@@ -30,6 +30,7 @@ export class UserSetUpComponent implements OnInit {
     if(this.selectedValue == ''){
       return
     }
+    sessionStorage.setItem('usertype',this.selectedValue)
     this.router.navigate([this.selectedValue])
   }
 }
