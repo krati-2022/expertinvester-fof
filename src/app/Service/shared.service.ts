@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ExpertInvestorManagementDetails } from '../MainModule/admin/expert-and-investor/expert-and-investor.classes';
@@ -12,7 +12,7 @@ import { SendOtp, VerifyOtp } from '../MainModule/admin/sign-in/sign-in.class';
 })
 export class SharedService {
   apiUrl = environment.apiUrl
-
+  public toggleSidebar: EventEmitter<any> = new EventEmitter()
   constructor(private http: HttpClient) { }
 
   SendOtp(data: SendOtp): Observable<any>{

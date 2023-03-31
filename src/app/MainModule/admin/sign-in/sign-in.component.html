@@ -24,7 +24,7 @@
                   <form class="row g-3 needs-validation" [formGroup]="SendOtpForm" (ngSubmit)="sendOtp()">
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Mobile Number</label>
+                      <label for="yourUsername" class="form-label" >Mobile Number</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-telephone-fill"></i></span>
                         <input type="text" name="Mobile Number" class="form-control" formControlName="mobile_No" maxlength="15"
@@ -40,7 +40,7 @@
 
                     <div class="col-12">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe" [disabled]="SendOtpForm.value.mobile_No == ''" [checked]="SendOtpForm.value.mobile_No != ''">
                         <label class="form-check-label" for="rememberMe">I agree to the <span class="login-line">Terms of Service </span>and<span class="login-line">Privacy Policy</span></label>
                       </div>
                     </div>

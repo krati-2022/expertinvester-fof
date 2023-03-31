@@ -6,7 +6,7 @@ export class ExpertManagementDetails {
   email: string = '';
   IsSEBI: any;
   SEBIRegNo: string = '';
-  certificateURL: any;
+  certificateURL:string = '';
   experience: string = '';
   knowledgelevel: string = '';
   accountname: string = '';

@@ -38,7 +38,6 @@ import { TermsServicesComponent } from './Pages/terms-services/terms-services.co
 import { CommenSelectionComponent } from 'src/app/SharedComponent/shared-component/commen-selection/commen-selection.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 
-
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -73,14 +72,14 @@ import { NgOtpInputModule } from 'ng-otp-input';
     PrivacyPolicyComponent,
     LegalDisclamerComponent,
     TermsServicesComponent,
-  CommenSelectionComponent
+    CommenSelectionComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgOtpInputModule
-  ]
+    NgOtpInputModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

@@ -13,10 +13,15 @@ import { ExpertManagementDetails } from './expert.classes';
 })
 export class ExpertComponent implements OnInit {
   AddExpertForm: FormGroup | any;
+  formData = new FormData();
   submitted: boolean = false;
   submitPhone: boolean = false;
+  imageSrc: string = '';
+
   ExpertDetails = new ExpertManagementDetails();
-  country:Array<any> = []
+  country: Array<any> = [];
+  file: File[] | any;
+  url: any;
   usertype = sessionStorage.getItem('usertype');
   constructor(
     private router: Router,
@@ -42,9 +47,9 @@ export class ExpertComponent implements OnInit {
       usertype: [this.usertype, Validators.required],
       aboutus: ['', Validators.required],
       experttype: ['', Validators.required],
-      IsSEBI: [true, Validators.required],
-      SEBIRegNo: ['', Validators.required],
-      certificateURL: [''],
+      IsSEBI: ['', Validators.required],
+      SEBIRegNo: [''],
+      certificateURL: [],
       experience: ['', Validators.required],
       knowledgelevel: ['', Validators.required],
       accountname: ['', Validators.required],
@@ -52,10 +57,10 @@ export class ExpertComponent implements OnInit {
       bankname: ['', Validators.required],
       bankIFSCcode: ['', Validators.required],
     });
-    this._service.GetCountry().subscribe(response =>{
-      this.country = response.data
+    this._service.GetCountry().subscribe((response) => {
+      this.country = response.data;
       // console.log('this.country: ', this.country);
-    })
+    });
   }
 
   get ExpertControl() {
@@ -89,43 +94,123 @@ export class ExpertComponent implements OnInit {
   //   this.router.navigate(['home/expertList']);
   // }
 
+  onSelectFile(event: any) {
+    // console.log('event: ', event);
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      // reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = () => {
+        let ext = event.target.files[0].name.split('.').pop().toLowerCase();
+        let accpt = ['pdf'];
+        if (accpt.includes(ext)) {
+        
+          this.formData.append('FilePath', file, file.name);
+          this.imageSrc = reader.result as string;
+        }
+      
+      };
+      // let formData = new FormData();
+      // formData.set('file', this.file);
+      
+      
+    }
+  }
+
   onSubmit() {
+    // this.ExpertDetails = this.AddExpertForm.getRawValue() as ExpertManagementDetails;
+    // console.log('this.ExpertDetails: ', this.ExpertDetails);
+    // return
     this.submitted = true;
     this.submitPhone = true;
     if (this.AddExpertForm.invalid) {
       return;
     }
-   
+
+    
+    // let name = this.AddExpertForm.value.name
+    // let email = this.AddExpertForm.value.email
+    // let mobileno = this.AddExpertForm.value.mobileno
+    // let usertype = this.AddExpertForm.value.usertype
+    // let aboutus = this.AddExpertForm.value.aboutus
+    // let experttype = this.AddExpertForm.value.experttype
+    // let IsSEBI = this.AddExpertForm.value.IsSEBI
+    // let SEBIRegNo = this.AddExpertForm.value.SEBIRegNo
+    // let experience = this.AddExpertForm.value.name
+    // let knowledgelevel = this.AddExpertForm.value.knowledgelevel
+    // let accountname = this.AddExpertForm.value.accountname
+    // let accountnumber = this.AddExpertForm.value.accountnumber
+    // let bankname = this.AddExpertForm.value.bankname
+    // let bankIFSCcode = this.AddExpertForm.value.bankIFSCcode
+    
+    // this.formData.append('name', this.AddExpertForm.value.name)
+    // this.formData.append('email', this.AddExpertForm.value.email)
+    // this.formData.append('mobileno', this.AddExpertForm.value.mobileno)
+    // this.formData.append('usertype',this.AddExpertForm.value.usertype)
+    // this.formData.append('aboutus',this.AddExpertForm.value.aboutus)
+    // this.formData.append('experttype',this.AddExpertForm.value.experttype)
+    // this.formData.append('IsSEBI',this.AddExpertForm.value.IsSEBI)
+    // this.formData.append('SEBIRegNo',this.AddExpertForm.value.SEBIRegNo)
+    // this.formData.append('experience',this.AddExpertForm.value.experience)
+    // this.formData.append('knowledgelevel',this.AddExpertForm.value.knowledgelevel)
+    // this.formData.append('accountname',this.AddExpertForm.value.accountname)
+    // this.formData.append('accountnumber',this.AddExpertForm.value.accountnumber)
+    // this.formData.append('bankname',this.AddExpertForm.value.bankname)
+    // this.formData.append('bankIFSCcode',this.AddExpertForm.value.bankIFSCcode)
+    // this.formData.append('certificateURL', this.imageSrc);
+
+    // this.formData = new ExpertManagementDetails
+    // let modelDetail = new ExpertManagementDetails
+    // modelDetail.certificateURL = this.imageSrc
+    // modelDetail.name = name
+    // modelDetail.email = email
+    // modelDetail.mobileno = mobileno
+    // modelDetail.usertype = usertype
+    // modelDetail.aboutus = aboutus
+    // modelDetail.experttype = experttype
+    // modelDetail.IsSEBI = IsSEBI
+    // modelDetail.SEBIRegNo = SEBIRegNo
+    // modelDetail.experience = experience
+    // modelDetail.knowledgelevel = knowledgelevel
+    // modelDetail.accountname = accountname
+    // modelDetail.accountnumber = accountnumber
+    // modelDetail.bankname = bankname
+    // modelDetail.bankIFSCcode = bankIFSCcode
+    // console.log('modelDetail.certificateURL: ', modelDetail);
     this.ExpertDetails = this.AddExpertForm.getRawValue() as ExpertManagementDetails;
     // console.log('this.ExpertDetails: ', this.ExpertDetails);
     // return
-    this._service.AddExpert(this.ExpertDetails).subscribe((response) => {
-      // console.log('response: ', response);
-      this.AddExpertForm.reset()
-      this.submitted = false
-      this.submitPhone = false
-      sessionStorage.removeItem('usertype')
-      this.router.navigate(['home/expertList']);
-    },
-    (error)=>{
-      if(error.status == '400'){
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          },
-        });
-        Toast.fire({
-          icon: 'success',
-          title: 'Something went wrong please try again',
-        });
+    this._service.AddExpert(this.ExpertDetails).subscribe(
+      (response) => {
+        console.log('response: ', response);
+        debugger
+        this.AddExpertForm.reset();
+        this.submitted = false;
+        this.submitPhone = false;
+        sessionStorage.removeItem('usertype');
+        this.router.navigate(['home/expertList']);
+      },
+      (error) => {
+        if (error.status == '400') {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+          Toast.fire({
+            icon: 'success',
+            title: 'Something went wrong please try again',
+          });
+        }
       }
-    }
     );
   }
 }
