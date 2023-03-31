@@ -1,0 +1,246 @@
+.search-bar {
+    padding: 12px;
+}
+
+.search-form input {
+    border: 0;
+    font-size: 14px;
+    color: #012970;
+    border: 1px solid rgba(1, 41, 112, 0.2);
+    padding: 7px 38px 7px 8px;
+    border-radius: 15px;
+    transition: 0.3s;
+    width: 100%;
+  }
+
+  .search-form input:focus,
+ .search-form input:hover {
+  outline: none;
+  box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
+  border: 1px solid rgba(1, 41, 112, 0.3);
+}
+.search-form button {
+    border: 0;
+    padding: 0;
+    margin-left: -30px;
+    background: none;
+  }
+  .search-form button i {
+    color: #012970;
+  }
+  
+.user-icon {
+    font-size: 50px;
+    color: #FDCDE7;
+}
+.select-icon{
+  color:#F61C7A ;
+}
+.heading-line{
+  color: #4D455D;
+}
+
+.follow-name{
+  font-weight: 600;
+}
+
+.follow-dropdown{
+  list-style: none;
+}
+
+.user-name {
+  color: black;
+  font-weight: 600;
+}
+
+.verification-icon {
+  color: #0081C9;
+}
+
+.post-img{
+  border-radius: 12px;
+}
+
+.trending-name {
+  font-size: 14px;
+}
+span.title-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+
+.hashtag-line {
+  font-size: 14px;
+  color: #4D455D;
+}
+.hashtag {
+  font-size: 14px;
+  color: #0081C9;
+}
+
+.user_name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #496333;
+}
+
+.detail {
+  font-size: 14px;
+  font-weight: 600;
+  color: #03314B;
+}
+
+.percent {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3500D4;
+}
+
+.row.user_informatiom {
+  border-bottom: 2px solid #FFD859;
+  border-radius: 3px;
+}
+
+span.subscript {
+  padding: 9px;
+  border: 2px solid #FFD859;
+  border-radius: 36px;
+  font-size: 14px;
+  font-weight: 600;
+}
+i.lock-icon {
+  color: #496333;
+}
+
+.channel-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #F61C7A;
+}
+
+.channel-detail {
+  font-weight: 600;
+  color: #000;
+}
+
+.date {
+  font-size: 13px;
+  font-weight: 400;
+  color: #979797;
+}
+
+h6.heading {
+  font-size: 16px;
+  font-weight: 600;
+  color: #496333;
+}
+
+.expect-section {
+  padding: 10px;
+  border: 2px solid #F61C7A;
+  border-radius: 8px;
+}
+.expect {
+  font-size: 14px;
+  font-weight: 600;
+  color: #979797;
+}
+
+.expect-percent {
+  font-size: 16px;
+  font-weight: 500;
+  color: #E6A376;
+}
+
+.expect-inf {
+  border-bottom: 2px solid #FF9E03;
+}
+
+span.line {
+  font-weight: 500;
+  color: #E6A376;
+}
+span.equity-btn {
+  padding: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  background: #F5F5F5;
+  border-radius: 4px;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: 400;
+  color: #03314B;
+}
+
+.rate {
+  font-size: 18px;
+  font-weight: 400;
+  color: #E6A376;
+}
+
+.dot{
+  font-size: 20px;
+  color: red;
+}
+.risk-btn {
+  padding: 10px;
+  color: #03314B;
+  border-radius: 10px;
+  background: #DEF4FF;
+}
+.position-btn{
+  padding: 10px;
+  color: black;
+  border-radius: 10px;
+  background: #FDCDE7;
+}
+
+.dis-line{
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.dis{
+  font-size: 14px;
+  font-weight: 600;
+  color: #3500D4;
+}
+
+button.btn.follow-btn {
+  background: #F61C7A;
+  color: #fff;
+  font-weight: 700;
+}
+
+.club-dis{
+  color: #496333;
+}
+.club-header{
+  font-size: 20px;
+  font-weight: 600;
+  color: #03314B;
+}
+
+.club{
+  border-right: 1px solid #979797;
+}
+
+.club-icon {
+  color: #F61C7A;
+}
+
+span.club-inf {
+  font-size: 14px;
+  font-weight: 600;
+  color: #979797;
+}
+
+.club-dis{
+  font-size: 14px;
+  color: #496333;
+  font-weight: 600;
+}

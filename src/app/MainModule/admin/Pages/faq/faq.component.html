@@ -1,0 +1,133 @@
+<div class="container ">
+  <div class="row ">
+    <div class="col-lg-8 mx-auto my-5">
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="row g-3">
+
+              <div class="col-12">
+                <label for="Question-Title" class="form-label">Question Title</label>
+                <input type="text" class="form-control" id="Question-Title" name="Question-Title" required>
+              </div>
+              <div class="col-12">
+                <label for="Tags" class="form-label">Tags</label>
+                <input type="email" class="form-control" id="Tags" name="Tags" required>
+              </div>
+              <div class="col-12">
+                <label for="Category" class="form-label">Category</label>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Select a Category</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  Master Checkbox
+                </label>
+              </div>
+
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <button data-res="<?php echo $sum; ?>" type="submit" class="btn btn-primary w-100 fw-bold" >Publish your question</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 mx-auto my-5">
+    <div class="card">
+      <div class="card-body">
+        <div class="row g-3">
+<h5 class="faq-heading">Step 1: Draft your question</h5>
+<p class="faq-line">The community is here to help you with specific coding, algorithm, or language problems.
+
+  Avoid asking opinion-based questions.</p>
+        <div class="row">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Summarize the problem
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <ul class="">
+                    <li class="benefit-line">
+                      Include details about your goal
+                    </li>
+                    <li class="benefit-line">
+                      Describe expected and actual results
+                    </li>
+                    <li class="benefit-line">
+                      Include any error messages
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row pt-2">
+          <div class="accordion" id="accordionExample1">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+                  Describe what you’ve tried
+                </button>
+              </h2>
+              <div id="collapseOne1" class="accordion-collapse collapse " aria-labelledby="headingOne1"
+                data-bs-parent="#accordionExample1">
+                <div class="accordion-body">
+                  <ul class="">
+                    <li class="benefit-line">
+                      Show what you’ve tried and tell us what you found (on this site or elsewhere) and why it didn’t meet your needs. You can get better answers when you provide research.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row pt-2">
+          <div class="accordion" id="accordionExample2">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne2">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">
+                  Show some code
+                </button>
+              </h2>
+              <div id="collapseOne2" class="accordion-collapse collapse " aria-labelledby="headingOne2"
+                data-bs-parent="#accordionExample2">
+                <div class="accordion-body">
+                  <ul class="">
+                    <li class="benefit-line">
+                      When appropriate, share the minimum amount of code others need to reproduce your problem (also called a minimum, reproducible example)
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

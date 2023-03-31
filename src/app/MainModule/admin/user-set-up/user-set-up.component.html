@@ -1,0 +1,114 @@
+<section class="section my-5">
+    <form [formGroup]="selectUserRoleForm" (ngSubmit)="onSubmitRouteChnage()">
+    <div class="row py-3">
+      <div class="col-lg-6 mx-auto">
+        <div class="card">
+          <div class="card-body py-5">
+            <div class="ExpertList">
+              <h4 class="heading-select">I am a...</h4>
+              <p class="subline-select">Our AI algorithm will suggest you trades and investment ideas as per your selected
+                preferences Please answer the question carefully & responsibly</p>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8 mx-auto select-field">
+                  <h6 class="select-option px-4">Expert</h6>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="radio-btn">
+                      <div class="form-check">
+                        <label class="form-check-label select-detail" for="expert">
+                          To make profile quickly from short-term swings in the market
+                        </label>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault"  id="expert"
+                            (click)="onChange($event)">
+                      </div>
+                    </div>
+                    <div class="icon">
+                      <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="42" height="42" rx="21" fill="#F61C7A" />
+                        <mask id="mask0_646_4304" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0"
+                          width="42" height="42">
+                          <rect width="42" height="42" rx="21" fill="white" />
+                        </mask>
+                        <g mask="url(#mask0_646_4304)">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18.2318 19.3598C18.5814 18.9403 19.1953 18.8837 19.6141 19.2106L19.7071 19.2929L21.943 21.528L25.825 17H24C23.4872 17 23.0645 16.614 23.0068 16.1166L23 16C23 15.4872 23.3861 15.0645 23.8834 15.0067L24 15H28L28.0344 15.0006C28.0601 15.0014 28.0859 15.0033 28.1115 15.0061L28 15C28.0538 15 28.1066 15.0042 28.158 15.0124C28.1778 15.0156 28.1978 15.0193 28.2176 15.0238L28.2293 15.0264L28.277 15.0389C28.297 15.0446 28.3169 15.051 28.3367 15.0581C28.4489 15.0981 28.5522 15.158 28.642 15.2333C28.645 15.2358 28.6479 15.2383 28.6508 15.2407L28.6653 15.2534C28.6893 15.2748 28.7122 15.2973 28.734 15.3208L28.6508 15.2407C28.6868 15.2716 28.72 15.3044 28.7505 15.3389C28.7706 15.3618 28.7899 15.3859 28.8081 15.4108C28.8141 15.4187 28.8198 15.4267 28.8253 15.4349C28.841 15.4579 28.8558 15.4815 28.8696 15.5058C28.8764 15.5176 28.8829 15.5296 28.8892 15.5418C28.8993 15.5614 28.9087 15.5814 28.9176 15.6017C28.9243 15.6173 28.9305 15.6328 28.9364 15.6484C28.9459 15.6735 28.9543 15.6991 28.9618 15.7251C28.9643 15.7347 28.9669 15.7441 28.9693 15.7535C28.9801 15.7957 28.9882 15.8391 28.9933 15.8834L29 16V20C29 20.5523 28.5523 21 28 21C27.4872 21 27.0645 20.614 27.0068 20.1166L27 20L27 18.702L22.7593 23.6508C22.4073 24.0615 21.7998 24.1132 21.385 23.7887L21.2929 23.7071L19.067 21.482L14.7682 26.6402C14.4419 27.0318 13.8795 27.1108 13.4612 26.8425L13.3598 26.7682C12.9682 26.4419 12.8892 25.8795 13.1575 25.4612L13.2318 25.3598L18.2318 19.3598Z"
+                            fill="white" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row my-3">
+                <div class="col-lg-8 mx-auto select-field">
+                  <h6 class="select-option px-4">Investor</h6>
+                  <div class="d-flex align-items-center justify-content-around">
+                    <div class="radio-btn">
+                      <div class="form-check">
+                        <label class="form-check-label select-detail" for="investor">
+                          To Buy & Hold good quality stocks for mid to long term wealth appreciation
+                        </label>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="investor"
+                         (click)="onChange($event)">
+                      </div>
+                    </div>
+                    <div class="icon">
+                      <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="42" height="42" rx="21" fill="#F61C7A" />
+                        <mask id="mask0_646_4304" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0"
+                          width="42" height="42">
+                          <rect width="42" height="42" rx="21" fill="white" />
+                        </mask>
+                        <g mask="url(#mask0_646_4304)">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18.2318 19.3598C18.5814 18.9403 19.1953 18.8837 19.6141 19.2106L19.7071 19.2929L21.943 21.528L25.825 17H24C23.4872 17 23.0645 16.614 23.0068 16.1166L23 16C23 15.4872 23.3861 15.0645 23.8834 15.0067L24 15H28L28.0344 15.0006C28.0601 15.0014 28.0859 15.0033 28.1115 15.0061L28 15C28.0538 15 28.1066 15.0042 28.158 15.0124C28.1778 15.0156 28.1978 15.0193 28.2176 15.0238L28.2293 15.0264L28.277 15.0389C28.297 15.0446 28.3169 15.051 28.3367 15.0581C28.4489 15.0981 28.5522 15.158 28.642 15.2333C28.645 15.2358 28.6479 15.2383 28.6508 15.2407L28.6653 15.2534C28.6893 15.2748 28.7122 15.2973 28.734 15.3208L28.6508 15.2407C28.6868 15.2716 28.72 15.3044 28.7505 15.3389C28.7706 15.3618 28.7899 15.3859 28.8081 15.4108C28.8141 15.4187 28.8198 15.4267 28.8253 15.4349C28.841 15.4579 28.8558 15.4815 28.8696 15.5058C28.8764 15.5176 28.8829 15.5296 28.8892 15.5418C28.8993 15.5614 28.9087 15.5814 28.9176 15.6017C28.9243 15.6173 28.9305 15.6328 28.9364 15.6484C28.9459 15.6735 28.9543 15.6991 28.9618 15.7251C28.9643 15.7347 28.9669 15.7441 28.9693 15.7535C28.9801 15.7957 28.9882 15.8391 28.9933 15.8834L29 16V20C29 20.5523 28.5523 21 28 21C27.4872 21 27.0645 20.614 27.0068 20.1166L27 20L27 18.702L22.7593 23.6508C22.4073 24.0615 21.7998 24.1132 21.385 23.7887L21.2929 23.7071L19.067 21.482L14.7682 26.6402C14.4419 27.0318 13.8795 27.1108 13.4612 26.8425L13.3598 26.7682C12.9682 26.4419 12.8892 25.8795 13.1575 25.4612L13.2318 25.3598L18.2318 19.3598Z"
+                            fill="white"/>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-8 mx-auto select-field">
+                  <h6 class="select-option px-4">Expert + Investor</h6>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="radio-btn">
+                      <div class="form-check">
+                        <label class="form-check-label select-detail" for="expertAndInvestor">
+                          I can do both styles
+                        </label>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="expertAndInvestor"  (click)="onChange($event)">
+                      </div>
+                    </div>
+                    <div class="icon">
+                      <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="42" height="42" rx="21" fill="#F61C7A" />
+                        <mask id="mask0_646_4304" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0"
+                          width="42" height="42">
+                          <rect width="42" height="42" rx="21" fill="white" />
+                        </mask>
+                        <g mask="url(#mask0_646_4304)">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18.2318 19.3598C18.5814 18.9403 19.1953 18.8837 19.6141 19.2106L19.7071 19.2929L21.943 21.528L25.825 17H24C23.4872 17 23.0645 16.614 23.0068 16.1166L23 16C23 15.4872 23.3861 15.0645 23.8834 15.0067L24 15H28L28.0344 15.0006C28.0601 15.0014 28.0859 15.0033 28.1115 15.0061L28 15C28.0538 15 28.1066 15.0042 28.158 15.0124C28.1778 15.0156 28.1978 15.0193 28.2176 15.0238L28.2293 15.0264L28.277 15.0389C28.297 15.0446 28.3169 15.051 28.3367 15.0581C28.4489 15.0981 28.5522 15.158 28.642 15.2333C28.645 15.2358 28.6479 15.2383 28.6508 15.2407L28.6653 15.2534C28.6893 15.2748 28.7122 15.2973 28.734 15.3208L28.6508 15.2407C28.6868 15.2716 28.72 15.3044 28.7505 15.3389C28.7706 15.3618 28.7899 15.3859 28.8081 15.4108C28.8141 15.4187 28.8198 15.4267 28.8253 15.4349C28.841 15.4579 28.8558 15.4815 28.8696 15.5058C28.8764 15.5176 28.8829 15.5296 28.8892 15.5418C28.8993 15.5614 28.9087 15.5814 28.9176 15.6017C28.9243 15.6173 28.9305 15.6328 28.9364 15.6484C28.9459 15.6735 28.9543 15.6991 28.9618 15.7251C28.9643 15.7347 28.9669 15.7441 28.9693 15.7535C28.9801 15.7957 28.9882 15.8391 28.9933 15.8834L29 16V20C29 20.5523 28.5523 21 28 21C27.4872 21 27.0645 20.614 27.0068 20.1166L27 20L27 18.702L22.7593 23.6508C22.4073 24.0615 21.7998 24.1132 21.385 23.7887L21.2929 23.7071L19.067 21.482L14.7682 26.6402C14.4419 27.0318 13.8795 27.1108 13.4612 26.8425L13.3598 26.7682C12.9682 26.4419 12.8892 25.8795 13.1575 25.4612L13.2318 25.3598L18.2318 19.3598Z"
+                            fill="white" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="submitted && this.selectedValue == ''" class="container d-flex justify-content-center">
+                <p style="color: red;">Please Select At Least One</p>
+            </div>
+            <div class="col-lg-8 mx-auto mt-3">
+              <button class="btn btn-primary w-100 " type="submit" >Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
+  </section>

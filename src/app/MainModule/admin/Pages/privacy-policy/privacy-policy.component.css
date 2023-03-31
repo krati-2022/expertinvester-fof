@@ -1,0 +1,24 @@
+h1 {
+    font-size: 25px;
+    text-align: center;
+    font-weight: 600;
+    color: #03314B;
+}
+h2 {
+  font-size: 18px;
+  line-height: 10px;
+  font-weight: 500;
+  text-align: left;
+  color: #03314B;
+  margin: 0;
+  padding: 20px 0 0 0;
+ 
+}
+p {
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: #03314B;
+  margin: 0;
+  padding: 10px 0 0 0;
+}

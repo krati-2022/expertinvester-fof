@@ -1,0 +1,540 @@
+@media screen and (min-width: 320px) and (max-width: 416px) {
+  span.profile-option {
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    background: #FCDDEC;
+    border-radius: 10px;
+    color: #D32276;
+}
+  .profile-line {
+    font-size: 12px;
+    font-weight: 700;
+    color: #03314B;
+}
+  li.benefit-line {
+    font-size: 12px;
+    color: #03314B;
+}
+  .profile-detail {
+    font-weight: 600;
+    margin: 0;
+    padding: 8px;
+    background: #F3FBED;
+    border-radius: 5px;
+    font-size: 10px;
+    color: #849360;
+}
+  .danger-btn {
+    font-size: 10px;
+}
+  .percent {
+    font-size: 8px;
+    font-weight: 600;
+    color: #3500D4;
+}
+  .detail {
+    font-size: 10px;
+    font-weight: 600;
+    color: #03314B;
+}
+  .club-icon {
+    padding-right: 2px;
+    padding-left: 0px;
+    font-size: 12px;
+    color: #F61C7A;
+  }
+  .user_name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #496333;
+}
+  span.club-inf {
+    font-size: 12px;
+    font-weight: 600;
+    color: #979797;
+}
+.user-icon {
+  font-size: 30px;
+  color: #FDCDE7;
+}
+.risk-btn {
+  font-size: 9px;
+  padding: 6px 4px;
+  color: #03314B;
+  border-radius: 2px;
+  background: #DEF4FF;
+}
+.price {
+  font-size: 9px;
+  font-weight: 600;
+  color: #03314B;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.card-title {
+  padding: 20px 0 15px 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
+}
+.trending-name {
+  font-size: 12px;
+}
+span.title-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: black;
+}
+.hashtag-line {
+  font-size: 12px;
+  color: #4D455D;
+}
+.hashtag {
+  font-size: 12px;
+  color: #0081C9;
+}
+.pagetitle h1 {
+  font-size: 15px;
+  margin-bottom: 0;
+  font-weight: 600;
+  color: #012970;
+}
+.channel-name {
+  font-size: 7px;
+  font-weight: 600;
+  color: #F61C7A;
+}
+.fol {
+  font-size: 12px;
+}
+.prices {
+  font-size: 9px;
+  font-weight: 600;
+  color: #496333;
+  margin: 0;
+}
+h6.heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: #496333;
+  margin: 0;
+  padding: 0;
+}
+span.subscript {
+  padding: 5px;
+  border: 2px solid #FFD859;
+  border-radius: 36px;
+  font-size: 9px;
+  font-weight: 600;
+}
+.club-dis {
+  font-size: 10px;
+  color: #496333;
+  font-weight: 600;
+}
+.risks-btn {
+  padding: 5px;
+  color: #03314B;
+  border-radius: 5px;
+  background: #FDCDE7;
+  font-size: 10px;
+}
+.dis-line {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+}
+.position-btn {
+  padding: 6px;
+  color: black;
+  border-radius: 5px;
+  background: #FDCDE7;
+  font-size: 9px;
+}
+.heading-line{
+  color: #4D455D;
+    font-size: 15px;
+}
+.user-icon {
+  font-size: 35px;
+  color: #FDCDE7;
+}
+.select-icon {
+  font-size: 14px;
+  color: #F61C7A;
+}
+.primary-btn {
+  font-size: 10px;
+}
+.channel-detail {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+}
+.date {
+  font-size: 10px;
+  font-weight: 400;
+  color: #979797;
+}
+.expect {
+  font-size: 10px;
+  font-weight: 500;
+  color: #979797;
+}
+.expect-percent {
+  font-size: 13px;
+  font-weight: 500;
+  color: #E6A376;
+}
+.rate {
+  font-size: 13px;
+  font-weight: 400;
+  color: #E6A376;
+}
+span.line {
+  font-weight: 500;
+  font-size: 12px;
+  color: #E6A376;
+}
+.dis {
+  font-size: 10px;
+  font-weight: 600;
+  color: #3500D4;
+}
+button.btn.follow-btn {
+  background: #F61C7A;
+  color: #fff;
+  font-weight: 700;
+  font-size: 10px;
+  padding: 4px;
+}
+.expect-section {
+  padding: 2px;
+  border: 2px solid #F61C7A;
+  border-radius: 8px;
+}
+.DSSL {
+  font-size: 12px;
+  font-weight: 700;
+}
+.rounded-circle {
+  font-size: 14px;
+  border-radius: 39px !important;
+  padding: 3px;
+}
+.update {
+  font-size: 10px;
+  font-weight: 500;
+}
+.lead {
+  font-size: 12px;
+  font-weight: 600;
+}
+.dot {
+  font-size: 14px;
+  font-weight: 500;
+  color: red;
+}
+}
+@media screen and (min-width: 415px) and (max-width: 501px) {
+  .dot {
+    font-size: 14px;
+    font-weight: 500;
+    color: red;
+  }
+  .lead {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .update {
+    font-size: 10px;
+    font-weight: 500;
+}
+  .rounded-circle {
+    font-size: 14px;
+    border-radius: 39px !important;
+    padding: 3px;
+}
+  .DSSL {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .expect-section {
+    padding: 2px;
+    border: 2px solid #F61C7A;
+    border-radius: 8px;
+  }
+  span.profile-option {
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    background: #FCDDEC;
+    border-radius: 10px;
+    color: #D32276;
+}
+  .profile-line {
+    font-size: 12px;
+    font-weight: 700;
+    color: #03314B;
+}
+  li.benefit-line {
+    font-size: 12px;
+    color: #03314B;
+}
+  .profile-detail {
+    font-weight: 600;
+    margin: 0;
+    padding: 8px;
+    background: #F3FBED;
+    border-radius: 5px;
+    font-size: 10px;
+    color: #849360;
+}
+  .danger-btn {
+    font-size: 10px;
+}
+  button.btn.follow-btn {
+    background: #F61C7A;
+    color: #fff;
+    font-weight: 700;
+    font-size: 10px;
+    padding: 4px;
+  }
+  .dis {
+    font-size: 10px;
+    font-weight: 600;
+    color: #3500D4;
+}
+  .dis-line {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000;
+}
+  .percent {
+    font-size: 10px;
+    font-weight: 600;
+    color: #3500D4;
+}
+  .detail {
+    font-size: 12px;
+    font-weight: 600;
+    color: #03314B;
+}
+  .user-icon {
+    font-size: 35px;
+    color: #FDCDE7;
+}
+.user_name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #496333;
+}
+  .club-icon {
+    padding-right: 1px;
+    padding-left: 1px;
+    font-size: 12px;
+    color: #F61C7A;
+  }
+  span.club-inf {
+    font-size: 12px;
+    font-weight: 600;
+    color: #979797;
+}
+.risk-btn {
+  font-size: 9px;
+  padding: 6px 4px;
+  color: #03314B;
+  border-radius: 2px;
+  background: #DEF4FF;
+}
+.risks-btn {
+  padding: 5px;
+  color: #03314B;
+  border-radius: 5px;
+  background: #FDCDE7;
+  font-size: 12px;
+}
+.position-btn {
+  padding: 6px;
+  color: black;
+  border-radius: 5px;
+  background: #FDCDE7;
+  font-size: 10px;
+}
+.price {
+  font-size: 10px;
+  font-weight: 600;
+  color: #03314B;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.prices {
+  font-size: 9px;
+  font-weight: 600;
+  color: #496333;
+  margin: 0;
+}
+.card-title {
+  padding: 20px 0 15px 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
+}
+.trending-name {
+  font-size: 12px;
+}
+span.title-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: black;
+}
+.hashtag-line {
+  font-size: 12px;
+  color: #4D455D;
+}
+.hashtag {
+  font-size: 12px;
+  color: #0081C9;
+}
+.pagetitle h1 {
+  font-size: 15px;
+  margin-bottom: 0;
+  font-weight: 600;
+  color: #012970;
+}
+.channel-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #F61C7A;
+}
+.fol {
+  font-size: 12px;
+}
+h6.heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: #496333;
+  margin: 0;
+  padding: 0;
+}
+span.subscript {
+  padding: 5px;
+  border: 2px solid #FFD859;
+  border-radius: 36px;
+  font-size: 9px;
+  font-weight: 600;
+}
+.club-dis {
+  font-size: 10px;
+  color: #496333;
+  font-weight: 600;
+}
+.heading-line{
+  color: #4D455D;
+    font-size: 15px;
+}
+.user-icon {
+  font-size: 35px;
+  color: #FDCDE7;
+}
+.select-icon {
+  font-size: 16px;
+  color: #F61C7A;
+}
+.primary-btn {
+  font-size: 10px;
+}
+.date {
+  font-size: 10px;
+  font-weight: 400;
+  color: #979797;
+}
+.expect {
+  font-size: 10px;
+  font-weight: 500;
+  color: #979797;
+}
+.expect-percent {
+  font-size: 13px;
+  font-weight: 500;
+  color: #E6A376;
+}
+.rate {
+  font-size: 13px;
+  font-weight: 400;
+  color: #E6A376;
+}
+span.line {
+  font-weight: 500;
+  font-size: 12px;
+  color: #E6A376;
+}
+}
+@media screen and (min-width: 500px) and (max-width: 769px) {
+  .danger-btn {
+    font-size: 14px;
+}
+  .club-icon {
+    padding-right: 4px;
+    padding-left: 4px;
+    font-size: 14px;
+    color: #F61C7A;
+}
+span.club-inf {
+  font-size: 12px;
+  font-weight: 600;
+  color: #979797;
+}
+.risk-btn {
+  font-size: 12px;
+  padding: 14px 10px;
+  color: #03314B;
+  border-radius: 5px;
+  background: #DEF4FF;
+}
+.price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #03314B;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.card-title {
+  padding: 20px 0 15px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
+}
+
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .club-icon {
+
+    font-size: 14px;
+    color: #F61C7A;
+  }
+  span.club-inf {
+    font-size: 12px;
+    font-weight: 600;
+    color: #979797;
+  }
+  .price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #03314B;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .card-title {
+    padding: 20px 0 15px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #012970;
+    font-family: "Poppins", sans-serif;
+}
+}
