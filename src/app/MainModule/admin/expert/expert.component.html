@@ -1,128 +1,175 @@
 <section class="container my-5">
-    <div class="row">
-      <div class="col-lg-10 mx-auto">
+  <div class="row">
+    <div class="col-lg-10 mx-auto">
 
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"> Expert-Form</h5>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Expert-Form</h5>
+          <!-- General Form Elements -->
+          <form [formGroup]="AddExpertForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="row mb-3">
+                  <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-person px-2"></i>User Name</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" (keypress)="omit_special_char($event)" formControlName="name"
+                    [ngClass]="{ 'is-invalid': submitted && ExpertControl.name.errors }">
+                    <div *ngIf=" submitted && ExpertControl.name.errors" class="invalid-feedback">
+                      <div *ngIf="ExpertControl.name.errors.required">Name is required.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-lg-4 col-form-label form-line"><i class="bi bi-tablet px-2"></i>Mobile No.</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="mobileno"
+                    [ngClass]="{ 'is-invalid': (submitted || submitPhone) && ExpertControl.mobileno.errors  }">
+                    <div *ngIf="(submitted || submitPhone )  && ExpertControl.mobileno?.errors " class="invalid-feedback">             
+                      <div *ngIf="ExpertControl.mobileno.errors?.validatePhoneNumber ">Phone number is invalid.</div>
+                      <div *ngIf="ExpertControl.mobileno.errors?.maxLength ">Phone number is invalid.</div>
+                      <div *ngIf="ExpertControl.mobileno.errors?.required ">Phone number is required.</div>
+                    </div>  
+                  </div>
+                </div>
 
-            <!-- General Form Elements -->
-            <form>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="row mb-3">
-                    <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-person px-2"></i>User Name</label>
-                    <div class="col-lg-8">
-                      <input type="text" class="form-control">
+
+                <div class="row mb-3">
+                  <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Expert Type</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" formControlName="experttype" [ngClass]="{ 'is-invalid': submitted && ExpertControl.experttype.errors }">
+                    <div *ngIf=" submitted && ExpertControl.experttype.errors" class="invalid-feedback">
+                      <div *ngIf="ExpertControl.experttype.errors.required">Expert Type is required.</div>
                     </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="inputText" class="col-lg-4 col-form-label form-line"><i class="bi bi-tablet px-2"></i>Mobile No.</label>
-                    <div class="col-lg-8">
-                      <input type="text" class="form-control">
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>Expert Type</label>
-                    <div class="col-lg-8">
-                      <input type="text" class="form-control">
-                    </div>
-                  </div>
-              <fieldset class="row mt-2 mb-3">
-                <legend class="col-form-label col-lg-6 pt-0 form-line"><i class="bi bi-r-circle px-2"></i>Are you SEBI registered</legend>
-                <div class="col-lg-6 d-flex justify-content-around">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                    <label class="form-check-label" for="gridRadios1">
-                     Yes
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">
-               No
-                    </label>
                   </div>
                 </div>
-              </fieldset>
-              <div class="row mb-3">
-                <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-person-vcard px-2"></i>Account Name</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control">
+            <fieldset class="row mt-2 mb-3">
+              <legend class="col-form-label col-lg-6 pt-0 form-line"><i class="bi bi-r-circle px-2"></i>Are you SEBI registered</legend>
+              <div class="col-lg-6 d-flex justify-content-around">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" [value]="true" formControlName="IsSEBI"  checked>
+                 
+                  <label class="form-check-label">Yes</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" [value]="false" formControlName="IsSEBI">
+                  <label class="form-check-label" >No</label>
                 </div>
               </div>
-              <div class="row mb-3">
-                <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Bank Name</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control">
+            </fieldset>
+            <div class="row mb-3">
+              <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-person-vcard px-2"></i>Account Name</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" formControlName="accountname"  [ngClass]="{ 'is-invalid': submitted && ExpertControl.accountname.errors }">
+                <div *ngIf=" submitted && ExpertControl.accountname.errors" class="invalid-feedback">
+                  <div *ngIf="ExpertControl.accountname.errors.required">Account Name is required.</div>
                 </div>
               </div>
-              <div class="row mb-3">
-                <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-book px-2"></i>Knowledge Level</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control">
+            </div>
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Bank Name</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" formControlName="bankname" [ngClass]="{ 'is-invalid': submitted && ExpertControl.bankname.errors }">
+                <div *ngIf=" submitted && ExpertControl.bankname.errors" class="invalid-feedback">
+                  <div *ngIf="ExpertControl.bankname.errors.required">Bank Name is required.</div>
                 </div>
               </div>
-              <div class="row mb-3">
-                <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-pencil px-2"></i>About Us</label>
-                <div class="col-lg-8">
-                  <textarea class="form-control" style="height: 80px"></textarea>
+            </div>
+            <div class="row mb-3">
+              <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-book px-2"></i>Knowledge Level</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && ExpertControl.knowledgelevel.errors }">
+                <div *ngIf=" submitted && ExpertControl.knowledgelevel.errors" class="invalid-feedback">
+                  <div *ngIf="ExpertControl.knowledgelevel.errors.required">Knowledge Level is required.</div>
                 </div>
               </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-pencil px-2"></i>About Us</label>
+              <div class="col-lg-8">
+                <textarea class="form-control" formControlName="aboutus" style="height: 80px"[ngClass]="{ 'is-invalid': submitted && ExpertControl.aboutus.errors }"></textarea>
+                
+                    <div *ngIf=" submitted && ExpertControl.aboutus.errors" class="invalid-feedback">
+                      <div *ngIf="ExpertControl.aboutus.errors.required">About Us is required.</div>
+                    </div>
+              </div>
+            </div>
+              </div>
+              <div class="col-lg-6">
+                <!-- <div class="row mb-3">
+                  <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>User Type</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" formControlName="mobileno">
+                  </div>
+                </div> -->
+                <div class="row mb-3">
+                  <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Email*</label>
+                  <div class="col-lg-8">
+                    <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted && ExpertControl.email.errors }" maxlength="50">
+                    <div *ngIf=" submitted && ExpertControl.email.errors" class="invalid-feedback">
+                      <div *ngIf="ExpertControl.email.errors.required">Email is required.</div>
+                      <div *ngIf="ExpertControl.email.errors.email">Email is invalid.</div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-lg-6">
-                  <div class="row mb-3">
-                    <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Email*</label>
-                    <div class="col-lg-8">
-                      <input type="email" class="form-control">
+<!--I am expert-->
+                <div class="row mb-3">
+                  <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am Expert </label>
+                  <div class="col-lg-8"> 
+                    <select class="form-select" aria-label="Default select example" formControlName="experttype" [ngClass]="{ 'is-invalid': submitted && ExpertControl.experttype.errors }">
+                      <option [value]="item.countryName" *ngFor="let item of country">{{item.countryName}}</option>
+                    </select>
+                    <div *ngIf=" submitted && ExpertControl.experttype.errors" class="invalid-feedback">
+                      <div *ngIf="ExpertControl.experttype.errors.required">Expert type is required.</div>
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am Expert </label>
-                    <div class="col-lg-8">
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-bank px-2"></i>SEBI Reg.No</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" formControlName="SEBIRegNo" [ngClass]="{ 'is-invalid': submitted && ExpertControl.SEBIRegNo.errors }">
+                    <div *ngIf=" submitted && ExpertControl.SEBIRegNo.errors" class="invalid-feedback">
+                      <div *ngIf="ExpertControl.SEBIRegNo.errors.required">SEBI Reg.No is required.</div>
+                    </div>
+                    <small><i class="bi bi-paperclip px-2"></i>Attached SEBI reg certificate PDF</small>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Account No</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" formControlName="accountnumber" (keypress)="keyPressNumbers($event)" [ngClass]="{ 'is-invalid': submitted && ExpertControl.accountnumber.errors }">
+                    <div *ngIf=" submitted && ExpertControl.accountnumber.errors" class="invalid-feedback">
+                      <div *ngIf="ExpertControl.accountnumber.errors.required">Account No is required.</div>
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-bank px-2"></i>SEBI Reg.No</label>
-                    <div class="col-lg-8">
-                      <input type="text" class="form-control">
-                      <small><i class="bi bi-paperclip px-2"></i>Attached SEBI reg certificate PDF</small>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Bank IFSC Code</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" formControlName="bankIFSCcode" [ngClass]="{ 'is-invalid': submitted && ExpertControl.bankIFSCcode.errors }">
+                    <div *ngIf=" submitted && ExpertControl.bankIFSCcode.errors" class="invalid-feedback">
+                      <div *ngIf="ExpertControl.bankIFSCcode.errors.required">Bank IFSC Code is required.</div>
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Account No</label>
-                    <div class="col-lg-8">
-                      <input type="text" class="form-control">
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Bank IFSC Code</label>
-                    <div class="col-lg-8">
-                      <input type="text" class="form-control">
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-database px-2"></i>Experience</label>
-                    <div class="col-lg-8">
-                      <input type="text" class="form-control">
+                </div>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-database px-2"></i>Experience</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && ExpertControl.experience.errors }">
+                    <div *ngIf=" submitted && ExpertControl.experience.errors" class="invalid-feedback">
+                      <div *ngIf="ExpertControl.experience.errors.required">Experience is required.</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row mb-3 mt-3">
-                <div class="col-lg-6 mx-auto">
-                  <button class="btn btn-primary w-100 " (click)="goToHomePage()">Submit</button>
-                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+              <div class="col-lg-6 mx-auto">
+                <button class="btn btn-primary w-100 " type="submit">Submit</button>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

@@ -36,6 +36,7 @@ import { PrivacyPolicyComponent } from './Pages/privacy-policy/privacy-policy.co
 import { LegalDisclamerComponent } from './Pages/legal-disclamer/legal-disclamer.component';
 import { TermsServicesComponent } from './Pages/terms-services/terms-services.component';
 import { CommenSelectionComponent } from 'src/app/SharedComponent/shared-component/commen-selection/commen-selection.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 
 @NgModule({
@@ -78,8 +79,8 @@ import { CommenSelectionComponent } from 'src/app/SharedComponent/shared-compone
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    FormsModule
-
+    FormsModule,
+    NgOtpInputModule
   ]
 })
 export class AdminModule { }

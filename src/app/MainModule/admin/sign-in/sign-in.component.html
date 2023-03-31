@@ -21,30 +21,34 @@
                     <p class="text-center small">Create an account to continue</p>
                   </div>
 
-                  <!-- <form class="row g-3 needs-validation" novalidate> -->
+                  <form class="row g-3 needs-validation" [formGroup]="SendOtpForm" (ngSubmit)="sendOtp()">
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Mobile Number</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-telephone-fill"></i></span>
-                        <input type="text" name="Mobile Number" class="form-control" id="yourmobilenumber" required>
-
+                        <input type="text" name="Mobile Number" class="form-control" formControlName="mobile_No" maxlength="15"
+                        [ngClass]="{ 'is-invalid' : submitted && SendOtpFormControl['mobile_No']['errors']}" (keypress)="keyPressNumbers($event)" >
+                        <div *ngIf="submitted && SendOtpFormControl['mobile_No']['errors']" class="invalid-feedback">
+                          <div *ngIf="SendOtpFormControl['mobile_No']['errors']['required']">Mobile Number is required.</div>
+                          
+                      </div>
                       </div>
                     </div>
 
+                 
 
-
-                    <div class="col-12 py-4">
+                    <div class="col-12">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
                         <label class="form-check-label" for="rememberMe">I agree to the <span class="login-line">Terms of Service </span>and<span class="login-line">Privacy Policy</span></label>
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100 " data-bs-toggle="modal" data-bs-target="#exampleModal">Start</button>
+                      <button class="btn btn-primary w-100 " type="submit" >Start</button>
                     </div>
-
-                  <!-- </form> -->
+                   
+                  </form>
 
                 </div>
               </div>
@@ -58,11 +62,11 @@
   </main>
 
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered" >
       <div class="modal-content">
         <div class="modal-header">
-
+        
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -71,34 +75,32 @@
               <div class="card-header p-5">
                 <h5 class="mb-2">Enter authentication code</h5>
                 <div>
-                  <small>Enter 6-digit code we just texted to your phone number, <span class="login-line">+84 999 999 999</span></small>
+                  <small>Enter 6-digit code we just texted to your phone number, <span class="login-line">{{mobileNumbr}}</span></small>
                 </div>
               </div>
               <div class="input-container d-flex flex-row justify-content-center mt-2">
-                <input type="text" class="m-1 text-center form-control rounded" maxlength="1">
-                <input type="text" class="m-1 text-center form-control rounded" maxlength="1">
-                <input type="text" class="m-1 text-center form-control rounded" maxlength="1">
-                <input type="text" class="m-1 text-center form-control rounded" maxlength="1">
-                <input type="text" class="m-1 text-center form-control rounded" maxlength="1">
-                <input type="text" class="m-1 text-center form-control rounded" maxlength="1">
+                <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" [config]="config"></ng-otp-input>
               </div>
+              <div *ngIf="submitted && otp == ''" >
+                <div style="color: red;">Otp Number is required.</div>
+            </div>
               <div>
                 <small>
                 didn't get the otp
-                <a href="#" class="text-decoration-none">Resend</a>
+                <a  class="text-decoration-none" (click)="sendOtp()" style="cursor: pointer;">Resend</a>
                 </small>
               </div>
               <div class="mt-3 ">
-                <button class="btn btn-success px-4 verify-btn" data-bs-dismiss="modal" (click)="goToUserSetup()">Continue</button>
+                <button class="btn btn-success px-4 verify-btn" type="submit" (click)="verifyOtp()">Continue</button>
               </div>
               <div class="mt-2 mb-5">
-                <button class="btn   Resend-btn">Resend code</button>
+                <!-- <button class="btn   Resend-btn" >Resend code</button> -->
               </div>
             </div>
           </div>
-
+     
         </div>
-
+      
       </div>
     </div>
   </div>
