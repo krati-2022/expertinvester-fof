@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ExpertInvestorManagementDetails } from '../MainModule/admin/expert-and-investor/expert-and-investor.classes';
 import { ExpertManagementDetails } from '../MainModule/admin/expert/expert.classes';
@@ -13,12 +13,23 @@ import { SendOtp, VerifyOtp } from '../MainModule/admin/sign-in/sign-in.class';
 export class SharedService {
   apiUrl = environment.apiUrl
 
+  private toggleState = new Subject();
+  public toggleState$ = this.toggleState.asObservable();
+  private toggleVal = false;
+
+
   constructor(private http: HttpClient) { }
+
+  emitData(){
+    this.toggleVal = !this.toggleVal;
+    this.toggleState.next(this.toggleVal);
+ }
+
 
   SendOtp(data: SendOtp): Observable<any>{
     return this.http.post(this.apiUrl + 'api/Login/SendOTP', data)
   }
-  
+
   VerifyOtp(data: VerifyOtp): Observable<any>{
     return this.http.post(this.apiUrl + 'api/Login/ConfirmOTP', data)
   }
@@ -54,7 +65,7 @@ export class SharedService {
   AddInvestor(data: InvestorManagementDetails): Observable<any>{
     return this.http.post(this.apiUrl + 'api/ExpertInvestor/AddInvester', data)
   }
-  
+
   AddExpertInvestor(data: ExpertInvestorManagementDetails): Observable<any>{
     return this.http.post(this.apiUrl + 'api/ExpertInvestor/AddExpertInvester', data)
   }

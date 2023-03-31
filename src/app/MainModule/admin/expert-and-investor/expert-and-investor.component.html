@@ -19,17 +19,17 @@
                     </div>
                   </div>
                 </div>
-               
+
                 <div class="row mb-3">
                   <label for="inputText" class="col-lg-4 col-form-label form-line"><i class="bi bi-tablet px-2"></i>Mobile No.</label>
                   <div class="col-lg-8">
                     <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="mobileno"
                     [ngClass]="{ 'is-invalid': (submitted || submitPhone) && ExpertInvestorControl.mobileno.errors  }">
-                    <div *ngIf="(submitted || submitPhone )  && ExpertInvestorControl.mobileno?.errors " class="invalid-feedback">             
+                    <div *ngIf="(submitted || submitPhone )  && ExpertInvestorControl.mobileno?.errors " class="invalid-feedback">
                       <div *ngIf="ExpertInvestorControl.mobileno.errors?.validatePhoneNumber ">Phone number is invalid.</div>
                       <div *ngIf="ExpertInvestorControl.mobileno.errors?.maxLength ">Phone number is invalid.</div>
                       <div *ngIf="ExpertInvestorControl.mobileno.errors?.required ">Phone number is required.</div>
-                    </div>  
+                    </div>
                   </div>
                 </div>
 
@@ -54,7 +54,7 @@
                   <input class="form-check-input" type="radio" [value]="false" formControlName="IsSEBI">
                   <label class="form-check-label" >No</label>
                 </div>
-               
+
               </div>
             </fieldset>
             <div class="row mb-3">
@@ -88,7 +88,7 @@
               <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-pencil px-2"></i>About Us</label>
               <div class="col-lg-8">
                 <textarea class="form-control" formControlName="aboutus" style="height: 80px"[ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.aboutus.errors }"></textarea>
-                
+
                     <div *ngIf=" submitted && ExpertInvestorControl.aboutus.errors" class="invalid-feedback">
                       <div *ngIf="ExpertInvestorControl.aboutus.errors.required">About Us is required.</div>
                     </div>
@@ -115,7 +115,7 @@
 <!--I am expert-->
                 <div class="row mb-3">
                   <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am Expert </label>
-                  <div class="col-lg-8"> 
+                  <div class="col-lg-8">
                     <select class="form-select" aria-label="Default select example" formControlName="country" (change)="getCountry(AddExpertInvestorForm.value.country)" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.experttype.errors }">
                       <option [value]="item.countryName" *ngFor="let item of country">{{item.countryName}}</option>
                     </select>
@@ -131,7 +131,8 @@
                     <div *ngIf=" submitted && ExpertInvestorControl.SEBIRegNo.errors" class="invalid-feedback">
                       <div *ngIf="ExpertInvestorControl.SEBIRegNo.errors.required">SEBI Reg.No is required.</div>
                     </div>
-                    <small><i class="bi bi-paperclip px-2"></i>Attached SEBI reg certificate PDF</small>
+                    <a href="" >  <small><i class="bi bi-paperclip px-2"></i>Attached SEBI reg certificate PDF</small>
+                    </a>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -170,7 +171,7 @@
                     <div *ngIf="submitted && ideaOnlist.length == 0" style="color: red;">Please select at least one</div>
                   </div>
                 </div>
-                
+
               </div>
             </div>
             <div class="row mb-3 mt-3">

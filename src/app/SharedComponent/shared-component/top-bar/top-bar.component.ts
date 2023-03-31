@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/Service/shared.service';
 
 
 @Component({
@@ -8,13 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor(
-) {
-
-  }
+  constructor(private sharedService : SharedService) {}
 
   ngOnInit(): void {
   }
 
+  toggleme(){
+   this.sharedService.emitData();
+}
 
 }
