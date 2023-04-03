@@ -7,7 +7,7 @@ import { SharedService } from 'src/app/Service/shared.service';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
-  hide : boolean = false
+  hide : boolean = true
   constructor(private coreService: SharedService ) { }
 
   ngOnInit(): void {
