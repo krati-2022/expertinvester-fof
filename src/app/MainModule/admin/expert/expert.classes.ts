@@ -6,7 +6,7 @@ export class ExpertManagementDetails {
   email: string = '';
   IsSEBI: any;
   SEBIRegNo: string = '';
-  certificateURL:string = '';
+  certificateURL: any;
   experience: string = '';
   knowledgelevel: string = '';
   accountname: string = '';
@@ -17,4 +17,10 @@ export class ExpertManagementDetails {
   public constructor(init?: Partial<ExpertManagementDetails>) {
     Object.assign(this, init);
   }
+}
+
+export interface FileUpload {
+  name: string;
+  type: string;
+  content: any;
 }

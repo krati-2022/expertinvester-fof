@@ -5,7 +5,8 @@ import { environment } from 'src/environments/environment';
 import { ExpertInvestorManagementDetails } from '../MainModule/admin/expert-and-investor/expert-and-investor.classes';
 import { ExpertManagementDetails } from '../MainModule/admin/expert/expert.classes';
 import { InvestorManagementDetails } from '../MainModule/admin/investor/investor.classes';
-import { SendOtp, VerifyOtp } from '../MainModule/admin/sign-in/sign-in.class';
+import { SendOtp, UserIsExist, VerifyOtp } from '../MainModule/admin/sign-in/sign-in.class';
+import { SetPin } from '../MainModule/admin/setu-up-pin/set-up-pin.classes';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import { SendOtp, VerifyOtp } from '../MainModule/admin/sign-in/sign-in.class';
 export class SharedService {
   apiUrl = environment.apiUrl
   public toggleSidebar: EventEmitter<any> = new EventEmitter()
+  
   constructor(private http: HttpClient) { }
 
   SendOtp(data: SendOtp): Observable<any>{
@@ -23,6 +25,14 @@ export class SharedService {
     return this.http.post(this.apiUrl + 'api/Login/ConfirmOTP', data)
   }
 
+  UserIsExist(mobile_No: string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Login/CheckUserExists?Mobile_No='+ mobile_No)
+  }
+
+  SetPin(data: SetPin): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Login/SetPIN', data)
+  }
+
   GetCountry(): Observable<any>{
     return this.http.get(this.apiUrl + 'api/ExpertInvestor/GetCountrylist')
   }
@@ -31,25 +41,25 @@ export class SharedService {
     return this.http.get(this.apiUrl + 'api/ExpertInvestor/GetIdeaonlist?countryname=' + countryname)
   }
 
-  AddExpert(data: ExpertManagementDetails): Observable<any>{
-    let formData = new FormData()
-    formData.append('name', data.name)
-    formData.append('email', data.email)
-    formData.append('mobileno', data.mobileno)
-    formData.append('usertype',data.usertype)
-    formData.append('aboutus',data.aboutus)
-    formData.append('experttype',data.experttype)
-    formData.append('IsSEBI',data.IsSEBI)
-    formData.append('SEBIRegNo',data.SEBIRegNo)
-    formData.append('certificateURL',data.certificateURL)
-    formData.append('experience',data.experience)
-    formData.append('knowledgelevel',data.knowledgelevel)
-    formData.append('accountname',data.accountname)
-    formData.append('accountnumber',data.accountnumber)
-    formData.append('bankname',data.bankname)
-    formData.append('bankIFSCcode',data.bankIFSCcode)
-    return this.http.post(this.apiUrl + 'api/ExpertInvestor/AddExpert', formData)
-  }
+  // AddExpert(data: ExpertManagementDetails): Observable<any>{
+  //   let formData = new FormData()
+  //   formData.append('name', data.name)
+  //   formData.append('email', data.email)
+  //   formData.append('mobileno', data.mobileno)
+  //   formData.append('usertype',data.usertype)
+  //   formData.append('aboutus',data.aboutus)
+  //   formData.append('experttype',data.experttype)
+  //   formData.append('IsSEBI',data.IsSEBI)
+  //   formData.append('SEBIRegNo',data.SEBIRegNo)
+  //   formData.append('certificateURL',data.certificateURL)
+  //   formData.append('experience',data.experience)
+  //   formData.append('knowledgelevel',data.knowledgelevel)
+  //   formData.append('accountname',data.accountname)
+  //   formData.append('accountnumber',data.accountnumber)
+  //   formData.append('bankname',data.bankname)
+  //   formData.append('bankIFSCcode',data.bankIFSCcode)
+  //   return this.http.post(this.apiUrl + 'api/ExpertInvestor/AddExpert', formData)
+  // }
 
   AddInvestor(data: InvestorManagementDetails): Observable<any>{
     return this.http.post(this.apiUrl + 'api/ExpertInvestor/AddInvester', data)
