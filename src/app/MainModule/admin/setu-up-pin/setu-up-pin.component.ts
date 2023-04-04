@@ -11,7 +11,7 @@ import { SharedService } from 'src/app/Service/shared.service';
 export class SetuUpPinComponent implements OnInit {
   pinDetails = new SetPin();
   showOtpComponent = true;
-  mobile_No = localStorage.getItem('mobile_number')
+  mobile_No:any = localStorage.getItem('mobile_number')
   password!:string
   config = {
     allowNumbersOnly: true,
@@ -36,13 +36,14 @@ export class SetuUpPinComponent implements OnInit {
     this.password = otp;
     // console.log('this.password: ', this.password.length);
     if(this.password.length == 4){
-      let number = JSON.stringify(this.mobile_No)
+      let number = this.mobile_No
       this.pinDetails = new SetPin({
         mobileno: number,
         password: this.password
         
       });
       this._service.SetPin(this.pinDetails).subscribe(res =>{
+      console.log('res: ', res);
         // localStorage.removeItem('mobile_number')
         localStorage.setItem('pin', this.password)
         this.router.navigate(['enter-pin'])

@@ -36,7 +36,10 @@
                     <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i
                         class="bi bi-database px-2"></i>Experience</label>
                     <div class="col-lg-8">
-                      <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experience.errors }">
+                      <!-- <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experience.errors }"> -->
+                      <select class="form-select" aria-label="Default select example" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experience.errors }">
+                        <option [value]="item" *ngFor="let item of experience">{{item}}</option>
+                      </select>
                       <div *ngIf=" submitted && InvestorControl.experience.errors" class="invalid-feedback">
                         <div *ngIf="InvestorControl.experience.errors.required">Experience is required.</div>
                       </div>
@@ -59,7 +62,7 @@
                 </div>
                 <div class="col-lg-6">
                  
-                  <div class="row mb-3">
+                  <!-- <div class="row mb-3">
                     <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>Mobile Number
                     </label>
                     <div class="col-lg-8">
@@ -71,7 +74,7 @@
                       <div *ngIf="InvestorControl.mobileno.errors?.required ">Phone number is required.</div>
                     </div>  
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="row mb-3">
                     <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am advice in </label>
@@ -87,7 +90,10 @@
                     <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i
                         class="bi bi-book px-2"></i>Knowledge Level</label>
                     <div class="col-lg-8">
-                      <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }">
+                      <!-- <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }"> -->
+                      <select class="form-select" aria-label="Default select example" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }">
+                        <option [value]="item" *ngFor="let item of knowledgeLevel">{{item}}</option>
+                      </select>
                       <div *ngIf=" submitted && InvestorControl.knowledgelevel.errors" class="invalid-feedback">
                         <div *ngIf="InvestorControl.knowledgelevel.errors.required">Knowledge Level is required.</div>
                       </div>

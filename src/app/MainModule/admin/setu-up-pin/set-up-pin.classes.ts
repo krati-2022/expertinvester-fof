@@ -1,5 +1,5 @@
 export class SetPin{
-    mobileno!: string;
+    mobileno: string = '';
     password!: string;
 
     public constructor(init?:Partial<SetPin>){

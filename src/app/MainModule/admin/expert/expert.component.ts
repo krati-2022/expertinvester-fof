@@ -18,11 +18,13 @@ export class ExpertComponent implements OnInit {
   submitted: boolean = false;
   submitPhone: boolean = false;
   imageSrc: string = '';
-
   ExpertDetails = new ExpertManagementDetails();
   country: Array<any> = [];
   file: File[] | any;
   url: any;
+  experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year']
+  knowledgeLevel = ['Beginner', 'Intermediate', 'Professional']
+  ismobileNumberExist = localStorage.getItem('mobile_number')
   usertype = sessionStorage.getItem('usertype');
   constructor(
     private router: Router,
@@ -33,6 +35,10 @@ export class ExpertComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('this.ismobileNumberExist: ', this.ismobileNumberExist);
+    if(!this.ismobileNumberExist){
+      this.router.navigate([''])
+     }
     this.AddExpertForm = this.formBuilder.group({
       name: [
         '',
@@ -42,10 +48,7 @@ export class ExpertComponent implements OnInit {
         ]),
       ],
       email: ['', Validators.compose([Validators.email, Validators.required])],
-      mobileno: [
-        '',
-        Validators.compose([Validators.maxLength(20), Validators.required]),
-      ],
+      mobileno: [this.ismobileNumberExist, Validators.required],
       usertype: [this.usertype, Validators.required],
       aboutus: ['', Validators.required],
       experttype: ['', Validators.required],
@@ -97,27 +100,6 @@ export class ExpertComponent implements OnInit {
   // }
 
   onSelectFile(event: any) {
-    // console.log('event: ', event);
-    // if (event.target.files && event.target.files[0]) {
-    //   var reader = new FileReader();
-    //   const [file] = event.target.files;
-    //   reader.readAsDataURL(file);
-    //   // reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-    //   reader.onload = () => {
-    //     let ext = event.target.files[0].name.split('.').pop().toLowerCase();
-    //     let accpt = ['pdf'];
-    //     if (accpt.includes(ext)) {
-
-    //       this.formData.append('FilePath', file, file.name);
-    //       this.imageSrc = reader.result as string;
-    //     }
-
-    //   };
-    // let formData = new FormData();
-    // formData.set('file', this.file);
-
-    // }
     const file = event.target.files[0];
     this.imageSrc = event.target.files[0].name
     this.AddExpertForm.patchValue({
@@ -161,12 +143,14 @@ export class ExpertComponent implements OnInit {
       'certificateURL',
       this.AddExpertForm.get('certificateURL').value
     );
+    // console.log('formData: ', formData);
+    // return
     this.http
-      .post('http://192.168.0.161/api/ExpertInvestor/AddExpert', formData)
+      .post('https://api.expertinvester.com/api/ExpertInvestor/AddExpert', formData)
       .subscribe({
         next: (response) => {
           console.log('response: ', response);
-          debugger;
+          // debugger;
           this.AddExpertForm.reset();
           this.submitted = false;
           this.submitPhone = false;

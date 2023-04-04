@@ -7,6 +7,7 @@ import { ExpertManagementDetails } from '../MainModule/admin/expert/expert.class
 import { InvestorManagementDetails } from '../MainModule/admin/investor/investor.classes';
 import { SendOtp, UserIsExist, VerifyOtp } from '../MainModule/admin/sign-in/sign-in.class';
 import { SetPin } from '../MainModule/admin/setu-up-pin/set-up-pin.classes';
+import { Login } from '../MainModule/admin/enter-pin/enter-pin.classes';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class SharedService {
     return this.http.post(this.apiUrl + 'api/Login/ConfirmOTP', data)
   }
 
+  LoginIn(data:Login): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Login/LoginIn',data)
+  }
+
   UserIsExist(mobile_No: string): Observable<any>{
     return this.http.get(this.apiUrl + 'api/Login/CheckUserExists?Mobile_No='+ mobile_No)
   }
@@ -39,6 +44,10 @@ export class SharedService {
 
   GetIdeaonlist(countryname:string): Observable<any>{
     return this.http.get(this.apiUrl + 'api/ExpertInvestor/GetIdeaonlist?countryname=' + countryname)
+  }
+
+  GetPin(mobile_number: string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Login/GetPIN?Mobile_No='+ mobile_number)
   }
 
   // AddExpert(data: ExpertManagementDetails): Observable<any>{

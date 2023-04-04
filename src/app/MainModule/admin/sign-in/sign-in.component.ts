@@ -67,10 +67,10 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('this.isExistUser: ', this.isExistUser);
-    // if(this.isExistUser != null){
-    //   this.router.navigate(['enter-pin'])
-    // }
+    // console.log('this.isExistUser: ', this.isExistUser);
+    if(this.isExistUser != null){
+      this.router.navigate(['enter-pin'])
+    }
   }
   onOtpChange(otp: string) {
     this.otp = otp;
@@ -123,7 +123,7 @@ export class SignInComponent implements OnInit {
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 5000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                   toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -132,7 +132,7 @@ export class SignInComponent implements OnInit {
               });
               Toast.fire({
                 icon: 'success',
-                title: response.message,
+                title: response.message + ' ' +response.data.otp,
               });
               this.submitted = false;
               
@@ -156,6 +156,7 @@ export class SignInComponent implements OnInit {
     this._service.VerifyOtp(this.VerifyOtpModel).subscribe((response) => {
       // console.log('response: ', response);
       if (response.status == 'Success') {
+        localStorage.setItem('mobile_number', response.data[0].mobileno);
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -173,7 +174,7 @@ export class SignInComponent implements OnInit {
         });
         (<any>$('#exampleModal')).modal('hide');
         // this.router.navigate(['user-set-up']);
-        localStorage.setItem('mobile_number', response.data.mobileNo);
+        // localStorage.setItem('mobile_number', response.data.mobileNo);
         if(this.status == 'True'){
           localStorage.setItem('isExist', this.status)
           this.router.navigate(['enter-pin'])

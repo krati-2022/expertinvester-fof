@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent implements OnInit {
 
-  ismobileNumberExist = localStorage.getItem('mobile_No')
+  ismobileNumberExist = localStorage.getItem('mobile_number')
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    if(this.ismobileNumberExist){
-      this.router.navigate(['enter-pin'])
-    }
+   if(!this.ismobileNumberExist){
+    this.router.navigate([''])
+   }
   }
 
 }
