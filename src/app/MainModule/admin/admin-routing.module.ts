@@ -39,6 +39,7 @@ const routes: Routes = [
   { path: 'expertAndInvestor', component: ExpertAndInvestorComponent },
   { path: 'enter-pin', component: EnterPinComponent },
   { path: 'set-up-pin', component: SetuUpPinComponent },
+  { path: 'club-list', component: ClubListComponent },
   {
     path: 'home',
     component: HomePageComponent,
@@ -55,7 +56,7 @@ const routes: Routes = [
       { path: 'list', component: ListComponent },
       { path: 'add-trade', component: AddTradeComponent },
       { path: 'trades', component: TradesComponent },
-      { path: 'club-list', component: ClubListComponent },
+      // { path: 'club-list', component: ClubListComponent },
       { path: 'feed-club', component: FeedClubListComponent },
       { path: 'upgrade-plan', component: UpgradePlanComponent },
       { path: 'profile-page', component: ProfilePageComponent },

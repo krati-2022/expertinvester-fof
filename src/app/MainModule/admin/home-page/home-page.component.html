@@ -7,7 +7,18 @@
   <!-- End Sidebar-->
 
   <main id="main" class="main">
-     <router-outlet></router-outlet>
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-7">
+            <router-outlet></router-outlet>
+         </div>
+         <div class="col-lg-5">
+            <app-common-section></app-common-section>
+         </div>
+   
+      </div>
+
+   </div>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

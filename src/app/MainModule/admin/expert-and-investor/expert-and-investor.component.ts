@@ -100,9 +100,9 @@ export class ExpertAndInvestorComponent implements OnInit {
     }
   }
 
-  goToHomePage(){
-    this.router.navigate(['home'])
-  }
+  // goToHomePage(){
+  //   this.router.navigate(['home'])
+  // }
 
   getCountry(event: string) {
     this._service.GetIdeaonlist(event).subscribe((response) => {
@@ -197,7 +197,7 @@ export class ExpertAndInvestorComponent implements OnInit {
     this.submitted = false
     this.submitPhone = false
     sessionStorage.removeItem('usertype')
-    this.router.navigate(['home']);
+    this.router.navigate(['club-list']);
     })
   }
 

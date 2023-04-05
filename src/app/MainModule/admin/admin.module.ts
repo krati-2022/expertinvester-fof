@@ -35,10 +35,11 @@ import { ProfilePageComponent } from './Pages/profile-page/profile-page.componen
 import { PrivacyPolicyComponent } from './Pages/privacy-policy/privacy-policy.component';
 import { LegalDisclamerComponent } from './Pages/legal-disclamer/legal-disclamer.component';
 import { TermsServicesComponent } from './Pages/terms-services/terms-services.component';
-import { CommenSelectionComponent } from 'src/app/SharedComponent/shared-component/commen-selection/commen-selection.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { EnterPinComponent } from './enter-pin/enter-pin.component';
 import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
+import { CommonSectionComponent } from 'src/app/SharedComponent/shared-component/common-section/common-section.component';
+import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -74,9 +75,10 @@ import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
     PrivacyPolicyComponent,
     LegalDisclamerComponent,
     TermsServicesComponent,
-    CommenSelectionComponent,
     EnterPinComponent,
-    SetuUpPinComponent
+    SetuUpPinComponent,
+    CommonSectionComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,

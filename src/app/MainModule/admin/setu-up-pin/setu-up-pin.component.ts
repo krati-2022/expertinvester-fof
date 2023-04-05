@@ -43,7 +43,7 @@ export class SetuUpPinComponent implements OnInit {
         
       });
       this._service.SetPin(this.pinDetails).subscribe(res =>{
-      console.log('res: ', res);
+      // console.log('res: ', res);
         // localStorage.removeItem('mobile_number')
         localStorage.setItem('pin', this.password)
         this.router.navigate(['enter-pin'])

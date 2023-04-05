@@ -29,8 +29,8 @@
                       <div class="input-group has-validation">
                         <!-- <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-telephone-fill"></i></span> -->
                         <div class="col-2">
-                          <select class="form-control" disabled >
-                              <option [value]="+91" selected>+91</option>
+                          <select class="form-control" formControlName="code" [ngModel]="'+91'" >
+                              <option [value]="item.CountryISDCode" *ngFor="let item of countryCodes" >{{item.CountryISDCode}}</option>
                             </select>
                           <!-- <input type="text" [value]="+91" disabled class="form-control"> -->
                         </div>

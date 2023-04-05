@@ -8,6 +8,7 @@ import { InvestorManagementDetails } from '../MainModule/admin/investor/investor
 import { SendOtp, UserIsExist, VerifyOtp } from '../MainModule/admin/sign-in/sign-in.class';
 import { SetPin } from '../MainModule/admin/setu-up-pin/set-up-pin.classes';
 import { Login } from '../MainModule/admin/enter-pin/enter-pin.classes';
+import { FollowClub } from '../MainModule/admin/Pages/club-list/club-list.classes';
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +77,20 @@ export class SharedService {
   
   AddExpertInvestor(data: ExpertInvestorManagementDetails): Observable<any>{
     return this.http.post(this.apiUrl + 'api/ExpertInvestor/AddExpertInvester', data)
+  }
+
+  GetMasterData(mobile_No:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Club/GetMasterclublist?mobileno=' + mobile_No)
+  }
+
+  FollowClub(data: FollowClub): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Club/AddUserFollowClub', data)
+  }
+  UnFollowClub(data: FollowClub): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Club/UserUnFollowClubListUpdate', data)
+  }
+
+  GetFeed(mobile_No:string, pageNumber: number, pageSize: number){
+    return this.http.get(this.apiUrl + 'GetFeedPost?Mobile_No=' + mobile_No + '&pageNumber=' + pageNumber +'&pageSize=' + pageSize)
   }
 }

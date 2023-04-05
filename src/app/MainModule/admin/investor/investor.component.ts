@@ -149,7 +149,7 @@ export class InvestorComponent implements OnInit {
         this.submitted = false;
         this.submitPhone = false;
         sessionStorage.removeItem('usertype');
-        this.router.navigate(['home']);
+        this.router.navigate(['club-list']);
       },
       (error) => {
         if (error.status == '400') {
