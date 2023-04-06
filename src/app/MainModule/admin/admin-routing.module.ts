@@ -28,7 +28,8 @@ import { TradesComponent } from './Pages/trades/trades.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { UpgradePlanComponent } from './upgrade-plan/upgrade-plan.component';
 import { UserSetUpComponent } from './user-set-up/user-set-up.component';
-
+import { EnterPinComponent } from './enter-pin/enter-pin.component';
+import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -36,10 +37,12 @@ const routes: Routes = [
   { path: 'expert', component: ExpertComponent },
   { path: 'investor', component: InvestorComponent },
   { path: 'expertAndInvestor', component: ExpertAndInvestorComponent },
-
+  { path: 'enter-pin', component: EnterPinComponent },
+  { path: 'set-up-pin', component: SetuUpPinComponent },
   {
-    path: 'home', component: HomePageComponent,
-    children:[
+    path: 'home',
+    component: HomePageComponent,
+    children: [
       { path: '', component: FeedComponent },
       { path: 'feed', component: FeedComponent },
       { path: 'club', component: ClubComponent },
@@ -55,21 +58,20 @@ const routes: Routes = [
       { path: 'club-list', component: ClubListComponent },
       { path: 'feed-club', component: FeedClubListComponent },
       { path: 'upgrade-plan', component: UpgradePlanComponent },
-      {path : 'profile-page',component:ProfilePageComponent},
-      {path : 'faq',component:FaqComponent},
-      {path : 'contact',component:ContactUsComponent},
-      {path : 'about',component :AboutUsComponent},
-      {path : 'terms',component:TermsConditionsComponent},
-      {path:'privacy-policy',component:PrivacyPolicyComponent},
-      {path:'legal-disclamer',component:LegalDisclamerComponent},
-      {path:'terms-services',component:TermsServicesComponent},
-
+      { path: 'profile-page', component: ProfilePageComponent },
+      { path: 'faq', component: FaqComponent },
+      { path: 'contact', component: ContactUsComponent },
+      { path: 'about', component: AboutUsComponent },
+      { path: 'terms', component: TermsConditionsComponent },
+      { path: 'privacy-policy', component: PrivacyPolicyComponent },
+      { path: 'legal-disclamer', component: LegalDisclamerComponent },
+      { path: 'terms-services', component: TermsServicesComponent },
     ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

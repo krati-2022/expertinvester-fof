@@ -18,3 +18,9 @@ export class ExpertManagementDetails {
     Object.assign(this, init);
   }
 }
+
+export interface FileUpload {
+  name: string;
+  type: string;
+  content: any;
+}

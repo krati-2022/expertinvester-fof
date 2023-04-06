@@ -37,7 +37,8 @@ import { LegalDisclamerComponent } from './Pages/legal-disclamer/legal-disclamer
 import { TermsServicesComponent } from './Pages/terms-services/terms-services.component';
 import { CommenSelectionComponent } from 'src/app/SharedComponent/shared-component/commen-selection/commen-selection.component';
 import { NgOtpInputModule } from 'ng-otp-input';
-
+import { EnterPinComponent } from './enter-pin/enter-pin.component';
+import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
 
 @NgModule({
   declarations: [
@@ -73,14 +74,16 @@ import { NgOtpInputModule } from 'ng-otp-input';
     PrivacyPolicyComponent,
     LegalDisclamerComponent,
     TermsServicesComponent,
-  CommenSelectionComponent
+    CommenSelectionComponent,
+    EnterPinComponent,
+    SetuUpPinComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgOtpInputModule
-  ]
+    NgOtpInputModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

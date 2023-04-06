@@ -1,7 +1,6 @@
 <section class="container my-5">
   <div class="row">
     <div class="col-lg-10 mx-auto">
-
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Expert-Form</h5>
@@ -19,7 +18,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row mb-3">
+                <!-- <div class="row mb-3">
                   <label for="inputText" class="col-lg-4 col-form-label form-line"><i class="bi bi-tablet px-2"></i>Mobile No.</label>
                   <div class="col-lg-8">
                     <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="mobileno"
@@ -30,7 +29,7 @@
                       <div *ngIf="ExpertControl.mobileno.errors?.required ">Phone number is required.</div>
                     </div>  
                   </div>
-                </div>
+                </div> -->
 
 
                 <div class="row mb-3">
@@ -46,16 +45,33 @@
               <legend class="col-form-label col-lg-6 pt-0 form-line"><i class="bi bi-r-circle px-2"></i>Are you SEBI registered</legend>
               <div class="col-lg-6 d-flex justify-content-around">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" [value]="true" formControlName="IsSEBI"  checked>
-                 
+                  <input class="form-check-input" type="radio" [value]="true"  formControlName="IsSEBI">
                   <label class="form-check-label">Yes</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" [value]="false" formControlName="IsSEBI">
+                  <input class="form-check-input" type="radio"  [value]="false" formControlName="IsSEBI">
                   <label class="form-check-label" >No</label>
                 </div>
               </div>
             </fieldset>
+
+            <div class="row mb-3" *ngIf="AddExpertForm.value.IsSEBI == true">
+              <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-bank px-2"></i>SEBI Reg.No</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" formControlName="SEBIRegNo" [ngClass]="{ 'is-invalid': submitted && ExpertControl.SEBIRegNo.errors }">
+                <div *ngIf=" submitted && ExpertControl.SEBIRegNo.errors" class="invalid-feedback">
+                  <div *ngIf="ExpertControl.SEBIRegNo.errors.required">SEBI Reg.No is required.</div>
+                </div>
+                <div class="edit-icon">
+                  <label for="file-input">
+                    <i class="bi bi-paperclip"></i>Attached SEBI reg. certificate PDF
+                    <p *ngIf="imageSrc != ''">{{imageSrc}}</p>
+                </label>
+                <input id="file-input" type="file" accept="pdf" class="cstm-file" (change)="onSelectFile($event)">
+              </div>
+              </div>
+            </div>
+
             <div class="row mb-3">
               <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-person-vcard px-2"></i>Account Name</label>
               <div class="col-lg-8">
@@ -77,22 +93,16 @@
             <div class="row mb-3">
               <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-book px-2"></i>Knowledge Level</label>
               <div class="col-lg-8">
-                <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && ExpertControl.knowledgelevel.errors }">
+                <!-- <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && ExpertControl.knowledgelevel.errors }"> -->
+                <select class="form-select" aria-label="Default select example" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && ExpertControl.knowledgelevel.errors }">
+                  <option [value]="item" *ngFor="let item of knowledgeLevel">{{item}}</option>
+                </select>
                 <div *ngIf=" submitted && ExpertControl.knowledgelevel.errors" class="invalid-feedback">
                   <div *ngIf="ExpertControl.knowledgelevel.errors.required">Knowledge Level is required.</div>
                 </div>
               </div>
             </div>
-            <div class="row mb-3">
-              <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-pencil px-2"></i>About Us</label>
-              <div class="col-lg-8">
-                <textarea class="form-control" formControlName="aboutus" style="height: 80px"[ngClass]="{ 'is-invalid': submitted && ExpertControl.aboutus.errors }"></textarea>
-                
-                    <div *ngIf=" submitted && ExpertControl.aboutus.errors" class="invalid-feedback">
-                      <div *ngIf="ExpertControl.aboutus.errors.required">About Us is required.</div>
-                    </div>
-              </div>
-            </div>
+            
               </div>
               <div class="col-lg-6">
                 <!-- <div class="row mb-3">
@@ -123,16 +133,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-bank px-2"></i>SEBI Reg.No</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" formControlName="SEBIRegNo" [ngClass]="{ 'is-invalid': submitted && ExpertControl.SEBIRegNo.errors }">
-                    <div *ngIf=" submitted && ExpertControl.SEBIRegNo.errors" class="invalid-feedback">
-                      <div *ngIf="ExpertControl.SEBIRegNo.errors.required">SEBI Reg.No is required.</div>
-                    </div>
-                    <small><i class="bi bi-paperclip px-2"></i>Attached SEBI reg certificate PDF</small>
-                  </div>
-                </div>
+               
                 <div class="row mb-3">
                   <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Account No</label>
                   <div class="col-lg-8">
@@ -154,10 +155,24 @@
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-database px-2"></i>Experience</label>
                   <div class="col-lg-8">
-                    <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && ExpertControl.experience.errors }">
+                    <!-- <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && ExpertControl.experience.errors }"> -->
+                    <select class="form-select" aria-label="Default select example" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && ExpertControl.experience.errors }">
+                      <option [value]="item" *ngFor="let item of experience">{{item}}</option>
+                    </select>
                     <div *ngIf=" submitted && ExpertControl.experience.errors" class="invalid-feedback">
                       <div *ngIf="ExpertControl.experience.errors.required">Experience is required.</div>
                     </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-pencil px-2"></i>About Us</label>
+                  <div class="col-lg-8">
+                    <textarea class="form-control" formControlName="aboutus" style="height: 80px"[ngClass]="{ 'is-invalid': submitted && ExpertControl.aboutus.errors }"></textarea>
+                    
+                        <div *ngIf=" submitted && ExpertControl.aboutus.errors" class="invalid-feedback">
+                          <div *ngIf="ExpertControl.aboutus.errors.required">About Us is required.</div>
+                        </div>
                   </div>
                 </div>
               </div>

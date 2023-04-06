@@ -254,6 +254,9 @@ scrollbar-width: none;
 }
 
 @media screen and (min-width: 320px) and (max-width: 416px) {
+  .danger-btn {
+    font-size: 10px;
+}
   .percent {
     font-size: 8px;
     font-weight: 600;
@@ -440,6 +443,9 @@ button.btn.follow-btn {
 }
 
 @media screen and (min-width: 415px) and (max-width: 501px) {
+  .danger-btn {
+    font-size: 10px;
+}
   button.btn.follow-btn {
     background: #F61C7A;
     color: #fff;
@@ -619,8 +625,10 @@ span.line {
 }
 }
 
-
 @media screen and (min-width: 500px) and (max-width: 769px) {
+  .danger-btn {
+    font-size: 14px;
+}
   .club-icon {
     padding-right: 4px;
     padding-left: 4px;

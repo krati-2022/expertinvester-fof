@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class FeedComponent implements OnInit {
 
- 
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -17,4 +17,8 @@ export class FeedComponent implements OnInit {
   AddChannel(){
     this.router.navigate(['home/add-channel'])
   }
+  goToListGroup(){
+    this.router.navigate(['home/listGroup'])
+  }
+
 }

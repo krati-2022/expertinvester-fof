@@ -19,19 +19,19 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="row mb-3">
+               
+                <!-- <div class="row mb-3">
                   <label for="inputText" class="col-lg-4 col-form-label form-line"><i class="bi bi-tablet px-2"></i>Mobile No.</label>
                   <div class="col-lg-8">
                     <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="mobileno"
                     [ngClass]="{ 'is-invalid': (submitted || submitPhone) && ExpertInvestorControl.mobileno.errors  }">
-                    <div *ngIf="(submitted || submitPhone )  && ExpertInvestorControl.mobileno?.errors " class="invalid-feedback">
+                    <div *ngIf="(submitted || submitPhone )  && ExpertInvestorControl.mobileno?.errors " class="invalid-feedback">             
                       <div *ngIf="ExpertInvestorControl.mobileno.errors?.validatePhoneNumber ">Phone number is invalid.</div>
                       <div *ngIf="ExpertInvestorControl.mobileno.errors?.maxLength ">Phone number is invalid.</div>
                       <div *ngIf="ExpertInvestorControl.mobileno.errors?.required ">Phone number is required.</div>
-                    </div>
+                    </div>  
                   </div>
-                </div>
+                </div> -->
 
 
                 <div class="row mb-3">
@@ -54,9 +54,27 @@
                   <input class="form-check-input" type="radio" [value]="false" formControlName="IsSEBI">
                   <label class="form-check-label" >No</label>
                 </div>
-
+               
               </div>
             </fieldset>
+
+            <div class="row mb-3" *ngIf="AddExpertInvestorForm.value.IsSEBI == true">
+              <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-bank px-2"></i>SEBI Reg.No</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" formControlName="SEBIRegNo" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.SEBIRegNo.errors }">
+                <div *ngIf=" submitted && ExpertInvestorControl.SEBIRegNo.errors" class="invalid-feedback">
+                  <div *ngIf="ExpertInvestorControl.SEBIRegNo.errors.required">SEBI Reg.No is required.</div>
+                </div>
+                <div class="edit-icon">
+                  <label for="file-input">
+                    <i class="bi bi-paperclip"></i>Attached SEBI reg. certificate PDF
+                    <p *ngIf="fileName != ''">{{fileName}}</p>
+                </label>
+                <input id="file-input" type="file" accept="pdf" class="cstm-file" (change)="onSelectFile($event)">
+              </div>
+              </div>
+            </div>
+
             <div class="row mb-3">
               <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-person-vcard px-2"></i>Account Name</label>
               <div class="col-lg-8">
@@ -78,7 +96,10 @@
             <div class="row mb-3">
               <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-book px-2"></i>Knowledge Level</label>
               <div class="col-lg-8">
-                <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.knowledgelevel.errors }">
+                <!-- <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.knowledgelevel.errors }"> -->
+                <select class="form-select" aria-label="Default select example" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.knowledgelevel.errors }">
+                  <option [value]="item" *ngFor="let item of knowledgeLevel">{{item}}</option>
+                </select>
                 <div *ngIf=" submitted && ExpertInvestorControl.knowledgelevel.errors" class="invalid-feedback">
                   <div *ngIf="ExpertInvestorControl.knowledgelevel.errors.required">Knowledge Level is required.</div>
                 </div>
@@ -88,7 +109,7 @@
               <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-pencil px-2"></i>About Us</label>
               <div class="col-lg-8">
                 <textarea class="form-control" formControlName="aboutus" style="height: 80px"[ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.aboutus.errors }"></textarea>
-
+                
                     <div *ngIf=" submitted && ExpertInvestorControl.aboutus.errors" class="invalid-feedback">
                       <div *ngIf="ExpertInvestorControl.aboutus.errors.required">About Us is required.</div>
                     </div>
@@ -115,7 +136,7 @@
 <!--I am expert-->
                 <div class="row mb-3">
                   <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am Expert </label>
-                  <div class="col-lg-8">
+                  <div class="col-lg-8"> 
                     <select class="form-select" aria-label="Default select example" formControlName="country" (change)="getCountry(AddExpertInvestorForm.value.country)" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.experttype.errors }">
                       <option [value]="item.countryName" *ngFor="let item of country">{{item.countryName}}</option>
                     </select>
@@ -124,17 +145,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-bank px-2"></i>SEBI Reg.No</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" formControlName="SEBIRegNo" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.SEBIRegNo.errors }">
-                    <div *ngIf=" submitted && ExpertInvestorControl.SEBIRegNo.errors" class="invalid-feedback">
-                      <div *ngIf="ExpertInvestorControl.SEBIRegNo.errors.required">SEBI Reg.No is required.</div>
-                    </div>
-                    <a href="" >  <small><i class="bi bi-paperclip px-2"></i>Attached SEBI reg certificate PDF</small>
-                    </a>
-                  </div>
-                </div>
+                
                 <div class="row mb-3">
                   <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Account No</label>
                   <div class="col-lg-8">
@@ -156,7 +167,10 @@
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-database px-2"></i>Experience</label>
                   <div class="col-lg-8">
-                    <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.experience.errors }">
+                    <!-- <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.experience.errors }"> -->
+                    <select class="form-select" aria-label="Default select example" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.experience.errors }">
+                      <option [value]="item" *ngFor="let item of experience">{{item}}</option>
+                    </select>
                     <div *ngIf=" submitted && ExpertInvestorControl.experience.errors" class="invalid-feedback">
                       <div *ngIf="ExpertInvestorControl.experience.errors.required">Experience is required.</div>
                     </div>
@@ -171,7 +185,7 @@
                     <div *ngIf="submitted && ideaOnlist.length == 0" style="color: red;">Please select at least one</div>
                   </div>
                 </div>
-
+                
               </div>
             </div>
             <div class="row mb-3 mt-3">

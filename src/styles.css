@@ -277,10 +277,23 @@ span.club-inf {
 
 }
 @media screen and (min-width: 320px) and (max-width: 416px) {
+  .upload-img {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .header {
+    transition: all 0.5s;
+    z-index: 997;
+    height: 60px;
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+    background-color: #fff;
+    padding-left: 0;
+}
   .logo img {
-    max-height: 22px;
+    max-height: 19px;
     margin-right: 6px;
 }
+
   button.btn.follow-btn {
     font-size: 11px;
     background: #F61C7A;
@@ -433,8 +446,20 @@ span.subscript {
 }
 
 @media screen and (min-width: 415px) and (max-width: 501px) {
+  .upload-img {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .header {
+    transition: all 0.5s;
+    z-index: 997;
+    height: 60px;
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+    background-color: #fff;
+    padding-left: 0;
+}
   .logo img {
-    max-height: 22px;
+    max-height: 19px;
     margin-right: 6px;
 }
   button.btn.follow-btn {
