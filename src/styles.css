@@ -358,6 +358,7 @@ span.club-inf {
 }
 .club-icons{
   justify-content: center;
+  align-items: center;
 }
 .card-title {
   padding: 20px 0 15px 0;
