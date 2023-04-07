@@ -1,7 +1,7 @@
 <div class="pagetitle">
   <div class="d-flex justify-content-between align-items-baseline">
     <div>
-      <h1 class="px-3 py-1">Home</h1>
+      <h1 class="px-3 py-1">Feed</h1>
     </div>
   </div>
 </div>
@@ -9,32 +9,32 @@
   <div class="row">
     <div class="mx-auto">
       <div class="card">
-      <div class="d-lg-none d-md-block d-sm-block">
-        <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
-          <li class="nav-item flex-fill" role="presentation">
-            <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab"
-              data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home"
-              aria-selected="true">FEEDS</button>
-          </li>
-          <li class="nav-item flex-fill" role="presentation">
-            <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab"
-              data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile"
-              aria-selected="false">CLUDS</button>
-          </li>
-          <li class="nav-item flex-fill" role="presentation">
-            <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab"
-              data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact"
-              aria-selected="false">CHANNEL</button>
-          </li>
-        </ul>
+        <div class="d-lg-none d-md-block d-sm-block">
+          <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab"
+                data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home"
+                aria-selected="true">FEEDS</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab"
+                data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile"
+                aria-selected="false">CLUBS</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab"
+                data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact"
+                aria-selected="false">CHANNEL</button>
+            </li>
+          </ul>
 
-        
-      </div>
+
+        </div>
         <!-- Bordered Tabs Justified -->
         <div class="tab-content pt-2" id="borderedTabJustifiedContent">
           <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
             aria-labelledby="home-tab">
-            <div class="example" style="height: 75vh; overflow: auto;" >
+            <div class="example" style="height: 75vh; overflow: auto;">
               <div class="card my-3 m-4" *ngFor="let items of feedDetails">
                 <div class="card-body">
                   <div class=" row user_informatiom">
@@ -133,7 +133,9 @@
                   </div>
                 </div>
               </div>
-              <app-pagination [totalRecords]="totalRecord" [recordsPerPage]="recoardsPerPage" (onPageChange)="displayActivePage($event)"></app-pagination>
+              <!-- <app-pagination [totalRecords]="totalRecord" [recordsPerPage]="recoardsPerPage" (onPageChange)="displayActivePage($event)"></app-pagination> -->
+              <app-pagination [current]="current" [total]="total" (goTo)="onGoTo($event)" (next)="onNext($event)"
+                (previous)="onPrevious($event)"></app-pagination>
 
             </div>
           </div>
@@ -263,7 +265,7 @@
                     <div class="row">
                       <div class="d-flex justify-content-between align-items-baseline py-2">
                         <h6 class="heading">TRADING CHANNEL</h6>
-                        <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free Access</span>
+                        <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i>Free Access</span>
                       </div>
                     </div>
                   </div>
@@ -298,37 +300,57 @@
                       text ever since the 1500s, when an unknown printer took a galley</p>
                   </div>
                     </div>
-                   <div class="conatiner">
-                    <div class=" expect-section my-3">
-                      <div class="expect-inf d-flex justify-content-between pb-2 ">
-                        <div>
-                          <div class="expect">
-                            Expected Move
-                          </div>
-                          <div class="expect-percent">18.0%</div>
+                    <div class="container expect-section my-2">
+                      <div class="grid-data d-flex expect-sections ">
+                        <div class="col-3 border-end ">
+                          <div class="d-flex club-icons"><span class="club-icon "><i
+                                class="bi bi-chat-square-text"></i></span><span class="club-inf">Reputation</span></div>
+                          <div class="club-icon px-2">185</div>
                         </div>
-                        <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button></div>
+                        <div class="col-3  border-end ">
+                          <div class="d-flex club-icons"><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                              class="club-inf">Impression</span></div>
+                          <div class="club-icon px-2">15</div>
+                        </div>
+                        <div class="col-3  border-end">
+                          <div class="d-flex club-icons"><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                              class="club-inf">Followers</span></div>
+                          <div class="club-icon px-2">58</div>
+                        </div>
+                        <div class="col-3  ">
+                          <div class="d-flex club-icons"><span class="club-icon"><i
+                                class="bi bi-pencil-square "></i></span><span class="club-inf">Post</span></div>
+                          <div class="club-icon px-3">5</div>
+                        </div>
                       </div>
-                      <div>
-                        <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
-                        <div class="row d-flex text-center py-2">
-                          <div class="col-4">
-                            <div class="price">Entry Price</div>
-                            <div class="rate">$305.0 </div>
+                      <div class="container-fluid ">
+                        <div class="row py-2">
+                          <div class="col-6">
+                            <div class=" risk-btn w-100 d-flex justify-content-between">
+                              One Month accuracy<span class="">0%</span></div>
                           </div>
-                          <div class="col-4">
-                            <div class="price">Target Price</div>
-                            <div class="rate">$360.0 </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="price">Stop Loss</div>
-                            <div class="rate"> $265.0</div>
+                          <div class="col-6">
+                            <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                              gain<span class="">0%</span></div>
                           </div>
                         </div>
+                        <div class="row">
+                          <div class="col-6">
+                            <div class=" risk-btn w-100 d-flex justify-content-between"> One year
+                              accuracy<span class="">0%</span></div>
+                          </div>
+                          <div class="col-6 ">
+                            <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                              gain<span class="">0%</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="py-2">
+                        <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
+                          investing</p>
                       </div>
                     </div>
-                   </div>
-                  <div class="container">
+                  <!-- <div class="container">
                     <div class="row">
                       <div class="col-4 risk">
                         <button type="button" class="btn position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
@@ -342,7 +364,7 @@
                           (1-3 Months)</button>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                    <div class="container">
                     <div class="row">
                       <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
@@ -369,11 +391,10 @@
             </div>
           </div>
 
-          
+
         </div>
-        
+
       </div>
     </div>
   </div>
 </section>
-

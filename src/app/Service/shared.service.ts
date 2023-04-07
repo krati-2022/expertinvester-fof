@@ -90,7 +90,19 @@ export class SharedService {
     return this.http.post(this.apiUrl + 'api/Club/UserUnFollowClubListUpdate', data)
   }
 
-  GetFeed(mobile_No:string, pageNumber: number, pageSize: number){
+  GetFeed(mobile_No:string, pageNumber: number, pageSize: number): Observable<any>{
     return this.http.get(this.apiUrl + 'GetFeedPost?Mobile_No=' + mobile_No + '&pageNumber=' + pageNumber +'&pageSize=' + pageSize)
+  }
+
+  GetChannel(mobile_No:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Channel/GetChannelMasterList?Mobile_No=' + mobile_No)
+  }
+
+  GetExpertList(mobile_No:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Channel/GetExpertProfile?Mobile_No='+ mobile_No)
+  }
+
+  AddChannel(data:any): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Channel/AddchannelMaster', data)
   }
 }

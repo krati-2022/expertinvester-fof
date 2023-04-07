@@ -1,117 +1,268 @@
 <section class="section">
-    <div class="row">
-      <div class="col-lg-12 mx-auto">
-
-        <div class="card">
-          <div class="card-body">
-            
-            <div class="d-flex justify-content-between align-items-baseline mb-3">
-              <h5 class="card-title">Add-Channel</h5>
-              <h4 class=" "><i class="bi bi-cloud-arrow-up px-2"></i> Upload image</h4>
-            </div>
-            <!-- General Form Elements -->
-            <form>
-              <div class="row">
-                <div class="col-lg-8 mx-auto"> 
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-baseline mb-3">
+            <h5 class="card-title">Add-Channel</h5>
+            <!-- <h4 class=" "><i class="bi bi-cloud-arrow-up px-2"></i> Upload image</h4> -->
+          </div>
+          <!-- General Form Elements -->
+          <form [formGroup]="AddChannelFrom" (ngSubmit)="onSubmit()">
+            <div class="col-lg-12">
+              <div class="">
+                <div class="">
                   <div class="row mb-3">
-                  <label for="inputText" class="col-lg-4 col-form-label form-line"><i class="bi bi-person px-2"></i>Channel Name</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control">
-                   
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-pencil px-2"></i>Channel Description</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <fieldset class="row mb-3 mt-2">
-                  <legend class="col-form-label col-lg-4 form-line"><i class="bi bi-person-video3 px-2"></i>Ideal For</legend>
-                  <div class="col-lg-8 d-flex ">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      <label class="form-check-label form-lines" for="flexCheckDefault">
-                        Nifty
-                      </label>
+                    <label for="inputText" class="col-lg-4 col-form-label form-line"><i
+                        class="bi bi-person px-2"></i>Channel Name</label>
+                    <div class="col-lg-8">
+                      <input type="text" formControlName="name" placeholder="Enter Name" class="form-control"[ngClass]="{ 'is-invalid': submitted && AddChannelControl.name.errors }">
+                      <div *ngIf=" submitted && AddChannelControl.name.errors" class="invalid-feedback">
+                        <div *ngIf="AddChannelControl.name.errors.required">Name is required.</div>
+                      </div>
+
                     </div>
-                    <div class="form-check mx-4">
-                      <input class="form-check-input " type="checkbox" value="" id="flexCheckChecked" checked>
-                      <label class="form-check-label form-lines" for="flexCheckChecked">
-                        Bank Nifty
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1" checked>
-                      <label class="form-check-label form-lines" for="flexCheckChecked1">
-                        Stock F & O
-                      </label>
-                    </div>
-                   
                   </div>
-                </fieldset>
-                <fieldset class="row mb-3 mt-2">
-                  <legend class="col-form-label col-lg-4 pt-0 form-line"><i class="bi bi-shield-lock-fill px-2"></i>fee subscription</legend>
-                  <div class="col-lg-8 ">
-                 
-                  <div class="row">
-                    <div class="col-lg-6">   <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked (click)="onChange($event)">
-                      <label class="form-check-label form-lines" for="gridRadios1">
-                        Free Access 
-                      </label>
+                  <div class="row mb-3">
+                    <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i
+                        class="bi bi-pencil px-2"></i>Channel Description</label>
+                    <div class="col-lg-8">
+                      <textarea type="text" formControlName="description" placeholder="Enter Description"
+                        class="form-control"[ngClass]="{ 'is-invalid': submitted && AddChannelControl.description.errors }"></textarea>
+                        
+                    <div *ngIf=" submitted && AddChannelControl.description.errors" class="invalid-feedback">
+                      <div *ngIf="AddChannelControl.description.errors.required">Description is required.</div>
                     </div>
-                   </div>
-                    <div class="col-lg-6"> <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" (click)="onChange($event)">
-                      <label class="form-check-label form-lines" for="gridRadios2">
-                        Paid Access
-                      </label>
-                    </div></div>
+                    </div>
                   </div>
-                  <small class="form-line">One time demo for paid access</small>
+                  <fieldset class="row mb-3 mt-2">
+                    <legend class="col-form-label col-lg-4 form-line"><i class="bi bi-person-video3 px-2"></i>Ideal For
+                    </legend>
+                    <div class="col-lg-8 d-flex ">
+                      <div class="form-check" *ngFor="let items of ideaOn">
+                        <input class="form-check-input" type="checkbox" formControlName="ideaOn"
+                          (change)="getIdeaFor(AddChannelFrom.value.ideaOn,items)" >
+                        <label class="form-check-label form-lines" for="flexCheckDefault">
+                          &nbsp;{{items}}&nbsp;
+                        </label>
+                      </div>
+                      <!-- <div class="d-flex" *ngFor="let item of ideaOn">
+                      <input type="checkbox" formControlName="ideaOn" (change)="getIdeaOn(AddInvestorForm.value.ideaOn,item,item.ideaOn)">
+                      <label for="scales">{{item.ideaOn}}</label>
+                    </div> -->
                   </div>
-               
-                </fieldset>
-                <fieldset class="row mb-3 mt-2">
+                  <!-- {{ideaOnlist.length}} -->
+                  <div *ngIf="ideaOnlist.length ==  0 && idealMessage!=''" style="color:red" class="d-flex justify-content-center">{{idealMessage}}</div>
+                  </fieldset>
+                  <fieldset class="row mb-3 mt-2">
+                    <legend class="col-form-label col-lg-4 pt-0 form-line"><i
+                        class="bi bi-shield-lock-fill px-2"></i>fee subscription</legend>
+                    <div class="col-lg-8 ">
+
+                      <div class="row">
+                        <div class="col-lg-6" *ngFor="let item of fee_subscription">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" formControlName="subscription" [value]="item"
+                              (click)="onChange($event)" >
+                            <label class="form-check-label form-lines" for="gridRadios1">
+                              {{item}}
+                            </label>
+
+                            
+                          </div>
+                        </div>
+
+                      </div>
+                      <small class="form-line" *ngIf="AddChannelFrom.value.subscription == 'Free Access'">One time demo for paid access</small>
+                    </div>
+
+                  </fieldset>
+                  <!-- <fieldset class="row mb-3 mt-2">
                   <legend class="col-form-label col-lg-4 form-line"><i class="bi bi-hand-thumbs-up-fill px-2"></i>Benefits </legend>
                   <div class="col-lg-8 ">
-                    <div class="form-check">
+                    <div class="form-check" *ngFor="let items of benefits">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
                       <label class="form-check-label form-lines" for="flexCheckDefault1">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                        {{items}}
                       </label>
                     </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" checked>
-                      <label class="form-check-label form-lines" for="flexCheckChecked2">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3" checked>
-                      <label class="form-check-label form-lines" for="flexCheckChecked3">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                      </label>
-                    </div>
-                
+                    
+  
                   </div>
-                </fieldset>
-              </div>
-            
-              </div>
-         
-              <div class="row mb-3 mt-3">
-                <div class="col-lg-6 mx-auto">
-                  <button class="btn btn-primary w-100 " >Submit</button>
+                </fieldset> -->
+
+                  <div class="row mb-3">
+                    <label for="inputText" class="col-lg-4 col-form-label form-line"><i
+                        class="bi bi-person px-2"></i>Benefits</label>
+                    <div class="col-lg-6">
+                      <input type="text" formControlName="addBenefits" placeholder="Enter benefits"
+                        class="form-control">
+                        <!-- <div *ngIf=" submitted && AddChannelControl.addBenefits.errors" class="invalid-feedback">
+                          <div *ngIf="AddChannelControl.addBenefits.errors.required">Required.</div>
+                        </div> -->
+                      <!-- <ul class="mt-2" *ngFor="let items of benefits">
+                      <li class="">{{items.benefits}}</li>
+                     </ul> -->
+                     <div *ngIf="benefits.length == 0  && benefitMessage!=''" style="color:red" class="d-flex justify-content-center">{{benefitMessage}}</div>
+                      <div>
+                        <ul class="d-flex justify-content-between" *ngFor="let items of benefits">
+                          <li>{{items.benefits}}</li>
+                          <li class="" style="color: red ; font-weight: 600; list-style: none;"><i
+                              class="bi bi-x-circle" (click)="remove(items.id)"></i></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-lg-2">
+                      <button class="btn btn-primary" type="button"
+                        (click)="addBenefits(AddChannelFrom.value.addBenefits)">Add</button>
+                    </div>
+                  </div>
+
+
+
+                  <div class="row mb-3">
+                    <div class="col-lg-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                          formControlName="coAdChannel" [checked]="coAddOn != null" (change)="coAddChannel()">
+                        <label class="form-check-label" for="flexCheckChecked">
+                          Co-Ad Channel
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-lg-9">
+                      <label for="file-input">
+                        <i class="bi bi-cloud-arrow-up px-2"></i> Upload image
+                        <p *ngIf="fileName != ''">{{fileName}}</p>
+                      </label>
+                      <input id="file-input" type="file" (change)="onSelectFile($event)" class="cstm-file">
+                    </div>
+                  </div>
+
+                 
                 </div>
               </div>
 
-            </form><!-- End General Form Elements -->
-
-          </div>
+            </div>
+            <div class="row mb-3 mt-3">
+              <div class="col-lg-6 mx-auto">
+                <button class="btn btn-primary w-100 " type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+          <!-- End General Form Elements -->
         </div>
-
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+
+<div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Expert List</h5>
+        <button type="button" class="close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="container-fluid">
+          <div class="row">
+            <div class="mx-auto">
+              <div class="card px-2">
+                <div class="example" style="height: 65vh; overflow: auto;">
+                  <div class="card my-3" *ngFor="let items of expertList">
+                    <div class="user_informatiom container-fluid">
+                      <div class=" d-flex align-items-center">
+                        <div class="col-1">
+                          <span class="user-icon"><i class="bi bi-person-circle "></i></span>
+                        </div>
+                        <div class="col-9 px-3 py-2">
+                          <div class="user_name">{{items.name}}</div>
+                          <div class="detail">Sr Wealth is led by an SEBI</div>
+                          <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                        </div>
+                        <div class="col-1 d-flex justify-content-end">
+                          <div class="form-check">
+                            <form [formGroup]="myForm">
+                              <input class="form-check-input" formControlName="adOn" type="checkbox" id="flexCheckChecked"
+                                (change)="goToExpertProfilePage(items.id)">
+                              <label class="form-check-label" for="flexCheckChecked">
+                              </label>
+        
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container expect-section my-2">
+                      <div class="grid-data d-flex expect-sections ">
+                        <div class="col-3 border-end ">
+                          <div class="d-flex club-icons"><span class="club-icon "><i
+                                class="bi bi-chat-square-text"></i></span><span class="club-inf">Reputation</span></div>
+                          <div class="club-icon px-2">{{items.reputation}}</div>
+                        </div>
+                        <div class="col-3  border-end ">
+                          <div class="d-flex club-icons"><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                              class="club-inf">Impression</span></div>
+                          <div class="club-icon px-2">15</div>
+                        </div>
+                        <div class="col-3  border-end">
+                          <div class="d-flex club-icons"><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                              class="club-inf">Followers</span></div>
+                          <div class="club-icon px-2">{{items.followersCount}}</div>
+                        </div>
+                        <div class="col-3  ">
+                          <div class="d-flex club-icons"><span class="club-icon"><i
+                                class="bi bi-pencil-square "></i></span><span class="club-inf">Post</span></div>
+                          <div class="club-icon px-3">{{items.post}}</div>
+                        </div>
+                      </div>
+                      <div class="container-fluid ">
+                        <div class="row py-2">
+                          <div class="col-6">
+                            <div class=" risk-btn w-100 d-flex justify-content-between">
+                              One Month accuracy<span class="">0%</span></div>
+                          </div>
+                          <div class="col-6">
+                            <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                              gain<span class="">0%</span></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6">
+                            <div class=" risk-btn w-100 d-flex justify-content-between"> One year
+                              accuracy<span class="">0%</span></div>
+                          </div>
+                          <div class="col-6 ">
+                            <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                              gain<span class="">0%</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="py-2">
+                        <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
+                          investing</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-primary" >Submit</button>
+        
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

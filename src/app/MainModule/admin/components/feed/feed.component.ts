@@ -35,40 +35,56 @@ export interface GetFeedDetails {
 })
 export class FeedComponent implements OnInit {
   mobile_number = localStorage.getItem('mobile_number') || '{}';
-  activePage:number = 0
-  totalRecord = 0
-  recoardsPerPage = 10
   feedDetails: GetFeedDetails[] = [];
+  public current = 0;
+  public itemsToDisplay: any;
+  public perPage = 10;
+  public total:number = 0;
   constructor(private router: Router, private _service: SharedService) {}
 
   ngOnInit(): void {
+    this.itemsToDisplay = this.paginate(this.current, this.perPage);
     // this.GetFeed();
   }
 
-  displayActivePage(activePageNumber: number) {
-    this.activePage = activePageNumber;
-    let mobile_No = ''
-    var splitString = this.mobile_number.split("")
-    if( splitString[0] == '+'){
-      splitString[0] = '%2B'
-      var joinString =  splitString.join("")
-      mobile_No = joinString
-    }
-    this._service.GetFeed(mobile_No, this.activePage, this.recoardsPerPage).subscribe((res: any)=> {
-      this.feedDetails = res.items
-      // console.log('this.feedDetails: ', this.feedDetails);
-      this.totalRecord = res.totalRecords
-    });
+  public onGoTo(page: number): void {
+    this.current = page;
+    this.itemsToDisplay = this.paginate(this.current, this.perPage);
   }
-  // GetFeed() {
-  //   this._service.GetFeed(this.mobile_number, this.activePage, this.recoardsPerPage).subscribe((res: any)=> {
-  //     // console.log('res: ', res);
-  //     this.feedDetails = res.items
-  //     this.totalRecord = res.totalRecords
-  //     console.log('this.feedDetails: ', this.feedDetails);
-  //   });
-  // }
 
+  public onNext(page: number): void {
+    this.current = page + 1;
+    // console.log('this.current: ', this.current);
+    this.itemsToDisplay = this.paginate(this.current, this.perPage);
+    console.log('this.itemsToDisplay: ', this.itemsToDisplay);
+    
+  }
+
+  public onPrevious(page: number): void {
+    this.current = page - 1;
+    this.itemsToDisplay = this.paginate(this.current, this.perPage);
+  }
+
+  public paginate(current: number, perPage: number) {
+    let mobile_No = '';
+    var splitString = this.mobile_number.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      mobile_No = joinString;
+    }
+    this._service
+      .GetFeed(mobile_No, current, perPage)
+      .subscribe((res) => {
+        this.feedDetails = res.items;
+        this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+      });
+      // console.log('...this.feedDetails: ', ...this.feedDetails);
+      // console.log('(current - 1) * perPage: ', (current - 1) * perPage);
+    // return [...this.feedDetails.slice((current - 1) * perPage).slice(0, perPage)];
+  }
+
+  
   AddChannel() {
     this.router.navigate(['home/add-channel']);
   }
