@@ -35,6 +35,7 @@ export class SignInComponent implements OnInit {
   mobile: string = ''
   isExistUser = localStorage.getItem('mobile_number')
   @ViewChild('ngOtpInput', { static: false }) ngOtpInput: any;
+  isLoading:boolean = false
   countryCodes = Codes 
   config = {
     allowNumbersOnly: false,
@@ -102,6 +103,7 @@ export class SignInComponent implements OnInit {
     if (this.SendOtpForm.invalid) {
       return;
     }
+    this.isLoading = true
     this.SendOtpModel = new SendOtp({
       mobile_No: this.SendOtpForm.value.code + this.SendOtpForm.value.mobile_No,
     });
@@ -116,8 +118,8 @@ export class SignInComponent implements OnInit {
     this._service
         .SendOtp(this.SendOtpModel)
         .subscribe((response: SignInRespose) => {
-          console.log('response: ', response);
-  
+          // console.log('response: ', response);
+          this.isLoading = false
           this.mobileNumbr = this.SendOtpModel.mobile_No;
           console.log('this.mobileNumbr: ', response.data.otp);
           if (response.status == 'Success') {
