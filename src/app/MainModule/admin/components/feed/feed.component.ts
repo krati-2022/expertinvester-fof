@@ -82,6 +82,9 @@ export class FeedComponent implements OnInit {
   clubList: ClubList[] = [];
   followClubDetails = new FollowClub()
   count:any
+  throttle = 300;
+  scrollDistance = 1;
+  scrollUpDistance = 2;
   constructor(private router: Router, private _service: SharedService) {}
 
   ngOnInit(): void {
@@ -98,12 +101,13 @@ export class FeedComponent implements OnInit {
       mobile_No = joinString;
     }
     this._service
-      .GetFeed(mobile_No, 0, 10)
+      .GetFeed(mobile_No, this.current, this.perPage)
       .subscribe((res) => {
         this.feedDetails = res.items;
+        // console.log('this.feedDetails: ', this.feedDetails);
         // console.log(this.feedDetails);
         
-        this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
       });
   }
   getChannel(){
@@ -159,47 +163,27 @@ export class FeedComponent implements OnInit {
     this.getMasterData()
     })
   }
-  // public onGoTo(page: number): void {
-  //   this.current = page;
-  //   this.itemsToDisplay = this.paginate(this.current, this.perPage);
-  // }
+  
+  onScroll(){
+    var pageNumber = ++this.current;
+    // console.log('pageNumber: ', pageNumber);
+    // this.GetFeed()
+    let mobile_No = '';
+    var splitString = this.mobile_number.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      mobile_No = joinString;
+    }
+    this._service
+      .GetFeed(mobile_No, pageNumber, this.perPage)
+      .subscribe((res) => {
+        this.feedDetails.push(...res.items);
+        
+        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+      });
+  }
 
-  // public onNext(page: number): void {
-  //   this.current = page + 1;
-  //   // console.log('this.current: ', this.current);
-  //   this.itemsToDisplay = this.paginate(this.current, this.perPage);
-  //   console.log('this.itemsToDisplay: ', this.itemsToDisplay);
-    
-  // }
-
-  // public onPrevious(page: number): void {
-  //   this.current = page - 1;
-  //   this.itemsToDisplay = this.paginate(this.current, this.perPage);
-  // }
-
-  // public paginate(current: number, perPage: number) {
-  //   let mobile_No = '';
-  //   var splitString = this.mobile_number.split('');
-  //   if (splitString[0] == '+') {
-  //     splitString[0] = '%2B';
-  //     var joinString = splitString.join('');
-  //     mobile_No = joinString;
-  //   }
-  //   this._service
-  //     .GetFeed(mobile_No, current, perPage)
-  //     .subscribe((res) => {
-  //       this.feedDetails = res.items;
-  //       this.total = Math.ceil(res.totalRecords / this.perPage) - 1
-  //     });
-  //     // console.log('...this.feedDetails: ', ...this.feedDetails);
-  //     // console.log('(current - 1) * perPage: ', (current - 1) * perPage);
-  //   // return [...this.feedDetails.slice((current - 1) * perPage).slice(0, perPage)];
-  // }
-
-  // scrollUp(event:any){
-  // console.log('event: ', event);
-
-  // }
   
   AddChannel() {
     this.router.navigate(['home/add-channel']);
@@ -221,6 +205,20 @@ export class FeedComponent implements OnInit {
       default:
         this.GetFeed();
     }
+  }
+
+  getDetails(id:string, recordType:string) {
+  console.log('recordType: ', recordType);
+  console.log('id: ', id);
+  switch(recordType){
+    case 'ClubRecord':
+      this.router.navigate(['home/listGroup'])
+      break
+      case 'ChannelRecord':
+        this.router.navigate([''])
+        break
+  }
+
   }
 
 

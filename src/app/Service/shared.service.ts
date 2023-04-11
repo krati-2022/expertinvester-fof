@@ -9,6 +9,7 @@ import { SendOtp, UserIsExist, VerifyOtp } from '../MainModule/admin/sign-in/sig
 import { SetPin } from '../MainModule/admin/setu-up-pin/set-up-pin.classes';
 import { Login } from '../MainModule/admin/enter-pin/enter-pin.classes';
 import { FollowClub } from '../MainModule/admin/Pages/club-list/club-list.classes';
+import { AddTrade } from '../MainModule/admin/Pages/add-trade/add-trade.classes';
 
 @Injectable({
   providedIn: 'root'
@@ -116,5 +117,9 @@ export class SharedService {
   
   GetProfile( mobile_No:string ,id:string): Observable<any>{
     return this.http.get(this.apiUrl + 'api/Channel/GetChannelProfile?Mobile_No='+ mobile_No +'&channelid=' + id)
+  }
+
+  AddFeedPost(data: AddTrade): Observable<any>{
+    return this.http.post(this.apiUrl + 'AddFeedPost', data)
   }
 }

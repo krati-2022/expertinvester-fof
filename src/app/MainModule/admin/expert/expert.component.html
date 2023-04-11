@@ -44,14 +44,14 @@
             <fieldset class="row mt-2 mb-3">
               <legend class="col-form-label col-lg-6 pt-0 form-line"><i class="bi bi-r-circle px-2"></i>Are you SEBI registered</legend>
               <div class="col-lg-6 d-flex justify-content-around">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" [value]="true"  formControlName="IsSEBI">
-                  <label class="form-check-label">Yes</label>
+                <div class="form-check" *ngFor="let item of isSebi">
+                  <input class="form-check-input" type="radio" [value]="item.value" formControlName="IsSEBI" >
+                  <label class="form-check-label">{{item.status}}</label>
                 </div>
-                <div class="form-check">
+                <!-- <div class="form-check">
                   <input class="form-check-input" type="radio"  [value]="false" formControlName="IsSEBI">
                   <label class="form-check-label" >No</label>
-                </div>
+                </div> -->
               </div>
             </fieldset>
 

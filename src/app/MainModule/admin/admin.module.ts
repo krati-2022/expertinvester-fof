@@ -41,6 +41,8 @@ import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
 import { CommonSectionComponent } from 'src/app/SharedComponent/shared-component/common-section/common-section.component';
 import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pagination/pagination.component';
 import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
+import { InfiniteScrollComponent } from 'src/app/SharedComponent/shared-component/infinite-scroll/infinite-scroll.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,8 @@ import { ChannelDetailsComponent } from './components/channel-details/channel-de
     SetuUpPinComponent,
     CommonSectionComponent,
     PaginationComponent,
-    ChannelDetailsComponent
+    ChannelDetailsComponent,
+    InfiniteScrollComponent
   ],
   imports: [
     CommonModule,
@@ -88,6 +91,7 @@ import { ChannelDetailsComponent } from './components/channel-details/channel-de
     ReactiveFormsModule,
     FormsModule,
     NgOtpInputModule,
+    InfiniteScrollModule
   ],
 })
 export class AdminModule {}

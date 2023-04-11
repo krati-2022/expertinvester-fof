@@ -29,6 +29,7 @@ export class ExpertComponent implements OnInit {
   ismobileNumberExist = localStorage.getItem('mobile_number')
   usertype = sessionStorage.getItem('usertype');
   isLoading:boolean = false
+  isSebi = [{status:"Yes", value:true} , {status:"No", value:false}]
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -117,7 +118,7 @@ export class ExpertComponent implements OnInit {
     if (this.AddExpertForm.invalid) {
       return;
     }
-    
+ 
     var formData: any = new FormData();
     formData.append('name', this.AddExpertForm.get('name').value);
     formData.append('email', this.AddExpertForm.get('email').value);

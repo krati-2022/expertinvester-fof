@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/Service/shared.service';
 import { FollowClub } from './club.classes';
 import { Router } from '@angular/router';
+import { ChannelListDetails, GetFeedDetails } from '../feed/feed.component';
 
 export interface ClubList {
   id: string;
@@ -23,16 +24,23 @@ export class ClubComponent implements OnInit {
   mobileNumber = localStorage.getItem('mobile_number') || '{}';
   clubList: ClubList[] = [];
   followClubDetails = new FollowClub()
+  feedDetails: GetFeedDetails[] = [];
+  channelDetails: ChannelListDetails[] = []
   count:any
+  public current = 0;
+  public itemsToDisplay: any;
+  public perPage = 10;
   constructor(private _service: SharedService, private router: Router) {}
 
   ngOnInit(): void {
     this.getMasterData();
+    this.GetFeed()
   }
 
   getMasterData() {
     let mobile_No = ''
     var splitString = this.mobileNumber.split("")
+    // console.log('this.mobileNumber: ', this.mobileNumber);
     if( splitString[0] == '+'){
       splitString[0] = '%2B'
       var joinString =  splitString.join("")
@@ -40,10 +48,46 @@ export class ClubComponent implements OnInit {
     }
     this._service.GetMasterData(mobile_No).subscribe((res) => {
       this.clubList = res.data;
+      // console.log('this.clubList: ', this.clubList);
       // console.log('this.clubList : ', this.clubList);
       let data = this.clubList.filter(i => i.follow == 'Followed')
       this.count = data.length
     });
+  }
+
+  GetFeed(){
+    let mobile_No = '';
+    var splitString = this.mobileNumber.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      mobile_No = joinString;
+    }
+    this._service
+      .GetFeed(mobile_No, this.current, this.perPage)
+      .subscribe((res) => {
+        this.feedDetails = res.items;
+        // console.log('this.feedDetails: ', this.feedDetails);
+        // console.log(this.feedDetails);
+        
+        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+      });
+  }
+  getChannel(){
+    let mobile_No = ''
+    var splitString = this.mobileNumber.split("")
+    if(splitString[0] == '+'){
+      splitString[0] ='%2B'
+      var joinString = splitString.join("")
+      mobile_No = joinString
+    }
+
+    this._service.GetChannel(mobile_No).subscribe(res =>{
+    console.log('res: ', res);
+    this.channelDetails = res.data
+    // console.log('this.channelDetails: ', this.channelDetails);
+      
+    })
   }
 
   followClub(clublistId:string){
@@ -68,8 +112,51 @@ export class ClubComponent implements OnInit {
     })
   }
 
+  onScroll(){
+    var pageNumber = ++this.current;
+    // console.log('pageNumber: ', pageNumber);
+    // this.GetFeed()
+    let mobile_No = '';
+    var splitString = this.mobileNumber.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      mobile_No = joinString;
+    }
+    this._service
+      .GetFeed(mobile_No, pageNumber, this.perPage)
+      .subscribe((res) => {
+        this.feedDetails.push(...res.items);
+        
+        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+      });
+  }
+
  
   AddChannel(){
     this.router.navigate(['home/add-channel'])
+  }
+
+  getDetails(clublistId:string){
+  // console.log('clublistId: ', clublistId);
+    this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobileNumber])
+  }
+
+  getTab(event: any) {
+    console.log('event: ', event.target.id);
+    switch (event.target.id) {
+      case 'home-tab':
+        this.GetFeed();
+        break;
+      case 'profile-tab':
+        this.getMasterData();
+        break;
+        case 'contact-tab':
+        this.getChannel();
+        break;
+     
+      default:
+        this.GetFeed();
+    }
   }
 }
