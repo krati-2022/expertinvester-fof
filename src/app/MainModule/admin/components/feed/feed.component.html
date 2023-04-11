@@ -12,17 +12,17 @@
         <div class="d-lg-none d-md-block d-sm-block">
           <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab"
+              <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" (click)="getTab($event)"
                 data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home"
                 aria-selected="true">FEEDS</button>
             </li>
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab"
+              <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" (click)="getTab($event)"
                 data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile"
                 aria-selected="false">CLUBS</button>
             </li>
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab"
+              <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" (click)="getTab($event)"
                 data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact"
                 aria-selected="false">CHANNEL</button>
             </li>
@@ -33,8 +33,8 @@
         <!-- Bordered Tabs Justified -->
         <div class="tab-content pt-2" id="borderedTabJustifiedContent">
           <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
-            aria-labelledby="home-tab">
-            <div class="example" style="height: 75vh; overflow: auto;">
+            aria-labelledby="home-tab" >
+            <div class="example" style="height: 75vh; overflow: auto;" >
               <div class="card my-3 m-4" *ngFor="let items of feedDetails">
                 <div class="card-body">
                   <div class=" row user_informatiom">
@@ -134,120 +134,57 @@
                 </div>
               </div>
               <!-- <app-pagination [totalRecords]="totalRecord" [recordsPerPage]="recoardsPerPage" (onPageChange)="displayActivePage($event)"></app-pagination> -->
-              <app-pagination [current]="current" [total]="total" (goTo)="onGoTo($event)" (next)="onNext($event)"
-                (previous)="onPrevious($event)"></app-pagination>
+              <!-- <app-pagination [current]="current" [total]="total" (goTo)="onGoTo($event)" (next)="onNext($event)"
+                (previous)="onPrevious($event)"></app-pagination> -->
 
             </div>
           </div>
-          <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab" >
             <div class="example" style="height: 65vh; overflow: auto;">
-              <div class="card py-3">
+              <div class="card py-3" *ngFor="let items of clubList">
                 <div class="container">
-                  <div class="row">
-                    <div class="channel-name d-flex justify-content-between align-items-center py-2">
-                      <span class="club-header"> Chartbusters</span> <span class=""><button type="button"
-                          class="btn follow-btn">Followed</button></span>
-                    </div>
-                    <div class="">
-                      <p class="club-dis">Hangout of people wh eat, sleep and drink technical
-                        analysis. Share your analysis, data insights on stocks here. Let’s together find the best ideas
-                        to trade</p>
-                    </div>
+                 <div class="row">
+                   <div class="channel-name d-flex justify-content-between align-items-center py-2">
+                   <span class="club-header"> {{items.name}}</span> 
+                   <span class="">
+                     <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
+                     <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
+                   </span>
+                   </div>
+                   <div class="">
+                    <p class="club-dis">{{items.description}}</p>
+                   </div>
+
                   </div>
                 </div>
-                <div class="container expect-section my-2 ">
-                  <div class="grid-data d-flex  ">
-                    <div class="col-5  border-end ">
-                      <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
-                          class="club-inf">Impression</span></div>
-                      <div class="club-icon px-2">15</div>
+                  <div class="container expect-section my-2 ">
+                    <div class="grid-data d-flex  ">
+
+                      <div class="col-5  border-end ">
+                        <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                            class="club-inf">Impression</span></div>
+                        <div class="club-icon px-2">{{items.likecount}}</div>
+                      </div>
+                      <div class="col-4 px-2 border-end">
+                        <div class="d-flex "><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                            class="club-inf">Followers</span></div>
+                        <div class="club-icon px-2">{{items.followersCount}}</div>
+                      </div>
+                      <div class="col-3  px-1">
+                        <div class="d-flex "><span class="club-icon"><i class="bi bi-pencil-square "></i></span><span
+                            class="club-inf">Post</span></div>
+                        <div class="club-icon px-3">{{items.postcount}}</div>
+                      </div>
                     </div>
-                    <div class="col-4 px-2 border-end">
-                      <div class="d-flex "><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
-                          class="club-inf">Followers</span></div>
-                      <div class="club-icon px-2">58</div>
+
+
                     </div>
-                    <div class="col-3  px-1">
-                      <div class="d-flex "><span class="club-icon"><i class="bi bi-pencil-square "></i></span><span
-                          class="club-inf">Post</span></div>
-                      <div class="club-icon px-3">5</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card py-3">
-                <div class="container">
-                  <div class="row">
-                    <div class="channel-name d-flex justify-content-between align-items-center py-2">
-                      <span class="club-header"> Chartbusters</span> <span class=""><button type="button"
-                          class="btn follow-btn">Followed</button></span>
-                    </div>
-                    <div class="">
-                      <p class="club-dis">Hangout of people wh eat, sleep and drink technical
-                        analysis. Share your analysis, data insights on stocks here. Let’s together find the best ideas
-                        to trade</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="container expect-section my-2 ">
-                  <div class="grid-data d-flex  ">
-                    <div class="col-5  border-end ">
-                      <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
-                          class="club-inf">Impression</span></div>
-                      <div class="club-icon px-2">15</div>
-                    </div>
-                    <div class="col-4 px-2 border-end">
-                      <div class="d-flex "><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
-                          class="club-inf">Followers</span></div>
-                      <div class="club-icon px-2">58</div>
-                    </div>
-                    <div class="col-3  px-1">
-                      <div class="d-flex "><span class="club-icon"><i class="bi bi-pencil-square "></i></span><span
-                          class="club-inf">Post</span></div>
-                      <div class="club-icon px-3">5</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card py-3">
-                <div class="container">
-                  <div class="row">
-                    <div class="channel-name d-flex justify-content-between align-items-center py-2">
-                      <span class="club-header"> Chartbusters</span> <span class=""><button type="button"
-                          class="btn follow-btn">Followed</button></span>
-                    </div>
-                    <div class="">
-                      <p class="club-dis">Hangout of people wh eat, sleep and drink technical
-                        analysis. Share your analysis, data insights on stocks here. Let’s together find the best ideas
-                        to trade</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="container expect-section my-2 ">
-                  <div class="grid-data d-flex  ">
-                    <div class="col-5  border-end ">
-                      <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
-                          class="club-inf">Impression</span></div>
-                      <div class="club-icon px-2">15</div>
-                    </div>
-                    <div class="col-4 px-2 border-end">
-                      <div class="d-flex "><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
-                          class="club-inf">Followers</span></div>
-                      <div class="club-icon px-2">58</div>
-                    </div>
-                    <div class="col-3  px-1">
-                      <div class="d-flex "><span class="club-icon"><i class="bi bi-pencil-square "></i></span><span
-                          class="club-inf">Post</span></div>
-                      <div class="club-icon px-3">5</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
+          <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab" >
             <div class="example" style="height: 55vh; overflow: auto;">
-              <div class="card my-3">
+              <div class="card my-3" *ngFor="let items of channelDetails">
                 <div class="card-body">
                   <div class="container">
                     <div class=" row user_informatiom">
@@ -255,17 +192,17 @@
                         <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                       </div>
                       <div class="col-8 mx-3 py-2">
-                        <div class="user_name">User Name</div>
-                        <div class="detail">Sr Wealth is led by an SEBI</div>
+                        <div class="user_name">{{items.username}}</div>
+                        <div class="detail">{{items.sebi}}</div>
                         <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                       </div>
                     </div>
-                   </div>
+                  </div>
                   <div class="container">
                     <div class="row">
                       <div class="d-flex justify-content-between align-items-baseline py-2">
-                        <h6 class="heading">TRADING CHANNEL</h6>
-                        <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i>Free Access</span>
+                        <h6 class="heading">{{items.name}}</h6>
+                        <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
                       </div>
                     </div>
                   </div>
@@ -277,7 +214,7 @@
                       <div class="channel-detail d-flex py-2">
                         <div class="col-6 d-flex text-center">
                           <div class="px-3">
-                            <div>23</div>
+                            <div>{{items.post}}</div>
                             <div class="channel-name">Post</div>
                           </div>
                           <div>
@@ -286,71 +223,70 @@
                           </div>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
-                          <button type="button" class="btn position-btn"><i class="bi bi-graph-up-arrow px-2"></i>Success
+                          <button type="button" class="btn position-btn"><i
+                              class="bi bi-graph-up-arrow px-2"></i>Success
                             rate: 20%</button>
                         </div>
                       </div>
                       <div class="date">27 Jan 2023, 06:43 PM</div>
                     </div>
                   </div>
-                    <div class="container">
-                  <div class="row">
-                    <p class="club-dis">Lorem Ipsum is simply dummy text of the printing and typesetting
-                      industry. Lorem Ipsum has been the industry's standard dummy
-                      text ever since the 1500s, when an unknown printer took a galley</p>
+                  <div class="container">
+                    <div class="row">
+                      <p class="club-dis">{{items.description}}</p>
+                    </div>
                   </div>
-                    </div>
-                    <div class="container expect-section my-2">
-                      <div class="grid-data d-flex expect-sections ">
-                        <div class="col-3 border-end ">
-                          <div class="d-flex club-icons"><span class="club-icon "><i
-                                class="bi bi-chat-square-text"></i></span><span class="club-inf">Reputation</span></div>
-                          <div class="club-icon px-2">185</div>
-                        </div>
-                        <div class="col-3  border-end ">
-                          <div class="d-flex club-icons"><span class="club-icon "><i class="bi bi-eye"></i></span><span
-                              class="club-inf">Impression</span></div>
-                          <div class="club-icon px-2">15</div>
-                        </div>
-                        <div class="col-3  border-end">
-                          <div class="d-flex club-icons"><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
-                              class="club-inf">Followers</span></div>
-                          <div class="club-icon px-2">58</div>
-                        </div>
-                        <div class="col-3  ">
-                          <div class="d-flex club-icons"><span class="club-icon"><i
-                                class="bi bi-pencil-square "></i></span><span class="club-inf">Post</span></div>
-                          <div class="club-icon px-3">5</div>
-                        </div>
+                  <div class="container expect-section my-2">
+                    <div class="grid-data d-flex expect-sections ">
+                      <div class="col-3 border-end ">
+                        <div class="d-flex club-icons"><span class="club-icon "><i
+                              class="bi bi-chat-square-text"></i></span><span class="club-inf">Reputation</span></div>
+                        <div class="club-icon px-2">{{items.reputation}}</div>
                       </div>
-                      <div class="container-fluid ">
-                        <div class="row py-2">
-                          <div class="col-6">
-                            <div class=" risk-btn w-100 d-flex justify-content-between">
-                              One Month accuracy<span class="">0%</span></div>
-                          </div>
-                          <div class="col-6">
-                            <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
-                              gain<span class="">0%</span></div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-6">
-                            <div class=" risk-btn w-100 d-flex justify-content-between"> One year
-                              accuracy<span class="">0%</span></div>
-                          </div>
-                          <div class="col-6 ">
-                            <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
-                              gain<span class="">0%</span></div>
-                          </div>
-                        </div>
+                      <div class="col-3  border-end ">
+                        <div class="d-flex club-icons"><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                            class="club-inf">Impression</span></div>
+                        <div class="club-icon px-2">15</div>
                       </div>
-                      <div class="py-2">
-                        <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
-                          investing</p>
+                      <div class="col-3  border-end">
+                        <div class="d-flex club-icons"><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                            class="club-inf">Followers</span></div>
+                        <div class="club-icon px-2">{{items.followersCount}}</div>
+                      </div>
+                      <div class="col-3  ">
+                        <div class="d-flex club-icons"><span class="club-icon"><i
+                              class="bi bi-pencil-square "></i></span><span class="club-inf">Post</span></div>
+                        <div class="club-icon px-3">{{items.post}}</div>
                       </div>
                     </div>
-                  <!-- <div class="container">
+                    <div class="container-fluid ">
+                      <div class="row py-2">
+                        <div class="col-6">
+                          <div class=" risk-btn w-100 d-flex justify-content-between">
+                            One Month accuracy<span class="">0%</span></div>
+                        </div>
+                        <div class="col-6">
+                          <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                            gain<span class="">0%</span></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class=" risk-btn w-100 d-flex justify-content-between"> One year
+                            accuracy<span class="">0%</span></div>
+                        </div>
+                        <div class="col-6 ">
+                          <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                            gain<span class="">0%</span></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="py-2">
+                      <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
+                        investing</p>
+                    </div>
+                  </div>
+                  <div class="container">
                     <div class="row">
                       <div class="col-4 risk">
                         <button type="button" class="btn position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
@@ -364,28 +300,29 @@
                           (1-3 Months)</button>
                       </div>
                     </div>
-                  </div> -->
-                   <div class="container">
+                  </div>
+                  <!-- <div class="container">
                     <div class="row">
                       <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
                     </div>
-                   </div>
-                    <div class="d-flex justify-content-between">
-                      <div>
-                        <span> <i class="bi bi-hand-thumbs-up-fill px-2">1</i></span>
-                        <span><i class="bi bi-share-fill"></i></span>
-                      </div>
-                      <div>
-                        <i class="bi bi-bookmark-fill"></i>
-                      </div>
+                  </div> -->
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
+                      <span><i class="bi bi-share-fill"></i></span>
                     </div>
-                    <div class="py-3">
-                      <div class="percent">Co-ad channels</div>
-                      <div class="d-flex justify-content-end">
-                        <span class="px-4"><button type="button" class="btn btn-primary danger-btn">Approve</button></span>
-                        <span><button type="button" class="btn btn-success danger-btn">Reject</button></span>
-                      </div>
+                    <div>
+                      <i class="bi bi-bookmark-fill"></i>
                     </div>
+                  </div>
+                  <div class="py-3">
+                    <div class="percent" *ngIf="items.coAdChannel == true">Co-ad channels</div>
+                    <div class="d-flex justify-content-end" *ngIf="items.coAdChannel == true">
+                      <span class="px-4"><button type="button"
+                          class="btn btn-primary danger-btn">Approve</button></span>
+                      <span><button type="button" class="btn btn-success danger-btn">Reject</button></span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

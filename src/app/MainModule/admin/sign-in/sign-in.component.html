@@ -42,6 +42,7 @@
                           <div *ngIf="submitted && SendOtpFormControl['mobile_No']['errors']" class="invalid-feedback">
                             <div *ngIf="SendOtpFormControl['mobile_No']['errors']['required']">Mobile Number is
                               required.</div>
+                              <div *ngIf="SendOtpFormControl['mobile_No']['errors']['pattern']">Please, Enter 10 digit Mobile Number.</div>  
                           </div>
                           <div style="color: red;" *ngIf="submitted && message != ''">
                             {{message}}
@@ -58,8 +59,7 @@
 
                   <div class="col-12">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe"
-                        [disabled]="SendOtpForm.value.mobile_No == ''" [checked]="SendOtpForm.value.mobile_No != ''">
+                      <input class="form-check-input" type="checkbox" formControlName="PrivacyPolicy" name="remember" value="true" id="rememberMe" >
                       <label class="form-check-label" for="rememberMe">I agree to the <span class="login-line">Terms of
                           Service </span>and<span class="login-line">Privacy Policy</span></label>
                     </div>

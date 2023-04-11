@@ -40,6 +40,7 @@ import { EnterPinComponent } from './enter-pin/enter-pin.component';
 import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
 import { CommonSectionComponent } from 'src/app/SharedComponent/shared-component/common-section/common-section.component';
 import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pagination/pagination.component';
+import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pa
     EnterPinComponent,
     SetuUpPinComponent,
     CommonSectionComponent,
-    PaginationComponent
+    PaginationComponent,
+    ChannelDetailsComponent
   ],
   imports: [
     CommonModule,

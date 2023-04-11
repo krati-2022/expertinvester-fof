@@ -63,7 +63,7 @@ export class EnterPinComponent implements OnInit {
           password: this.pin
         })
         this._service.LoginIn(loginDetailas).subscribe(res => {
-        console.log('res: ', res);
+        // console.log('res: ', res);
           if(res.data[0]?.userDetail){
             this.router.navigate(['home'])
           }else{

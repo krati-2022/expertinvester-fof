@@ -64,8 +64,9 @@ export class SignInComponent implements OnInit {
     }
 
     this.SendOtpForm = this.formBuilder.group({
-      mobile_No: [mobileNumber, [Validators.required]],
+      mobile_No: [mobileNumber, [Validators.required,Validators.pattern("^[0-9]{10}$")]],
       code: ['', [Validators.required]],
+      PrivacyPolicy: ['', [Validators.required]]
     });
   }
 
@@ -102,6 +103,9 @@ export class SignInComponent implements OnInit {
     this.submitted = true;
     if (this.SendOtpForm.invalid) {
       return;
+    }
+    if(this.SendOtpForm.value.PrivacyPolicy == false || this.SendOtpForm.value.PrivacyPolicy == ''){
+      return
     }
     this.isLoading = true
     this.SendOtpModel = new SendOtp({

@@ -52,7 +52,7 @@ export class ChannelComponent implements OnInit {
 
     this._service.GetChannel(mobile_No).subscribe(res =>{
     this.channelDetails = res.data
-    console.log('this.channelDetails: ', this.channelDetails);
+    // console.log('this.channelDetails: ', this.channelDetails);
       
     })
   }
@@ -61,6 +61,11 @@ export class ChannelComponent implements OnInit {
   }
   goToListGroup(){
     this.router.navigate(['home/listGroup'])
+  }
+
+  getChannelDetails(item:any){
+    // console.log(item);
+    this.router.navigate(['home/channel-details/' + item.channelMasterId + '/' + item.mobile_No])
   }
 
 }

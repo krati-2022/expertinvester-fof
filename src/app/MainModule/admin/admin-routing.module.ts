@@ -30,6 +30,7 @@ import { UpgradePlanComponent } from './upgrade-plan/upgrade-plan.component';
 import { UserSetUpComponent } from './user-set-up/user-set-up.component';
 import { EnterPinComponent } from './enter-pin/enter-pin.component';
 import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
+import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
       { path: 'feed', component: FeedComponent },
       { path: 'club', component: ClubComponent },
       { path: 'channel', component: ChannelComponent },
+      { path: 'channel-details/:param1/:param2', component: ChannelDetailsComponent },
       { path: 'add-channel', component: AddChannelComponent },
       { path: 'expertList', component: ExpertListComponent },
       { path: 'expertProfile', component: ExpertProfileComponent },

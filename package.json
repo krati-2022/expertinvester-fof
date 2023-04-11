@@ -26,6 +26,7 @@
     "jquery": "^3.6.4",
     "ng-otp-input": "^1.8.5",
     "ngx-cookie-service": "^15.0.0",
+    "ngx-infinite-scroll": "^15.0.0",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.7.3",
     "tslib": "^2.3.0",
