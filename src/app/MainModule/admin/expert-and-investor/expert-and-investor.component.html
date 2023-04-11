@@ -190,7 +190,11 @@
             </div>
             <div class="row mb-3 mt-3">
               <div class="col-lg-6 mx-auto">
-                <button class="btn btn-primary w-100 " type="submit">Submit</button>
+                <!-- <button class="btn btn-primary w-100 " type="submit">Submit</button> -->
+                <button class="btn btn-primary w-100 " type="submit" [disabled]="isLoading">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+                   <span *ngIf="!isLoading">Submit</span>
+                </button>
               </div>
             </div>
           </div>

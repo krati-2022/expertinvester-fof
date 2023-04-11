@@ -34,6 +34,7 @@ export class ExpertAndInvestorComponent implements OnInit {
   fileName: string = ''
   experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year']
   knowledgeLevel = ['Beginner', 'Intermediate', 'Professional']
+  isLoading: boolean= false
   constructor(private router: Router, private _service: SharedService, private _fb: FormBuilder, private coreHelperService: CoreHelperService) { }
 
   ngOnInit(): void {
@@ -191,11 +192,13 @@ export class ExpertAndInvestorComponent implements OnInit {
     }
     // console.log('formData: ', formData);
     // return
+    this.isLoading = true
     this._service.AddExpertInvestor(formData).subscribe(response =>{
     // console.log('response: ', response);
     this.AddExpertInvestorForm.reset()
     this.submitted = false
     this.submitPhone = false
+    this.isLoading = false
     sessionStorage.removeItem('usertype')
     this.router.navigate(['club-list']);
     })
