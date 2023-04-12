@@ -1,14 +1,15 @@
-<div class="pagetitle">
-  <div class="d-flex justify-content-between align-items-baseline">
-    <div>
-      <h1 class="px-3 py-1">Feed</h1>
-    </div>
-  </div>
-</div>
+
 <section class="container  ">
   <div class="row">
     <div class="mx-auto">
       <div class="card">
+        <div class="pagetitle">
+          <div class="d-flex justify-content-between align-items-baseline">
+            <div>
+              <h1 class="px-3 py-1">Feed</h1>
+            </div>
+          </div>
+        </div>
         <div class="d-lg-none d-md-block d-sm-block">
           <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
             <li class="nav-item flex-fill" role="presentation">
@@ -43,35 +44,46 @@
               [fromRoot]="true" 
               (scrolled)="onScroll()">
 
-                <div class="card my-3 m-4" *ngFor="let items of feedDetails"  >
+                <div class="card my-3 m-4" *ngFor="let items of feedDetails | filter : searchKey : 'username'"  >
                   <div class="card-body" >
-                    <div class=" row user_informatiom">
-                      <div class="col-1">
-                        <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                    <div class=" row user_informatiom d-flex justify-content-between" >
+                      <div class="d-flex col-8" (click)="getDetails(items.id, items.recordType)">
+                        <div class="col-2" >
+                          <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                        </div>
+                        <div class="col-6 mx-3 py-2" >
+                          <div class="user_name">{{items.username}}</div>
+                          <div class="detail">{{items.sebi}}</div>
+                          <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                        </div>
                       </div>
-                      <div class="col-8 mx-3 py-2" >
-                        <div class="user_name">{{items.username}}</div>
-                        <div class="detail">{{items.sebi}}</div>
-                        <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                      
+                      <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
+                        <button class="btn follow-btn" >
+                          <span *ngIf="items.clubBlock == false" (click)="blockUnblockPost(items.id, true)" style="padding: inherit;">Block</span>
+                          <span *ngIf="items.clubBlock == true" (click)="blockUnblockPost(items.id, false)" style="padding: inherit;">Unblock</span>
+                        </button>
                       </div>
                     </div>
+                   <div *ngIf="items.clubBlock != true">
                     <div class="row">
                       <div class="d-flex justify-content-between align-items-baseline py-2">
-                        <h6 class="heading">TRADING CHANNEL</h6>
+                        <h6 class="heading" (click)="getDetails(items.id, items.recordType)">TRADING CHANNEL</h6>
                         <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free Access</span>
                       </div>
                     </div>
                     <div class="row" *ngIf="items.recordType == 'ClubRecord'">
                       <div class="channel-name d-flex justify-content-between align-items-center">
-                        <span> <i class="bi bi-lightbulb"></i>Chat Barter</span> <span class=""><button type="button"
-                            class="btn follow-btn">Follow</button></span>
+                        <span (click)="getDetails(items.id, items.recordType)"> <i class="bi bi-lightbulb"></i>Chat Barter</span> 
+                        <!-- <span class=""><button type="button"
+                            class="btn follow-btn">Follow</button></span> -->
                       </div>
                       <div class="channel-detail">
                         {{items.stockname}}
                       </div>
                       <div class="date">27 Jan 2023, 06:43 PM</div>
                     </div>
-                    <div class="row" *ngIf="items.recordType == 'ChannelRecord'">
+                    <div class="row mb-2" *ngIf="items.recordType == 'ChannelRecord'">
                       <div class="channel-name">
                         <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
                       </div>
@@ -80,7 +92,7 @@
                       </div>
                       <div class="date">27 Jan 2023, 06:43 PM</div>
                     </div>
-                    <div class="row expect-section my-3" *ngIf="items.recordType == 'ChannelRecord'">
+                    <div class="row expect-section my-3 " *ngIf="items.recordType == 'ChannelRecord'">
                       <div class="expect-inf d-flex justify-content-between pb-2 ">
                         <div>
                           <div class="expect">
@@ -108,7 +120,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row" *ngIf="items.recordType == 'ChannelRecord'">
+                    <div class="row mb-2" *ngIf="items.recordType == 'ChannelRecord'">
                       <div class="col-4 months">
                         <div type="button" class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,25 +134,28 @@
                       </div>
                     </div>
                     <div class="row">
-                      <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
+                      <img [src]="items.imageurl" style="object-fit:fill; height:500px" alt="">
                     </div>
-                    <div class="row py-2">
+                    <div class="row py-2" (click)="getDetails(items.id, items.recordType)">
                       <h6 class="dis-line">IBR Infra CMP 305 :</h6>
                       <p class="dis">Lorem Ipsum is simply dummy text of the printing and typesetting
                         industry. Lorem Ipsum has been the industry's standard dummy
                         text ever since the 1500s, when an unknown printer took a galley</p>
                     </div>
                     <div class="d-flex justify-content-between">
-                      <div>
+                      <div >
                         <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likeCount}}</i></span>
                         <span><i class="bi bi-share-fill"></i></span>
                         <span><i class="bi bi-bookmark-fill"></i></span>
                       </div>
                       <div>
-                        <button class="btn btn-primary" *ngIf="items.recordType == 'ChannelRecord'" (click)="getDetails(items.id, items.recordType)">Details</button>
-                        <button class="btn btn-primary" *ngIf="items.recordType == 'ClubRecord'" (click)="getDetails(items.clublistId, items.recordType)">Details</button>
+                        <button class="btn follow-btn" style="background: blue;" (click)="getDetails(items.id, items.recordType)">
+                          <span *ngIf="items.recordType == 'ChannelRecord'">Channel Details</span>
+                          <span *ngIf="items.recordType == 'ClubRecord'">Club Details</span>
+                        </button>
                       </div>
                     </div>
+                   </div>
                   </div>
                 </div>
               </div>
@@ -155,7 +170,7 @@
           </div>
           <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab" >
             <div class="example" style="height: 65vh; overflow: auto;">
-              <div class="card py-3" *ngFor="let items of clubList">
+              <div class="card py-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
                 <div class="container">
                  <div class="row">
                    <div class="channel-name d-flex justify-content-between align-items-center py-2">
@@ -198,7 +213,7 @@
           </div>
           <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab" >
             <div class="example" style="height: 55vh; overflow: auto;">
-              <div class="card my-3" *ngFor="let items of channelDetails">
+              <div class="card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
                 <div class="card-body">
                   <div class="container">
                     <div class=" row user_informatiom">
@@ -317,7 +332,7 @@
                   </div>
                   <!-- <div class="container">
                     <div class="row">
-                      <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
+                      <img [src]="items.imageurl" style="object-fit:fill, height:500px" alt="">
                     </div>
                   </div> -->
                   <div class="d-flex justify-content-between">

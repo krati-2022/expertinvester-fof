@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ExpertInvestorManagementDetails } from '../MainModule/admin/expert-and-investor/expert-and-investor.classes';
 import { ExpertManagementDetails } from '../MainModule/admin/expert/expert.classes';
@@ -17,6 +17,7 @@ import { AddTrade } from '../MainModule/admin/Pages/add-trade/add-trade.classes'
 export class SharedService {
   apiUrl = environment.apiUrl
   public toggleSidebar: EventEmitter<any> = new EventEmitter()
+  public search = new BehaviorSubject<string>("");
   
   constructor(private http: HttpClient) { }
 
@@ -122,4 +123,13 @@ export class SharedService {
   AddFeedPost(data: AddTrade): Observable<any>{
     return this.http.post(this.apiUrl + 'AddFeedPost', data)
   }
+
+  GetFeedPostdetail(Mobileno:string, feedpostid: string): Observable<any>{
+    return this.http.get(this.apiUrl + 'GetFeedPostdetail?Mobileno='+ Mobileno +'&feedpostid=' + feedpostid)
+  }
+
+  BlockUnblockFeedPost(id:string, mobile_No: string, status: boolean): Observable<any>{
+    const data = {}
+    return this.http.post(this.apiUrl + 'FeedPostblock?FeedPostID='+ id +'&mobileno=' + mobile_No +'&block=' + status, data)
+  } 
 }

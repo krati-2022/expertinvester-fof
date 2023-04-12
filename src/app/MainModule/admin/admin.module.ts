@@ -43,6 +43,8 @@ import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pa
 import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
 import { InfiniteScrollComponent } from 'src/app/SharedComponent/shared-component/infinite-scroll/infinite-scroll.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FilterPipe } from 'src/app/Utils/filter.pipe';
+import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     CommonSectionComponent,
     PaginationComponent,
     ChannelDetailsComponent,
-    InfiniteScrollComponent
+    InfiniteScrollComponent,
+    FilterPipe,
+    PinRecoveryComponent,
+    
   ],
   imports: [
     CommonModule,

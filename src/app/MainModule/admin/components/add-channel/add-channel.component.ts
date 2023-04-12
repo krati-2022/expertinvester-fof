@@ -126,7 +126,7 @@ export class AddChannelComponent implements OnInit {
 
   getIdeaFor(status: boolean, item: string) {
     if (status == true) {
-      this.ideaOnlist.push({ idealfor: item });
+      this.ideaOnlist.push({ "idealfor": item });
       // console.log('this.ideaOnlist: ', this.ideaOnlist);
     } else {
       let removeIndexValue = -1;
@@ -159,7 +159,7 @@ export class AddChannelComponent implements OnInit {
     } else {
       this.coAdList = [
         {
-          expertId: '00000000-0000-0000-0000-000000000000',
+          "expertId": '00000000-0000-0000-0000-000000000000',
         },
       ];
     }
@@ -193,7 +193,7 @@ export class AddChannelComponent implements OnInit {
       return;
     }
 
-    this.benefits.push({ id: this.benefits.length, benefits: data });
+    this.benefits.push({ "id": this.benefits.length, "benefits": data });
     this.AddChannelFrom.get('addBenefits')?.reset();
     // this.AddChannelFrom.value.benefits =  this.benefits
     // console.log('this.AddChannelFrom.value.benefits: ', this.AddChannelFrom.value.benefits);
@@ -214,11 +214,12 @@ export class AddChannelComponent implements OnInit {
       reader.onload = () => {
         let ext = event.target.files[0].name.split('.').pop().toLowerCase();
         this.fileName = event.target.files[0].name;
-        let accept = ['png', 'jpeg', 'jpg', 'pdf'];
-        if (accept.includes(ext)) {
-          this.base64 = reader.result as string;
-          // console.log('this.base64: ', this.base64);
-        }
+        // let accept = ['png', 'jpeg', 'jpg', 'pdf'];
+        // if (accept.includes(ext)) {
+        //   this.base64 = reader.result as string;
+        //   console.log('this.base64: ', this.base64);
+        // }
+        this.base64 = reader.result as string;
       };
     }
   }
@@ -227,12 +228,18 @@ export class AddChannelComponent implements OnInit {
     if (this.AddChannelFrom.value.coAdChannel == false) {
       this.coAdList = [
         {
-          expertId: '00000000-0000-0000-0000-000000000000',
+          "expertId": '00000000-0000-0000-0000-000000000000',
         },
       ];
     }
     this.AddChannelFrom.value.idealfor = this.ideaOnlist;
+    this.benefits.map((i:any) =>{
+      delete i.id
+    })
     this.AddChannelFrom.value.benefits = this.benefits;
+
+    // console.log('this.AddChannelFrom.value.benefits: ', this.AddChannelFrom.value.benefits);
+    // return
     this.AddChannelFrom.value.coAdList = this.coAdList;
 
     // this.AddChannelFrom.value.imageurl = this.base64;
@@ -250,6 +257,8 @@ export class AddChannelComponent implements OnInit {
       return;
     }
 
+    var splitString = this.base64.split('data:image/jpeg;base64,')
+    // console.log('splitString: ', splitString);
     this.formData = {
       mobile_No: this.AddChannelFrom.value.mobile_No,
       name: this.AddChannelFrom.value.name,
@@ -258,10 +267,11 @@ export class AddChannelComponent implements OnInit {
       subscription: this.AddChannelFrom.value.subscription,
       coAdChannel: this.AddChannelFrom.value.coAdChannel,
       description: this.AddChannelFrom.value.description,
-      imageurl: this.base64,
+      imageurl: splitString[1],
       coAdList: this.AddChannelFrom.value.coAdList,
     };
     // console.log('formData: ', this.formData);
+    // return
     this._service.AddChannel(this.formData).subscribe((res) => {
       // console.log('res: ', res);
       const Toast = Swal.mixin({

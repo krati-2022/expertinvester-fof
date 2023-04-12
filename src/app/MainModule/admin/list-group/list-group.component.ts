@@ -13,7 +13,7 @@ export class ListGroupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goToDetail(){
-    this.router.navigate(['home/details'])
-  }
+  // goToDetail(){
+  //   this.router.navigate(['home/details'])
+  // }
 }

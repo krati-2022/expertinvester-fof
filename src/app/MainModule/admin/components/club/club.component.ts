@@ -27,6 +27,7 @@ export class ClubComponent implements OnInit {
   feedDetails: GetFeedDetails[] = [];
   channelDetails: ChannelListDetails[] = []
   count:any
+  searchKey: string =""
   public current = 0;
   public itemsToDisplay: any;
   public perPage = 10;
@@ -35,6 +36,9 @@ export class ClubComponent implements OnInit {
   ngOnInit(): void {
     this.getMasterData();
     this.GetFeed()
+    this._service.search.subscribe((val:any)=>{
+      this.searchKey = val;
+    })
   }
 
   getMasterData() {
@@ -142,6 +146,27 @@ export class ClubComponent implements OnInit {
     this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobileNumber])
   }
 
+  getFeedDetails(id: string, recordType: string) {
+    // console.log('recordType: ', recordType);
+    // console.log('id: ', id);
+    // return
+    switch (recordType) {
+      case 'ClubRecord':
+        this.router.navigate(['home/details/' + id + '/' + this.mobileNumber]);
+        break;
+      case 'ChannelRecord':
+        this.router.navigate([
+          'home/listGroup/' + id + '/' + this.mobileNumber,
+        ]);
+        break;
+    }
+  }
+
+  getChannelDetails(item:any){
+    // console.log(item);
+    this.router.navigate(['home/channel-details/' + item.channelMasterId + '/' + item.mobile_No])
+  }
+
   getTab(event: any) {
     console.log('event: ', event.target.id);
     switch (event.target.id) {
@@ -158,5 +183,23 @@ export class ClubComponent implements OnInit {
       default:
         this.GetFeed();
     }
+  }
+
+  blockUnblockPost(id: string, status: boolean) {
+    // console.log('status: ', status);
+    // console.log('id: ', id);
+    let mobile_No = '';
+    var splitString = this.mobileNumber.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      mobile_No = joinString;
+    }
+    this._service
+      .BlockUnblockFeedPost(id, mobile_No, status)
+      .subscribe((res) => {
+        console.log('res: ', res);
+        this.GetFeed();
+      });
   }
 }

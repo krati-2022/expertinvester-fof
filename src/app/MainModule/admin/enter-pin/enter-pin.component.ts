@@ -86,6 +86,6 @@ export class EnterPinComponent implements OnInit {
   }
 
   forgotPin(){
-    this.router.navigate(['set-up-pin'])
+    this.router.navigate(['pin-recovery'])
   }
 }

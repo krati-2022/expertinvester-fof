@@ -31,6 +31,7 @@ import { UserSetUpComponent } from './user-set-up/user-set-up.component';
 import { EnterPinComponent } from './enter-pin/enter-pin.component';
 import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
 import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
+import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'enter-pin', component: EnterPinComponent },
   { path: 'set-up-pin', component: SetuUpPinComponent },
   { path: 'club-list', component: ClubListComponent },
+  { path: 'pin-recovery', component: PinRecoveryComponent },
   {
     path: 'home',
     component: HomePageComponent,
@@ -53,7 +55,7 @@ const routes: Routes = [
       { path: 'add-channel', component: AddChannelComponent },
       { path: 'expertList', component: ExpertListComponent },
       { path: 'expertProfile', component: ExpertProfileComponent },
-      { path: 'listGroup', component: ListGroupComponent },
+      { path: 'listGroup/:param1/:param2', component: ListGroupComponent },
       { path: 'details/:param1/:param2', component: DetailsComponent },
       { path: 'list', component: ListComponent },
       { path: 'add-trade/:param1/:param2', component: AddTradeComponent },
@@ -69,6 +71,7 @@ const routes: Routes = [
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'legal-disclamer', component: LegalDisclamerComponent },
       { path: 'terms-services', component: TermsServicesComponent },
+      
     ],
   },
 ];
