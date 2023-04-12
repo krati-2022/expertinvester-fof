@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from 'src/app/Service/shared.service';
 import Swal from 'sweetalert2';
 import { SendOtp, VerifyOtp } from './sign-in.class';
+import {Codes} from '../../../Utils/country-codes'
 declare var $: any;
 
 export interface SignInRespose {
@@ -34,7 +35,7 @@ export class SignInComponent implements OnInit {
   mobile: string = ''
   isExistUser = localStorage.getItem('mobile_number')
   @ViewChild('ngOtpInput', { static: false }) ngOtpInput: any;
-
+  countryCodes = Codes
   config = {
     allowNumbersOnly: false,
     length: 6,
@@ -63,14 +64,17 @@ export class SignInComponent implements OnInit {
 
     this.SendOtpForm = this.formBuilder.group({
       mobile_No: [mobileNumber, [Validators.required]],
+      code: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
+    // console.log(this.countryCodes);
+
     // console.log('this.isExistUser: ', this.isExistUser);
-    if(this.isExistUser != null){
-      this.router.navigate(['enter-pin'])
-    }
+    // if(this.isExistUser != null){
+    //   this.router.navigate(['enter-pin'])
+    // }
   }
   onOtpChange(otp: string) {
     this.otp = otp;
@@ -93,13 +97,13 @@ export class SignInComponent implements OnInit {
   }
 
   sendOtp() {
-    
+
     this.submitted = true;
     if (this.SendOtpForm.invalid) {
       return;
     }
     this.SendOtpModel = new SendOtp({
-      mobile_No: '+91' + this.SendOtpForm.value.mobile_No,
+      mobile_No: this.SendOtpForm.value.code + this.SendOtpForm.value.mobile_No,
     });
     var splitString = this.SendOtpModel.mobile_No.split("")
     if( splitString[0] == '+'){
@@ -109,38 +113,38 @@ export class SignInComponent implements OnInit {
     }else{
       this.mobile = this.SendOtpModel.mobile_No
     }
-    this._service.UserIsExist(this.mobile).subscribe(res =>{
-      this.status = res.message
-      this._service
-          .SendOtp(this.SendOtpModel)
-          .subscribe((response: SignInRespose) => {
-            console.log('response: ', response);
-    
-            this.mobileNumbr = this.SendOtpModel.mobile_No;
-            console.log('this.mobileNumbr: ', response.data.otp);
-            if (response.status == 'Success') {
-              const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer);
-                  toast.addEventListener('mouseleave', Swal.resumeTimer);
-                },
-              });
-              Toast.fire({
-                icon: 'success',
-                title: response.message + ' ' +response.data.otp,
-              });
-              this.submitted = false;
-              
-              (<any>$('#exampleModal')).modal('show');
-            }
-          });
-    })
-   
+    this._service
+        .SendOtp(this.SendOtpModel)
+        .subscribe((response: SignInRespose) => {
+          console.log('response: ', response);
+
+          this.mobileNumbr = this.SendOtpModel.mobile_No;
+          console.log('this.mobileNumbr: ', response.data.otp);
+          if (response.status == 'Success') {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+              },
+            });
+            Toast.fire({
+              icon: 'success',
+              title: response.message + ' ' +response.data.otp,
+            });
+            this.submitted = false;
+
+            (<any>$('#exampleModal')).modal('show');
+          }
+        });
+    // this._service.UserIsExist(this.mobile).subscribe(res =>{
+    //   this.status = res.message
+    // })
+
   }
 
   verifyOtp() {
@@ -149,7 +153,7 @@ export class SignInComponent implements OnInit {
       return;
     }
     this.VerifyOtpModel = new VerifyOtp({
-      mobileno: '+91' + this.SendOtpForm.value.mobile_No,
+      mobileno: this.SendOtpForm.value.code + this.SendOtpForm.value.mobile_No,
       otp: this.otp,
     });
 
@@ -173,10 +177,8 @@ export class SignInComponent implements OnInit {
           title: response.message,
         });
         (<any>$('#exampleModal')).modal('hide');
-        // this.router.navigate(['user-set-up']);
-        // localStorage.setItem('mobile_number', response.data.mobileNo);
-        if(this.status == 'True'){
-          localStorage.setItem('isExist', this.status)
+        if(response.data[0]?.isRegistered){
+          localStorage.setItem('isRegistered', response.data[0]?.isRegistered)
           this.router.navigate(['enter-pin'])
         }else {
           this.router.navigate(['set-up-pin'])
@@ -197,7 +199,7 @@ export class SignInComponent implements OnInit {
           icon: 'error',
           title: response.message,
         });
-        
+
       }
     });
   }

@@ -91,18 +91,18 @@ export class ExpertAndInvestorComponent implements OnInit {
         if (accpt.includes(ext)) {
           this.imageSrc = reader.result as string;
           // console.log('this.imageSrc: ', this.imageSrc);
-          
+
         }
 
       };
-   
+
 
     }
   }
 
-  goToHomePage(){
-    this.router.navigate(['home'])
-  }
+  // goToHomePage(){
+  //   this.router.navigate(['home'])
+  // }
 
   getCountry(event: string) {
     this._service.GetIdeaonlist(event).subscribe((response) => {
@@ -149,7 +149,7 @@ export class ExpertAndInvestorComponent implements OnInit {
       return true;
     }
   }
-  
+
   omit_special_char(event: any) {
     var k;
     k = event.charCode;
@@ -162,8 +162,8 @@ export class ExpertAndInvestorComponent implements OnInit {
     );
   }
   onSubmit(){
-    
-    
+
+
     this.submitted  = true
     this.submitPhone = true;
     if(this.AddExpertInvestorForm.invalid){
@@ -197,7 +197,7 @@ export class ExpertAndInvestorComponent implements OnInit {
     this.submitted = false
     this.submitPhone = false
     sessionStorage.removeItem('usertype')
-    this.router.navigate(['home']);
+    this.router.navigate(['club-list']);
     })
   }
 

@@ -35,7 +35,7 @@ export class ExpertComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('this.ismobileNumberExist: ', this.ismobileNumberExist);
+    // console.log('this.ismobileNumberExist: ', this.ismobileNumberExist);
     if(!this.ismobileNumberExist){
       this.router.navigate([''])
      }
@@ -155,7 +155,7 @@ export class ExpertComponent implements OnInit {
           this.submitted = false;
           this.submitPhone = false;
           sessionStorage.removeItem('usertype');
-          this.router.navigate(['home/expertList']);
+          this.router.navigate(['club-list']);
         },
         error: (error) => {
           if (error.status == '400') {

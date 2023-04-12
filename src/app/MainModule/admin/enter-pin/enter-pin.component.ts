@@ -10,14 +10,14 @@ import { Login } from './enter-pin.classes';
 })
 export class EnterPinComponent implements OnInit {
   pin:any = localStorage.getItem('pin');
-  isExist = localStorage.getItem('isExist')
+  isRegistered = localStorage.getItem('isRegistered')
   password!: string;
   showOtpComponent = true;
   loginDetails = new Login()
   mobile_No:any = localStorage.getItem('mobile_number')
   message!: string
   mobile : string = ''
-  
+
   config = {
     allowNumbersOnly: true,
     length: 4,
@@ -56,29 +56,29 @@ export class EnterPinComponent implements OnInit {
 
   onOtpChange(pin: string) {
     this.password = pin;
-   
     if (this.password === this.pin) {
-      if(this.isExist){
+      if(this.isRegistered){
         let loginDetailas = new Login({
           mobileno: this.mobile_No,
           password: this.pin
         })
         this._service.LoginIn(loginDetailas).subscribe(res => {
-          if(res.data[0].userDetail === true){
+        console.log('res: ', res);
+          if(res.data[0]?.userDetail){
             this.router.navigate(['home'])
           }else{
             this.router.navigate(['user-set-up'])
           }
           })
-        
+
       }else{
-        this.router.navigate(['user-set-up']);
+        this.router.navigate(['user-set-up'])
       }
     }else if(this.password != this.pin && this.password.length == 4){
-      
+
       this.message = 'Incorrect Pin'
     }
-    
+
   }
 
   onClick() {
