@@ -10,6 +10,7 @@ import { SetPin } from '../MainModule/admin/setu-up-pin/set-up-pin.classes';
 import { Login } from '../MainModule/admin/enter-pin/enter-pin.classes';
 import { FollowClub } from '../MainModule/admin/Pages/club-list/club-list.classes';
 import { AddTrade } from '../MainModule/admin/Pages/add-trade/add-trade.classes';
+import { SendOtpForRecoverPin, VerifyOtpForRecovery } from '../MainModule/admin/pin-recovery/pin-recovery.classes';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,16 @@ export class SharedService {
   SendOtp(data: SendOtp): Observable<any>{
     return this.http.post(this.apiUrl + 'api/Login/SendOTP', data)
   }
+
+  SendOtpForRestPin(data: SendOtpForRecoverPin): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Login/SendForgotPasswordOTP', data)
+  }
   
   VerifyOtp(data: VerifyOtp): Observable<any>{
     return this.http.post(this.apiUrl + 'api/Login/ConfirmOTP', data)
+  }
+  VerifyRecoverPinOtp(data: VerifyOtpForRecovery): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Login/ForgotPasswordConfirmOTP', data)
   }
 
   LoginIn(data:Login): Observable<any>{
@@ -127,9 +135,17 @@ export class SharedService {
   GetFeedPostdetail(Mobileno:string, feedpostid: string): Observable<any>{
     return this.http.get(this.apiUrl + 'GetFeedPostdetail?Mobileno='+ Mobileno +'&feedpostid=' + feedpostid)
   }
-
+  
   BlockUnblockFeedPost(id:string, mobile_No: string, status: boolean): Observable<any>{
     const data = {}
     return this.http.post(this.apiUrl + 'FeedPostblock?FeedPostID='+ id +'&mobileno=' + mobile_No +'&block=' + status, data)
   } 
+  
+  FeedPostLikeDislike(FeedPostID:string,status:boolean, mobile_No:string):Observable<any>{
+    const data = {}
+    return this.http.post(this.apiUrl + 'UpdateFeedPostlike?FeedPostID=' + FeedPostID +'&like=' + status +'&Mobileno=' + mobile_No, data)
+  }
+  GetLikes(id:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'GetLikeCount?id=' + id)
+  }
 }

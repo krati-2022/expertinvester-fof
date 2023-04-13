@@ -45,6 +45,7 @@ import { InfiniteScrollComponent } from 'src/app/SharedComponent/shared-componen
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FilterPipe } from 'src/app/Utils/filter.pipe';
 import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
     ReactiveFormsModule,
     FormsModule,
     NgOtpInputModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgxGalleryModule
   ],
 })
 export class AdminModule {}

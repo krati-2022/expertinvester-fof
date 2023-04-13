@@ -58,7 +58,7 @@ const routes: Routes = [
       { path: 'listGroup/:param1/:param2', component: ListGroupComponent },
       { path: 'details/:param1/:param2', component: DetailsComponent },
       { path: 'list', component: ListComponent },
-      { path: 'add-trade/:param1/:param2', component: AddTradeComponent },
+      { path: 'add-trade/:param1/:param2/:param3', component: AddTradeComponent },
       { path: 'trades', component: TradesComponent },
       // { path: 'club-list', component: ClubListComponent },
       { path: 'feed-club', component: FeedClubListComponent },

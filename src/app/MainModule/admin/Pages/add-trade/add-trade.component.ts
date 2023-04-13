@@ -16,6 +16,7 @@ export class AddTradeComponent implements OnInit {
   apiUrl = environment.apiUrl
   mobile_number: any
   clubListId: any
+  name: any
   imageSrc: string = ''
   submitted : boolean = false
   formData:any  = new FormData()
@@ -25,6 +26,8 @@ export class AddTradeComponent implements OnInit {
   ngOnInit(): void {
     this.clubListId = this._ActivatedRoute.snapshot.paramMap.get('param1')
     this.mobile_number = this._ActivatedRoute.snapshot.paramMap.get('param2')
+    this.name = this._ActivatedRoute.snapshot.paramMap.get('param3')
+    console.log('this.name: ', this.name);
     this.AddFeedForm = new FormGroup({
       Mobile_No : new FormControl(this.mobile_number),
       ClublistId : new FormControl(this.clubListId),
@@ -64,11 +67,28 @@ export class AddTradeComponent implements OnInit {
     // })
     this.isLoading = true
     this.http.post(this.apiUrl + 'AddFeedPost', this.formData).subscribe({
-      next: (response) =>{
-        console.log('response: ', response);
+      next: (response:any) =>{
+        // console.log('response: ', response.message);
         // debugger;
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 5000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+        Toast.fire({
+          icon: 'success',
+          title: response.message,
+        });
         this.AddFeedForm.reset();
         this.submitted = false;
+        this.imageSrc = ''
+
         // this.router.navigate(['home/club']);
         this.isLoading = false
       }, error : (error) =>{

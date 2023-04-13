@@ -164,9 +164,9 @@ export class ChannelComponent implements OnInit {
       });
   }
 
-  getDetails(clublistId:string){
+  getDetails(clublistId:string, clubName:string){
   // console.log('clublistId: ', clublistId);
-    this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobileNumber])
+    this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobileNumber + '/' + clubName])
   }
 
   getFeedDetails(id: string, recordType: string) {

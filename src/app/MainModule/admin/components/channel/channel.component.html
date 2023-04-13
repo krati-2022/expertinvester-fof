@@ -341,37 +341,26 @@
         <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
           <div class="example" style="height: 65vh; overflow: auto;">
             <div class="card py-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
-              <div class="container">
+              <div class="">
                <div class="row">
-                 <!-- <div class="channel-name d-flex justify-content-between align-items-center py-2">
-                 <span class="club-header"> {{items.name}}</span> 
-                 <span class="">
-                   <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
-                   <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
-                 </span>
-                 </div>
-                 <div class="">
-                  <p class="club-dis">{{items.description}}</p>
-                 </div> -->
-
                  <div class="channel-name d-flex col-12">
-                  <div class="col-8" (click)="getDetails(items.id)">
-                    <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span> 
-                  </div>
-                  <div class="col-4 d-flex justify-content-end">
-                    <span class="">
-                      <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
-                      <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
-                    </span>
-                  </div>
-                </div>
-                <div class="">
-                  <p class="club-dis" (click)="getDetails(items.id)">{{items.description}}</p>
+                   <div class="col-8" (click)="getDetails(items.id, items.name)">
+                     <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span> 
+                   </div>
+                   <div class="col-4 d-flex justify-content-end">
+                     <span class="">
+                       <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
+                       <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
+                     </span>
+                   </div>
                  </div>
-
-                </div>
+                 
+               </div>
+               <div class="">
+                <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
+               </div>
               </div>
-                <div class="container expect-section my-2 " (click)="getDetails(items.id)">
+                <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
                   <div class="grid-data d-flex  ">
 
                     <div class="col-5  border-end ">

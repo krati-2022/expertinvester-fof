@@ -143,8 +143,11 @@
                         text ever since the 1500s, when an unknown printer took a galley</p>
                     </div>
                     <div class="d-flex justify-content-between">
-                      <div >
-                        <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likeCount}}</i></span>
+                       <div >
+                        <span (click)="like(items.id, !items.isUserLiked)"> 
+                          <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isUserLiked == false">{{items.likeCount}}</i>
+                          <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isUserLiked == true">{{items.likeCount}}</i>
+                        </span>
                         <span><i class="bi bi-share-fill"></i></span>
                         <span><i class="bi bi-bookmark-fill"></i></span>
                       </div>
@@ -171,22 +174,26 @@
           <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab" >
             <div class="example" style="height: 65vh; overflow: auto;">
               <div class="card py-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
-                <div class="container">
+                <div class="">
                  <div class="row">
-                   <div class="channel-name d-flex justify-content-between align-items-center py-2">
-                   <span class="club-header"> {{items.name}}</span> 
-                   <span class="">
-                     <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
-                     <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
-                   </span>
+                   <div class="channel-name d-flex col-12">
+                     <div class="col-8" (click)="getClubDetails(items.id, items.name)">
+                       <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span> 
+                     </div>
+                     <div class="col-4 d-flex justify-content-end">
+                       <span class="">
+                         <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
+                         <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
+                       </span>
+                     </div>
                    </div>
-                   <div class="">
-                    <p class="club-dis">{{items.description}}</p>
-                   </div>
-
-                  </div>
+                   
+                 </div>
+                 <div class="">
+                  <p class="club-dis" (click)="getClubDetails(items.id, items.name)">{{items.description}}</p>
+                 </div>
                 </div>
-                  <div class="container expect-section my-2 ">
+                  <div class="container expect-section my-2 " (click)="getClubDetails(items.id, items.name)">
                     <div class="grid-data d-flex  ">
 
                       <div class="col-5  border-end ">
@@ -337,7 +344,7 @@
                   </div> -->
                   <div class="d-flex justify-content-between">
                     <div>
-                      <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
+                      <span > <i class="bi bi-hand-thumbs-up-fill px-2" >{{items.likecount}}</i></span>
                       <span><i class="bi bi-share-fill"></i></span>
                     </div>
                     <div>

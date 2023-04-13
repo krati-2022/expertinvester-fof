@@ -4,10 +4,18 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from 'src/app/Service/shared.service';
 import Swal from 'sweetalert2';
-import { SendOtp, VerifyOtp } from './pin-recovery.classes';
 import {Codes} from '../../../Utils/country-codes'
+import { SendOtpForRecoverPin, VerifyOtpForRecovery } from './pin-recovery.classes';
 
 declare var $: any;
+export interface PinRecoveryRespose {
+  data: {
+    mobileNo: string;
+    otp: string;
+  };
+  status: string;
+  message: string;
+}
 @Component({
   selector: 'app-pin-recovery',
   templateUrl: './pin-recovery.component.html',
@@ -16,8 +24,8 @@ declare var $: any;
 export class PinRecoveryComponent implements OnInit {
   SendOtpForm: FormGroup;
   submitted: boolean = false;
-  SendOtpModel = new SendOtp();
-  VerifyOtpModel = new VerifyOtp();
+  SendOtpModel = new SendOtpForRecoverPin();
+  VerifyOtpModel = new VerifyOtpForRecovery();
   mobileNumbr!: string ;
   otp: string = '';
   showOtpComponent = true;
@@ -96,7 +104,7 @@ export class PinRecoveryComponent implements OnInit {
     }
    
     this.isLoading = true
-    this.SendOtpModel = new SendOtp({
+    this.SendOtpModel = new SendOtpForRecoverPin({
       mobile_No: this.SendOtpForm.value.code + this.SendOtpForm.value.mobile_No,
     });
     var splitString = this.SendOtpModel.mobile_No.split("")
@@ -107,37 +115,54 @@ export class PinRecoveryComponent implements OnInit {
     }else{
       this.mobile = this.SendOtpModel.mobile_No
     }
-    // this._service
-    //     .SendOtp(this.SendOtpModel)
-    //     .subscribe((response: SignInRespose) => {
-    //       // console.log('response: ', response);
-    //       this.isLoading = false
-    //       this.mobileNumbr = this.SendOtpModel.mobile_No;
-    //       console.log('this.mobileNumbr: ', response.data.otp);
-    //       if (response.status == 'Success') {
-    //         const Toast = Swal.mixin({
-    //           toast: true,
-    //           position: 'top-end',
-    //           showConfirmButton: false,
-    //           timer: 5000,
-    //           timerProgressBar: true,
-    //           didOpen: (toast) => {
-    //             toast.addEventListener('mouseenter', Swal.stopTimer);
-    //             toast.addEventListener('mouseleave', Swal.resumeTimer);
-    //           },
-    //         });
-    //         Toast.fire({
-    //           icon: 'success',
-    //           title: response.message + ' ' +response.data.otp,
-    //         });
-    //         this.submitted = false;
+    this._service
+        .SendOtpForRestPin(this.SendOtpModel)
+        .subscribe((response: PinRecoveryRespose) => {
+          // console.log('response: ', response);
+          if(response.message == 'False'){
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+              },
+            });
+            Toast.fire({
+              icon: 'error',
+              title: 'Number is not valid',
+            });
+            this.isLoading = false
+            return
+          }
+          this.isLoading = false
+          this.mobileNumbr = this.SendOtpModel.mobile_No;
+          console.log('this.mobileNumbr: ', response.data.otp);
+          if (response.status == 'Success') {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+              },
+            });
+            Toast.fire({
+              icon: 'success',
+              title: response.message + ' ' +response.data.otp,
+            });
+            this.submitted = false;
             
-    //         (<any>$('#exampleModal')).modal('show');
-    //       }
-    //     });
-    // this._service.UserIsExist(this.mobile).subscribe(res =>{
-    //   this.status = res.message
-    // })
+            (<any>$('#exampleModal')).modal('show');
+          }
+        });
+    
    
   }
 
@@ -146,12 +171,12 @@ export class PinRecoveryComponent implements OnInit {
     if (this.otp == '') {
       return;
     }
-    this.VerifyOtpModel = new VerifyOtp({
+    this.VerifyOtpModel = new VerifyOtpForRecovery({
       mobileno: this.SendOtpForm.value.code + this.SendOtpForm.value.mobile_No,
       otp: this.otp,
     });
 
-    this._service.VerifyOtp(this.VerifyOtpModel).subscribe((response) => {
+    this._service.VerifyRecoverPinOtp(this.VerifyOtpModel).subscribe((response) => {
       // console.log('response: ', response);
       if (response.status == 'Success') {
         localStorage.setItem('mobile_number', response.data[0].mobileno);
@@ -171,12 +196,8 @@ export class PinRecoveryComponent implements OnInit {
           title: response.message,
         });
         (<any>$('#exampleModal')).modal('hide');
-        if(response.data[0]?.isRegistered){
-          localStorage.setItem('isRegistered', response.data[0]?.isRegistered)
-          this.router.navigate(['enter-pin'])
-        }else {
-          this.router.navigate(['set-up-pin'])
-        }
+        this.router.navigate(['set-up-pin'])
+      
       } else if (response.status == 'Failed') {
         const Toast = Swal.mixin({
           toast: true,

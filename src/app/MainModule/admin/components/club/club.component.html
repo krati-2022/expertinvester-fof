@@ -20,7 +20,7 @@
                  <div class="">
                   <div class="row">
                     <div class="channel-name d-flex col-12">
-                      <div class="col-8" (click)="getDetails(items.id)">
+                      <div class="col-8" (click)="getDetails(items.id, items.name)">
                         <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span> 
                       </div>
                       <div class="col-4 d-flex justify-content-end">
@@ -33,10 +33,10 @@
                     
                   </div>
                   <div class="">
-                   <p class="club-dis" (click)="getDetails(items.id)">{{items.description}}</p>
+                   <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
                   </div>
                  </div>
-                   <div class="container expect-section my-2 " (click)="getDetails(items.id)">
+                   <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
                      <div class="grid-data d-flex  ">
 
                        <div class="col-5  border-end ">
@@ -256,7 +256,7 @@
                            </div> -->
 
                            <div class="channel-name d-flex col-12">
-                            <div class="col-8" (click)="getDetails(items.id)">
+                            <div class="col-8" (click)="getDetails(items.id, items.name)">
                               <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span> 
                             </div>
                             <div class="col-4 d-flex justify-content-end">
@@ -267,12 +267,12 @@
                             </div>
                           </div>
                           <div class="">
-                            <p class="club-dis" (click)="getDetails(items.id)">{{items.description}}</p>
+                            <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
                            </div>
     
                           </div>
                         </div>
-                          <div class="container expect-section my-2 " (click)="getDetails(items.id)">
+                          <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
                             <div class="grid-data d-flex  ">
     
                               <div class="col-5  border-end ">

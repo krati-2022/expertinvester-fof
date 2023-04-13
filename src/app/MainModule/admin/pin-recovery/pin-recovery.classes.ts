@@ -1,14 +1,14 @@
-export class SendOtp {
+export class SendOtpForRecoverPin {
     mobile_No!: string;
-    public constructor(init?: Partial<SendOtp>) {
+    public constructor(init?: Partial<SendOtpForRecoverPin>) {
         Object.assign(this, init);
     }
 }
 
-export class VerifyOtp {
+export class VerifyOtpForRecovery {
     mobileno! : string;
     otp : string | undefined;
-    public constructor(init?: Partial<VerifyOtp>) {
+    public constructor(init?: Partial<VerifyOtpForRecovery>) {
         Object.assign(this, init);
     }
 }

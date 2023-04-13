@@ -101,7 +101,7 @@ export class ChannelDetailsComponent implements OnInit {
     }
 
     this._service.GetProfile(mobile_No, this.id).subscribe((res) => {
-    console.log('res: ', res.data[0]);
+    // console.log('res: ', res.data[0]);
       
       this.profile = res.data;
       // console.log('this.channelDetails: ', this.channelDetails);

@@ -87,6 +87,7 @@ export class FeedComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 2;
   searchKey: string = '';
+  
   constructor(private router: Router, private _service: SharedService) {}
 
   ngOnInit(): void {
@@ -147,6 +148,13 @@ export class FeedComponent implements OnInit {
     });
   }
 
+  getLikes(id:any){
+    this._service.GetLikes(id).subscribe(res =>{
+      console.log(res);
+      
+    })
+  }
+
   followClub(clublistId: string) {
     this.followClubDetails = new FollowClub({
       clublistId: clublistId,
@@ -183,8 +191,13 @@ export class FeedComponent implements OnInit {
     this._service
       .GetFeed(mobile_No, pageNumber, this.perPage)
       .subscribe((res) => {
-        this.feedDetails.push(...res.items);
-
+      // console.log('res: ', res.items);
+        if(res.items.length != 0){
+          this.feedDetails.push(...res.items);
+        }else {
+          this.current--
+        }
+        
         // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
       });
   }
@@ -227,6 +240,11 @@ export class FeedComponent implements OnInit {
     }
   }
 
+  getClubDetails(clublistId:string, clubName:string){
+    // console.log('clublistId: ', clublistId);
+      this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobile_number + '/' + clubName])
+    }
+
   blockUnblockPost(id: string, status: boolean) {
     // console.log('status: ', status);
     // console.log('id: ', id);
@@ -244,19 +262,22 @@ export class FeedComponent implements OnInit {
         this.GetFeed();
       });
   }
-  // unBlockPost(id: string, status: boolean) {
-  //   let mobile_No = '';
-  //   var splitString = this.mobile_number.split('');
-  //   if (splitString[0] == '+') {
-  //     splitString[0] = '%2B';
-  //     var joinString = splitString.join('');
-  //     mobile_No = joinString;
-  //   }
-  //   this._service
-  //     .BlockUnblockFeedPost(id, mobile_No, status)
-  //     .subscribe((res) => {
-  //       console.log('res: ', res);
-  //       this.GetFeed();
-  //     });
-  // }
+  like(id:string, status:boolean){
+    let mobile_No = '';
+    var splitString = this.mobile_number.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      mobile_No = joinString;
+    }
+    this._service
+      .FeedPostLikeDislike(id, status, mobile_No)
+      .subscribe((res) => {
+        // console.log('res: ', res);
+        this.GetFeed();
+        // this.getLikes(id)
+      });
+  }
+
+
 }

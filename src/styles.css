@@ -672,3 +672,14 @@ span.club-inf {
     font-family: "Poppins", sans-serif;
 }
 }
+
+.ngx-gallery-layout.thumbnails-bottom ngx-gallery-thumbnails {
+  display: none;
+}
+
+.ngx-gallery-arrow-right .ngx-gallery-arrow {
+  display: none;
+}
+.ngx-gallery-arrow-left .ngx-gallery-arrow {
+  display: none;
+}
