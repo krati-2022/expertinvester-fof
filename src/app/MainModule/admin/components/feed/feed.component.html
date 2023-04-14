@@ -44,7 +44,7 @@
               [fromRoot]="true" 
               (scrolled)="onScroll()">
 
-                <div class="card my-3 m-4" *ngFor="let items of feedDetails | filter : searchKey : 'username'"  >
+                <div class="card list-card my-3 m-4" *ngFor="let items of feedDetails | filter : searchKey : 'username'"  >
                   <div class="card-body" >
                     <div class=" row user_informatiom d-flex justify-content-between" >
                       <div class="d-flex col-8" (click)="getDetails(items.id, items.recordType)">
@@ -173,7 +173,7 @@
           </div>
           <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab" >
             <div class="example" style="height: 65vh; overflow: auto;">
-              <div class="card py-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
+              <div class="card list-card py-2 px-2" *ngFor="let items of clubList | filter : searchKey : 'name'">
                 <div class="">
                  <div class="row">
                    <div class="channel-name d-flex col-12">
@@ -220,7 +220,7 @@
           </div>
           <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab" >
             <div class="example" style="height: 55vh; overflow: auto;">
-              <div class="card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
+              <div class="card list-card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
                 <div class="card-body">
                   <div class="container">
                     <div class=" row user_informatiom">
