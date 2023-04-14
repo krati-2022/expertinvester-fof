@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedComponentRoutingModule } from './shared-component-routing.module';
-import { CommenSelectionComponent } from './commen-selection/commen-selection.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { InfiniteScrollComponent } from './infinite-scroll/infinite-scroll.component';
 
 @NgModule({
-  declarations: [
-    CommenSelectionComponent
-  ],
+  declarations: [ ],
   imports: [
     CommonModule,
     SharedComponentRoutingModule

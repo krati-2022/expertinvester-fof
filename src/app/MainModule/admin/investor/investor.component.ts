@@ -26,11 +26,15 @@ export class InvestorComponent implements OnInit {
   submitPhone: boolean = false;
   InvestorDetails = new InvestorManagementDetails();
   usertype = sessionStorage.getItem('usertype');
+  ismobileNumberExist = localStorage.getItem('mobile_number')
   country: Array<Country> = [];
   ideaOn: Array<IdeaOn> = [];
   ideaOnlist: Array<any> = [];
   isChecked: boolean = false;
   message: string = ''
+  experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year']
+  knowledgeLevel = ['Beginner', 'Intermediate', 'Professional']
+  isLoading:boolean = false
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -38,8 +42,11 @@ export class InvestorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(!this.ismobileNumberExist){
+      this.router.navigate([''])
+     }
     this.AddInvestorForm = this.formBuilder.group({
-      mobileno: ['', Validators.required],
+      mobileno: [this.ismobileNumberExist, Validators.required],
       name: ['', Validators.required],
       country: ['', Validators.required],
       ideaOn: [],
@@ -136,14 +143,16 @@ export class InvestorComponent implements OnInit {
     };
     // console.log('formData: ', formData);
     // return;
+    this.isLoading = true
     this._service.AddInvestor(formData).subscribe(
       (response) => {
         console.log(response);
         this.AddInvestorForm.reset();
         this.submitted = false;
         this.submitPhone = false;
+        this.isLoading = false
         sessionStorage.removeItem('usertype');
-        this.router.navigate(['home']);
+        this.router.navigate(['club-list']);
       },
       (error) => {
         if (error.status == '400') {

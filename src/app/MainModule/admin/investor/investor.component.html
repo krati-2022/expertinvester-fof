@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-10 mx-auto">
 
-        <div class="card">
+        <div class="card list-card">
           <div class="card-body">
             <h5 class="card-title">Investor-Form</h5>
 
@@ -36,20 +36,23 @@
                     <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i
                         class="bi bi-database px-2"></i>Experience</label>
                     <div class="col-lg-8">
-                      <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experience.errors }">
+                      <!-- <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experience.errors }"> -->
+                      <select class="form-select" aria-label="Default select example" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experience.errors }">
+                        <option [value]="item" *ngFor="let item of experience">{{item}}</option>
+                      </select>
                       <div *ngIf=" submitted && InvestorControl.experience.errors" class="invalid-feedback">
                         <div *ngIf="InvestorControl.experience.errors.required">Experience is required.</div>
                       </div>
 
                     </div>
                   </div>
-                  
+
                   <div class="row mb-3">
                     <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i
                         class="bi bi-pencil px-2"></i>About Us</label>
                     <div class="col-lg-8">
                       <textarea class="form-control" formControlName="aboutus" style="height: 100px" [ngClass]="{ 'is-invalid': submitted && InvestorControl.aboutus.errors }"></textarea>
-                      
+
                       <div *ngIf=" submitted && InvestorControl.aboutus.errors" class="invalid-feedback">
                         <div *ngIf="InvestorControl.aboutus.errors.required">About Us is required.</div>
                       </div>
@@ -58,26 +61,26 @@
                   </div>
                 </div>
                 <div class="col-lg-6">
-                 
-                  <div class="row mb-3">
+
+                  <!-- <div class="row mb-3">
                     <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>Mobile Number
                     </label>
                     <div class="col-lg-8">
                     <input type="text" class="form-control" formControlName="mobileno"(keypress)="keyPressNumbers($event)" formControlName="mobileno"
                     [ngClass]="{ 'is-invalid': (submitted || submitPhone) && InvestorControl.mobileno.errors  }">
-                    <div *ngIf="(submitted || submitPhone )  && InvestorControl.mobileno?.errors " class="invalid-feedback">             
+                    <div *ngIf="(submitted || submitPhone )  && InvestorControl.mobileno?.errors " class="invalid-feedback">
                       <div *ngIf="InvestorControl.mobileno.errors?.validatePhoneNumber ">Phone number is invalid.</div>
                       <div *ngIf="InvestorControl.mobileno.errors?.maxLength ">Phone number is invalid.</div>
                       <div *ngIf="InvestorControl.mobileno.errors?.required ">Phone number is required.</div>
-                    </div>  
                     </div>
-                  </div>
+                    </div>
+                  </div> -->
 
                   <div class="row mb-3">
                     <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am advice in </label>
                     <div class="col-lg-8">
                       <select class="form-select" aria-label="Default select example" formControlName="country" (change)="getCountry(AddInvestorForm.value.country)" >
-                        
+
                         <option [value]="item.countryName" *ngFor="let item of country">{{item.countryName}}</option>
                       </select>
                     </div>
@@ -87,7 +90,10 @@
                     <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i
                         class="bi bi-book px-2"></i>Knowledge Level</label>
                     <div class="col-lg-8">
-                      <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }">
+                      <!-- <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }"> -->
+                      <select class="form-select" aria-label="Default select example" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }">
+                        <option [value]="item" *ngFor="let item of knowledgeLevel">{{item}}</option>
+                      </select>
                       <div *ngIf=" submitted && InvestorControl.knowledgelevel.errors" class="invalid-feedback">
                         <div *ngIf="InvestorControl.knowledgelevel.errors.required">Knowledge Level is required.</div>
                       </div>
@@ -119,7 +125,11 @@
               </div>
               <div class="row mb-3 mt-3">
                 <div class="col-lg-6 mx-auto">
-                  <button class="btn btn-primary w-100 " type="submit">Submit</button>
+                  <!-- <button class="btn btn-primary w-100 " type="submit">Submit</button> -->
+                  <button class="btn btn-primary w-100 " type="submit" [disabled]="isLoading">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+                     <span *ngIf="!isLoading">Submit</span>
+                  </button>
                 </div>
               </div>
 

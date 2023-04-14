@@ -28,7 +28,10 @@ import { TradesComponent } from './Pages/trades/trades.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { UpgradePlanComponent } from './upgrade-plan/upgrade-plan.component';
 import { UserSetUpComponent } from './user-set-up/user-set-up.component';
-
+import { EnterPinComponent } from './enter-pin/enter-pin.component';
+import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
+import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
+import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -36,40 +39,45 @@ const routes: Routes = [
   { path: 'expert', component: ExpertComponent },
   { path: 'investor', component: InvestorComponent },
   { path: 'expertAndInvestor', component: ExpertAndInvestorComponent },
-
+  { path: 'enter-pin', component: EnterPinComponent },
+  { path: 'set-up-pin', component: SetuUpPinComponent },
+  { path: 'club-list', component: ClubListComponent },
+  { path: 'pin-recovery', component: PinRecoveryComponent },
   {
-    path: 'home', component: HomePageComponent,
-    children:[
+    path: 'home',
+    component: HomePageComponent,
+    children: [
       { path: '', component: FeedComponent },
       { path: 'feed', component: FeedComponent },
       { path: 'club', component: ClubComponent },
       { path: 'channel', component: ChannelComponent },
+      { path: 'channel-details/:param1/:param2', component: ChannelDetailsComponent },
       { path: 'add-channel', component: AddChannelComponent },
       { path: 'expertList', component: ExpertListComponent },
       { path: 'expertProfile', component: ExpertProfileComponent },
-      { path: 'listGroup', component: ListGroupComponent },
-      { path: 'details', component: DetailsComponent },
+      { path: 'listGroup/:param1/:param2', component: ListGroupComponent },
+      { path: 'details/:param1/:param2', component: DetailsComponent },
       { path: 'list', component: ListComponent },
-      { path: 'add-trade', component: AddTradeComponent },
+      { path: 'add-trade/:param1/:param2/:param3', component: AddTradeComponent },
       { path: 'trades', component: TradesComponent },
-      { path: 'club-list', component: ClubListComponent },
+      // { path: 'club-list', component: ClubListComponent },
       { path: 'feed-club', component: FeedClubListComponent },
       { path: 'upgrade-plan', component: UpgradePlanComponent },
-      {path : 'profile-page',component:ProfilePageComponent},
-      {path : 'faq',component:FaqComponent},
-      {path : 'contact',component:ContactUsComponent},
-      {path : 'about',component :AboutUsComponent},
-      {path : 'terms',component:TermsConditionsComponent},
-      {path:'privacy-policy',component:PrivacyPolicyComponent},
-      {path:'legal-disclamer',component:LegalDisclamerComponent},
-      {path:'terms-services',component:TermsServicesComponent},
-
+      { path: 'profile-page', component: ProfilePageComponent },
+      { path: 'faq', component: FaqComponent },
+      { path: 'contact', component: ContactUsComponent },
+      { path: 'about', component: AboutUsComponent },
+      { path: 'terms', component: TermsConditionsComponent },
+      { path: 'privacy-policy', component: PrivacyPolicyComponent },
+      { path: 'legal-disclamer', component: LegalDisclamerComponent },
+      { path: 'terms-services', component: TermsServicesComponent },
+      
     ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

@@ -1,71 +1,268 @@
-<div class="pagetitle">
-  <h1 class="px-3">Home</h1>
-</div><!-- End Page Title -->
-<section class="container">
+<!-- End Page Title -->
+<section class="container d-none d-md-none d-lg-block">
   <div class="row">
-    <div class="col-lg-7 mx-auto">
+    <div class="mx-auto">
       <div class="card">
+        <div class="pagetitle">
+          <div class="d-flex justify-content-between align-items-baseline p-2">
+           <div>
+             <h1 class="px-3">Channel</h1>
+           </div>
+           <div>
+            <button type="button" class="btn btn-outline-secondary" (click)="AddChannel()"><i class="bi bi-pencil-square"></i></button>
+          </div>
+          </div>
+         </div>
         <div class="card-body">
-          <h5 class="card-title"></h5>
-          <!-- Bordered Tabs Justified -->
-          <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
-            <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab"
-                data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home"
-                aria-selected="true">Active Post</button>
-            </li>
-            <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab"
-                data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile"
-                aria-selected="false">Past Post</button>
-            </li>
-            <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab"
-                data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact"
-                aria-selected="false">Profile</button>
-            </li>
-            <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="Chat-tab" data-bs-toggle="tab"
-                data-bs-target="#bordered-justified-Chat" type="button" role="tab" aria-controls="Chat"
-                aria-selected="false">Chat</button>
-            </li>
-          </ul>
-          <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-            <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
-              aria-labelledby="home-tab">
 
-              <div class="example" style="height: 65vh; overflow: auto;">
-                <div class="card my-3">
-                  <div class="card-body">
-                    <div class=" row user_informatiom">
-                      <div class="col-1">
+          <div class="example" style="height: 75vh; overflow: auto;" *ngIf="channelDetails.length != 0">
+            <div class="card list-card my-2" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
+              <div class="card-body">
+                <div class="container" (click)="getChannelDetails(items)">
+                  <div class=" row user_informatiom">
+                    <div class="col-1">
+                      <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                    </div>
+                    <div class="col-8 mx-3 py-2">
+                      <div class="user_name">{{items.username}}</div>
+                      <div class="detail">{{items.sebi}}</div>
+                      <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="d-flex justify-content-between align-items-baseline py-2">
+                      <h6 class="heading">{{items.name}}</h6>
+                      <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="channel-name">
+                      <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
+                    </div>
+                    <div class="channel-detail d-flex py-2">
+                      <div class="col-6 d-flex text-center">
+                        <div class="px-3">
+                          <div>{{items.post}}</div>
+                          <div class="channel-name">Post</div>
+                        </div>
+                        <div>
+                          <div>23k</div>
+                          <div class="channel-name">Subscriber</div>
+                        </div>
+                      </div>
+                      <div class="col-6 d-flex justify-content-end">
+                        <button type="button" class="btn position-btn"><i
+                            class="bi bi-graph-up-arrow px-2"></i>Success
+                          rate: 20%</button>
+                      </div>
+                    </div>
+                    <div class="date">27 Jan 2023, 06:43 PM</div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <p class="club-dis">{{items.description}}</p>
+                  </div>
+                </div>
+                <div class="container expect-section my-2">
+                  <div class="grid-data d-flex expect-sections ">
+                    <div class="col-3 border-end ">
+                      <div class="d-flex club-icons"><span class="club-icon "><i
+                            class="bi bi-chat-square-text"></i></span><span class="club-inf">Reputation</span></div>
+                      <div class="club-icon px-2">{{items.reputation}}</div>
+                    </div>
+                    <div class="col-3  border-end ">
+                      <div class="d-flex club-icons"><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                          class="club-inf">Impression</span></div>
+                      <div class="club-icon px-2">15</div>
+                    </div>
+                    <div class="col-3  border-end">
+                      <div class="d-flex club-icons"><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                          class="club-inf">Followers</span></div>
+                      <div class="club-icon px-2">{{items.followersCount}}</div>
+                    </div>
+                    <div class="col-3  ">
+                      <div class="d-flex club-icons"><span class="club-icon"><i
+                            class="bi bi-pencil-square "></i></span><span class="club-inf">Post</span></div>
+                      <div class="club-icon px-3">{{items.post}}</div>
+                    </div>
+                  </div>
+                  <div class="container-fluid ">
+                    <div class="row py-2">
+                      <div class="col-6">
+                        <div class=" risk-btn w-100 d-flex justify-content-between">
+                          One Month accuracy<span class="">0%</span></div>
+                      </div>
+                      <div class="col-6">
+                        <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                          gain<span class="">0%</span></div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class=" risk-btn w-100 d-flex justify-content-between"> One year
+                          accuracy<span class="">0%</span></div>
+                      </div>
+                      <div class="col-6 ">
+                        <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                          gain<span class="">0%</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="py-2">
+                    <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
+                      investing</p>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-4 risk">
+                      <button type="button" class="btn position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
+                          fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="6" cy="6" r="6" fill="#ED1C24" />
+                        </svg>
+                        High Risk</button>
+                    </div>
+                    <div class="col-8 months">
+                      <button type="button" class="btn position-btn"><i class="bi bi-clock px-"></i>Positional Trading
+                        (1-3 Months)</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="container">
+                  <div class="row">
+                    <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
+                  </div>
+                </div> -->
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
+                    <span><i class="bi bi-share-fill"></i></span>
+                  </div>
+                  <div>
+                    <i class="bi bi-bookmark-fill"></i>
+                  </div>
+                </div>
+                <div class="py-3">
+                  <div class="percent" *ngIf="items.coAdChannel == true">Co-ad channels</div>
+                  <div class="d-flex justify-content-end" *ngIf="items.coAdChannel == true">
+                    <span class="px-4"><button type="button"
+                        class="btn btn-primary danger-btn">Approve</button></span>
+                    <span><button type="button" class="btn btn-success danger-btn">Reject</button></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="example d-flex justify-content-center" style="height: 65vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0" >
+            <span>Data Not Found</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<div class="container d-lg-none d-md-block d-sm-block">
+  <div class="row">
+    <div class=" mx-auto">
+      <div class="card">
+        <!-- Bordered Tabs Justified -->
+        <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+          <li class="nav-item flex-fill" role="presentation">
+            <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" (click)="getTab($event)"
+              data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home"
+              aria-selected="true">FEEDS</button>
+          </li>
+          <li class="nav-item flex-fill" role="presentation">
+            <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" (click)="getTab($event)"
+              data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile"
+              aria-selected="false">CLUBS</button>
+          </li>
+          <li class="nav-item flex-fill" role="presentation">
+            <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" (click)="getTab($event)"
+              data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact"
+              aria-selected="false">CHANNEL</button>
+          </li>
+        </ul>
+        <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+          <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
+          aria-labelledby="home-tab">
+          <div class="example" style="height: 75vh; overflow: auto;" >
+            <div  infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollContainer]="'.example'"
+            [scrollWindow]="true"
+            [fromRoot]="true"
+            (scrolled)="onScroll()">
+
+              <div class="card list-card my-2 m-2" *ngFor="let items of feedDetails"  >
+                <div class="card-body" >
+                  <div class=" row user_informatiom d-flex align-items-center">
+                    <!-- <div class="col-1">
+                      <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                    </div>
+                    <div class="col-8 mx-3 py-2">
+                      <div class="user_name">{{items.username}}</div>
+                      <div class="detail">{{items.sebi}}</div>
+                      <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                    </div> -->
+                    <div class="d-flex col-8" (click)="getFeedDetails(items.id, items.recordType)">
+                      <div class="col-2" >
                         <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                       </div>
-                      <div class="col-8 mx-3 py-2">
-                        <div class="user_name">User Name</div>
-                        <div class="detail">Sr Wealth is led by an SEBI</div>
+                      <div class="col-6 mx-3 py-2" >
+                        <div class="user_name">{{items.username}}</div>
+                        <div class="detail">{{items.sebi}}</div>
                         <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                       </div>
-
                     </div>
 
+                    <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
+                      <button class="btn follow-btn" >
+                        <span *ngIf="items.clubBlock == false" (click)="blockUnblockPost(items.id, true)" style="padding: inherit;">Block</span>
+                        <span *ngIf="items.clubBlock == true" (click)="blockUnblockPost(items.id, false)" style="padding: inherit;">Unblock</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div *ngIf="items.clubBlock != true">
                     <div class="row">
                       <div class="d-flex justify-content-between align-items-baseline py-2">
                         <h6 class="heading">TRADING CHANNEL</h6>
                         <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free Access</span>
                       </div>
-
                     </div>
-                    <div class="row">
-                      <div class="channel-name">
-                        <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
+                    <div class="row " *ngIf="items.recordType == 'ClubRecord'">
+                      <div class="channel-name d-flex justify-content-between align-items-center">
+                        <span> <i class="bi bi-lightbulb"></i>Chat Barter</span>
+                        <!-- <span class=""><button type="button"
+                            class="btn follow-btn">Follow</button>
+                          </span> -->
                       </div>
-                      <div class="channel-detail" style="cursor: pointer;" (click)="goToListGroup()">
-                        DSSL DYNACON SYSTEM [ Update 4]
+                      <div class="channel-detail">
+                        {{items.stockname}}
                       </div>
                       <div class="date">27 Jan 2023, 06:43 PM</div>
                     </div>
-                    <div class="row expect-section my-3">
+                    <div class="row mb-2" *ngIf="items.recordType == 'ChannelRecord'">
+                      <div class="channel-name">
+                        <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
+                      </div>
+                      <div class="channel-detail">
+                        {{items.stockname}}
+                      </div>
+                      <div class="date">27 Jan 2023, 06:43 PM</div>
+                    </div>
+                    <div class="row expect-section my-3" *ngIf="items.recordType == 'ChannelRecord'">
                       <div class="expect-inf d-flex justify-content-between pb-2 ">
                         <div>
                           <div class="expect">
@@ -80,22 +277,21 @@
                         <div class="row d-flex text-center py-2">
                           <div class="col-4">
                             <div class="price">Entry Price</div>
-                            <div class="rate">$305.0 </div>
+                            <div class="rate">{{items.entryprice}} </div>
                           </div>
                           <div class="col-4">
                             <div class="price">Target Price</div>
-                            <div class="rate">$360.0 </div>
+                            <div class="rate">{{items.targetprice}}</div>
                           </div>
                           <div class="col-4">
                             <div class="price">Stop Loss</div>
-                            <div class="rate"> $265.0</div>
+                            <div class="rate">{{items.stoploss}}</div>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    <div class="row">
-                      <div class="col-4 risk">
+                    <div class="row mb-2" *ngIf="items.recordType == 'ChannelRecord'">
+                      <div class="col-4 months ">
                         <div type="button" class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="6" cy="6" r="6" fill="#ED1C24" />
@@ -103,12 +299,12 @@
                           High Risk</div>
                       </div>
                       <div class="col-8 months">
-                        <div type="button" class=" position-btn"><i class="bi bi-clock px-1"></i>Positional
-                          Trading (1-3 Months)</div>
+                        <div type="button" class=" position-btn"><i class="bi bi-clock px-2"></i>Positional Trading (1-3
+                          Months)</div>
                       </div>
                     </div>
                     <div class="row">
-                      <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
+                      <img [src]="items.imageurl" style="object-fit:fill; height:500px" alt="">
                     </div>
                     <div class="row py-2">
                       <h6 class="dis-line">IBR Infra CMP 305 :</h6>
@@ -117,732 +313,234 @@
                         text ever since the 1500s, when an unknown printer took a galley</p>
                     </div>
                     <div class="d-flex justify-content-between">
-                      <div>
-                        <span> <i class="bi bi-hand-thumbs-up-fill px-2">1</i></span>
+                      <div >
+                        <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likeCount}}</i></span>
                         <span><i class="bi bi-share-fill"></i></span>
+                        <span><i class="bi bi-bookmark-fill"></i></span>
                       </div>
                       <div>
-                        <i class="bi bi-bookmark-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card ">
-                  <div class="card-body">
-                    <div class=" row user_informatiom">
-                      <div class="col-1">
-                        <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                      </div>
-                      <div class="col-6 mx-3 py-2">
-                        <div class="user_name">User Name</div>
-                        <div class="detail">Sr Wealth is led by an SEBI</div>
-                        <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                      </div>
-
-                    </div>
-
-                    <div class="row">
-                      <div class="d-flex justify-content-between align-items-baseline py-2">
-                        <h6 class="heading">TRADING CHANNEL</h6>
-                        <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free Access</span>
-                      </div>
-
-                    </div>
-                    <div class="row">
-                      <div class="channel-name d-flex justify-content-between align-items-center">
-                        <span> <i class="bi bi-lightbulb"></i>Chat Barter</span> <span class=""><button type="button"
-                            class="btn follow-btn">Follow</button></span>
-                      </div>
-                      <div class="channel-detail">
-                        DSSL DYNACON SYSTEM
-                      </div>
-                      <div class="date">27 Jan 2023, 06:43 PM</div>
-                    </div>
-
-                    <div class="row">
-                      <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
-                    </div>
-                    <div class="row py-2">
-                      <h6 class="dis-line">IBR Infra CMP 305 :</h6>
-                      <p class="dis">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy
-                        text ever since the 1500s, when an unknown printer took a galley</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                      <div>
-                        <span> <i class="bi bi-hand-thumbs-up-fill px-2">1</i></span>
-                        <span><i class="bi bi-share-fill"></i></span>
-                      </div>
-                      <div>
-                        <i class="bi bi-bookmark-fill"></i>
-                      </div>
-                    </div>
-                    <div class="py-3">
-
-                      <div class="d-flex justify-content-start">
-                        <span class=""><button type="button" class="btn btn-primary danger-btn">Approve</button></span>
-                        <span class="px-2"><button type="button"
-                            class="btn btn-success danger-btn">Reject</button></span>
+                        <button class="btn follow-btn" style="background: blue;" (click)="getFeedDetails(items.id, items.recordType)">
+                          <span *ngIf="items.recordType == 'ChannelRecord'">Channel Details</span>
+                          <span *ngIf="items.recordType == 'ClubRecord'">Club Details</span>
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
-              <div class="example" style="height: 65vh; overflow: auto;">
-                <div class="card my-3">
-                  <div class="card-body">
-                    <div class=" row user_informatiom">
-                      <div class="col-1">
-                        <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                      </div>
-                      <div class="col-8 mx-3 py-2">
-                        <div class="user_name">User Name</div>
-                        <div class="detail">Sr Wealth is led by an SEBI</div>
-                        <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="d-flex justify-content-between align-items-baseline py-2">
-                        <h6 class="heading">TRADING CHANNEL</h6>
-                        <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free Access</span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="channel-name">
-                        <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                      </div>
-                      <div class="channel-detail">
-                        DSSL DYNACON SYSTEM [ Update 4]
-                      </div>
-                      <div class="date">27 Jan 2023, 06:43 PM</div>
-                    </div>
-                    <div class="row expect-section my-3">
-                      <div class="expect-inf d-flex justify-content-between pb-2 ">
-                        <div>
-                          <div class="expect">
-                            Expected Move
-                          </div>
-                          <div class="expect-percent">18.0%</div>
-                        </div>
-                        <div><button type="button" class="btn btn-danger danger-btn">Target Hit</button></div>
-                      </div>
-                      <div>
-                        <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
-                        <div class="row d-flex text-center py-2">
-                          <div class="col-4">
-                            <div class="price">Entry Price</div>
-                            <div class="rate">$305.0 </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="price">Target Price</div>
-                            <div class="rate">$360.0 </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="price">Stop Loss</div>
-                            <div class="rate"> $265.0</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            <!-- <app-pagination [totalRecords]="totalRecord" [recordsPerPage]="recoardsPerPage" (onPageChange)="displayActivePage($event)"></app-pagination> -->
+            <!-- <app-pagination [current]="current" [total]="total" (goTo)="onGoTo($event)" (next)="onNext($event)"
+              (previous)="onPrevious($event)"></app-pagination> -->
 
-                    <div class="row">
-                      <div class="col-4 risk">
-                        <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="6" cy="6" r="6" fill="#ED1C24" />
-                          </svg>
-                          High Risk</div>
-                      </div>
-                      <div class="col-8 months">
-                        <div class=" position-btn"><i class="bi bi-clock px-1"></i>Positional
-                          Trading (1-3 Months)</div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
-                    </div>
-                    <div class="row py-2">
-                      <h6 class="dis-line">IBR Infra CMP 305 :</h6>
-                      <p class="dis">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy
-                        text ever since the 1500s, when an unknown printer took a galley</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                      <div>
-                        <span> <i class="bi bi-hand-thumbs-up-fill px-2">1</i></span>
-                        <span><i class="bi bi-share-fill"></i></span>
-                      </div>
-                      <div>
-                        <i class="bi bi-bookmark-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card ">
-                  <div class="card-body">
-                    <div class=" row user_informatiom">
-                      <div class="col-1">
-                        <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                      </div>
-                      <div class="col-8 mx-3 py-2">
-                        <div class="user_name">User Name</div>
-                        <div class="detail">Sr Wealth is led by an SEBI</div>
-                        <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                      </div>
+          </div>
+          <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="feedDetails.length == 0" >
+            <span>Data Not Found</span>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="example" style="height: 65vh; overflow: auto;">
+            <div class="card list-card px-2 py-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
+              <div class="">
+               <div class="row">
+                 <div class="channel-name d-flex col-12">
+                   <div class="col-8" (click)="getDetails(items.id, items.name)">
+                     <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span>
+                   </div>
+                   <div class="col-4 d-flex justify-content-end">
+                     <span class="">
+                       <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
+                       <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
+                     </span>
+                   </div>
+                 </div>
 
-                    </div>
-
-                    <div class="row">
-                      <div class="d-flex justify-content-between align-items-baseline py-2">
-                        <h6 class="heading">TRADING CHANNEL</h6>
-                        <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free Access</span>
-                      </div>
-
-                    </div>
-                    <div class="row">
-                      <div class="channel-name">
-                        <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                      </div>
-                      <div class="channel-detail">
-                        DSSL DYNACON SYSTEM [ Update 4]
-                      </div>
-                      <div class="date">27 Jan 2023, 06:43 PM</div>
-                    </div>
-                    <div class="row expect-section my-3">
-                      <div class="expect-inf d-flex justify-content-between pb-2 ">
-                        <div>
-                          <div class="expect">
-                            Expected Move
-                          </div>
-                          <div class="expect-percent">18.0%</div>
-                        </div>
-                        <div><button type="button" class="btn btn-danger danger-btn">Stop loss hit</button></div>
-                      </div>
-                      <div>
-                        <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
-                        <div class="row d-flex text-center py-2">
-                          <div class="col-4">
-                            <div class="price">Entry Price</div>
-                            <div class="rate">$305.0 </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="price">Target Price</div>
-                            <div class="rate">$360.0 </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="price">Stop Loss</div>
-                            <div class="rate"> $265.0</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-4 risk">
-                        <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="6" cy="6" r="6" fill="#ED1C24" />
-                          </svg>
-                          High Risk</div>
-                      </div>
-                      <div class="col-8 months">
-                        <div class=" position-btn"><i class="bi bi-clock px-1"></i>Positional
-                          Trading (1-3 Months)</div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
-                    </div>
-                    <div class="row py-2">
-                      <h6 class="dis-line">IBR Infra CMP 305 :</h6>
-                      <p class="dis">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy
-                        text ever since the 1500s, when an unknown printer took a galley</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                      <div>
-                        <span> <i class="bi bi-hand-thumbs-up-fill px-2">1</i></span>
-                        <span><i class="bi bi-share-fill"></i></span>
-                      </div>
-                      <div>
-                        <i class="bi bi-bookmark-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+               </div>
+               <div class="">
+                <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
+               </div>
               </div>
-            </div>
-            <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
-              <div class="example" style="height: 65vh; overflow: auto;">
-                <div class="card my-3">
-                  <div class="card-body">
-                    <div class=" row user_informatiom d-flex align-items-center">
-                      <div class="col-2">
+                <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
+                  <div class="grid-data d-flex  ">
+
+                    <div class="col-5  border-end ">
+                      <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                          class="club-inf">Impression</span></div>
+                      <div class="club-icon px-2">{{items.likecount}}</div>
+                    </div>
+                    <div class="col-4 px-2 border-end">
+                      <div class="d-flex "><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                          class="club-inf">Followers</span></div>
+                      <div class="club-icon px-2">{{items.followersCount}}</div>
+                    </div>
+                    <div class="col-3  px-1">
+                      <div class="d-flex "><span class="club-icon"><i class="bi bi-pencil-square "></i></span><span
+                          class="club-inf">Post</span></div>
+                      <div class="club-icon px-3">{{items.postcount}}</div>
+                    </div>
+                  </div>
+
+
+                  </div>
+             </div>
+
+          </div>
+          <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="clubList.length == 0" >
+            <span>Data Not Found</span>
+          </div>
+        </div>
+          <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="example" style="height: 55vh; overflow: auto;" *ngIf="channelDetails.length != 0">
+              <div class="card list-card my-3" *ngFor="let items of channelDetails">
+                <div class="mx-2">
+                  <div class="container" (click)="getChannelDetails(items)">
+                    <div class=" row user_informatiom">
+                      <div class="col-1">
                         <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                       </div>
-                      <div class="col-6 mx-2 py-2">
-                        <div class="user_name">User Name</div>
-                        <div class="detail">Sr Wealth is led by an SEBI</div>
-
+                      <div class="col-8 mx-3 py-2">
+                        <div class="user_name">{{items.username}}</div>
+                        <div class="detail">{{items.sebi}}</div>
+                        <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                       </div>
-                      <div class="col-3 text-end "><button type="button" class="btn follow-btn">Followed</button>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="d-flex justify-content-between align-items-baseline py-2">
+                        <h6 class="heading">{{items.name}}</h6>
+                        <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="channel-name">
+                        <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
+                      </div>
+                      <div class="channel-detail d-flex py-2">
+                        <div class="col-6 d-flex text-center">
+                          <div class="px-3">
+                            <div>{{items.post}}</div>
+                            <div class="channel-name">Post</div>
+                          </div>
+                          <div>
+                            <div>23k</div>
+                            <div class="channel-name">Subscriber</div>
+                          </div>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                          <button type="button" class="btn position-btn"><i
+                              class="bi bi-graph-up-arrow px-2"></i>Success
+                            rate: 20%</button>
+                        </div>
+                      </div>
+                      <div class="date">27 Jan 2023, 06:43 PM</div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                      <p class="club-dis">{{items.description}}</p>
+                    </div>
+                  </div>
+                  <div class="container expect-section my-2 ">
+                    <div class="grid-data d-flex expect-sections ">
+                      <div class="col-3 border-end ">
+                        <div class="d-flex club-icons align-items-center"><span class="club-icon "><i
+                              class="bi bi-chat-square-text"></i></span><span class="club-inf">Reputation</span></div>
+                        <div class="club-icon px-2">{{items.reputation}}</div>
+                      </div>
+                      <div class="col-3  border-end ">
+                        <div class="d-flex club-icons align-items-center"><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                            class="club-inf">Impression</span></div>
+                        <div class="club-icon px-2">15</div>
+                      </div>
+                      <div class="col-3  border-end">
+                        <div class="d-flex club-icons align-items-center"><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                            class="club-inf">Followers</span></div>
+                        <div class="club-icon px-2">{{items.followersCount}}</div>
+                      </div>
+                      <div class="col-3  ">
+                        <div class="d-flex club-icons align-items-center"><span class="club-icon"><i
+                              class="bi bi-pencil-square "></i></span><span class="club-inf">Post</span></div>
+                        <div class="club-icon px-3">{{items.post}}</div>
+                      </div>
+                    </div>
+                    <div class="container-fluid ">
+                      <div class="row py-2">
+                        <div class="col-6">
+                          <div class=" risk-btn w-100 d-flex justify-content-between">
+                            One Month accuracy<span class="">0%</span></div>
+                        </div>
+                        <div class="col-6">
+                          <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                            gain<span class="">0%</span></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class=" risk-btn w-100 d-flex justify-content-between"> One year
+                            accuracy<span class="">0%</span></div>
+                        </div>
+                        <div class="col-6 ">
+                          <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                            gain<span class="">0%</span></div>
+                        </div>
                       </div>
                     </div>
                     <div class="py-2">
-                      <p class="profile-detail">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text eve.</p>
+                      <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
+                        investing</p>
                     </div>
+                  </div>
+                  <div class="container">
                     <div class="row">
-                      <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Benefits:
-                            </button>
-                          </h2>
-                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                              <ul class="">
-                                <li class="benefit-line">
-                                  Open the Tradebase app to get started and follow the steps.
-                                </li>
-                                <li class="benefit-line">
-                                  Open the Tradebase app to get started and follow the steps.
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-
+                      <div class="col-4 risk">
+                        <button type="button" class="btn position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="6" cy="6" r="6" fill="#ED1C24" />
+                          </svg>
+                          High Risk</button>
+                      </div>
+                      <div class="col-8 months">
+                        <button type="button" class="btn position-btn"><i class="bi bi-clock px-"></i>Positional Trading
+                          (1-3 Months)</button>
                       </div>
                     </div>
-                    <div class="row py-2">
-                      <h6 class="profile-line">INSTRUMENTS</h6>
-                      <div class="py-2">
-                        <span class="profile-option ">Nifty</span> <span class="profile-option mx-3">Bank Nifty</span>
-                        <span class="profile-option">Stock F & O</span>
-                      </div>
+                  </div>
+                  <!-- <div class="container">
+                    <div class="row">
+                      <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
                     </div>
-                    <div class="row py-2">
-                      <h6 class="profile-line">TIME HORIZON</h6>
-                      <div class="py-2">
-                        <span class="profile-option ">Intraday</span> <span class="profile-option mx-3">Swing Trading
-                          (2:30 days)</span>
-                      </div>
+                  </div> -->
+                  <div class="d-flex justify-content-between py-2">
+                    <div>
+                      <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
+                      <span><i class="bi bi-share-fill"></i></span>
                     </div>
-                    <div class="row py-2">
-                      <h6 class="profile-line">CAPITAL REQUIRED</h6>
-                      <div class="py-2">
-                        <span class="profile-option ">Less than INR 1 Lac</span> <span class="profile-option mx-3">INR
-                          1 - 3 Lacs</span>
-                      </div>
+                    <div>
+                      <i class="bi bi-bookmark-fill"></i>
                     </div>
-                    <div class="row py-2">
-                      <h6 class="profile-line">KNOWLEDGE LEVEL</h6>
-                      <div class="py-2">
-                        <span class="profile-option ">Beginner</span> <span
-                          class="profile-option mx-3">Intermediate</span> <span class="profile-option">Pro</span>
-                      </div>
-                    </div>
-                    <div class="row py-2">
-                      <h6 class="profile-line">PARTICIPANT TYPE</h6>
-                      <div class="py-2">
-                        <span class="profile-option ">Trader</span>
-                      </div>
-                    </div>
-                    <div class="row py-2">
-                      <h6 class="profile-line">RISK TYPE</h6>
-                      <div class="py-2">
-                        <span class="profile-option ">High</span>
-                      </div>
-                    </div>
-                    <div class="my-4">
-                      <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
-                        <li class="nav-item flex-fill" role="presentation">
-                          <button class="nav-link w-100 active" id="Active-tab" data-bs-toggle="tab"
-                            data-bs-target="#bordered-justified-Active" type="button" role="tab" aria-controls="Active"
-                            aria-selected="true">Active Post</button>
-                        </li>
-                        <li class="nav-item flex-fill" role="presentation">
-                          <button class="nav-link w-100" id="Past-tab" data-bs-toggle="tab"
-                            data-bs-target="#bordered-justified-Past" type="button" role="tab" aria-controls="Past"
-                            aria-selected="false">Past Post</button>
-                        </li>
-                      </ul>
-                      <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-                        <div class="tab-pane fade show active" id="bordered-justified-Active" role="tabpanel"
-                          aria-labelledby="Active-tab">
-
-                          <div class="card my-3">
-                            <div class="card-body">
-                              <div class="container">
-                                <div class=" row user_informatiom">
-                                  <div class="col-1">
-                                    <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                                  </div>
-                                  <div class="col-8 mx-3 py-2">
-                                    <div class="user_name">User Name</div>
-                                    <div class="detail">Sr Wealth is led by an SEBI</div>
-                                    <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                                  </div>
-
-                                </div>
-                              </div>
-
-                              <div class="container">
-                                <div class="row">
-                                  <div class="d-flex justify-content-between align-items-baseline py-2">
-                                    <h6 class="heading">TRADING CHANNEL</h6>
-                                    <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free
-                                      Access</span>
-                                  </div>
-
-                                </div>
-                              </div>
-                              <div class="container">
-                                <div class="row">
-                                  <div class="channel-name">
-                                    <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                                  </div>
-                                  <div class="channel-detail">
-                                    DSSL DYNACON SYSTEM [ Update 4]
-                                  </div>
-                                  <div class="date">27 Jan 2023, 06:43 PM</div>
-                                </div>
-                              </div>
-                              <div class="container">
-                                <div class="row expect-section my-3">
-                                  <div class="expect-inf d-flex justify-content-between pb-2 ">
-                                    <div>
-                                      <div class="expect">
-                                        Expected Move
-                                      </div>
-                                      <div class="expect-percent">18.0%</div>
-                                    </div>
-                                    <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button>
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
-                                    <div class="row d-flex text-center py-2">
-                                      <div class="col-4">
-                                        <div class="price">Entry Price</div>
-                                        <div class="rate">$305.0 </div>
-                                      </div>
-                                      <div class="col-4">
-                                        <div class="price">Target Price</div>
-                                        <div class="rate">$360.0 </div>
-                                      </div>
-                                      <div class="col-4">
-                                        <div class="price">Stop Loss</div>
-                                        <div class="rate"> $265.0</div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="container">
-                                <div class="row">
-                                  <div class="col-4 risk">
-                                    <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="6" cy="6" r="6" fill="#ED1C24" />
-                                      </svg>
-                                      High Risk</div>
-                                  </div>
-                                  <div class="col-8 months">
-                                    <div class=" position-btn"><i class="bi bi-clock px-1"></i>Positional Trading (1-3
-                                      Months)</div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="container">
-                                <div class="row">
-                                  <img
-                                    src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png"
-                                    alt="">
-                                </div>
-                              </div>
-                              <div class="container">
-                                <div class="row py-2">
-                                  <h6 class="dis-line">IBR Infra CMP 305 :</h6>
-                                  <p class="dis">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                    industry. Lorem Ipsum has been the industry's standard dummy
-                                    text ever since the 1500s, when an unknown printer took a galley</p>
-                                </div>
-                              </div>
-                              <div class="d-flex justify-content-between">
-                                <div>
-                                  <span> <i class="bi bi-hand-thumbs-up-fill px-2">1</i></span>
-                                  <span><i class="bi bi-share-fill"></i></span>
-                                </div>
-                                <div>
-                                  <i class="bi bi-bookmark-fill"></i>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
-                        <div class="tab-pane fade" id="bordered-justified-Past" role="tabpanel"
-                          aria-labelledby="Past-tab">
-                          <div class="card my-3">
-                            <div class="card-body">
-                              <div class=" row user_informatiom">
-                                <div class="col-1">
-                                  <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                                </div>
-                                <div class="col-8 mx-3 py-2">
-                                  <div class="user_name">User Name</div>
-                                  <div class="detail">Sr Wealth is led by an SEBI</div>
-                                  <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                                </div>
-
-                              </div>
-                              <div class="row">
-                                <div class="d-flex justify-content-between align-items-baseline py-2">
-                                  <h6 class="heading">TRADING CHANNEL</h6>
-                                  <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free
-                                    Access</span>
-                                </div>
-
-                              </div>
-                              <div class="row">
-                                <div class="channel-name">
-                                  <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                                </div>
-                                <div class="channel-detail">
-                                  DSSL DYNACON SYSTEM [ Update 4]
-                                </div>
-                                <div class="date">27 Jan 2023, 06:43 PM</div>
-                              </div>
-                              <div class="row expect-section my-3">
-                                <div class="expect-inf d-flex justify-content-between pb-2 ">
-                                  <div>
-                                    <div class="expect">
-                                      Expected Move
-                                    </div>
-                                    <div class="expect-percent">18.0%</div>
-                                  </div>
-                                  <div><button type="button" class="btn btn-danger danger-btn">Target Hit</button></div>
-                                </div>
-                                <div>
-                                  <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
-                                  <div class="row d-flex text-center py-2">
-                                    <div class="col-4">
-                                      <div class="price">Entry Price</div>
-                                      <div class="rate">$305.0 </div>
-                                    </div>
-                                    <div class="col-4">
-                                      <div class="price">Target Price</div>
-                                      <div class="rate">$360.0 </div>
-                                    </div>
-                                    <div class="col-4">
-                                      <div class="price">Stop Loss</div>
-                                      <div class="rate"> $265.0</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="row">
-                                <div class="col-4 risk">
-                                  <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                      xmlns="http://www.w3.org/2000/svg">
-                                      <circle cx="6" cy="6" r="6" fill="#ED1C24" />
-                                    </svg>
-                                    High Risk</div>
-                                </div>
-                                <div class="col-8 months">
-                                  <div class=" position-btn"><i class="bi bi-clock px-1"></i>Positional Trading (1-3
-                                    Months)</div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <img
-                                  src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png"
-                                  alt="">
-                              </div>
-                              <div class="row py-2">
-                                <h6 class="dis-line">IBR Infra CMP 305 :</h6>
-                                <p class="dis">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                  industry. Lorem Ipsum has been the industry's standard dummy
-                                  text ever since the 1500s, when an unknown printer took a galley</p>
-                              </div>
-                              <div class="d-flex justify-content-between">
-                                <div>
-                                  <span> <i class="bi bi-hand-thumbs-up-fill px-2">1</i></span>
-                                  <span><i class="bi bi-share-fill"></i></span>
-                                </div>
-                                <div>
-                                  <i class="bi bi-bookmark-fill"></i>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card ">
-                            <div class="card-body">
-                              <div class=" row user_informatiom">
-                                <div class="col-1">
-                                  <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                                </div>
-                                <div class="col-8 mx-3 py-2">
-                                  <div class="user_name">User Name</div>
-                                  <div class="detail">Sr Wealth is led by an SEBI</div>
-                                  <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="d-flex justify-content-between align-items-baseline py-2">
-                                  <h6 class="heading">TRADING CHANNEL</h6>
-                                  <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free
-                                    Access</span>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="channel-name">
-                                  <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                                </div>
-                                <div class="channel-detail">
-                                  DSSL DYNACON SYSTEM [ Update 4]
-                                </div>
-                                <div class="date">27 Jan 2023, 06:43 PM</div>
-                              </div>
-                              <div class="row expect-section my-3">
-                                <div class="expect-inf d-flex justify-content-between pb-2 ">
-                                  <div>
-                                    <div class="expect">
-                                      Expected Move
-                                    </div>
-                                    <div class="expect-percent">18.0%</div>
-                                  </div>
-                                  <div><button type="button" class="btn btn-danger danger-btn">Stop loss hit</button>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
-                                  <div class="row d-flex text-center py-2">
-                                    <div class="col-4">
-                                      <div class="price">Entry Price</div>
-                                      <div class="rate">$305.0 </div>
-                                    </div>
-                                    <div class="col-4">
-                                      <div class="price">Target Price</div>
-                                      <div class="rate">$360.0 </div>
-                                    </div>
-                                    <div class="col-4">
-                                      <div class="price">Stop Loss</div>
-                                      <div class="rate"> $265.0</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-4 risk">
-                                  <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                      xmlns="http://www.w3.org/2000/svg">
-                                      <circle cx="6" cy="6" r="6" fill="#ED1C24" />
-                                    </svg>
-                                    High Risk</div>
-                                </div>
-                                <div class="col-8 months">
-                                  <div class=" position-btn"><i class="bi bi-clock px-1"></i>Positional Trading (1-3
-                                    Months)</div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <img
-                                  src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png"
-                                  alt="">
-                              </div>
-                              <div class="row py-2">
-                                <h6 class="dis-line">IBR Infra CMP 305 :</h6>
-                                <p class="dis">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                  industry. Lorem Ipsum has been the industry's standard dummy
-                                  text ever since the 1500s, when an unknown printer took a galley</p>
-                              </div>
-                              <div class="d-flex justify-content-between">
-                                <div>
-                                  <span> <i class="bi bi-hand-thumbs-up-fill px-2">1</i></span>
-                                  <span><i class="bi bi-share-fill"></i></span>
-                                </div>
-                                <div>
-                                  <i class="bi bi-bookmark-fill"></i>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                  </div>
+                  <div class="py-3">
+                    <div class="percent" *ngIf="items.coAdChannel == true">Co-ad channels</div>
+                    <div class="d-flex justify-content-end" *ngIf="items.coAdChannel == true">
+                      <span class="px-4"><button type="button"
+                          class="btn btn-primary danger-btn">Approve</button></span>
+                      <span><button type="button" class="btn btn-success danger-btn">Reject</button></span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="bordered-justified-Chat" role="tabpanel" aria-labelledby="Chat-tab">
-              <div class="card my-3">
-                <div class="d-flex justify-content-center container mt-5">
-                  <div class="wrapper">
-                    <div class="main">
-                      <div class="px-2 scroll">
-                        <div class="d-flex align-items-center">
-                          <div class="text-left pr-1"><img src="https://img.icons8.com/color/40/000000/guest-female.png"
-                              width="30" class="img1" /></div>
-                          <div class="pr-2 pl-1"> <span class="name">Sarah Anderson</span>
-                            <p class="msg">Hi Hendrikson, I haven't been falling well for past few days.</p>
-                          </div>
-                        </div>
-                        <div class="d-flex align-items-center text-right justify-content-end ">
-                          <div class="pr-2"> <span class="name">Hendrikson</span>
-                            <p class="msg">Let's jump on a video call</p>
-                          </div>
-                          <div><img src="https://i.imgur.com/HpF4BFG.jpg" width="30" class="img1" /></div>
-                        </div>
-                        <div class="text-center"><span class="between">Call started at 10:47am</span></div>
-                        <div class="text-center"><span class="between">Call ended at 11:03am</span></div>
-                        <div class="d-flex align-items-center">
-                          <div class="text-left pr-1"><img src="https://img.icons8.com/color/40/000000/guest-female.png"
-                              width="30" class="img1" /></div>
-                          <div class="pr-2 pl-1"> <span class="name">Sarah Anderson</span>
-                            <p class="msg">How often should i take this?</p>
-                          </div>
-                        </div>
-                        <div class="d-flex align-items-center text-right justify-content-end ">
-                          <div class="pr-2"> <span class="name">Hendrikson</span>
-                            <p class="msg">Twice a day, at breakfast and before bed</p>
-                          </div>
-                          <div><img src="https://i.imgur.com/HpF4BFG.jpg" width="30" class="img1" /></div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="text-left pr-1"><img src="https://img.icons8.com/color/40/000000/guest-female.png"
-                              width="30" class="img1" /></div>
-                          <div class="pr-2 pl-1"> <span class="name">Sarah Anderson</span>
-                            <p class="msg">How often should i take this?</p>
-                          </div>
-                        </div>
-                      </div>
-                      <nav class="navbar bg-white navbar-expand-sm d-flex justify-content-between"> <input
-                          type="text number" name="text" class="form-control" placeholder="Type a message...">
-                        <div class="icondiv d-flex justify-content-end align-content-center text-center ml-2"> <i
-                            class="fa fa-paperclip icon1"></i> <i class="fa fa-arrow-circle-right icon2"></i> </div>
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End Bordered Tabs Justified -->
+
+            <div class="example d-flex justify-content-center" style="height: 65vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0" >
+              <span>Data Not Found</span>
+            </div>
           </div>
-        </div>
+        </div><!-- End Bordered Tabs Justified -->
       </div>
-    </div>
-    <div class="col-lg-5">
-      <app-commen-selection></app-commen-selection>
     </div>
 
   </div>
-</section>
+</div>

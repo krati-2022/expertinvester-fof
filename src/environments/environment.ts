@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://192.168.0.161/'
+  apiUrl: 'http://103.117.66.70:5008/'
+  // apiUrl: 'https://api.expertinvester.com/'
 };
 
 /*

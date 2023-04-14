@@ -35,9 +35,17 @@ import { ProfilePageComponent } from './Pages/profile-page/profile-page.componen
 import { PrivacyPolicyComponent } from './Pages/privacy-policy/privacy-policy.component';
 import { LegalDisclamerComponent } from './Pages/legal-disclamer/legal-disclamer.component';
 import { TermsServicesComponent } from './Pages/terms-services/terms-services.component';
-import { CommenSelectionComponent } from 'src/app/SharedComponent/shared-component/commen-selection/commen-selection.component';
 import { NgOtpInputModule } from 'ng-otp-input';
-
+import { EnterPinComponent } from './enter-pin/enter-pin.component';
+import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
+import { CommonSectionComponent } from 'src/app/SharedComponent/shared-component/common-section/common-section.component';
+import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pagination/pagination.component';
+import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
+import { InfiniteScrollComponent } from 'src/app/SharedComponent/shared-component/infinite-scroll/infinite-scroll.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FilterPipe } from 'src/app/Utils/filter.pipe';
+import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -73,14 +81,24 @@ import { NgOtpInputModule } from 'ng-otp-input';
     PrivacyPolicyComponent,
     LegalDisclamerComponent,
     TermsServicesComponent,
-  CommenSelectionComponent
+    EnterPinComponent,
+    SetuUpPinComponent,
+    CommonSectionComponent,
+    PaginationComponent,
+    ChannelDetailsComponent,
+    InfiniteScrollComponent,
+    FilterPipe,
+    PinRecoveryComponent,
+    
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgOtpInputModule
-  ]
+    NgOtpInputModule,
+    InfiniteScrollModule,
+    NgxGalleryModule
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

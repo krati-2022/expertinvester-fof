@@ -380,7 +380,7 @@ span.subscript {
   color: #000;
 }
 .position-btn {
-  padding: 6px;
+  padding: 3px;
   color: black;
   border-radius: 5px;
   background: #FDCDE7;
@@ -695,5 +695,3 @@ span.club-inf {
     font-family: "Poppins", sans-serif;
 }
 }
-
-

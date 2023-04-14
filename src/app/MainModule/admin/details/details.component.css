@@ -538,3 +538,17 @@ span.club-inf {
     font-family: "Poppins", sans-serif;
 }
 }
+
+
+
+.gallery-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}
+.ngx-gallery {
+  display: inline-block;
+  /* margin-bottom: 20px; */
+  /* width: 500px;
+   height: 400px;
+   border-color: #4a89ff;*/
+}
