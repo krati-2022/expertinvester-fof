@@ -23,11 +23,12 @@ export class TopBarComponent implements OnInit {
     this._service.toggleSidebar.emit();
   }
 
-  
+
   search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
     this._service.search.next(this.searchTerm);
   }
+
 
   signOut(){
     localStorage.clear()
@@ -36,5 +37,9 @@ export class TopBarComponent implements OnInit {
 
   userProfile(){
     this.router.navigate(['home/profile-page'])
+  }
+
+  homePage(){
+    this.router.navigate(['home'])
   }
 }

@@ -29,6 +29,44 @@ export interface GetFeedDetails {
   tradetype: string;
   username: string;
   usertype: string;
+  isSelfPost: boolean
+}
+
+export interface ChannelListDetails {
+  channelApproved: boolean;
+  channelMasterId: string;
+  channelRejected: boolean;
+  channel_madeby_them: boolean;
+  coAdChannel: boolean;
+  description: string;
+  email: string;
+  experttype: string;
+  followersCount: number;
+  imagename: string;
+  imageurl: string;
+  isChannelApprove: boolean;
+  isChannelLiked: boolean;
+  isSubscribed: boolean;
+  likecount: number;
+  post: number;
+  reputation: number;
+  mobile_No: string;
+  name: string;
+  sebi: string;
+  subscription: string;
+  username: string;
+  usertype: string;
+  clubBlock: boolean
+}
+
+export interface ClubList {
+  id: string;
+  description: string;
+  follow: string;
+  followersCount: number;
+  likecount: number;
+  name: string;
+  postcount: number;
 }
 
 export interface ChannelListDetails {

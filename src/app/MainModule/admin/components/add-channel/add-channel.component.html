@@ -121,22 +121,37 @@
 
 
                   <div class="row mb-3">
+
+                    <div class="col-lg-4">
+                      <label for="file-input">
+                        <i class="bi bi-cloud-arrow-up"></i> Upload image
+                      </label>
+                      <input id="file-input" type="file" (change)="onSelectFile($event)" class="cstm-file">
+                    </div>
+                    <div class="col-lg-8">
+                      <p *ngIf="fileName != ''">{{fileName}}</p>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
                     <div class="col-lg-3">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                          formControlName="coAdChannel" [checked]="coAddOn != null" (change)="coAddChannel()">
+                          formControlName="coAdChannel" [checked]="coAdList.length != 0" (change)="coAddChannel()">
                         <label class="form-check-label" for="flexCheckChecked">
                           Co-Ad Channel
                         </label>
                       </div>
                     </div>
-                    <div class="col-lg-9">
-                      <label for="file-input">
-                        <i class="bi bi-cloud-arrow-up px-2"></i> Upload image
-                        <p *ngIf="fileName != ''">{{fileName}}</p>
-                      </label>
-                      <input id="file-input" type="file" (change)="onSelectFile($event)" class="cstm-file">
+
+                    <div class="col-lg-9" *ngIf="this.coAdList.length != 0">
+                      <div *ngFor="let item of coAdList" class="mb-2">
+                        <button type="button" class="btn btn-primary">
+                          {{item.name}} <span class="badge badge-light"><i class="bi bi-x-circle" (click)="removeCoAdList(item.expertId)"></i></span>
+                        </button>
+                      </div>
+
                     </div>
+
                   </div>
 
 
@@ -164,7 +179,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Expert List</h5>
-        <button type="button" class="close" (click)="close()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -174,7 +189,7 @@
             <div class="mx-auto">
               <div class="card px-2">
                 <div class="example" style="height: 65vh; overflow: auto;">
-                  <div class="card my-3" *ngFor="let items of expertList">
+                  <div class="card list-card my-3" *ngFor="let items of expertList">
                     <div class="user_informatiom container-fluid">
                       <div class=" d-flex align-items-center">
                         <div class="col-1">
@@ -188,8 +203,8 @@
                         <div class="col-1 d-flex justify-content-end">
                           <div class="form-check">
                             <form [formGroup]="myForm">
-                              <input class="form-check-input" formControlName="adOn" type="checkbox" id="flexCheckChecked"
-                                (change)="goToExpertProfilePage(items.id)">
+                              <input class="form-check-input" formControlName="adOn"  type="checkbox" [id]="items.id"
+                                (change)="goToExpertProfilePage(items.id, items.name, myForm.value.adOn)">
                               <label class="form-check-label" for="flexCheckChecked">
                               </label>
 

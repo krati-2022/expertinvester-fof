@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
 import { environment } from 'src/environments/environment';
@@ -27,12 +27,12 @@ export class AddTradeComponent implements OnInit {
     this.clubListId = this._ActivatedRoute.snapshot.paramMap.get('param1')
     this.mobile_number = this._ActivatedRoute.snapshot.paramMap.get('param2')
     this.name = this._ActivatedRoute.snapshot.paramMap.get('param3')
-    console.log('this.name: ', this.name);
+    // console.log('this.name: ', this.name);
     this.AddFeedForm = new FormGroup({
       Mobile_No : new FormControl(this.mobile_number),
       ClublistId : new FormControl(this.clubListId),
       externallink : new FormControl(''),
-      description : new FormControl(''),
+      description : new FormControl('', Validators.required),
       imageurl : new FormControl('')
     })
   }
@@ -63,7 +63,7 @@ export class AddTradeComponent implements OnInit {
 
     // this._service.AddFeedPost(this.formData).subscribe(res =>{
     // console.log('res: ', res);
-      
+
     // })
     this.isLoading = true
     this.http.post(this.apiUrl + 'AddFeedPost', this.formData).subscribe({
@@ -105,14 +105,14 @@ export class AddTradeComponent implements OnInit {
             },
           });
           Toast.fire({
-            icon: 'success',
+            icon: 'error',
             title: 'Something went wrong please try again',
           });
           this.isLoading = false
         }
       }
     })
-    
+
   }
 
 }
