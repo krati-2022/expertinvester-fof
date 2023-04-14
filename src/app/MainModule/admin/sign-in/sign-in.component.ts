@@ -35,7 +35,8 @@ export class SignInComponent implements OnInit {
   mobile: string = ''
   isExistUser = localStorage.getItem('mobile_number')
   @ViewChild('ngOtpInput', { static: false }) ngOtpInput: any;
-  countryCodes = Codes
+  isLoading:boolean = false
+  countryCodes = Codes 
   config = {
     allowNumbersOnly: false,
     length: 6,
@@ -63,14 +64,15 @@ export class SignInComponent implements OnInit {
     }
 
     this.SendOtpForm = this.formBuilder.group({
-      mobile_No: [mobileNumber, [Validators.required]],
+      mobile_No: [mobileNumber, [Validators.required,Validators.pattern("^[0-9]{10}$")]],
       code: ['', [Validators.required]],
+      PrivacyPolicy: ['', [Validators.required]]
     });
   }
 
   ngOnInit(): void {
     // console.log(this.countryCodes);
-
+    
     // console.log('this.isExistUser: ', this.isExistUser);
     // if(this.isExistUser != null){
     //   this.router.navigate(['enter-pin'])
@@ -97,11 +99,15 @@ export class SignInComponent implements OnInit {
   }
 
   sendOtp() {
-
+    
     this.submitted = true;
     if (this.SendOtpForm.invalid) {
       return;
     }
+    if(this.SendOtpForm.value.PrivacyPolicy == false || this.SendOtpForm.value.PrivacyPolicy == ''){
+      return
+    }
+    this.isLoading = true
     this.SendOtpModel = new SendOtp({
       mobile_No: this.SendOtpForm.value.code + this.SendOtpForm.value.mobile_No,
     });
@@ -116,8 +122,8 @@ export class SignInComponent implements OnInit {
     this._service
         .SendOtp(this.SendOtpModel)
         .subscribe((response: SignInRespose) => {
-          console.log('response: ', response);
-
+          // console.log('response: ', response);
+          this.isLoading = false
           this.mobileNumbr = this.SendOtpModel.mobile_No;
           console.log('this.mobileNumbr: ', response.data.otp);
           if (response.status == 'Success') {
@@ -137,14 +143,14 @@ export class SignInComponent implements OnInit {
               title: response.message + ' ' +response.data.otp,
             });
             this.submitted = false;
-
+            
             (<any>$('#exampleModal')).modal('show');
           }
         });
     // this._service.UserIsExist(this.mobile).subscribe(res =>{
     //   this.status = res.message
     // })
-
+   
   }
 
   verifyOtp() {
@@ -199,7 +205,7 @@ export class SignInComponent implements OnInit {
           icon: 'error',
           title: response.message,
         });
-
+        
       }
     });
   }

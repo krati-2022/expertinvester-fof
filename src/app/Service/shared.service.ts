@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ExpertInvestorManagementDetails } from '../MainModule/admin/expert-and-investor/expert-and-investor.classes';
 import { ExpertManagementDetails } from '../MainModule/admin/expert/expert.classes';
@@ -9,6 +9,8 @@ import { SendOtp, UserIsExist, VerifyOtp } from '../MainModule/admin/sign-in/sig
 import { SetPin } from '../MainModule/admin/setu-up-pin/set-up-pin.classes';
 import { Login } from '../MainModule/admin/enter-pin/enter-pin.classes';
 import { FollowClub } from '../MainModule/admin/Pages/club-list/club-list.classes';
+import { AddTrade } from '../MainModule/admin/Pages/add-trade/add-trade.classes';
+import { SendOtpForRecoverPin, VerifyOtpForRecovery } from '../MainModule/admin/pin-recovery/pin-recovery.classes';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +18,23 @@ import { FollowClub } from '../MainModule/admin/Pages/club-list/club-list.classe
 export class SharedService {
   apiUrl = environment.apiUrl
   public toggleSidebar: EventEmitter<any> = new EventEmitter()
-
+  public search = new BehaviorSubject<string>("");
+  
   constructor(private http: HttpClient) { }
 
   SendOtp(data: SendOtp): Observable<any>{
     return this.http.post(this.apiUrl + 'api/Login/SendOTP', data)
   }
 
+  SendOtpForRestPin(data: SendOtpForRecoverPin): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Login/SendForgotPasswordOTP', data)
+  }
+  
   VerifyOtp(data: VerifyOtp): Observable<any>{
     return this.http.post(this.apiUrl + 'api/Login/ConfirmOTP', data)
+  }
+  VerifyRecoverPinOtp(data: VerifyOtpForRecovery): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Login/ForgotPasswordConfirmOTP', data)
   }
 
   LoginIn(data:Login): Observable<any>{
@@ -74,7 +84,7 @@ export class SharedService {
   AddInvestor(data: InvestorManagementDetails): Observable<any>{
     return this.http.post(this.apiUrl + 'api/ExpertInvestor/AddInvester', data)
   }
-
+  
   AddExpertInvestor(data: ExpertInvestorManagementDetails): Observable<any>{
     return this.http.post(this.apiUrl + 'api/ExpertInvestor/AddExpertInvester', data)
   }
@@ -90,7 +100,52 @@ export class SharedService {
     return this.http.post(this.apiUrl + 'api/Club/UserUnFollowClubListUpdate', data)
   }
 
-  GetFeed(mobile_No:string, pageNumber: number, pageSize: number){
+  GetFeed(mobile_No:string, pageNumber: number, pageSize: number): Observable<any>{
     return this.http.get(this.apiUrl + 'GetFeedPost?Mobile_No=' + mobile_No + '&pageNumber=' + pageNumber +'&pageSize=' + pageSize)
+  }
+
+  GetChannel(mobile_No:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Channel/GetChannelMasterList?Mobile_No=' + mobile_No)
+  }
+
+  GetExpertList(mobile_No:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Channel/GetExpertProfile?Mobile_No='+ mobile_No)
+  }
+
+  AddChannel(data:any): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Channel/AddchannelMaster', data)
+  }
+
+  GetActivePost( mobile_No:string ,id:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Channel/GetChannelActivePost?Mobile_No='+ mobile_No +'&channelid=' + id)
+  }
+
+  GetPastPost( mobile_No:string ,id:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Channel/GetChannelPastPost?Mobile_No='+ mobile_No +'&channelid=' + id)
+  }
+  
+  GetProfile( mobile_No:string ,id:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'api/Channel/GetChannelProfile?Mobile_No='+ mobile_No +'&channelid=' + id)
+  }
+
+  AddFeedPost(data: AddTrade): Observable<any>{
+    return this.http.post(this.apiUrl + 'AddFeedPost', data)
+  }
+
+  GetFeedPostdetail(Mobileno:string, feedpostid: string): Observable<any>{
+    return this.http.get(this.apiUrl + 'GetFeedPostdetail?Mobileno='+ Mobileno +'&feedpostid=' + feedpostid)
+  }
+  
+  BlockUnblockFeedPost(id:string, mobile_No: string, status: boolean): Observable<any>{
+    const data = {}
+    return this.http.post(this.apiUrl + 'FeedPostblock?FeedPostID='+ id +'&mobileno=' + mobile_No +'&block=' + status, data)
+  } 
+  
+  FeedPostLikeDislike(FeedPostID:string,status:boolean, mobile_No:string):Observable<any>{
+    const data = {}
+    return this.http.post(this.apiUrl + 'UpdateFeedPostlike?FeedPostID=' + FeedPostID +'&like=' + status +'&Mobileno=' + mobile_No, data)
+  }
+  GetLikes(id:string): Observable<any>{
+    return this.http.get(this.apiUrl + 'GetLikeCount?id=' + id)
   }
 }

@@ -6,6 +6,7 @@ import { SharedService } from 'src/app/Service/shared.service';
 import Swal from 'sweetalert2';
 import { ExpertManagementDetails } from './expert.classes';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-expert',
@@ -13,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./expert.component.css'],
 })
 export class ExpertComponent implements OnInit {
+  apiUrl = environment.apiUrl
   AddExpertForm: FormGroup | any;
   formData = new FormData();
   submitted: boolean = false;
@@ -26,6 +28,8 @@ export class ExpertComponent implements OnInit {
   knowledgeLevel = ['Beginner', 'Intermediate', 'Professional']
   ismobileNumberExist = localStorage.getItem('mobile_number')
   usertype = sessionStorage.getItem('usertype');
+  isLoading:boolean = false
+  isSebi = [{status:"Yes", value:true} , {status:"No", value:false}]
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -114,7 +118,7 @@ export class ExpertComponent implements OnInit {
     if (this.AddExpertForm.invalid) {
       return;
     }
-
+ 
     var formData: any = new FormData();
     formData.append('name', this.AddExpertForm.get('name').value);
     formData.append('email', this.AddExpertForm.get('email').value);
@@ -138,16 +142,18 @@ export class ExpertComponent implements OnInit {
     formData.append(
       'bankIFSCcode',
       this.AddExpertForm.get('bankIFSCcode').value
-    );
-    formData.append(
-      'certificateURL',
-      this.AddExpertForm.get('certificateURL').value
-    );
-    // console.log('formData: ', formData);
-    // return
-    this.http
-      .post('https://api.expertinvester.com/api/ExpertInvestor/AddExpert', formData)
-      .subscribe({
+      );
+      formData.append(
+        'certificateURL',
+        this.AddExpertForm.get('certificateURL').value
+        );
+        // console.log('formData: ', formData);
+        this.isLoading = true
+        // return
+        this.http
+        // .post('https://api.expertinvester.com/api/ExpertInvestor/AddExpert', formData)
+        .post(this.apiUrl + 'api/ExpertInvestor/AddExpert', formData)
+        .subscribe({
         next: (response) => {
           console.log('response: ', response);
           // debugger;
@@ -156,6 +162,7 @@ export class ExpertComponent implements OnInit {
           this.submitPhone = false;
           sessionStorage.removeItem('usertype');
           this.router.navigate(['club-list']);
+          this.isLoading = false
         },
         error: (error) => {
           if (error.status == '400') {
@@ -174,6 +181,7 @@ export class ExpertComponent implements OnInit {
               icon: 'success',
               title: 'Something went wrong please try again',
             });
+            this.isLoading = false
           }
         },
       });

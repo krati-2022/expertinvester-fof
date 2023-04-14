@@ -1,12 +1,13 @@
 
-<div class="pagetitle">
-    <h1 class="px-3"><i class="bi bi-arrow-left px-2" onclick="history.back()"></i>Detail-Page</h1>
-  </div><!-- End Page Title -->
+<!-- End Page Title -->
   <section class="container">
     <div class="row">
-      <div class="col-lg-7 mx-auto">
-        <div class="card">
-          <div class="card-body">
+      <div class="mx-auto">
+        <div class="card list-card  ">
+          <div class="pagetitle">
+            <h1 class="px-3"><i class="bi bi-arrow-left px-2"></i>Detail-Page</h1>
+          </div>
+          <div class="card-body" *ngFor="let items of feedPostDetail">
             <!-- Bordered Tabs Justified -->
             <div class="example" style="height: 70vh; overflow: auto;">
               <div class="card py-2">
@@ -23,13 +24,12 @@
                       <button type="button" class="btn position-btn"><i class="bi bi-clock px-2"></i>Medium Term (6-12 Months)</button>
                     </div>
                   </div>
-                  <div class="row py-2 ">
+                  <div class="gallery-wrapper">
+                    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"  class="ngx-gallery"></ngx-gallery>
+                  </div>
+                  <div class="row py-2 " style="margin-top: -3rem;">
                     <h6 class="dis-line">*Current market Volatility* </h6>
-                    <p class="dis">As per my view Investors should faith and trust into the market
-                      and adding money (free money) into SIP basis on every correction.
-                      market will recover and rebound soon. Dont put entire money into
-                      single share. Always invest into min 10-15 share with equal amount.
-                      Market always looks for forward.</p><br>
+                    <p class="dis">{{items.description}}</p><br>
                       <p class="dis">https://twitter.com/riteshdaga83/status/162155698582558594?t=
                         4uQBU0aHDxGijcx3oXrqQ&s=35</p>
                   </div>
@@ -57,6 +57,12 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </section>
+
+<!--
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
+  </div> -->

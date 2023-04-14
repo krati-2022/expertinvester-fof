@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import {  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges, } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -6,57 +11,51 @@ import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent implements OnChanges {
-  @Input() totalRecords = 0;  
-  @Input() recordsPerPage = 0;  
+  @Input() current: number = 0;
+  @Input() total: number = 0;
 
-  @Output() onPageChange: EventEmitter<number> = new EventEmitter();  
+  @Output() goTo: EventEmitter<number> = new EventEmitter<number>();
+  @Output() next: EventEmitter<number> = new EventEmitter<number>();
+  @Output() previous: EventEmitter<number> = new EventEmitter<number>();
 
-  public pages: number [] = [];  
-  activePage: number = 0;  
+  public pages: number[] = [];
 
+  ngOnChanges(changes: SimpleChanges | any): void {
+  // console.log('changes: ', changes);
+    if (
+      (changes.current && changes.current.currentValue) ||
+      (changes.total && changes.total.currentValue)
+    ) {
+      this.pages = this.getPages(this.current, this.total);
+      // console.log('this.pages: ', this.pages);
+    }
+  }
 
-  ngOnChanges(): any {  
-    const pageCount = this.getPageCount();  
-    this.pages = this.getArrayOfPage(pageCount);  
-    // console.log('this.pages: ', this.pages);
-    this.activePage = 0;  
-    this.onPageChange.emit(this.activePage);  
-  }  
+  public onGoTo(page: number): void {
+    this.goTo.emit(page);
+  }
 
-  private  getPageCount(): number {  
-    let totalPage = 0;  
-    // console.log('totalPage: ', totalPage);
+  public onNext(): void {
+    this.next.emit(this.current);
+  }
 
-    // console.log('this.totalRecords: ', this.totalRecords);
-    // console.log('this.recordsPerPage: ', this.recordsPerPage);
-    if (this.totalRecords > 0 && this.recordsPerPage > 0) {  
-      const pageCount = this.totalRecords / this.recordsPerPage;  
-      const roundedPageCount = Math.floor(pageCount);  
-      totalPage = roundedPageCount < pageCount ? roundedPageCount +  0 : roundedPageCount;  
-     
-    }  
+  public onPrevious(): void {
+    this.previous.next(this.current);
+  }
 
-    return totalPage;  
-  }  
+  private getPages(current: number, total: number): number[] {
+    if (total <= 7) {
+      return [...Array(total).keys()].map((x) => ++x);
+    }
 
-  private getArrayOfPage(pageCount: number): number [] {  
-  // console.log('pageCount: ', pageCount);
-    const pageArray = [];  
+    if (current > 5) {
+      if (current >= total - 4) {
+        return [1, -1, total - 4, total - 3, total - 2, total - 1, total];
+      } else {
+        return [1, -1, current - 1, current, current + 1, -1, total];
+      }
+    }
 
-    if (pageCount > 0) {  
-        for(let i = 1 ; i <= pageCount ; i++) {  
-          pageArray.push(i);  
-        }  
-    }  
-
-    return pageArray;  
-  }  
-
-  onClickPage(pageNumber: number): void { 
-    
-      if (pageNumber >= 0 && pageNumber <= this.pages.length) {  
-          this.activePage = pageNumber;  
-          this.onPageChange.emit(this.activePage);  
-      }  
-  }  
-}  
+    return [1, 2, 3, 4, 5, -1, total];
+  }
+}

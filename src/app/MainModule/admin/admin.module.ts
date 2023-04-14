@@ -40,6 +40,12 @@ import { EnterPinComponent } from './enter-pin/enter-pin.component';
 import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
 import { CommonSectionComponent } from 'src/app/SharedComponent/shared-component/common-section/common-section.component';
 import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pagination/pagination.component';
+import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
+import { InfiniteScrollComponent } from 'src/app/SharedComponent/shared-component/infinite-scroll/infinite-scroll.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FilterPipe } from 'src/app/Utils/filter.pipe';
+import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -78,7 +84,12 @@ import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pa
     EnterPinComponent,
     SetuUpPinComponent,
     CommonSectionComponent,
-    PaginationComponent
+    PaginationComponent,
+    ChannelDetailsComponent,
+    InfiniteScrollComponent,
+    FilterPipe,
+    PinRecoveryComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -86,6 +97,8 @@ import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pa
     ReactiveFormsModule,
     FormsModule,
     NgOtpInputModule,
+    InfiniteScrollModule,
+    NgxGalleryModule
   ],
 })
 export class AdminModule {}

@@ -40,7 +40,7 @@ export class SetuUpPinComponent implements OnInit {
       this.pinDetails = new SetPin({
         mobileno: number,
         password: this.password
-
+        
       });
       this._service.SetPin(this.pinDetails).subscribe(res =>{
       // console.log('res: ', res);

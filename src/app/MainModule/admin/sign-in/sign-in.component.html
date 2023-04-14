@@ -12,7 +12,7 @@
               </a>
             </div>
 
-            <div class="card mb-3">
+            <div class="card list-card mb-3">
 
               <div class="card-body">
 
@@ -42,6 +42,7 @@
                           <div *ngIf="submitted && SendOtpFormControl['mobile_No']['errors']" class="invalid-feedback">
                             <div *ngIf="SendOtpFormControl['mobile_No']['errors']['required']">Mobile Number is
                               required.</div>
+                              <div *ngIf="SendOtpFormControl['mobile_No']['errors']['pattern']">Please, Enter 10 digit Mobile Number.</div>
                           </div>
                           <div style="color: red;" *ngIf="submitted && message != ''">
                             {{message}}
@@ -58,14 +59,16 @@
 
                   <div class="col-12">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe"
-                        [disabled]="SendOtpForm.value.mobile_No == ''" [checked]="SendOtpForm.value.mobile_No != ''">
+                      <input class="form-check-input" type="checkbox" formControlName="PrivacyPolicy" name="remember" value="true" id="rememberMe" >
                       <label class="form-check-label" for="rememberMe">I agree to the <span class="login-line">Terms of
                           Service </span>and<span class="login-line">Privacy Policy</span></label>
                     </div>
                   </div>
                   <div class="col-12">
-                    <button class="btn btn-primary w-100 " type="submit">Start</button>
+                    <button class="btn btn-primary w-100 " type="submit" [disabled]="isLoading">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+                       <span *ngIf="!isLoading">Start</span>
+                    </button>
                   </div>
 
                 </form>
@@ -127,18 +130,3 @@
 </div>
 
 
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-
-      </div>
-
-    </div>
-  </div>
-</div>

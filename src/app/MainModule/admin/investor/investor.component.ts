@@ -34,6 +34,7 @@ export class InvestorComponent implements OnInit {
   message: string = ''
   experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year']
   knowledgeLevel = ['Beginner', 'Intermediate', 'Professional']
+  isLoading:boolean = false
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -142,12 +143,14 @@ export class InvestorComponent implements OnInit {
     };
     // console.log('formData: ', formData);
     // return;
+    this.isLoading = true
     this._service.AddInvestor(formData).subscribe(
       (response) => {
         console.log(response);
         this.AddInvestorForm.reset();
         this.submitted = false;
         this.submitPhone = false;
+        this.isLoading = false
         sessionStorage.removeItem('usertype');
         this.router.navigate(['club-list']);
       },

@@ -34,6 +34,7 @@ export class ExpertAndInvestorComponent implements OnInit {
   fileName: string = ''
   experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year']
   knowledgeLevel = ['Beginner', 'Intermediate', 'Professional']
+  isLoading: boolean= false
   constructor(private router: Router, private _service: SharedService, private _fb: FormBuilder, private coreHelperService: CoreHelperService) { }
 
   ngOnInit(): void {
@@ -91,11 +92,11 @@ export class ExpertAndInvestorComponent implements OnInit {
         if (accpt.includes(ext)) {
           this.imageSrc = reader.result as string;
           // console.log('this.imageSrc: ', this.imageSrc);
-
+          
         }
 
       };
-
+   
 
     }
   }
@@ -149,7 +150,7 @@ export class ExpertAndInvestorComponent implements OnInit {
       return true;
     }
   }
-
+  
   omit_special_char(event: any) {
     var k;
     k = event.charCode;
@@ -162,8 +163,8 @@ export class ExpertAndInvestorComponent implements OnInit {
     );
   }
   onSubmit(){
-
-
+    
+    
     this.submitted  = true
     this.submitPhone = true;
     if(this.AddExpertInvestorForm.invalid){
@@ -191,11 +192,13 @@ export class ExpertAndInvestorComponent implements OnInit {
     }
     // console.log('formData: ', formData);
     // return
+    this.isLoading = true
     this._service.AddExpertInvestor(formData).subscribe(response =>{
     // console.log('response: ', response);
     this.AddExpertInvestorForm.reset()
     this.submitted = false
     this.submitPhone = false
+    this.isLoading = false
     sessionStorage.removeItem('usertype')
     this.router.navigate(['club-list']);
     })

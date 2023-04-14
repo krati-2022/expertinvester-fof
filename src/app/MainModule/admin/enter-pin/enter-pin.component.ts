@@ -17,7 +17,7 @@ export class EnterPinComponent implements OnInit {
   mobile_No:any = localStorage.getItem('mobile_number')
   message!: string
   mobile : string = ''
-
+  
   config = {
     allowNumbersOnly: true,
     length: 4,
@@ -63,22 +63,22 @@ export class EnterPinComponent implements OnInit {
           password: this.pin
         })
         this._service.LoginIn(loginDetailas).subscribe(res => {
-        console.log('res: ', res);
+        // console.log('res: ', res);
           if(res.data[0]?.userDetail){
             this.router.navigate(['home'])
           }else{
             this.router.navigate(['user-set-up'])
           }
           })
-
+        
       }else{
         this.router.navigate(['user-set-up'])
       }
     }else if(this.password != this.pin && this.password.length == 4){
-
+      
       this.message = 'Incorrect Pin'
     }
-
+    
   }
 
   onClick() {
@@ -86,6 +86,6 @@ export class EnterPinComponent implements OnInit {
   }
 
   forgotPin(){
-    this.router.navigate(['set-up-pin'])
+    this.router.navigate(['pin-recovery'])
   }
 }
