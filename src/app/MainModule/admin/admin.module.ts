@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -46,6 +46,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FilterPipe } from 'src/app/Utils/filter.pipe';
 import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { ResponsiveViewComponent } from './components/responsive-view/responsive-view.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     InfiniteScrollComponent,
     FilterPipe,
     PinRecoveryComponent,
+    ResponsiveViewComponent,
     
   ],
   imports: [
@@ -100,5 +102,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     InfiniteScrollModule,
     NgxGalleryModule
   ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
+  ]
 })
 export class AdminModule {}

@@ -39,6 +39,19 @@
                 <div class="example">
                   <div class="card my-3">
                     <div class="card-body">
+
+                      <div class="row py-3">
+                        <div class="form-group">
+                          <label class="form-line" for="exampleInputEmail4">Enter Description</label>
+                          <textarea type="text" class="form-control" formControlName="description" id="exampleInputEmail4" aria-describedby="emailHelp"
+                            placeholder="Enter Description"[ngClass]="{ 'is-invalid': submitted && AddFeedControl.description.errors }"></textarea>
+                        
+                            <div *ngIf=" submitted && AddFeedControl.description.errors" class="invalid-feedback">
+                              <div *ngIf="AddFeedControl.description.errors.required">Description is required.</div>
+                            </div>
+                        </div>
+                      </div>
+                      
                       <div class="row py-3">
                         <div class="form-group">
                           <label class="form-line" for="exampleInputEmail3">External Link</label>
@@ -46,13 +59,7 @@
                             placeholder="External Link">
                         </div>
                       </div>
-                      <div class="row py-3">
-                        <div class="form-group">
-                          <label class="form-line" for="exampleInputEmail4">Enter Description</label>
-                          <textarea type="text" class="form-control" formControlName="description" id="exampleInputEmail4" aria-describedby="emailHelp"
-                            placeholder="Enter Description"></textarea>
-                        </div>
-                      </div>
+                      
                       <div class="container">
                         <div class="row">
                           <div class="col-6 mx-auto d-flex justify-content-center">

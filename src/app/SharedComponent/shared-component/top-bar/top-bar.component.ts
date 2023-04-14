@@ -37,4 +37,7 @@ export class TopBarComponent implements OnInit {
   userProfile(){
     this.router.navigate(['home/profile-page'])
   }
+  homePage(){
+    this.router.navigate(['home'])
+  }
 }

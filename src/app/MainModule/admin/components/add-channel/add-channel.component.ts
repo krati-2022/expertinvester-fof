@@ -42,7 +42,7 @@ export interface ExpertList {
   styleUrls: ['./add-channel.component.css'],
 })
 export class AddChannelComponent implements OnInit {
-  coAddOn = localStorage.getItem('coAddOn') || '';
+  
   mobileNumber = localStorage.getItem('mobile_number') || '';
   AddChannelFrom: FormGroup | any;
   ideaOn = ['Nifty', 'Bank Nifty', 'Stcok F & O'];
@@ -66,7 +66,7 @@ export class AddChannelComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.coAddOn);
-    let status = this.coAddOn != '' ? true : false;
+    // let status = this.coAddOn != '' ? true : false;
     // console.log('status: ', status);
     this.AddChannelFrom = new FormGroup({
       mobile_No: new FormControl(this.mobileNumber),
@@ -105,16 +105,23 @@ export class AddChannelComponent implements OnInit {
     });
   }
 
-  goToExpertProfilePage(id: string) {
-    console.log(this.myForm.value.adOn);
-    if (this.myForm.value.adOn) {
-      this.coAdList.push({ expertId: id });
-    } else {
-      this.coAdList
-        .filter((i: any) => i.expertId == id)
-        .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
+  goToExpertProfilePage(id: string, name:string , status: boolean) {
+    if (status == true) {
+      this.coAdList.push({ expertId: id, name: name});
+      // console.log('this.coAdList: ', this.coAdList);
+    }else {
+      this.coAdList.filter((i: any) => i.expertId == id)
+      .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
+      // console.log('this.coAdList: ', this.coAdList);
     }
     // console.log('this.coAdList: ', this.coAdList);
+  }
+  
+  removeCoAdList(id:string){
+    this.coAdList.filter((i: any) => i.expertId == id)
+      .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
+   
+
   }
 
   onChange(event: any) {
@@ -142,26 +149,17 @@ export class AddChannelComponent implements OnInit {
 
   coAddChannel() {
     if (this.AddChannelFrom.value.coAdChannel) {
-      // let data = {
-      //   mobile_No: this.AddChannelFrom.value.mobile_No,
-      //   name: this.AddChannelFrom.value.name,
-      //   idealfor: this.ideaOnlist,
-      //   benefits: this.benefits,
-      //   subscription: this.AddChannelFrom.value.subscription,
-      //   coAdChannel: this.AddChannelFrom.value.coAdChannel,
-      //   description: this.AddChannelFrom.value.description,
-      //   imageurl: this.AddChannelFrom.value.imageurl,
-      //   coAdList: this.AddChannelFrom.value.coAdList,
-      // };
-      // localStorage.setItem('chennal', JSON.stringify(data))
-      // this.router.navigate(['home/expertList']);
       (<any>$('.bd-example-modal-lg')).modal('show');
-    } else {
-      this.coAdList = [
-        {
-          "expertId": '00000000-0000-0000-0000-000000000000',
-        },
-      ];
+    } else if(this.AddChannelFrom.value.coAdChannel == false) {
+      
+      this.coAdList.splice(0, this.coAdList.length)
+      
+      // this.coAdList = [
+      //   {
+      //     "expertId": '00000000-0000-0000-0000-000000000000',
+      //   },
+      // ];
+      // console.log(this.coAdList);
     }
   }
 

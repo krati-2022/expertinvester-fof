@@ -59,7 +59,7 @@
                       </div>
                       
                       <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
-                        <button class="btn follow-btn" >
+                        <button class="btn follow-btn" *ngIf="items.isSelfPost != true">
                           <span *ngIf="items.clubBlock == false" (click)="blockUnblockPost(items.id, true)" style="padding: inherit;">Block</span>
                           <span *ngIf="items.clubBlock == true" (click)="blockUnblockPost(items.id, false)" style="padding: inherit;">Unblock</span>
                         </button>

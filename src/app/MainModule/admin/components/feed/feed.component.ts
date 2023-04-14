@@ -29,6 +29,7 @@ export interface GetFeedDetails {
   tradetype: string;
   username: string;
   usertype: string;
+  isSelfPost: boolean
 }
 
 export interface ChannelListDetails {
