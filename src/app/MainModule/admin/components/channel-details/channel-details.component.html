@@ -1,8 +1,8 @@
 <section class="container">
     <div class="row">
       <div class="mx-auto">
-        <div class="card">
-          <div class="card-body">
+        <div class="card list-card">
+          <div class="mx-1">
             <h5 class="card-title"></h5>
             <!-- Bordered Tabs Justified -->
             <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist" >
@@ -30,11 +30,11 @@
             <div class="tab-content pt-2" id="borderedTabJustifiedContent">
               <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
                 aria-labelledby="home-tab">
-  
-                <div class="example" style="height: 65vh; overflow: auto;" *ngIf="activePostDetails.length != 0">
-                    
 
-                      <div class="card my-3" *ngFor="let items of activePostDetails">
+                <div class="example" style="height: 65vh; overflow: auto;" *ngIf="activePostDetails.length != 0">
+
+
+                      <div class="card list-card my-3" *ngFor="let items of activePostDetails">
                         <div class="card-body">
                           <div class="container">
                             <div class=" row user_informatiom">
@@ -46,17 +46,17 @@
                                 <div class="detail">{{items.sebi}}</div>
                                 <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                               </div>
-                    
+
                             </div>
                           </div>
-                    
+
                           <div class="container">
                             <div class="row">
                               <div class="d-flex justify-content-between align-items-baseline py-2">
                                 <h6 class="heading">{{items.channelname}}</h6>
                                 <span class=" subscript" *ngIf="items.subscription =='Free Access'"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
                               </div>
-                    
+
                             </div>
                           </div>
                           <div class="container">
@@ -101,7 +101,7 @@
                               </div>
                             </div>
                           </div>
-                    
+
                           <div class="container">
                             <div class="row mb-2">
                               <div class="col-4 risk">
@@ -141,7 +141,7 @@
                           </div>
                         </div>
                       </div>
-                  
+
                 </div>
                 <div class="example d-flex justify-content-center" style="font-size: 20px;" *ngIf="activePostDetails.length == 0">
                     <span>{{notFound}}</span>
@@ -150,7 +150,7 @@
               <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="example" style="height: 65vh; overflow: auto;" *ngIf="pastPostDetails.length != 0">
 
-                    <div class="card my-3" *ngFor="let items of pastPostDetails">
+                    <div class="card list-card my-3" *ngFor="let items of pastPostDetails">
                       <div class="card-body">
                         <div class="container">
                           <div class=" row user_informatiom">
@@ -162,17 +162,17 @@
                               <div class="detail">{{items.sebi}}</div>
                               <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                             </div>
-                  
+
                           </div>
                         </div>
-                  
+
                         <div class="container">
                           <div class="row">
                             <div class="d-flex justify-content-between align-items-baseline py-2">
                               <h6 class="heading">{{items.channelname}}</h6>
                               <span class=" subscript" *ngIf="items.subscription =='Free Access'"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
                             </div>
-                  
+
                           </div>
                         </div>
                         <div class="container">
@@ -217,7 +217,7 @@
                             </div>
                           </div>
                         </div>
-                  
+
                         <div class="container">
                           <div class="row mb-2">
                             <div class="col-4 risk">
@@ -257,7 +257,7 @@
                         </div>
                       </div>
                     </div>
-                
+
               </div>
               <div class="example d-flex justify-content-center" style="font-size: 20px;" *ngIf="pastPostDetails.length == 0">
                   <span>{{notFound}}</span>
@@ -265,7 +265,7 @@
               </div>
               <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
                 <div class="example" style="height: 65vh; overflow: auto;" *ngFor="let items of profile">
-                  <div class="card my-3">
+                  <div class="card list-card my-3">
                     <div class="card-body">
                       <div class=" row user_informatiom d-flex align-items-center">
                         <div class="col-2">
@@ -274,7 +274,7 @@
                         <div class="col-6 mx-2 py-2">
                           <div class="user_name">{{items.username}}</div>
                           <div class="detail">{{items.sebi}}</div>
-  
+
                         </div>
                         <div class="col-3 text-end "><button type="button" class="btn follow-btn">Followed</button>
                         </div>
@@ -298,12 +298,12 @@
                                   <li class="benefit-line">
                                     {{data.benefits}}
                                   </li>
-                                  
+
                                 </ul>
                               </div>
                             </div>
                           </div>
-  
+
                         </div>
                       </div>
                       <div class="row py-2">
@@ -361,7 +361,7 @@
                         <div class="tab-content pt-2" id="borderedTabJustifiedContent">
                           <div class="tab-pane fade show active" id="bordered-justified-Active" role="tabpanel"
                             aria-labelledby="Active-tab">
-  
+
                             <div class="card my-3">
                               <div class="card-body">
                                 <div class="container">
@@ -374,10 +374,10 @@
                                       <div class="detail">Sr Wealth is led by an SEBI</div>
                                       <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                                     </div>
-  
+
                                   </div>
                                 </div>
-  
+
                                 <div class="container">
                                   <div class="row">
                                     <div class="d-flex justify-content-between align-items-baseline py-2">
@@ -385,7 +385,7 @@
                                       <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free
                                         Access</span>
                                     </div>
-  
+
                                   </div>
                                 </div>
                                 <div class="container">
@@ -430,7 +430,7 @@
                                     </div>
                                   </div>
                                 </div>
-  
+
                                 <div class="container">
                                   <div class="row">
                                     <div class="col-4 risk">
@@ -472,7 +472,7 @@
                                 </div>
                               </div>
                             </div>
-  
+
                           </div>
                           <div class="tab-pane fade" id="bordered-justified-Past" role="tabpanel"
                             aria-labelledby="Past-tab">
@@ -487,7 +487,7 @@
                                     <div class="detail">Sr Wealth is led by an SEBI</div>
                                     <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                                   </div>
-  
+
                                 </div>
                                 <div class="row">
                                   <div class="d-flex justify-content-between align-items-baseline py-2">
@@ -495,7 +495,7 @@
                                     <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free
                                       Access</span>
                                   </div>
-  
+
                                 </div>
                                 <div class="row">
                                   <div class="channel-name">
@@ -534,7 +534,7 @@
                                     </div>
                                   </div>
                                 </div>
-  
+
                                 <div class="row">
                                   <div class="col-4 risk">
                                     <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
@@ -670,62 +670,76 @@
                 </div>
               </div>
               <div class="tab-pane fade" id="bordered-justified-Chat" role="tabpanel" aria-labelledby="Chat-tab">
-                <div class="card my-3">
-                  <div class="d-flex justify-content-center container mt-5">
-                    <div class="wrapper">
-                      <div class="main">
-                        <div class="px-2 scroll">
-                          <div class="d-flex align-items-center">
-                            <div class="text-left pr-1"><img src="https://img.icons8.com/color/40/000000/guest-female.png"
-                                width="30" class="img1" /></div>
-                            <div class="pr-2 pl-1"> <span class="name">Sarah Anderson</span>
-                              <p class="msg">Hi Hendrikson, I haven't been falling well for past few days.</p>
+                <div class="card list-card my-3">
+                  <div class="container">
+                    <div class="row clearfix">
+                        <div class="col-lg-12">
+                            <div class="card list-card chat-app">
+                                <div class="chat">
+                                    <div class="chat-header clearfix">
+                                        <div class="row">
+                                            <div class="col-lg-6 d-flex">
+                                                <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                                                </a>
+                                                <div class="chat-about">
+                                                    <h6 class="m-b-0 user-name">Aiden Chavez</h6>
+                                                    <small class="date">Last seen: 2 hours ago</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 d-none d-md-none d-lg-block text-end">
+                                                <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
+                                                <a href="javascript:void(0);" class="btn btn-outline-primary mx-1"><i class="fa fa-image"></i></a>
+                                                <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
+                                                <a href="javascript:void(0);" class="btn btn-outline-warning mx-1"><i class="fa fa-question"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-history">
+                                        <ul class="m-b-0">
+                                            <li class="clearfix">
+                                                <div class="message-data text-end">
+                                                    <span class="message-data-time">10:10 AM, Today</span>
+                                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                                                </div>
+                                                <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div>
+                                            </li>
+                                            <li class="clearfix">
+                                                <div class="message-data">
+                                                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                                                    <span class="message-data-time">10:12 AM, Today</span>
+                                                </div>
+                                                <div class="message my-message">Are we meeting today?</div>
+                                            </li>
+                                            <li class="clearfix">
+                                                <div class="message-data">
+                                                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                                                    <span class="message-data-time">10:15 AM, Today</span>
+                                                </div>
+                                                <div class="message my-message">Project has been already finished and I have results to show you.</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="chat-message clearfix">
+                                        <div class="input-group mb-0">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control search-bar" placeholder="Enter text here...">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                          <div class="d-flex align-items-center text-right justify-content-end ">
-                            <div class="pr-2"> <span class="name">Hendrikson</span>
-                              <p class="msg">Let's jump on a video call</p>
-                            </div>
-                            <div><img src="https://i.imgur.com/HpF4BFG.jpg" width="30" class="img1" /></div>
-                          </div>
-                          <div class="text-center"><span class="between">Call started at 10:47am</span></div>
-                          <div class="text-center"><span class="between">Call ended at 11:03am</span></div>
-                          <div class="d-flex align-items-center">
-                            <div class="text-left pr-1"><img src="https://img.icons8.com/color/40/000000/guest-female.png"
-                                width="30" class="img1" /></div>
-                            <div class="pr-2 pl-1"> <span class="name">Sarah Anderson</span>
-                              <p class="msg">How often should i take this?</p>
-                            </div>
-                          </div>
-                          <div class="d-flex align-items-center text-right justify-content-end ">
-                            <div class="pr-2"> <span class="name">Hendrikson</span>
-                              <p class="msg">Twice a day, at breakfast and before bed</p>
-                            </div>
-                            <div><img src="https://i.imgur.com/HpF4BFG.jpg" width="30" class="img1" /></div>
-                          </div>
-                          <div class="d-flex align-items-center">
-                            <div class="text-left pr-1"><img src="https://img.icons8.com/color/40/000000/guest-female.png"
-                                width="30" class="img1" /></div>
-                            <div class="pr-2 pl-1"> <span class="name">Sarah Anderson</span>
-                              <p class="msg">How often should i take this?</p>
-                            </div>
-                          </div>
                         </div>
-                        <nav class="navbar bg-white navbar-expand-sm d-flex justify-content-between"> <input
-                            type="text number" name="text" class="form-control" placeholder="Type a message...">
-                          <div class="icondiv d-flex justify-content-end align-content-center text-center ml-2"> <i
-                              class="fa fa-paperclip icon1"></i> <i class="fa fa-arrow-circle-right icon2"></i> </div>
-                        </nav>
-                      </div>
                     </div>
-                  </div>
+                    </div>
                 </div>
               </div><!-- End Bordered Tabs Justified -->
             </div>
           </div>
         </div>
       </div>
-     
-  
+
+
     </div>
   </section>

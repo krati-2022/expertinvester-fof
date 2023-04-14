@@ -12,7 +12,6 @@
           </div>
         </div>
         <div class="card-body">
-
           <div class="" >
             <div class="" >
               <div class="example" style="height: 70vh; overflow: auto;">
@@ -30,15 +29,13 @@
                         </span>
                       </div>
                     </div>
-
                   </div>
                   <div class="">
                    <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
                   </div>
                  </div>
                    <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
-                     <div class="grid-data d-flex  ">
-
+                     <div class="grid-data d-flex">
                        <div class="col-5  border-end ">
                          <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
                              class="club-inf">Impression</span></div>
@@ -55,23 +52,16 @@
                          <div class="club-icon px-3">{{items.postcount}}</div>
                        </div>
                      </div>
-
-
                      </div>
                 </div>
                </div>
-
             </div>
           </div><!-- End Bordered Tabs Justified -->
-
         </div>
       </div>
-
     </div>
-
   </div>
 </section>
-
     <section class="container d-lg-none d-md-block d-sm-block">
       <div class="row">
         <div class=" mx-auto">
@@ -254,7 +244,6 @@
                            <div class="">
                             <p class="club-dis">{{items.description}}</p>
                            </div> -->
-
                            <div class="channel-name d-flex col-12">
                             <div class="col-8" (click)="getDetails(items.id, items.name)">
                               <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span>
@@ -269,12 +258,10 @@
                           <div class="">
                             <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
                            </div>
-
                           </div>
                         </div>
                           <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
                             <div class="grid-data d-flex  ">
-
                               <div class="col-5  border-end ">
                                 <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
                                     class="club-inf">Impression</span></div>
@@ -291,11 +278,8 @@
                                 <div class="club-icon px-3">{{items.postcount}}</div>
                               </div>
                             </div>
-
-
                             </div>
                        </div>
-
                     </div>
                     <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="clubList.length == 0" >
                       <span>Data Not Found</span>
@@ -445,7 +429,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0" >
                   <span>Data Not Found</span>
                 </div>
@@ -453,6 +436,5 @@
             </div><!-- End Bordered Tabs Justified -->
           </div>
         </div>
-
       </div>
     </section>
