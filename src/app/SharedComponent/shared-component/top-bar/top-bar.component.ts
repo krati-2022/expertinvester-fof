@@ -12,33 +12,25 @@ export class TopBarComponent implements OnInit {
   public searchTerm!: string;
   searchFilterForm : FormGroup | any
   constructor(private _service: SharedService, private router: Router) {}
-
   ngOnInit(): void {
     this.searchFilterForm = new FormGroup({
       name: new FormControl('')
     })
   }
-
   public openSidebar() {
     this._service.toggleSidebar.emit();
   }
-
-
   search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
     this._service.search.next(this.searchTerm);
   }
-
-
   signOut(){
     localStorage.clear()
     this.router.navigate([''])
   }
-
   userProfile(){
     this.router.navigate(['home/profile-page'])
   }
-
   homePage(){
     this.router.navigate(['home'])
   }
