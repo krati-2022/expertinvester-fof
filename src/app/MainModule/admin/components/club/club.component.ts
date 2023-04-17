@@ -143,7 +143,8 @@ export class ClubComponent implements OnInit {
 
   getDetails(clublistId:string, clubName:string){
   // console.log('clublistId: ', clublistId);
-    this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobileNumber + '/' + clubName])
+    // this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobileNumber + '/' + clubName])
+    this.router.navigate(['home/club-details/' + clublistId + '/' + this.mobileNumber + '/' + clubName])
   }
 
   getFeedDetails(id: string, recordType: string) {

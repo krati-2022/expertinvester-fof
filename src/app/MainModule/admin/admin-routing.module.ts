@@ -32,6 +32,7 @@ import { EnterPinComponent } from './enter-pin/enter-pin.component';
 import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
 import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
 import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
+import { ClubDetailsComponent } from './components/club-details/club-details.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -51,16 +52,25 @@ const routes: Routes = [
       { path: 'feed', component: FeedComponent },
       { path: 'club', component: ClubComponent },
       { path: 'channel', component: ChannelComponent },
-      { path: 'channel-details/:param1/:param2', component: ChannelDetailsComponent },
+      {
+        path: 'channel-details/:param1/:param2',
+        component: ChannelDetailsComponent,
+      },
       { path: 'add-channel', component: AddChannelComponent },
       { path: 'expertList', component: ExpertListComponent },
       { path: 'expertProfile', component: ExpertProfileComponent },
       { path: 'listGroup/:param1/:param2', component: ListGroupComponent },
       { path: 'details/:param1/:param2', component: DetailsComponent },
-      { path: 'list', component: ListComponent },
-      { path: 'add-trade/:param1/:param2/:param3', component: AddTradeComponent },
-      { path: 'trades', component: TradesComponent },
-      // { path: 'club-list', component: ClubListComponent },
+      { path: 'list/:param1/:param2', component: ListComponent },
+      {
+        path: 'add-trade/:param1/:param2/:param3',
+        component: AddTradeComponent,
+      },
+      { path: 'trades/:param1/:param2/:param3', component: TradesComponent },
+      {
+        path: 'club-details/:param1/:param2/:param3',
+        component: ClubDetailsComponent,
+      },
       { path: 'feed-club', component: FeedClubListComponent },
       { path: 'upgrade-plan', component: UpgradePlanComponent },
       { path: 'profile-page', component: ProfilePageComponent },
@@ -71,7 +81,6 @@ const routes: Routes = [
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'legal-disclamer', component: LegalDisclamerComponent },
       { path: 'terms-services', component: TermsServicesComponent },
-      
     ],
   },
 ];

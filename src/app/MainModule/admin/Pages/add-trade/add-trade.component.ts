@@ -89,7 +89,14 @@ export class AddTradeComponent implements OnInit {
         this.submitted = false;
         this.imageSrc = ''
 
-        // this.router.navigate(['home/club']);
+        this.router.navigate([
+          'home/club-details/' +
+            this.clubListId +
+            '/' +
+            this.mobile_number +
+            '/' +
+            this.name,
+        ]);
         this.isLoading = false
       }, error : (error) =>{
         if (error.status == '400') {

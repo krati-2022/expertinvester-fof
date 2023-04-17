@@ -1,3 +1,6 @@
+.cstm-file {
+  display: contents
+}
 .search-bar {
     padding: 12px;
 }
@@ -264,13 +267,13 @@ span.club-inf {
 small.trade {
     font-size: 12px;
     font-weight: 700;
-    color: #F61C7A;
+    color: black;
 }
 
 .form-line {
   font-size: 14px;
   font-weight: 500;
-  color: #F61C7A;
+  color: black;
 }
 
 @media screen and (min-width: 320px) and (max-width: 416px) {

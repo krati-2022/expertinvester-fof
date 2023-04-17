@@ -11,7 +11,7 @@
                 <div class="row mb-3">
                   <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-person px-2"></i>User Name</label>
                   <div class="col-lg-8">
-                    <input type="text" class="form-control" (keypress)="omit_special_char($event)" formControlName="name"
+                    <input type="text" class="form-control"  formControlName="name"
                     [ngClass]="{ 'is-invalid': submitted && ExpertControl.name.errors }">
                     <div *ngIf=" submitted && ExpertControl.name.errors" class="invalid-feedback">
                       <div *ngIf="ExpertControl.name.errors.required">Name is required.</div>
