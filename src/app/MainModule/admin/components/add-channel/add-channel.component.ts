@@ -22,6 +22,7 @@ export interface ExpertList {
   email: string;
   expertType: string;
   isSEBI: boolean;
+  isSelected: boolean;
   sebiRegNo: string;
   certificateURL: string;
   certificatefilename: string;
@@ -101,16 +102,26 @@ export class AddChannelComponent implements OnInit {
     }
     this._service.GetExpertList(mobile_number).subscribe((res) => {
       this.expertList = res.data;
-      // console.log('this.expertList: ', this.expertList[0]);
+      // console.log('this.expertList: ', this.expertList);
+      this.expertList.map((i:any)=> {
+        i.isSelected = false
+      })
+      // console.log('this.expertList: ', this.expertList);
     });
   }
 
-  goToExpertProfilePage(id: string, name:string , status: boolean) {
+  goToExpertProfilePage(data:any , status: boolean) {
+    if(data.isSelected == false){
+      data.isSelected = true
+    }else {
+      data.isSelected = false
+    }
+    // console.log('data: ', data);
     if (status == true) {
-      this.coAdList.push({ expertId: id, name: name});
+      this.coAdList.push({ expertId: data.id, name: data.name});
       // console.log('this.coAdList: ', this.coAdList);
     }else {
-      this.coAdList.filter((i: any) => i.expertId == id)
+      this.coAdList.filter((i: any) => i.expertId == data.id)
       .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
       // console.log('this.coAdList: ', this.coAdList);
     }
@@ -152,6 +163,13 @@ export class AddChannelComponent implements OnInit {
       (<any>$('.bd-example-modal-lg')).modal('show');
     } else if(this.AddChannelFrom.value.coAdChannel == false) {
 
+      // console.log('this.coAdList: ', this.expertList);
+      this.expertList.map((i:any)=>{
+        if(i.isSelected == true){
+          i.isSelected = false
+        }
+      })
+      // return
       this.coAdList.splice(0, this.coAdList.length)
 
       // this.coAdList = [

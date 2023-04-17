@@ -11,7 +11,7 @@
           <div class="row border-bottom py-2">
             <div class="d-flex align-items-center justify-content-between">
               <div>
-                <h4 class="px-2 heading-line">ICICIBANK <small class="trade">NSE</small></h4>
+                <h4 class="px-2 heading-line">{{name}} <small class="trade">NSE</small></h4>
                 <div class="d-flex align-items-baseline justify-content-between">
                   <div class="">
                     <span class="px-3 select-icon">$1,208.24 <i class="bi bi-caret-down-fill"></i> </span><span
@@ -19,98 +19,126 @@
                   </div>
                 </div>
               </div>
-              <div class="upload-img"><i class="bi bi-cloud-arrow-up-fill"></i></div>
+              <div class="upload-img">
+                <!-- <i class="bi bi-cloud-arrow-up-fill"></i> -->
+                <label for="file-input">
+                  <i class="bi bi-cloud-arrow-up-fill"></i>
+                  <p *ngIf="imageSrc != ''" style="font-size: 14px;">{{imageSrc}}</p>
+                </label>
+                <input id="file-input" type="file" accept="pdf" class="cstm-file" (change)="onSelectFile($event)">
+              </div>
             </div>
           </div>
           <!-- Bordered Tabs Justified -->
           <ul class="nav nav-tabs nav-tabs-bordered d-flex py-2" id="borderedTabJustified" role="tablist">
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab"
+              <button class="nav-link w-100 active" id="BUY" data-bs-toggle="tab" (click)="getTab($event)"
                 data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home"
                 aria-selected="true">BUY</button>
             </li>
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab"
+              <button class="nav-link w-100" id="SELL" data-bs-toggle="tab" (click)="getTab($event)"
                 data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile"
                 aria-selected="false">SELL</button>
             </li>
 
           </ul>
-          <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-            <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
-              aria-labelledby="home-tab">
+        <form [formGroup]="addPostForm" (ngSubmit)="onSubmit()">
+          <div class="example">
+            <div class="card my-3">
+              <div class="card-body">
+                <div class="row py-3">
+                  <div class="form-group">
+                    <label class="form-line" for="exampleFormControlSelect1">Interval</label>
+                    <select class="form-control" id="exampleFormControlSelect1" formControlName="interval"
+                      [ngClass]="{ 'is-invalid': submitted && addPostControl.interval.errors }">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
 
-              <div class="example">
-                <div class="card list-card my-3">
-                  <div class="card-body">
-                    <div class="row py-3">
-                      <div class="form-group">
-                        <label class="form-line" for="exampleFormControlSelect1">Interval</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
+                    <div *ngIf=" submitted && addPostControl.interval.errors" class="invalid-feedback">
+                      <div *ngIf="addPostControl.interval.errors.required">Interval is required.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row py-3">
+                  <div class="form-group">
+                    <label class="form-line" for="">Entry Price</label>
+                    <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="entryprice"
+                      id="" aria-describedby="emailHelp" placeholder="Entry Price"
+                      [ngClass]="{ 'is-invalid': submitted && addPostControl.entryprice.errors }">
+                    <div *ngIf=" submitted && addPostControl.entryprice.errors" class="invalid-feedback">
+                      <div *ngIf="addPostControl.entryprice.errors.required">Entry Price is required.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row py-3">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-line" for="">Target Price</label>
+                      <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="targetprice"
+                        id="" aria-describedby="emailHelp" placeholder="Target Price"
+                        [ngClass]="{ 'is-invalid': submitted && addPostControl.targetprice.errors }">
+                      <div *ngIf=" submitted && addPostControl.targetprice.errors" class="invalid-feedback">
+                        <div *ngIf="addPostControl.targetprice.errors.required">Target Price is required.</div>
                       </div>
                     </div>
-                    <div class="row py-3">
-                      <div class="form-group">
-                        <label class="form-line" for="exampleInputEmail1">Entry Price</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                          placeholder="Entry Price">
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-line" for="exampleInputEmail2">Stop Loss</label>
+                      <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="stoploss"
+                        id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Stop Loss"
+                        [ngClass]="{ 'is-invalid': submitted && addPostControl.stoploss.errors }">
+                      <div *ngIf=" submitted && addPostControl.stoploss.errors" class="invalid-feedback">
+                        <div *ngIf="addPostControl.stoploss.errors.required">Stop Loss is required.</div>
                       </div>
                     </div>
-                    <div class="row py-3">
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-line" for="exampleInputEmail1">Target Price</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Target Price">
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-line" for="exampleInputEmail2">Stop Loss</label>
-                          <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
-                            placeholder="Stop Loss">
-                        </div>
-                      </div>
+                  </div>
 
+                </div>
+                <div class="row py-3">
+                  <div class="form-group">
+                    <label class="form-line" for="exampleInputEmail3">External Link</label>
+                    <input type="text" class="form-control" formControlName="externallink" id="exampleInputEmail3"
+                      aria-describedby="emailHelp" placeholder="External Link"
+                      [ngClass]="{ 'is-invalid': submitted && addPostControl.externallink.errors }">
+                    <div *ngIf=" submitted && addPostControl.externallink.errors" class="invalid-feedback">
+                      <div *ngIf="addPostControl.externallink.errors.required">External Link is required.</div>
                     </div>
-                    <div class="row py-3">
-                      <div class="form-group">
-                        <label class="form-line" for="exampleInputEmail3">External Link</label>
-                        <input type="text" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
-                          placeholder="External Link">
-                      </div>
+                  </div>
+                </div>
+                <div class="row py-3">
+                  <div class="form-group">
+                    <label class="form-line" for="exampleInputEmail4">Enter Description</label>
+                    <textarea type="text" class="form-control" formControlName="description" id="exampleInputEmail4"
+                      aria-describedby="emailHelp" placeholder="Enter Description"
+                      [ngClass]="{ 'is-invalid': submitted && addPostControl.description.errors }"></textarea>
+
+                    <div *ngIf=" submitted && addPostControl.description.errors" class="invalid-feedback">
+                      <div *ngIf="addPostControl.description.errors.required">Description is required.</div>
                     </div>
-                    <div class="row py-3">
-                      <div class="form-group">
-                        <label class="form-line" for="exampleInputEmail4">Enter Description</label>
-                        <input type="text" class="form-control" id="exampleInputEmail4" aria-describedby="emailHelp"
-                          placeholder="Enter Description">
-                      </div>
-                    </div>
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-6 mx-auto d-flex justify-content-center">
-                          <button type="button" class="btn btn-primary">Submit</button>
-                        </div>
-                      </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-6 mx-auto d-flex justify-content-center">
+                      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                      <button class="btn btn-primary" type="submit" [disabled]="isLoading">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                          *ngIf="isLoading"></span>
+                        <span *ngIf="!isLoading">Submit</span>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
-            <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
-
-
-            </div>
-
-          </div><!-- End Bordered Tabs Justified -->
+          </div>
+        </form>
 
         </div>
       </div>

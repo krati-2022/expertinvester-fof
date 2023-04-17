@@ -147,7 +147,7 @@ export class FeedComponent implements OnInit {
     this._service
       .GetFeed(mobile_No, this.current, this.perPage)
       .subscribe((res) => {
-        console.log('res: ', res.items);
+        // console.log('res: ', res.items);
         this.feedDetails = res.items;
         // console.log('this.feedDetails: ', this.feedDetails);
         // console.log(this.feedDetails);
@@ -245,7 +245,7 @@ export class FeedComponent implements OnInit {
   }
 
   getTab(event: any) {
-    console.log('event: ', event.target.id);
+    // console.log('event: ', event.target.id);
     switch (event.target.id) {
       case 'home-tab':
         this.GetFeed();
@@ -300,6 +300,7 @@ export class FeedComponent implements OnInit {
         this.GetFeed();
       });
   }
+
   like(id:string, status:boolean){
     let mobile_No = '';
     var splitString = this.mobile_number.split('');
@@ -316,6 +317,8 @@ export class FeedComponent implements OnInit {
         // this.getLikes(id)
       });
   }
+
+  
 
 
 }

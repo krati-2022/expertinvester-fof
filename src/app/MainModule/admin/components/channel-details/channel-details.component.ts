@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
 
 export interface PostDetails {
@@ -46,9 +46,11 @@ export class ChannelDetailsComponent implements OnInit {
   pastPostDetails: PostDetails[] = [];
   profile: PostDetails[] = [];
   notFound: any = '';
+  activeTab: any = 'Active-Post';
   constructor(
     private _ActivatedRoute: ActivatedRoute,
-    private _service: SharedService
+    private _service: SharedService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -83,7 +85,7 @@ export class ChannelDetailsComponent implements OnInit {
     }
 
     this._service.GetPastPost(mobile_No, this.id).subscribe((res) => {
-    console.log('res: ', res);
+      console.log('res: ', res);
       this.notFound = res.message;
       console.log('this.notFound: ', this.notFound);
       this.pastPostDetails = res.data;
@@ -101,14 +103,15 @@ export class ChannelDetailsComponent implements OnInit {
     }
 
     this._service.GetProfile(mobile_No, this.id).subscribe((res) => {
-    // console.log('res: ', res.data[0]);
-      
+      // console.log('res: ', res.data[0]);
+
       this.profile = res.data;
       // console.log('this.channelDetails: ', this.channelDetails);
     });
   }
   getTab(event: any) {
-    console.log('event: ', event.target.id);
+    // console.log('event: ', event.target.id);
+    this.activeTab = event.target.id;
     switch (event.target.id) {
       case 'Active-Post':
         this.getActivePost();
@@ -125,5 +128,9 @@ export class ChannelDetailsComponent implements OnInit {
       default:
         this.getActivePost();
     }
+  }
+
+  addPost(){
+    this.router.navigate(['home/list/' + this.id + '/' + this.mobile_No]);
   }
 }

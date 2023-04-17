@@ -547,8 +547,8 @@ span.club-inf {
 }
 .ngx-gallery {
   display: inline-block;
-  /* margin-bottom: 20px; */
-  /* width: 500px;
-   height: 400px;
-   border-color: #4a89ff;*/
+ 
+}
+.row.py-2.sds {
+  margin-top: -3rem;
 }

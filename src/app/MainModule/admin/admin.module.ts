@@ -47,6 +47,7 @@ import { FilterPipe } from 'src/app/Utils/filter.pipe';
 import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { ResponsiveViewComponent } from './components/responsive-view/responsive-view.component';
+import { ClubDetailsComponent } from './components/club-details/club-details.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { ResponsiveViewComponent } from './components/responsive-view/responsive
     FilterPipe,
     PinRecoveryComponent,
     ResponsiveViewComponent,
+    ClubDetailsComponent,
 
   ],
   imports: [

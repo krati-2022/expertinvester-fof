@@ -24,10 +24,10 @@
                       <button type="button" class="btn position-btn"><i class="bi bi-clock px-2"></i>Medium Term (6-12 Months)</button>
                     </div>
                   </div>
-                  <div class="gallery-wrapper">
-                    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"  class="ngx-gallery"></ngx-gallery>
+                  <div class="gallery-wrapper" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null">
+                    <ngx-gallery  [options]="galleryOptions" [images]="galleryImages"  class="ngx-gallery"></ngx-gallery>
                   </div>
-                  <div class="row py-2 " style="margin-top: -3rem;">
+                  <div class="row py-2" [ngClass]="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null ? 'sds' : 'dd'">
                     <h6 class="dis-line">*Current market Volatility* </h6>
                     <p class="dis">{{items.description}}</p><br>
                       <p class="dis">https://twitter.com/riteshdaga83/status/162155698582558594?t=
