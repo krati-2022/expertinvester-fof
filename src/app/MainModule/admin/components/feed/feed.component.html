@@ -134,7 +134,7 @@
                       </div>
                     </div>
                     <!-- {{items.imageurl}} -->
-                    <div class="row" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null">
+                    <div class="row" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
                       <img [src]="items.imageurl" style="object-fit:fill; height:500px" alt="">
                     </div>
                     <div class="row py-2" (click)="getDetails(items.id, items.recordType)">

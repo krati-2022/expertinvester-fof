@@ -852,3 +852,6 @@ span.club-inf {
     font-family: "Poppins", sans-serif;
 }
 }
+.scrollarea{
+  min-height: 282px;
+}

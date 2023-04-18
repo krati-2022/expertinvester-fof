@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
@@ -6,28 +7,32 @@ declare var $ :any
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent implements OnInit {
-  mobileNumber : any
-  id : any
-  feedPostDetail: any
+  mobileNumber: any;
+  id: any;
+  feedPostDetail: any;
   galleryOptions: NgxGalleryOptions[] | any;
   galleryImages: NgxGalleryImage[] | any;
-  constructor(private _ActivaedRoute: ActivatedRoute, private _service: SharedService) { }
+  constructor(
+    private _ActivaedRoute: ActivatedRoute,
+    private _service: SharedService,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
-    this.id  = this._ActivaedRoute.snapshot.paramMap.get('param1')
+    this.id = this._ActivaedRoute.snapshot.paramMap.get('param1');
     // console.log('this.id: ', this.id);
-    this.mobileNumber  = this._ActivaedRoute.snapshot.paramMap.get('param2')
+    this.mobileNumber = this._ActivaedRoute.snapshot.paramMap.get('param2');
     // console.log('this.mobileNumber: ', this.mobileNumber);
-    this.GetFeedPost()
+    this.GetFeedPost();
 
     this.galleryOptions = [
       {
         width: '600px',
         height: '400px',
-        previewDescription: false
+        previewDescription: false,
         // thumbnailsColumns: 4,
         // imageAnimation: NgxGalleryAnimation.Slide
       },
@@ -37,47 +42,42 @@ export class DetailsComponent implements OnInit {
         width: '100%',
         height: '600px',
         imagePercent: 80,
-        previewDescription: false
+        previewDescription: false,
       },
-     
+
       {
         breakpoint: 400,
         preview: false,
-        previewDescription: false
-        
-      }
+        previewDescription: false,
+      },
     ];
-
-    // this.galleryImages = [
-    //   {
-    //     small: 'http://103.117.66.70:5002/FitOnFace/ea24ea29-c743-490f-b1fe-6c40c99d95be_FeedPost.jpg',
-    //     medium: 'http://103.117.66.70:5002/FitOnFace/ea24ea29-c743-490f-b1fe-6c40c99d95be_FeedPost.jpg',
-    //     big: 'http://103.117.66.70:5002/FitOnFace/ea24ea29-c743-490f-b1fe-6c40c99d95be_FeedPost.jpg'
-    //   },
-     
-    // ];
-  
   }
 
-  GetFeedPost(){
-    this._service.GetFeedPostdetail(this.mobileNumber, this.id).subscribe(res =>{
-    this.feedPostDetail = res.data
-    let arr = [];
-      arr.push(...this.feedPostDetail);
-      // console.log('arr: ', arr);
-      
-      arr.map((ele: any) => {
-        ele.small = ele.imageurl;
-        ele.medium = ele.imageurl;
-        ele.big = ele.imageurl;
-        // delete ele.description
+  goBack(){
+    this.location.back()
+  }
+
+  GetFeedPost() {
+    this._service
+      .GetFeedPostdetail(this.mobileNumber, this.id)
+      .subscribe((res) => {
+        this.feedPostDetail = res.data;
+        let arr = [];
+        arr.push(...this.feedPostDetail);
+        // console.log('arr: ', arr);
+
+        arr.map((ele: any) => {
+          ele.small = ele.imageurl;
+          ele.medium = ele.imageurl;
+          ele.big = ele.imageurl;
+          // delete ele.description
+        });
+        // console.log(arr);
+        this.galleryImages = arr;
       });
-      // console.log(arr);
-      this.galleryImages = arr;
-    })
   }
 
-  imagePreview(){
+  imagePreview() {
     // (<any>$('#exampleModal1').modal('show'))
   }
 }

@@ -17,13 +17,13 @@
          
           <div class="example" style="height: 65vh; overflow: auto;" *ngIf="channelDetails.length != 0">
             <div class="card list-card my-3 m-4" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
-              <div class="card-body">
-                <div class="container" (click)="getChannelDetails(items)">
+              <div class="card-body" >
+                <div class="container" >
                   <div class=" row user_informatiom">
                     <div class="col-1">
                       <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                     </div>
-                    <div class="col-8 mx-3 py-2">
+                    <div class="col-8 mx-3 py-2" (click)="getChannelDetails(items)">
                       <div class="user_name">{{items.username}}</div>
                       <div class="detail">{{items.sebi}}</div>
                       <div class="percent">Accuracy 57.7% Profitability -13.5%</div>

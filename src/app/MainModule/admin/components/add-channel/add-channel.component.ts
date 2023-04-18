@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -43,7 +44,6 @@ export interface ExpertList {
   styleUrls: ['./add-channel.component.css'],
 })
 export class AddChannelComponent implements OnInit {
-  
   mobileNumber = localStorage.getItem('mobile_number') || '';
   AddChannelFrom: FormGroup | any;
   ideaOn = ['Nifty', 'Bank Nifty', 'Stcok F & O'];
@@ -53,6 +53,7 @@ export class AddChannelComponent implements OnInit {
   fileName: string = '';
   base64: string = '';
   submitted: boolean = false;
+  isLoading: boolean = false;
   formData: any;
   expertList: ExpertList[] = [];
   coAdList: any = [];
@@ -62,7 +63,8 @@ export class AddChannelComponent implements OnInit {
   constructor(
     private router: Router,
     private _service: SharedService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -88,6 +90,10 @@ export class AddChannelComponent implements OnInit {
     this.getExpertList();
   }
 
+  goBack() {
+    this.location.back();
+  }
+  
   get AddChannelControl() {
     return this.AddChannelFrom.controls;
   }
@@ -103,36 +109,36 @@ export class AddChannelComponent implements OnInit {
     this._service.GetExpertList(mobile_number).subscribe((res) => {
       this.expertList = res.data;
       // console.log('this.expertList: ', this.expertList);
-      this.expertList.map((i:any)=> {
-        i.isSelected = false
-      })
+      this.expertList.map((i: any) => {
+        i.isSelected = false;
+      });
       // console.log('this.expertList: ', this.expertList);
     });
   }
 
-  goToExpertProfilePage(data:any , status: boolean) {
-    if(data.isSelected == false){
-      data.isSelected = true
-    }else {
-      data.isSelected = false
+  goToExpertProfilePage(data: any, status: boolean) {
+    if (data.isSelected == false) {
+      data.isSelected = true;
+    } else {
+      data.isSelected = false;
     }
     // console.log('data: ', data);
     if (status == true) {
-      this.coAdList.push({ expertId: data.id, name: data.name});
+      this.coAdList.push({ expertId: data.id, name: data.name });
       // console.log('this.coAdList: ', this.coAdList);
-    }else {
-      this.coAdList.filter((i: any) => i.expertId == data.id)
-      .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
+    } else {
+      this.coAdList
+        .filter((i: any) => i.expertId == data.id)
+        .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
       // console.log('this.coAdList: ', this.coAdList);
     }
     // console.log('this.coAdList: ', this.coAdList);
   }
-  
-  removeCoAdList(id:string){
-    this.coAdList.filter((i: any) => i.expertId == id)
-      .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
-   
 
+  removeCoAdList(id: string) {
+    this.coAdList
+      .filter((i: any) => i.expertId == id)
+      .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
   }
 
   onChange(event: any) {
@@ -144,7 +150,7 @@ export class AddChannelComponent implements OnInit {
 
   getIdeaFor(status: boolean, item: string) {
     if (status == true) {
-      this.ideaOnlist.push({ "idealfor": item });
+      this.ideaOnlist.push({ idealfor: item });
       // console.log('this.ideaOnlist: ', this.ideaOnlist);
     } else {
       let removeIndexValue = -1;
@@ -161,17 +167,16 @@ export class AddChannelComponent implements OnInit {
   coAddChannel() {
     if (this.AddChannelFrom.value.coAdChannel) {
       (<any>$('.bd-example-modal-lg')).modal('show');
-    } else if(this.AddChannelFrom.value.coAdChannel == false) {
-      
+    } else if (this.AddChannelFrom.value.coAdChannel == false) {
       // console.log('this.coAdList: ', this.expertList);
-      this.expertList.map((i:any)=>{
-        if(i.isSelected == true){
-          i.isSelected = false
+      this.expertList.map((i: any) => {
+        if (i.isSelected == true) {
+          i.isSelected = false;
         }
-      })
+      });
       // return
-      this.coAdList.splice(0, this.coAdList.length)
-      
+      this.coAdList.splice(0, this.coAdList.length);
+
       // this.coAdList = [
       //   {
       //     "expertId": '00000000-0000-0000-0000-000000000000',
@@ -209,7 +214,7 @@ export class AddChannelComponent implements OnInit {
       return;
     }
 
-    this.benefits.push({ "id": this.benefits.length, "benefits": data });
+    this.benefits.push({ id: this.benefits.length, benefits: data });
     this.AddChannelFrom.get('addBenefits')?.reset();
     // this.AddChannelFrom.value.benefits =  this.benefits
     // console.log('this.AddChannelFrom.value.benefits: ', this.AddChannelFrom.value.benefits);
@@ -241,28 +246,27 @@ export class AddChannelComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.AddChannelFrom.value.coAdChannel == false) {
-      this.coAdList = [
-        {
-          "expertId": '00000000-0000-0000-0000-000000000000',
-        },
-      ];
-    }
-    this.AddChannelFrom.value.idealfor = this.ideaOnlist;
-    this.benefits.map((i:any) =>{
-      delete i.id
-    })
-    this.AddChannelFrom.value.benefits = this.benefits;
-
-    // console.log('this.AddChannelFrom.value.benefits: ', this.AddChannelFrom.value.benefits);
-    // return
-    this.AddChannelFrom.value.coAdList = this.coAdList;
-
     // this.AddChannelFrom.value.imageurl = this.base64;
     this.submitted = true;
     if (this.AddChannelFrom.invalid) {
       return;
     }
+    if (this.AddChannelFrom.value.coAdChannel == false) {
+      this.coAdList = [
+        {
+          expertId: '00000000-0000-0000-0000-000000000000',
+        },
+      ];
+    }
+    this.AddChannelFrom.value.idealfor = this.ideaOnlist;
+    this.benefits.map((i: any) => {
+      delete i.id;
+    });
+    this.AddChannelFrom.value.benefits = this.benefits;
+
+    // console.log('this.AddChannelFrom.value.benefits: ', this.AddChannelFrom.value.benefits);
+    // return
+    this.AddChannelFrom.value.coAdList = this.coAdList;
     if (this.AddChannelFrom.value.idealfor.length == 0) {
       this.idealMessage = 'Select at least one';
       return;
@@ -273,7 +277,7 @@ export class AddChannelComponent implements OnInit {
       return;
     }
 
-    var splitString = this.base64.split('data:image/jpeg;base64,')
+    var splitString = this.base64.split('data:image/jpeg;base64,');
     // console.log('splitString: ', splitString);
     this.formData = {
       mobile_No: this.AddChannelFrom.value.mobile_No,
@@ -288,6 +292,7 @@ export class AddChannelComponent implements OnInit {
     };
     // console.log('formData: ', this.formData);
     // return
+    this.isLoading = true;
     this._service.AddChannel(this.formData).subscribe((res) => {
       // console.log('res: ', res);
       const Toast = Swal.mixin({
@@ -305,8 +310,8 @@ export class AddChannelComponent implements OnInit {
       Toast.fire({
         icon: 'success',
         title: 'Channel Added Successfully',
-       
       });
+      this.isLoading = false;
       this.router.navigate(['home/channel']);
     });
   }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
-
+import Pusher from 'pusher-js';
+import { HttpClient } from '@angular/common/http';
+import { Location } from '@angular/common';
 export interface PostDetails {
   channelApproved: boolean;
   channelMasterId: string;
@@ -42,6 +44,9 @@ export interface PostDetails {
 export class ChannelDetailsComponent implements OnInit {
   id: any;
   mobile_No: any;
+  username: any;
+  messages: any = [];
+  message: string = '';
   activePostDetails: PostDetails[] = [];
   pastPostDetails: PostDetails[] = [];
   profile: PostDetails[] = [];
@@ -50,13 +55,31 @@ export class ChannelDetailsComponent implements OnInit {
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _service: SharedService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
     this.id = this._ActivatedRoute.snapshot.paramMap.get('param1');
     this.mobile_No = this._ActivatedRoute.snapshot.paramMap.get('param2');
+    this.username = this._ActivatedRoute.snapshot.paramMap.get('param3');
+    // console.log('this.username: ', this.username);
     this.getActivePost();
+    Pusher.logToConsole = true;
+    const pusher = new Pusher('523e3cf86c481c43e5a5', {
+      cluster: 'ap2',
+    });
+    const channel = pusher.subscribe('channel');
+    channel.bind('my-event', (data: any) => {
+      // alert(JSON.stringify(data));
+      this.messages.push(data);
+      console.log(' this.messages: ', this.messages);
+    });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   getActivePost() {
@@ -85,9 +108,7 @@ export class ChannelDetailsComponent implements OnInit {
     }
 
     this._service.GetPastPost(mobile_No, this.id).subscribe((res) => {
-      console.log('res: ', res);
       this.notFound = res.message;
-      console.log('this.notFound: ', this.notFound);
       this.pastPostDetails = res.data;
       // console.log('this.channelDetails: ', this.channelDetails);
     });
@@ -103,8 +124,6 @@ export class ChannelDetailsComponent implements OnInit {
     }
 
     this._service.GetProfile(mobile_No, this.id).subscribe((res) => {
-      // console.log('res: ', res.data[0]);
-
       this.profile = res.data;
       // console.log('this.channelDetails: ', this.channelDetails);
     });
@@ -130,7 +149,26 @@ export class ChannelDetailsComponent implements OnInit {
     }
   }
 
-  addPost(){
+  addPost() {
     this.router.navigate(['home/list/' + this.id + '/' + this.mobile_No]);
+  }
+
+  onChnage(event: any) {
+    // console.log('event: ', event.target.value);
+    this.message = event.target.value;
+  }
+
+  submit(): void {
+    this.message = '';
+    console.log('this.message: ', this.message);
+    return;
+    this.http
+      .post('http://localhost/api/messages', {
+        username: this.username,
+        message: this.message,
+      })
+      .subscribe(() => {
+        this.message = '';
+      });
   }
 }
