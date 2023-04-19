@@ -1,6 +1,6 @@
 <section class="container d-lg-none d-md-block d-sm-block">
     <div class="row">
-      <div class=" mx-auto">
+      <div class="mx-auto">
         <div class="card">
           <!-- Bordered Tabs Justified -->
           <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
@@ -31,10 +31,9 @@
                     [scrollWindow]="true"
                     [fromRoot]="true"
                     (scrolled)="onScroll()">
-
                       <div class="card list-card my-2" *ngFor="let items of feedDetails"  >
                         <div class="m-2" >
-                          <div class=" row user_informatiom">
+                          <div class=" row user_informatiom d-flex align-items-center  ">
                             <!-- <div class="col-1">
                               <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                             </div>
@@ -53,7 +52,6 @@
                                 <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                               </div>
                             </div>
-
                             <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
                               <button class="btn follow-btn" *ngIf="items.isSelfPost != true">
                                 <span *ngIf="items.clubBlock == false" (click)="blockUnblockPost(items.id, true)" style="padding: inherit;">Block</span>
@@ -162,7 +160,6 @@
                     <!-- <app-pagination [totalRecords]="totalRecord" [recordsPerPage]="recoardsPerPage" (onPageChange)="displayActivePage($event)"></app-pagination> -->
                     <!-- <app-pagination [current]="current" [total]="total" (goTo)="onGoTo($event)" (next)="onNext($event)"
                       (previous)="onPrevious($event)"></app-pagination> -->
-
                   </div>
                   <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="feedDetails.length == 0" >
                     <span>Data Not Found</span>
@@ -184,7 +181,6 @@
                           <div class="">
                            <p class="club-dis">{{items.description}}</p>
                           </div> -->
-
                           <div class="channel-name d-flex col-12">
                            <div class="col-8" (click)="getDetails(items.id, items.name)">
                              <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span>
@@ -199,12 +195,10 @@
                          <div class="">
                            <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
                           </div>
-
                          </div>
                        </div>
                          <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
                            <div class="grid-data d-flex  ">
-
                              <div class="col-5  border-end ">
                                <div class="d-flex align-items-center "><span class="club-icon  "><i class="bi bi-eye"></i></span><span
                                    class="club-inf">Impression</span></div>
@@ -221,12 +215,9 @@
                                <div class="club-icon px-3">{{items.postcount}}</div>
                              </div>
                            </div>
-
-
                            </div>
                      </div>
                      </div>
-
                   </div>
                   <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="clubList.length == 0" >
                     <span>Data Not Found</span>
@@ -379,14 +370,13 @@
                   </div>
                 </div>
               </div>
-
               <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0" >
                 <span>Data Not Found</span>
               </div>
             </div>
-          </div><!-- End Bordered Tabs Justified -->
+          </div>
+          <!-- End Bordered Tabs Justified -->
         </div>
       </div>
-
     </div>
   </section>
