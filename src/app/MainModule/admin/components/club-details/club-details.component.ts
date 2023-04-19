@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
@@ -12,11 +13,12 @@ export class ClubDetailsComponent implements OnInit {
   clubListId: any;
   name: any;
   clubDetails: any;
-  searchKey: string = ''
+  searchKey: string = '';
   constructor(
     private _service: SharedService,
     private router: Router,
-    private _ActivatedRoute: ActivatedRoute
+    private _ActivatedRoute: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,9 @@ export class ClubDetailsComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.location.back();
+  }
   getClubDetails() {
     this._service
       .GetClubDetails(this.mobile_number, this.clubListId)

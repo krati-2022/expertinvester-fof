@@ -15,7 +15,7 @@
           <div class="" >
             <div class="" >
               <div class="example" style="height: 70vh; overflow: auto;">
-                <div class="card list-card px-2 py-2" *ngFor="let items of clubList | filter : searchKey : 'name'">
+                <div class="card list-card my-3 m-4 p-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
                  <div class="">
                   <div class="row">
                     <div class="channel-name d-flex col-12">
@@ -96,9 +96,9 @@
                       [fromRoot]="true"
                       (scrolled)="onScroll()">
 
-                        <div class="card list-card my-3 m-2" *ngFor="let items of feedDetails"  >
-                          <div class="card-body" >
-                            <div class=" row user_informatiom">
+                        <div class="card list-card my-3" *ngFor="let items of feedDetails"  >
+                          <div class="m-2" >
+                            <div class=" row user_informatiom  d-flex justify-content-between align-items-center  ">
                               <!-- <div class="col-1">
                                 <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                               </div>

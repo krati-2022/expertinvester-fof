@@ -83,7 +83,12 @@ export class ChannelComponent implements OnInit {
   getChannelDetails(item: any) {
     // console.log(item);
     this.router.navigate([
-      'home/channel-details/' + item.channelMasterId + '/' + item.mobile_No,
+      'home/channel-details/' +
+        item.channelMasterId +
+        '/' +
+        item.mobile_No +
+        '/' +
+        item.username,
     ]);
   }
 
@@ -175,7 +180,7 @@ export class ChannelComponent implements OnInit {
     this.channelSubscriber = new ChannelSubscriber({
       channelId: item.channelMasterId,
       subscriber: !item.isSubscribed,
-      mobile_No: item.mobile_No,
+      mobile_No: this.mobileNumber,
     });
     // console.log('this.channelSubscriber: ', this.channelSubscriber);
     // return

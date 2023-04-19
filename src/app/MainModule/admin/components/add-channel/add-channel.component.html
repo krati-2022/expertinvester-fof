@@ -4,7 +4,7 @@
       <div class="card list-card ">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-baseline mb-3">
-            <h5 class="card-title">Add-Channel</h5>
+            <h5 class="card-title"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i> Add-Channel</h5>
             <!-- <h4 class=" "><i class="bi bi-cloud-arrow-up px-2"></i> Upload image</h4> -->
           </div>
           <!-- General Form Elements -->
@@ -161,8 +161,13 @@
             </div>
             <div class="row mb-3 mt-3">
               <div class="col-lg-6 mx-auto">
-                <button class="btn btn-primary w-100 " type="submit">Submit</button>
+                <!-- <button class="btn btn-primary w-100 " type="submit">Submit</button> -->
+                <button class="btn btn-primary w-100 " type="submit" [disabled]="isLoading">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+                  <span *ngIf="!isLoading">Submit</span>
+                </button>
               </div>
+             
             </div>
           </form>
           <!-- End General Form Elements -->

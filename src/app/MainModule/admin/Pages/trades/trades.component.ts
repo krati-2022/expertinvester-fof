@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,7 +23,8 @@ export class TradesComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private _service: SharedService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +46,9 @@ export class TradesComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.location.back();
+  }
   get addPostControl() {
     return this.addPostForm.controls;
   }
@@ -79,7 +84,6 @@ export class TradesComponent implements OnInit {
         this.tradetype = event.target.id;
         // console.log('this.tradetype: ', this.tradetype);
         break;
-   
     }
   }
 
@@ -121,8 +125,10 @@ export class TradesComponent implements OnInit {
         icon: 'success',
         title: res.message,
       });
-      this.addPostForm.reset()
-      this.router.navigate(['home/channel-details/' + this.channelId + '/' + this.mobileNumber]);
+      this.addPostForm.reset();
+      this.router.navigate([
+        'home/channel-details/' + this.channelId + '/' + this.mobileNumber,
+      ]);
       this.isLoading = false;
     });
   }

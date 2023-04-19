@@ -98,8 +98,8 @@ import { ClubDetailsComponent } from './components/club-details/club-details.com
   imports: [
     CommonModule,
     AdminRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     NgOtpInputModule,
     InfiniteScrollModule,
     NgxGalleryModule

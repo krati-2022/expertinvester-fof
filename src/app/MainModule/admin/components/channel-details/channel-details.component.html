@@ -34,8 +34,8 @@
                 <div class="example" style="height: 65vh; overflow: auto;" *ngIf="activePostDetails.length != 0">
 
 
-                      <div class="card list-card my-3 m-4my-3" *ngFor="let items of activePostDetails">
-                        <div class="card-body">
+                      <div class="card list-card my-3" *ngFor="let items of activePostDetails">
+                        <div class="m-2">
                           <div class="container">
                             <div class=" row user_informatiom">
                               <div class="col-1">
@@ -140,6 +140,12 @@
                             </div>
                           </div>
                         </div>
+                        <div class="col-8 mx-3 py-2">
+                          <div class="user_name">{{items.username}}</div>
+                          <div class="detail">{{items.sebi}}</div>
+                          <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                        </div>
+
                       </div>
 
                 </div>
@@ -175,16 +181,8 @@
 
                           </div>
                         </div>
-                        <div class="container">
-                          <div class="row">
-                            <div class="channel-name">
-                              <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                            </div>
-                            <div class="channel-detail">
-                              {{items.stockname}}
-                            </div>
-                            <div class="date">27 Jan 2023, 06:43 PM</div>
-                          </div>
+                        <div class="channel-detail">
+                          {{items.stockname}}
                         </div>
                         <div class="container">
                           <div class="row expect-section my-3">
@@ -248,19 +246,38 @@
                         </div>
                         <div class="d-flex justify-content-between">
                           <div>
-                            <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
-                            <span><i class="bi bi-share-fill"></i></span>
+                            <div class="expect">
+                              Expected Move
+                            </div>
+                            <div class="expect-percent">18.0%</div>
                           </div>
-                          <div>
-                            <i class="bi bi-bookmark-fill"></i>
+                          <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button>
+                          </div>
+                        </div>
+                        <div>
+                          <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
+                          <div class="row d-flex text-center py-2">
+                            <div class="col-4">
+                              <div class="price">Entry Price</div>
+                              <div class="rate">{{items.entryprice}} </div>
+                            </div>
+                            <div class="col-4">
+                              <div class="price">Target Price</div>
+                              <div class="rate">{{items.targetprice}} </div>
+                            </div>
+                            <div class="col-4">
+                              <div class="price">Stop Loss</div>
+                              <div class="rate"> {{items.stoploss}}</div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
               </div>
-              <div class="example d-flex justify-content-center" style="font-size: 20px;" *ngIf="pastPostDetails.length == 0">
-                  <span>{{notFound}}</span>
+              <div class="example d-flex justify-content-center" style="font-size: 20px;"
+                *ngIf="activePostDetails.length == 0">
+                <span>{{notFound}}</span>
               </div>
               </div>
               <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -271,17 +288,18 @@
                         <div class="col-2">
                           <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                         </div>
-                        <div class="col-6 mx-2 py-2">
+                        <div class="col-8 mx-3 py-2">
                           <div class="user_name">{{items.username}}</div>
                           <div class="detail">{{items.sebi}}</div>
 
                         </div>
                         <div class="col-3 text-end "><button type="button" class="btn follow-btn">Followed</button>
                         </div>
+
                       </div>
-                      <div class="py-2">
-                        <p class="profile-detail">{{items.description}}</p>
-                      </div>
+                    </div>
+
+                    <div class="container">
                       <div class="row">
                         <div class="accordion" id="accordionExample">
                           <div class="accordion-item">
@@ -306,46 +324,135 @@
 
                         </div>
                       </div>
-                      <div class="row py-2">
-                        <h6 class="profile-line">INSTRUMENTS</h6>
-                        <div class="py-2" >
-                          <span class="profile-option mx-2" *ngFor="let item of items.idealfor">{{item.idealfor}}</span>
+                    </div>
+
+                    <div class="container">
+                      <div class="row mb-2">
+                        <div class="col-4 risk">
+                          <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="6" cy="6" r="6" fill="#ED1C24" />
+                            </svg>
+                            High Risk</div>
+                        </div>
+                        <div class="col-8 months">
+                          <div class=" position-btn"><i class="bi bi-clock px-1"></i>Positional Trading (1-3
+                            Months)</div>
                         </div>
                       </div>
-                      <div class="row py-2">
-                        <h6 class="profile-line">TIME HORIZON</h6>
-                        <div class="py-2">
-                          <span class="profile-option ">Intraday</span> <span class="profile-option mx-3">Swing Trading
-                            (2:30 days)</span>
-                        </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <img [src]="items.imageurl" alt="">
                       </div>
+                    </div>
+                    <div class="container">
                       <div class="row py-2">
-                        <h6 class="profile-line">CAPITAL REQUIRED</h6>
-                        <div class="py-2">
-                          <span class="profile-option ">Less than INR 1 Lac</span> <span class="profile-option mx-3">INR
-                            1 - 3 Lacs</span>
-                        </div>
+                        <h6 class="dis-line">{{items.stockname}}:</h6>
+                        <p class="dis">{{items.description}}</p>
                       </div>
-                      <div class="row py-2">
-                        <h6 class="profile-line">KNOWLEDGE LEVEL</h6>
-                        <div class="py-2">
-                          <span class="profile-option ">Beginner</span> <span
-                            class="profile-option mx-3">Intermediate</span> <span class="profile-option">Pro</span>
-                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
+                        <span><i class="bi bi-share-fill"></i></span>
                       </div>
-                      <div class="row py-2">
-                        <h6 class="profile-line">PARTICIPANT TYPE</h6>
-                        <div class="py-2">
-                          <span class="profile-option ">Trader</span>
-                        </div>
+                      <div>
+                        <i class="bi bi-bookmark-fill"></i>
                       </div>
-                      <div class="row py-2">
-                        <h6 class="profile-line">RISK TYPE</h6>
-                        <div class="py-2">
-                          <span class="profile-option ">High</span>
-                        </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="example d-flex justify-content-center" style="font-size: 20px;"
+                *ngIf="pastPostDetails.length == 0">
+                <span>{{notFound}}</span>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
+              <div class="example" style="height: 65vh; overflow: auto;" *ngFor="let items of profile">
+                <div class="card list-card my-3">
+                  <div class="m-2">
+                    <div class=" row user_informatiom d-flex align-items-center">
+                      <div class="col-2">
+                        <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                       </div>
-                      <!-- <div class="my-4">
+                      <div class="col-6 mx-2 py-2">
+                        <div class="user_name">{{items.username}}</div>
+                        <div class="detail">{{items.sebi}}</div>
+
+                      </div>
+                      <div class="col-3 text-end "><button type="button" class="btn follow-btn">Followed</button>
+                      </div>
+                    </div>
+                    <div class="py-2">
+                      <p class="profile-detail">{{items.description}}</p>
+                    </div>
+                    <div class="row">
+                      <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              Benefits:
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              <ul class="" *ngFor="let data of items.benefits">
+                                <li class="benefit-line">
+                                  {{data.benefits}}
+                                </li>
+
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="row py-2">
+                      <h6 class="profile-line">INSTRUMENTS</h6>
+                      <div class="py-2">
+                        <span class="profile-option mx-2" *ngFor="let item of items.idealfor">{{item.idealfor}}</span>
+                      </div>
+                    </div>
+                    <div class="row py-2">
+                      <h6 class="profile-line">TIME HORIZON</h6>
+                      <div class="py-2">
+                        <span class="profile-option ">Intraday</span> <span class="profile-option mx-3">Swing Trading
+                          (2:30 days)</span>
+                      </div>
+                    </div>
+                    <div class="row py-2">
+                      <h6 class="profile-line">CAPITAL REQUIRED</h6>
+                      <div class="py-2">
+                        <span class="profile-option ">Less than INR 1 Lac</span> <span class="profile-option mx-3">INR
+                          1 - 3 Lacs</span>
+                      </div>
+                    </div>
+                    <div class="row py-2">
+                      <h6 class="profile-line">KNOWLEDGE LEVEL</h6>
+                      <div class="py-2">
+                        <span class="profile-option ">Beginner</span> <span
+                          class="profile-option mx-3">Intermediate</span> <span class="profile-option">Pro</span>
+                      </div>
+                    </div>
+                    <div class="row py-2">
+                      <h6 class="profile-line">PARTICIPANT TYPE</h6>
+                      <div class="py-2">
+                        <span class="profile-option ">Trader</span>
+                      </div>
+                    </div>
+                    <div class="row py-2">
+                      <h6 class="profile-line">RISK TYPE</h6>
+                      <div class="py-2">
+                        <span class="profile-option ">High</span>
+                      </div>
+                    </div>
+                    <!-- <div class="my-4">
                         <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
                           <li class="nav-item flex-fill" role="presentation">
                             <button class="nav-link w-100 active" id="Active-tab" data-bs-toggle="tab"
@@ -665,7 +772,6 @@
                           </div>
                         </div>
                       </div> -->
-                    </div>
                   </div>
                 </div>
               </div>
@@ -734,8 +840,9 @@
                     </div>
                     </div>
                 </div>
-              </div><!-- End Bordered Tabs Justified -->
-            </div>
+              </div>
+              <!-- </div> -->
+            </div><!-- End Bordered Tabs Justified -->
           </div>
         </div>
       </div>
