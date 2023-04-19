@@ -7,11 +7,11 @@
           <div class="pagetitle">
             <h1 class="px-3"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i>Detail-Page</h1>
           </div>
-          <div class="card-body" *ngFor="let items of feedPostDetail">
+          <div class="" *ngFor="let items of feedPostDetail">
             <!-- Bordered Tabs Justified -->
             <div class="example" style="height: 70vh; overflow: auto;">
-              <div class="card py-2">
-                <div class="card-body">
+              <div class="card ">
+                <div class="m-2">
                   <div class="row">
                     <div class="channel-detail py-1">
                       Market Volatility
@@ -25,9 +25,9 @@
                     </div>
                   </div>
                   <div class="gallery-wrapper" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null">
-                    <ngx-gallery  [options]="galleryOptions" [images]="galleryImages"  class="ngx-gallery"></ngx-gallery>
+                    <ngx-gallery  [options]="galleryOptions" [images]="galleryImages"  class="ngx-gallery" style="object-fit:fill; height:300px"></ngx-gallery>
                   </div>
-                  <div class="row py-2" [ngClass]="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null ? 'sds' : 'dd'">
+                  <div class="row py-2" [ngClass]="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null ? 'sds' : 'dd'"style="object-fit:fill; height:300px">
                     <h6 class="dis-line">*Current market Volatility* </h6>
                     <p class="dis">{{items.description}}</p><br>
                       <p class="dis">https://twitter.com/riteshdaga83/status/162155698582558594?t=

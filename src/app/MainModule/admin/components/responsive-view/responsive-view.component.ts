@@ -173,7 +173,12 @@ export class ResponsiveViewComponent implements OnInit {
   getChannelDetails(item: any) {
     // console.log(item);
     this.router.navigate([
-      'home/channel-details/' + item.channelMasterId + '/' + item.mobile_No,
+      'home/channel-details/' +
+        item.channelMasterId +
+        '/' +
+        item.mobile_No +
+        '/' +
+        item.username,
     ]);
   }
 

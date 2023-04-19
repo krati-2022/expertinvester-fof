@@ -152,28 +152,9 @@ export class ChannelComponent implements OnInit {
       });
   }
 
-  getDetails(clublistId: string, clubName: string) {
-    // console.log('clublistId: ', clublistId);
-    this.router.navigate([
-      'home/add-trade/' + clublistId + '/' + this.mobileNumber + '/' + clubName,
-    ]);
-  }
+  
 
-  getFeedDetails(id: string, recordType: string) {
-    // console.log('recordType: ', recordType);
-    // console.log('id: ', id);
-    // return
-    switch (recordType) {
-      case 'ClubRecord':
-        this.router.navigate(['home/details/' + id + '/' + this.mobileNumber]);
-        break;
-      case 'ChannelRecord':
-        this.router.navigate([
-          'home/listGroup/' + id + '/' + this.mobileNumber,
-        ]);
-        break;
-    }
-  }
+
 
   subscribe(item: any) {
     // console.log('item: ', item);
@@ -200,7 +181,7 @@ export class ChannelComponent implements OnInit {
   });
   // console.log(' this.approveRejectDetail: ',  this.approveRejectDetail);
     this._service.ApproveRejectChannel(this.approveRejectDetail).subscribe(res => {
-    console.log('res: ', res);
+    // console.log('res: ', res);
       this.getChannel();
     })
   }

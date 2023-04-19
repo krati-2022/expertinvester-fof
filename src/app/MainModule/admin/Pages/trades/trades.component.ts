@@ -14,6 +14,7 @@ export class TradesComponent implements OnInit {
   addPostForm: FormGroup | any;
   name: any;
   mobileNumber: any;
+  userName: any;
   channelId: any;
   imageSrc: string = '';
   tradetype: string = 'BUY';
@@ -31,6 +32,7 @@ export class TradesComponent implements OnInit {
     this.name = this._ActivatedRoute.snapshot.paramMap.get('param1');
     this.channelId = this._ActivatedRoute.snapshot.paramMap.get('param2');
     this.mobileNumber = this._ActivatedRoute.snapshot.paramMap.get('param3');
+    this.userName = this._ActivatedRoute.snapshot.paramMap.get('param4');
     this.addPostForm = this.formBuilder.group({
       Mobile_No: [this.mobileNumber, Validators.required],
       channelId: [this.channelId, Validators.required],
@@ -126,8 +128,14 @@ export class TradesComponent implements OnInit {
         title: res.message,
       });
       this.addPostForm.reset();
+      this.submitted = false;
       this.router.navigate([
-        'home/channel-details/' + this.channelId + '/' + this.mobileNumber,
+        'home/channel-details/' +
+          this.channelId +
+          '/' +
+          this.mobileNumber +
+          '/' +
+          this.userName,
       ]);
       this.isLoading = false;
     });

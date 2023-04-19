@@ -61,12 +61,12 @@ const routes: Routes = [
       { path: 'expertProfile', component: ExpertProfileComponent },
       { path: 'listGroup/:param1/:param2', component: ListGroupComponent },
       { path: 'details/:param1/:param2', component: DetailsComponent },
-      { path: 'list/:param1/:param2', component: ListComponent },
+      { path: 'list/:param1/:param2/:param3', component: ListComponent },
       {
         path: 'add-trade/:param1/:param2/:param3',
         component: AddTradeComponent,
       },
-      { path: 'trades/:param1/:param2/:param3', component: TradesComponent },
+      { path: 'trades/:param1/:param2/:param3/:param4', component: TradesComponent },
       {
         path: 'club-details/:param1/:param2/:param3',
         component: ClubDetailsComponent,

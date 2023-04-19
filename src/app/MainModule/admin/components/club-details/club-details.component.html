@@ -46,7 +46,7 @@
                     </div>
                     <div>
                       
-                      <div class="row">
+                      <div class="row" >
                         <div class="channel-name d-flex justify-content-between align-items-center py-2">
                           <span> <i class="bi bi-lightbulb"></i>Chat Barter</span> <span class=""><button type="button"
                               class="btn follow-btn">Follow</button></span>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="date">27 Jan 2023, 06:43 PM</div>
                       </div>
-                      <div class="row">
+                      <div class="row" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
                         <img [src]="items.imageurl" style="object-fit:fill; height:500px" alt="">
                       </div>
                       <div class="row py-2" >

@@ -97,12 +97,7 @@
                     <div class="col-lg-6">
                       <input type="text" formControlName="addBenefits" placeholder="Enter benefits"
                         class="form-control">
-                        <!-- <div *ngIf=" submitted && AddChannelControl.addBenefits.errors" class="invalid-feedback">
-                          <div *ngIf="AddChannelControl.addBenefits.errors.required">Required.</div>
-                        </div> -->
-                      <!-- <ul class="mt-2" *ngFor="let items of benefits">
-                      <li class="">{{items.benefits}}</li>
-                     </ul> -->
+                       
                      <div *ngIf="benefits.length == 0  && benefitMessage!=''" style="color:red" class="d-flex justify-content-center">{{benefitMessage}}</div>
                       <div>
                         <ul class="d-flex justify-content-between" *ngFor="let items of benefits">
@@ -136,9 +131,9 @@
                     <div class="col-lg-3">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                          formControlName="coAdChannel" [checked]="coAdList.length != 0" (change)="coAddChannel()">
+                          formControlName="coAdChannel" [checked]="coAdList.length != 0" (click)="coAddChannel()">
                         <label class="form-check-label" for="flexCheckChecked">
-                          Co-Ad Channel
+                          Co-Ad Channel 
                         </label>
                       </div>
                     </div>
