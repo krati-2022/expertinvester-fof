@@ -33,39 +33,44 @@
                     (scrolled)="onScroll()">
                       <div class="card list-card my-2" *ngFor="let items of feedDetails"  >
                         <div class="m-2" >
-                          <div class=" row user_informatiom d-flex align-items-center  ">
-                            <!-- <div class="col-1">
+                       <div class="container">
+                        <div class=" row user_informatiom d-flex align-items-center  ">
+                          <!-- <div class="col-1">
+                            <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                          </div>
+                          <div class="col-8 mx-3 py-2">
+                            <div class="user_name">{{items.username}}</div>
+                            <div class="detail">{{items.sebi}}</div>
+                            <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                          </div> -->
+                          <div class="d-flex col-8" (click)="getFeedDetails(items.id, items.recordType)">
+                            <div class="col-2" >
                               <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                             </div>
-                            <div class="col-8 mx-3 py-2">
+                            <div class="col-6 mx-3 py-2" >
                               <div class="user_name">{{items.username}}</div>
                               <div class="detail">{{items.sebi}}</div>
                               <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                            </div> -->
-                            <div class="d-flex col-8" (click)="getFeedDetails(items.id, items.recordType)">
-                              <div class="col-2" >
-                                <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                              </div>
-                              <div class="col-6 mx-3 py-2" >
-                                <div class="user_name">{{items.username}}</div>
-                                <div class="detail">{{items.sebi}}</div>
-                                <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                              </div>
-                            </div>
-                            <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
-                              <button class="btn follow-btn" *ngIf="items.isSelfPost != true">
-                                <span *ngIf="items.clubBlock == false" (click)="blockUnblockPost(items.id, true)" style="padding: inherit;">Block</span>
-                                <span *ngIf="items.clubBlock == true" (click)="blockUnblockPost(items.id, false)" style="padding: inherit;">Unblock</span>
-                              </button>
                             </div>
                           </div>
+                          <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
+                            <button class="btn follow-btn" *ngIf="items.isSelfPost != true">
+                              <span *ngIf="items.clubBlock == false" (click)="blockUnblockPost(items.id, true)" style="padding: inherit;">Block</span>
+                              <span *ngIf="items.clubBlock == true" (click)="blockUnblockPost(items.id, false)" style="padding: inherit;">Unblock</span>
+                            </button>
+                          </div>
+                        </div>
+                       </div>
                           <div *ngIf="items.clubBlock != true">
-                            <div class="row">
-                              <div class="d-flex justify-content-between align-items-baseline py-2">
-                                <h6 class="heading">TRADING CHANNEL</h6>
-                                <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free Access</span>
-                              </div>
-                            </div>
+                       <div class="container">
+                        <div class="row">
+                          <div class="d-flex justify-content-between align-items-baseline py-2">
+                            <h6 class="heading">TRADING CHANNEL</h6>
+                            <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free Access</span>
+                          </div>
+                        </div>
+                       </div>
+                          <div class="container">
                             <div class="row" *ngIf="items.recordType == 'ClubRecord'">
                               <div class="channel-name d-flex justify-content-between align-items-center">
                                 <span> <i class="bi bi-lightbulb"></i>Chat Barter</span>
@@ -78,6 +83,8 @@
                               </div>
                               <div class="date">27 Jan 2023, 06:43 PM</div>
                             </div>
+                          </div>
+                           <div class="container">
                             <div class="row" *ngIf="items.recordType == 'ChannelRecord'">
                               <div class="channel-name">
                                 <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
@@ -87,6 +94,8 @@
                               </div>
                               <div class="date">27 Jan 2023, 06:43 PM</div>
                             </div>
+                           </div>
+                           <div class="container">
                             <div class="row expect-section my-3 mb-2" *ngIf="items.recordType == 'ChannelRecord'">
                               <div class="expect-inf d-flex justify-content-between pb-2 ">
                                 <div>
@@ -115,6 +124,8 @@
                                 </div>
                               </div>
                             </div>
+                           </div>
+                           <div class="container">
                             <div class="row mb-2" *ngIf="items.recordType == 'ChannelRecord'">
                               <div class="col-4 months">
                                 <div type="button" class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
@@ -128,13 +139,18 @@
                                   Months)</div>
                               </div>
                             </div>
+                           </div>
+                          <div class="container">
                             <div class="row" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
                               <img [src]="items.imageurl" style="object-fit:fill; height:500px" alt="">
                             </div>
+                          </div>
+                          <div class="container">
                             <div class="row py-2">
                               <h6 class="dis-line">IBR Infra CMP 305 :</h6>
                               <p class="dis">{{items.description}}</p>
                             </div>
+                          </div>
                             <div class="d-flex justify-content-between">
                               <div >
                                <span (click)="like(items.id, !items.isUserLiked)">
