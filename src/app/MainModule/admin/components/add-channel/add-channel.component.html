@@ -77,19 +77,7 @@
                     </div>
 
                   </fieldset>
-                  <!-- <fieldset class="row mb-3 mt-2">
-                  <legend class="col-form-label col-lg-4 form-line"><i class="bi bi-hand-thumbs-up-fill px-2"></i>Benefits </legend>
-                  <div class="col-lg-8 ">
-                    <div class="form-check" *ngFor="let items of benefits">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                      <label class="form-check-label form-lines" for="flexCheckDefault1">
-                        {{items}}
-                      </label>
-                    </div>
-                    
-  
-                  </div>
-                </fieldset> -->
+                
 
                   <div class="row mb-3">
                     <label for="inputText" class="col-lg-4 col-form-label form-line"><i
@@ -97,12 +85,7 @@
                     <div class="col-lg-6">
                       <input type="text" formControlName="addBenefits" placeholder="Enter benefits"
                         class="form-control">
-                        <!-- <div *ngIf=" submitted && AddChannelControl.addBenefits.errors" class="invalid-feedback">
-                          <div *ngIf="AddChannelControl.addBenefits.errors.required">Required.</div>
-                        </div> -->
-                      <!-- <ul class="mt-2" *ngFor="let items of benefits">
-                      <li class="">{{items.benefits}}</li>
-                     </ul> -->
+                       
                      <div *ngIf="benefits.length == 0  && benefitMessage!=''" style="color:red" class="d-flex justify-content-center">{{benefitMessage}}</div>
                       <div>
                         <ul class="d-flex justify-content-between" *ngFor="let items of benefits">
@@ -136,9 +119,9 @@
                     <div class="col-lg-3">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                          formControlName="coAdChannel" [checked]="coAdList.length != 0" (change)="coAddChannel()">
+                          formControlName="coAdChannel" [checked]="coAdList.length != 0" (click)="coAddChannel()">
                         <label class="form-check-label" for="flexCheckChecked">
-                          Co-Ad Channel
+                          Co-Ad Channel 
                         </label>
                       </div>
                     </div>

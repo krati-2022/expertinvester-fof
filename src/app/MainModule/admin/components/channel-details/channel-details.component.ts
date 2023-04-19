@@ -150,7 +150,9 @@ export class ChannelDetailsComponent implements OnInit {
   }
 
   addPost() {
-    this.router.navigate(['home/list/' + this.id + '/' + this.mobile_No]);
+    this.router.navigate([
+      'home/list/' + this.id + '/' + this.mobile_No + '/' + this.username,
+    ]);
   }
 
   onChnage(event: any) {

@@ -129,7 +129,7 @@
                       </div>
                     </div>
                     <div class="container">
-                      <div class="row">
+                      <div class="row" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
                         <img [src]="items.imageurl" alt="">
                       </div>
                     </div>
@@ -245,7 +245,7 @@
                       </div>
                     </div>
                     <div class="container">
-                      <div class="row">
+                      <div class="row" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
                         <img [src]="items.imageurl" alt="">
                       </div>
                     </div>

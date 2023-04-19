@@ -12,16 +12,18 @@ export class ListComponent implements OnInit {
   Data = data;
   channelId: any;
   mobileNumber: any;
+  userName: any;
   constructor(
     private router: Router,
     private _ActivatedRoute: ActivatedRoute,
-    private location:Location
+    private location: Location
   ) {}
 
   ngOnInit(): void {
     // console.log(this.Data);
     this.channelId = this._ActivatedRoute.snapshot.paramMap.get('param1');
     this.mobileNumber = this._ActivatedRoute.snapshot.paramMap.get('param2');
+    this.userName = this._ActivatedRoute.snapshot.paramMap.get('param3');
   }
 
   goBack() {
@@ -36,7 +38,7 @@ export class ListComponent implements OnInit {
         '/' +
         this.channelId +
         '/' +
-        this.mobileNumber,
+        this.mobileNumber + '/' + this.userName
     ]);
   }
 }
