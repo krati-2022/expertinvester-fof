@@ -45,6 +45,7 @@
 
                 <div class="card list-card my-3" *ngFor="let items of feedDetails | filter : searchKey : 'username'"  >
                   <div class="m-2" >
+                   <div class="container">
                     <div class=" row user_informatiom d-flex justify-content-between align-items-center"style="cursor: pointer;">
                       <div class="d-flex col-8" (click)="getDetails(items.id, items.recordType)">
                         <div class="col-2" >
@@ -64,61 +65,71 @@
                         </button>
                       </div>
                     </div>
+                   </div>
                    <div *ngIf="items.clubBlock != true">
+                   <div class="container">
                     <div class="row">
                       <div class="d-flex justify-content-between align-items-baseline py-2">
                         <h6 class="heading" (click)="getDetails(items.id, items.recordType)">TRADING CHANNEL</h6>
                         <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i> Free Access</span>
                       </div>
                     </div>
-                    <div class="row" *ngIf="items.recordType == 'ClubRecord'">
-                      <div class="channel-name d-flex justify-content-between align-items-center">
-                        <span (click)="getDetails(items.id, items.recordType)"> <i class="bi bi-lightbulb"></i>Chat Barter</span>
-                        <!-- <span class=""><button type="button"
-                            class="btn follow-btn">Follow</button></span> -->
-                      </div>
-                      <div class="channel-detail">
-                        {{items.stockname}}
-                      </div>
-                      <div class="date">27 Jan 2023, 06:43 PM</div>
+                   </div>
+                 <div class="container">
+                  <div class="row" *ngIf="items.recordType == 'ClubRecord'">
+                    <div class="channel-name d-flex justify-content-between align-items-center">
+                      <span (click)="getDetails(items.id, items.recordType)"> <i class="bi bi-lightbulb"></i>Chat Barter</span>
+                      <!-- <span class=""><button type="button"
+                          class="btn follow-btn">Follow</button></span> -->
                     </div>
-                    <div class="row mb-2" *ngIf="items.recordType == 'ChannelRecord'">
-                      <div class="channel-name">
-                        <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                      </div>
-                      <div class="channel-detail">
-                        {{items.stockname}}
-                      </div>
-                      <div class="date">27 Jan 2023, 06:43 PM</div>
+                    <div class="channel-detail">
+                      {{items.stockname}}
                     </div>
-                    <div class="row expect-section my-3 " *ngIf="items.recordType == 'ChannelRecord'">
-                      <div class="expect-inf d-flex justify-content-between pb-2 ">
+                    <div class="date">27 Jan 2023, 06:43 PM</div>
+                  </div>
+                 </div>
+              <div class="container">
+                <div class="row mb-2" *ngIf="items.recordType == 'ChannelRecord'">
+                  <div class="channel-name">
+                    <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
+                  </div>
+                  <div class="channel-detail">
+                    {{items.stockname}}
+                  </div>
+                  <div class="date">27 Jan 2023, 06:43 PM</div>
+                </div>
+              </div>
+                    <div class="container">
+                      <div class="row expect-section my-3 " *ngIf="items.recordType == 'ChannelRecord'">
+                        <div class="expect-inf d-flex justify-content-between pb-2 ">
+                          <div>
+                            <div class="expect">
+                              Expected Move
+                            </div>
+                            <div class="expect-percent">18.0%</div>
+                          </div>
+                          <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button></div>
+                        </div>
                         <div>
-                          <div class="expect">
-                            Expected Move
-                          </div>
-                          <div class="expect-percent">18.0%</div>
-                        </div>
-                        <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button></div>
-                      </div>
-                      <div>
-                        <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
-                        <div class="row d-flex text-center py-2">
-                          <div class="col-4">
-                            <div class="price">Entry Price</div>
-                            <div class="rate">{{items.entryprice}} </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="price">Target Price</div>
-                            <div class="rate">{{items.targetprice}}</div>
-                          </div>
-                          <div class="col-4">
-                            <div class="price">Stop Loss</div>
-                            <div class="rate">{{items.stoploss}}</div>
+                          <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
+                          <div class="row d-flex text-center py-2">
+                            <div class="col-4">
+                              <div class="price">Entry Price</div>
+                              <div class="rate">{{items.entryprice}} </div>
+                            </div>
+                            <div class="col-4">
+                              <div class="price">Target Price</div>
+                              <div class="rate">{{items.targetprice}}</div>
+                            </div>
+                            <div class="col-4">
+                              <div class="price">Stop Loss</div>
+                              <div class="rate">{{items.stoploss}}</div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                   <div class="container">
                     <div class="row mb-2" *ngIf="items.recordType == 'ChannelRecord'">
                       <div class="col-4 months">
                         <div type="button" class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
@@ -132,13 +143,18 @@
                           Months)</div>
                       </div>
                     </div>
+                   </div>
                     <!-- {{items.imageurl}} -->
+                   <div class="container">
                     <div class="row" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
                       <img [src]="items.imageurl" style="object-fit:fill; height:500px" alt="">
                     </div>
-                    <div class="row py-2" (click)="getDetails(items.id, items.recordType)">
-                      <h6 class="dis-line">IBR Infra CMP 305 :</h6>
-                      <p class="dis">{{items.description}}</p>
+                   </div>
+                    <div class="container">
+                      <div class="row py-2" (click)="getDetails(items.id, items.recordType)">
+                        <h6 class="dis-line">IBR Infra CMP 305 :</h6>
+                        <p class="dis">{{items.description}}</p>
+                      </div>
                     </div>
                     <div class="d-flex justify-content-between">
                        <div >
@@ -172,7 +188,7 @@
           <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab" >
             <div class="example" style="height: 65vh; overflow: auto;">
               <div class="card list-card py-2 px-2" *ngFor="let items of clubList | filter : searchKey : 'name'">
-                <div class="">
+                <div class="container">
                  <div class="row">
                    <div class="channel-name d-flex col-12">
                      <div class="col-8" (click)="getClubDetails(items.id, items.name)">
