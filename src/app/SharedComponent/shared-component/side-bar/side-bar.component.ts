@@ -8,35 +8,31 @@ import { SharedService } from 'src/app/Service/shared.service';
 })
 export class SideBarComponent implements OnInit {
   hide: boolean = true;
-  screenWidth = 1440;
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.screenWidth = window.innerWidth;
-    this.onWidthChange();
-  }
+  screenWidth: any;
 
   constructor(private coreService: SharedService) {}
 
   ngOnInit(): void {
-    // console.log('this.screenWidth == 1440: ', this.screenWidth <= 1440);
-    if(this.screenWidth < 1440){
-      this.hide = false
-    }else{
-      this.hide = true
-    }
+    
+    this.getWindowSize();
     this.coreService.toggleSidebar.subscribe(() => {
-      //open your sidebar by setting classes, whatever
       this.hide = !this.hide;
     });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any) {
+    this.getWindowSize();
+  }
 
-  onWidthChange() {
+  getWindowSize() {
+    this.screenWidth = window.innerWidth;
     if (this.screenWidth < 1440) {
       this.hide = false;
     } else {
       this.hide = true;
     }
+    
   }
+ 
 }
