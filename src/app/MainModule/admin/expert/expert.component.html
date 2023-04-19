@@ -1,7 +1,7 @@
 <section class="container my-5">
   <div class="row">
     <div class="col-lg-10 mx-auto">
-      <div class="card">
+      <div class="card list-card">
         <div class="card-body">
           <h5 class="card-title">Expert-Form</h5>
           <!-- General Form Elements -->
@@ -23,11 +23,11 @@
                   <div class="col-lg-8">
                     <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="mobileno"
                     [ngClass]="{ 'is-invalid': (submitted || submitPhone) && ExpertControl.mobileno.errors  }">
-                    <div *ngIf="(submitted || submitPhone )  && ExpertControl.mobileno?.errors " class="invalid-feedback">             
+                    <div *ngIf="(submitted || submitPhone )  && ExpertControl.mobileno?.errors " class="invalid-feedback">
                       <div *ngIf="ExpertControl.mobileno.errors?.validatePhoneNumber ">Phone number is invalid.</div>
                       <div *ngIf="ExpertControl.mobileno.errors?.maxLength ">Phone number is invalid.</div>
                       <div *ngIf="ExpertControl.mobileno.errors?.required ">Phone number is required.</div>
-                    </div>  
+                    </div>
                   </div>
                 </div> -->
 
@@ -102,7 +102,7 @@
                 </div>
               </div>
             </div>
-            
+
               </div>
               <div class="col-lg-6">
                 <!-- <div class="row mb-3">
@@ -124,7 +124,7 @@
 <!--I am expert-->
                 <div class="row mb-3">
                   <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am Expert </label>
-                  <div class="col-lg-8"> 
+                  <div class="col-lg-8">
                     <select class="form-select" aria-label="Default select example" formControlName="experttype" [ngClass]="{ 'is-invalid': submitted && ExpertControl.experttype.errors }">
                       <option [value]="item.countryName" *ngFor="let item of country">{{item.countryName}}</option>
                     </select>
@@ -133,7 +133,7 @@
                     </div>
                   </div>
                 </div>
-               
+
                 <div class="row mb-3">
                   <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Account No</label>
                   <div class="col-lg-8">
@@ -169,7 +169,7 @@
                   <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i class="bi bi-pencil px-2"></i>About Us</label>
                   <div class="col-lg-8">
                     <textarea class="form-control" formControlName="aboutus" style="height: 80px"[ngClass]="{ 'is-invalid': submitted && ExpertControl.aboutus.errors }"></textarea>
-                    
+
                         <div *ngIf=" submitted && ExpertControl.aboutus.errors" class="invalid-feedback">
                           <div *ngIf="ExpertControl.aboutus.errors.required">About Us is required.</div>
                         </div>
@@ -185,7 +185,7 @@
                    <span *ngIf="!isLoading">Submit</span>
                 </button>
               </div>
-              
+
             </div>
           </form>
         </div>

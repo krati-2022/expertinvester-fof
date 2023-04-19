@@ -93,7 +93,7 @@ export class AddChannelComponent implements OnInit {
   goBack() {
     this.location.back();
   }
-  
+
   get AddChannelControl() {
     return this.AddChannelFrom.controls;
   }

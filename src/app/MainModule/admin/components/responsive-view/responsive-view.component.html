@@ -24,25 +24,17 @@
             <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
                   aria-labelledby="home-tab">
                   <div class="example" style="height: 75vh; overflow: auto;" >
-                    <div  infiniteScroll 
+                    <div  infiniteScroll
                     [infiniteScrollDistance]="2"
                     [infiniteScrollThrottle]="50"
-                    [infiniteScrollContainer]="'.example'" 
+                    [infiniteScrollContainer]="'.example'"
                     [scrollWindow]="true"
-                    [fromRoot]="true" 
+                    [fromRoot]="true"
                     (scrolled)="onScroll()">
-      
-                      <div class="card my-3 m-4" *ngFor="let items of feedDetails"  >
-                        <div class="card-body" >
+
+                      <div class="card list-card my-2" *ngFor="let items of feedDetails"  >
+                        <div class="m-2" >
                           <div class=" row user_informatiom">
-                            <!-- <div class="col-1">
-                              <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                            </div>
-                            <div class="col-8 mx-3 py-2">
-                              <div class="user_name">{{items.username}}</div>
-                              <div class="detail">{{items.sebi}}</div>
-                              <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                            </div> -->
                             <div class="d-flex col-8" (click)="getFeedDetails(items.id, items.recordType)">
                               <div class="col-2" >
                                 <span class="user-icon"><i class="bi bi-person-circle"></i></span>
@@ -53,7 +45,7 @@
                                 <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                               </div>
                             </div>
-                            
+
                             <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
                               <button class="btn follow-btn" *ngIf="items.isSelfPost != true">
                                 <span *ngIf="items.clubBlock == false" (click)="blockUnblockPost(items.id, true)" style="padding: inherit;">Block</span>
@@ -70,7 +62,7 @@
                             </div>
                             <div class="row" *ngIf="items.recordType == 'ClubRecord'">
                               <div class="channel-name d-flex justify-content-between align-items-center">
-                                <span> <i class="bi bi-lightbulb"></i>Chat Barter</span> 
+                                <span> <i class="bi bi-lightbulb"></i>Chat Barter</span>
                                 <!-- <span class=""><button type="button"
                                     class="btn follow-btn">Follow</button>
                                   </span> -->
@@ -139,7 +131,7 @@
                             </div>
                             <div class="d-flex justify-content-between">
                               <div >
-                               <span (click)="like(items.id, !items.isUserLiked)"> 
+                               <span (click)="like(items.id, !items.isUserLiked)">
                                  <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isUserLiked == false">{{items.likeCount}}</i>
                                  <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isUserLiked == true">{{items.likeCount}}</i>
                                </span>
@@ -160,7 +152,7 @@
                     <!-- <app-pagination [totalRecords]="totalRecord" [recordsPerPage]="recoardsPerPage" (onPageChange)="displayActivePage($event)"></app-pagination> -->
                     <!-- <app-pagination [current]="current" [total]="total" (goTo)="onGoTo($event)" (next)="onNext($event)"
                       (previous)="onPrevious($event)"></app-pagination> -->
-      
+
                   </div>
                   <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="feedDetails.length == 0" >
                     <span>Data Not Found</span>
@@ -168,61 +160,54 @@
                 </div>
                 <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
                   <div class="example" style="height: 65vh; overflow: auto;">
-                    <div class="card py-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
+                    <div class="card list-card my-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
+                     <div class="p-2">
                       <div class="container">
-                       <div class="row">
-                         <!-- <div class="channel-name d-flex justify-content-between align-items-center py-2">
-                         <span class="club-header"> {{items.name}}</span> 
-                         <span class="">
-                           <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
-                           <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
-                         </span>
+                        <div class="row">
+                     
+
+                          <div class="channel-name d-flex col-12">
+                           <div class="col-8" (click)="getDetails(items.id, items.name)">
+                             <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span>
+                           </div>
+                           <div class="col-4 d-flex justify-content-end" >
+                             <span class="" >
+                               <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
+                               <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
+                             </span>
+                           </div>
                          </div>
                          <div class="">
-                          <p class="club-dis">{{items.description}}</p>
-                         </div> -->
+                           <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
+                          </div>
 
-                         <div class="channel-name d-flex col-12">
-                          <div class="col-8" (click)="getDetails(items.id, items.name)">
-                            <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span> 
-                          </div>
-                          <div class="col-4 d-flex justify-content-end" >
-                            <span class="" >
-                              <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
-                              <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
-                            </span>
-                          </div>
-                        </div>
-                        <div class="">
-                          <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
                          </div>
-  
-                        </div>
-                      </div>
-                        <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
-                          <div class="grid-data d-flex  ">
-  
-                            <div class="col-5  border-end ">
-                              <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
-                                  class="club-inf">Impression</span></div>
-                              <div class="club-icon px-2">{{items.likecount}}</div>
-                            </div>
-                            <div class="col-4 px-2 border-end">
-                              <div class="d-flex "><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
-                                  class="club-inf">Followers</span></div>
-                              <div class="club-icon px-2">{{items.followersCount}}</div>
-                            </div>
-                            <div class="col-3  px-1">
-                              <div class="d-flex "><span class="club-icon"><i class="bi bi-pencil-square "></i></span><span
-                                  class="club-inf">Post</span></div>
-                              <div class="club-icon px-3">{{items.postcount}}</div>
-                            </div>
-                          </div>
-  
-  
-                          </div>
+                       </div>
+                         <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
+                           <div class="grid-data d-flex  ">
+
+                             <div class="col-5  border-end ">
+                               <div class="d-flex align-items-center "><span class="club-icon  "><i class="bi bi-eye"></i></span><span
+                                   class="club-inf">Impression</span></div>
+                               <div class="club-icon px-2">{{items.likecount}}</div>
+                             </div>
+                             <div class="col-4 px-2 border-end">
+                               <div class="d-flex align-items-center"><span class="club-icon "><i class="bi bi-chat-left"></i></span><span
+                                   class="club-inf">Followers</span></div>
+                               <div class="club-icon px-2">{{items.followersCount}}</div>
+                             </div>
+                             <div class="col-3  px-1">
+                               <div class="d-flex align-items-center "><span class="club-icon "><i class="bi bi-pencil-square "></i></span><span
+                                   class="club-inf">Post</span></div>
+                               <div class="club-icon px-3">{{items.postcount}}</div>
+                             </div>
+                           </div>
+
+
+                           </div>
                      </div>
-                    
+                     </div>
+
                   </div>
                   <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="clubList.length == 0" >
                     <span>Data Not Found</span>
@@ -230,10 +215,10 @@
                 </div>
             <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
               <div class="example" style="height: 55vh; overflow: auto;">
-                <div class="card list-card my-3 m-4" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
-                  <div class="card-body">
+                <div class="card list-card my-2" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
+                  <div class="m-2">
                     <div class="container" (click)="getChannelDetails(items)">
-                      <div class=" row user_informatiom">
+                      <div class=" row user_informatiom d-flex align-items-center">
                         <div class="col-1">
                           <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                         </div>
@@ -287,22 +272,22 @@
                     <div class="container expect-section my-2">
                       <div class="grid-data d-flex expect-sections ">
                         <div class="col-3 border-end ">
-                          <div class="d-flex club-icons"><span class="club-icon "><i class="bi bi-chat-square-text"></i></span><span
+                          <div class="d-flex club-icons d-flex align-items-center"><span class="club-icon "><i class="bi bi-chat-square-text"></i></span><span
                               class="club-inf">Reputation</span></div>
                           <div class="club-icon px-2">{{items.reputation}}</div>
                         </div>
                         <div class="col-3  border-end ">
-                          <div class="d-flex club-icons"><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                          <div class="d-flex club-icons d-flex align-items-center"><span class="club-icon "><i class="bi bi-eye"></i></span><span
                               class="club-inf">Impression</span></div>
                           <div class="club-icon px-2">15</div>
                         </div>
                         <div class="col-3  border-end">
-                          <div class="d-flex club-icons"><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                          <div class="d-flex club-icons d-flex align-items-center"><span class="club-icon "><i class="bi bi-chat-left"></i></span><span
                               class="club-inf">Followers</span></div>
                           <div class="club-icon px-2">{{items.followersCount}}</div>
                         </div>
                         <div class="col-3  ">
-                          <div class="d-flex club-icons"><span class="club-icon"><i class="bi bi-pencil-square "></i></span><span
+                          <div class="d-flex club-icons d-flex align-items-center"><span class="club-icon "><i class="bi bi-pencil-square "></i></span><span
                               class="club-inf">Post</span></div>
                           <div class="club-icon px-3">{{items.post}}</div>
                         </div>
@@ -375,7 +360,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0" >
                 <span>Data Not Found</span>
               </div>
@@ -383,6 +368,6 @@
           </div><!-- End Bordered Tabs Justified -->
         </div>
       </div>
-     
+
     </div>
   </section>

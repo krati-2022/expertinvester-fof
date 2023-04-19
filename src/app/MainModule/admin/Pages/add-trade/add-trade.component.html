@@ -4,10 +4,10 @@
   <form [formGroup]="AddFeedForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="mx-auto">
-        <div class="card">
+        <div class="card list-card">
           <!-- <div class="pagetitle">
             <h1 class="px-3"><i class="bi bi-arrow-left"></i></h1>
-          
+
           </div> -->
           <div class="card-body">
             <div class="row border-bottom py-2">
@@ -45,13 +45,13 @@
                           <label class="form-line" for="exampleInputEmail4">Enter Description</label>
                           <textarea type="text" class="form-control" formControlName="description" id="exampleInputEmail4" aria-describedby="emailHelp"
                             placeholder="Enter Description"[ngClass]="{ 'is-invalid': submitted && AddFeedControl.description.errors }"></textarea>
-                        
+
                             <div *ngIf=" submitted && AddFeedControl.description.errors" class="invalid-feedback">
                               <div *ngIf="AddFeedControl.description.errors.required">Description is required.</div>
                             </div>
                         </div>
                       </div>
-                      
+
                       <div class="row py-3">
                         <div class="form-group">
                           <label class="form-line" for="exampleInputEmail3">External Link</label>
@@ -59,7 +59,7 @@
                             placeholder="External Link">
                         </div>
                       </div>
-                      
+
                       <div class="container">
                         <div class="row">
                           <div class="col-6 mx-auto d-flex justify-content-center">

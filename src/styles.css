@@ -278,7 +278,7 @@ span.club-inf {
 }
 @media screen and (min-width: 320px) and (max-width: 416px) {
   .logo img {
-    max-height: 22px;
+    max-height: 19px;
     margin-right: 6px;
 }
   button.btn.follow-btn {

@@ -18,14 +18,14 @@
     </div><!-- End Logo -->
     <div class="search-bar">
       <form class="search-form d-flex align-items-center" [formGroup]="searchFilterForm">
-        <input type="text"  placeholder="Search" formControlName="name" [(ngModel)]="searchTerm" (keyup)="search($event)" title="Enter search keyword">
+        <input type="text" placeholder="Search" formControlName="name" [(ngModel)]="searchTerm" (keyup)="search($event)" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
     </div><!-- End Search Bar -->
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
         <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " >
+          <a class="nav-link nav-icon search-bar-toggle">
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
@@ -188,18 +188,14 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li>
               <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;" (click)="signOut()">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
             </li>
-
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
-
       </ul>
     </nav><!-- End Icons Navigation -->
-
-  </header>
+</header>

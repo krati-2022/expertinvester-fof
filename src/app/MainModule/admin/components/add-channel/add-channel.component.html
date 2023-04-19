@@ -1,7 +1,7 @@
 <section class="section">
   <div class="row">
     <div class="col-lg-12 mx-auto">
-      <div class="card">
+      <div class="card list-card ">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-baseline mb-3">
             <h5 class="card-title"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i> Add-Channel</h5>
@@ -29,7 +29,7 @@
                     <div class="col-lg-8">
                       <textarea type="text" formControlName="description" placeholder="Enter Description"
                         class="form-control"[ngClass]="{ 'is-invalid': submitted && AddChannelControl.description.errors }"></textarea>
-                        
+
                     <div *ngIf=" submitted && AddChannelControl.description.errors" class="invalid-feedback">
                       <div *ngIf="AddChannelControl.description.errors.required">Description is required.</div>
                     </div>
@@ -68,7 +68,7 @@
                               {{item}}
                             </label>
 
-                            
+
                           </div>
                         </div>
 
@@ -77,7 +77,19 @@
                     </div>
 
                   </fieldset>
-                
+                  <!-- <fieldset class="row mb-3 mt-2">
+                  <legend class="col-form-label col-lg-4 form-line"><i class="bi bi-hand-thumbs-up-fill px-2"></i>Benefits </legend>
+                  <div class="col-lg-8 ">
+                    <div class="form-check" *ngFor="let items of benefits">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                      <label class="form-check-label form-lines" for="flexCheckDefault1">
+                        {{items}}
+                      </label>
+                    </div>
+
+
+                  </div>
+                </fieldset> -->
 
                   <div class="row mb-3">
                     <label for="inputText" class="col-lg-4 col-form-label form-line"><i
@@ -104,7 +116,7 @@
 
 
                   <div class="row mb-3">
-                   
+
                     <div class="col-lg-4">
                       <label for="file-input">
                         <i class="bi bi-cloud-arrow-up"></i> Upload image
@@ -125,7 +137,7 @@
                         </label>
                       </div>
                     </div>
-                    
+
                     <div class="col-lg-9" *ngIf="this.coAdList.length != 0">
                       <div *ngFor="let item of coAdList" class="mb-2">
                         <button type="button" class="btn btn-primary">
@@ -134,10 +146,10 @@
                       </div>
 
                     </div>
-                    
+
                   </div>
 
-                 
+
                 </div>
               </div>
 
@@ -163,7 +175,7 @@
 
 <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-    
+
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Expert List</h5>
@@ -195,7 +207,7 @@
                                 (change)="goToExpertProfilePage(items, myForm.value.adOn)">
                               <label class="form-check-label" for="flexCheckChecked">
                               </label>
-        
+
                             </form>
                           </div>
                         </div>
@@ -255,17 +267,17 @@
                 </div>
               </div>
             </div>
-           
+
           </div>
         </section>
       </div>
       <div class="modal-footer">
         <div class="d-flex justify-content-end">
           <button class="btn btn-primary" (click)="close()">Submit</button>
-        
+
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>

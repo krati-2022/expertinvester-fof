@@ -93,7 +93,7 @@ import { ClubDetailsComponent } from './components/club-details/club-details.com
     PinRecoveryComponent,
     ResponsiveViewComponent,
     ClubDetailsComponent,
-    
+
   ],
   imports: [
     CommonModule,

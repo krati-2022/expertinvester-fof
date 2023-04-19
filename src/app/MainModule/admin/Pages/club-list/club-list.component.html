@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-lg-10 mx-auto">
       <h1 class="px-3 mt-2">Club List</h1>
-      <div class="card" style="height: 70vh; overflow: auto;">
+      <div class="card list-card" style="height: 70vh; overflow: auto;">
         <div class="card-body" >
-          
+
           <!-- Bordered Tabs Justified -->
 
           <div class="card pt-2" id="borderedTabJustifiedContent" *ngFor="let data of clubList">
@@ -56,12 +56,12 @@
 
         </div>
       </div>
-      
+
       <div class="d-flex justify-content-end mb-2" *ngIf="count >= 3">
         <button class="btn follow-btn" (click)="goToHomePage()">Next</button>
       </div>
     </div>
 
-    
+
   </div>
 </section>

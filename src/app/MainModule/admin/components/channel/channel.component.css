@@ -408,7 +408,7 @@ width: 100%;
     color: #496333;
 }
   span.club-inf {
-    font-size: 12px;
+    font-size: 8px;
     font-weight: 600;
     color: #979797;
 }
@@ -506,7 +506,7 @@ span.subscript {
   color: #000;
 }
 .position-btn {
-  padding: 6px;
+  padding: 4px;
   color: black;
   border-radius: 5px;
   background: #FDCDE7;

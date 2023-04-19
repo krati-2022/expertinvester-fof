@@ -1,15 +1,13 @@
 <!-- End Page Title -->
-
 <section class="container">
   <div class="row">
     <div class="mx-auto">
-      <div class="card">
+      <div class="card list-card">
         <div class="pagetitle">
           <h1 class="px-3"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i>Trade</h1>
 
         </div>
         <div class="card-body">
-          <h5 class="card-title"></h5>
           <div class="row border-bottom py-2">
             <div class="d-flex align-items-center justify-content-between">
               <div>
@@ -43,7 +41,6 @@
                 data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile"
                 aria-selected="false">SELL</button>
             </li>
-
           </ul>
         <form [formGroup]="addPostForm" (ngSubmit)="onSubmit()">
           <div class="example">
@@ -60,7 +57,6 @@
                       <option>4</option>
                       <option>5</option>
                     </select>
-        
                     <div *ngIf=" submitted && addPostControl.interval.errors" class="invalid-feedback">
                       <div *ngIf="addPostControl.interval.errors.required">Interval is required.</div>
                     </div>
@@ -100,7 +96,6 @@
                       </div>
                     </div>
                   </div>
-        
                 </div>
                 <div class="row py-3">
                   <div class="form-group">
@@ -119,7 +114,6 @@
                     <textarea type="text" class="form-control" formControlName="description" id="exampleInputEmail4"
                       aria-describedby="emailHelp" placeholder="Enter Description"
                       [ngClass]="{ 'is-invalid': submitted && addPostControl.description.errors }"></textarea>
-        
                     <div *ngIf=" submitted && addPostControl.description.errors" class="invalid-feedback">
                       <div *ngIf="addPostControl.description.errors.required">Description is required.</div>
                     </div>
@@ -141,12 +135,8 @@
             </div>
           </div>
         </form>
-
         </div>
       </div>
-
     </div>
-
-
   </div>
 </section>

@@ -14,10 +14,10 @@
           </div>
          </div>
         <div class="card-body">
-         
+
           <div class="example" style="height: 65vh; overflow: auto;" *ngIf="channelDetails.length != 0">
-            <div class="card list-card my-3 m-4" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
-              <div class="card-body" >
+            <div class="card list-card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
+              <div class="m-2" >
                 <div class="container" >
                   <div class=" row user_informatiom">
                     <div class="col-1">
@@ -158,16 +158,15 @@
                 </div>
               </div>
             </div>
-            
+
           </div>
 
           <div class="example d-flex justify-content-center" style="height: 65vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0" >
             <span>Data Not Found</span>
           </div>
-        </div>
+        </div><!-- End Bordered Tabs Justified -->
       </div>
     </div>
-    
   </div>
 </section>
 
