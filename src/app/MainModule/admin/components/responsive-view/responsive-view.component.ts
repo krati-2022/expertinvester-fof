@@ -144,8 +144,9 @@ export class ResponsiveViewComponent implements OnInit {
 
   getDetails(clublistId: string, clubName: string) {
     // console.log('clublistId: ', clublistId);
+    // this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobileNumber + '/' + clubName])
     this.router.navigate([
-      'home/club-details` /' +
+      'home/club-details/' +
         clublistId +
         '/' +
         this.mobileNumber +
@@ -171,7 +172,6 @@ export class ResponsiveViewComponent implements OnInit {
   }
 
   getChannelDetails(item: any) {
-    // console.log(item);
     this.router.navigate([
       'home/channel-details/' +
         item.channelMasterId +

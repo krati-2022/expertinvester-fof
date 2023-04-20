@@ -171,9 +171,7 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <app-pagination [totalRecords]="totalRecord" [recordsPerPage]="recoardsPerPage" (onPageChange)="displayActivePage($event)"></app-pagination> -->
-                    <!-- <app-pagination [current]="current" [total]="total" (goTo)="onGoTo($event)" (next)="onNext($event)"
-                      (previous)="onPrevious($event)"></app-pagination> -->
+                   
                   </div>
                   <div class="example d-flex justify-content-center" style="height: 75vh; overflow: auto; align-items: center;" *ngIf="feedDetails.length == 0" >
                     <span>Data Not Found</span>
@@ -185,16 +183,7 @@
                      <div class="p-2">
                       <div class="container">
                         <div class="row">
-                          <!-- <div class="channel-name d-flex justify-content-between align-items-center py-2">
-                          <span class="club-header"> {{items.name}}</span>
-                          <span class="">
-                            <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
-                            <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
-                          </span>
-                          </div>
-                          <div class="">
-                           <p class="club-dis">{{items.description}}</p>
-                          </div> -->
+                       
                           <div class="channel-name d-flex col-12">
                            <div class="col-8" (click)="getDetails(items.id, items.name)">
                              <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span>
@@ -256,7 +245,7 @@
                     <div class="container">
                       <div class="row">
                         <div class="d-flex justify-content-between align-items-baseline py-2">
-                          <h6 class="heading">{{items.name}}</h6>
+                          <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
                           <span class=" subscript" *ngIf="items.isSubscribed == false" (click)="subscribe(items)"
                             style="cursor: pointer;"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
                           <span class=" subscript" *ngIf="items.isSubscribed == true" style="cursor: pointer;"><i
@@ -264,7 +253,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="container">
+                    <div class="container" (click)="getChannelDetails(items)">
                       <div class="row">
                         <div class="channel-name">
                           <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
@@ -288,12 +277,12 @@
                         <div class="date">27 Jan 2023, 06:43 PM</div>
                       </div>
                     </div>
-                    <div class="container">
+                    <div class="container" (click)="getChannelDetails(items)">
                       <div class="row">
                         <p class="club-dis">{{items.description}}</p>
                       </div>
                     </div>
-                    <div class="container expect-section my-2">
+                    <div class="container expect-section my-2" (click)="getChannelDetails(items)">
                       <div class="grid-data d-flex expect-sections ">
                         <div class="col-3 border-end ">
                           <div class="d-flex club-icons d-flex align-items-center"><span class="club-icon "><i class="bi bi-chat-square-text"></i></span><span
@@ -358,11 +347,7 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="container">
-                                  <div class="row">
-                                    <img src="https://blog.kakaocdn.net/dn/dImadm/btqvUPu05X8/zODzIrVfvdEug963norH3k/img.png" alt="">
-                                  </div>
-                                </div> -->
+                    
                     <div class="d-flex justify-content-between">
                       <div>
                         <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
