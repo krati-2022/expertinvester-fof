@@ -45,13 +45,13 @@ export class ChannelDetailsComponent implements OnInit {
   id: any;
   mobile_No: any;
   username: any;
-  messages: any = [];
-  message: string = '';
+
   activePostDetails: PostDetails[] = [];
   pastPostDetails: PostDetails[] = [];
   profile: PostDetails[] = [];
   notFound: any = '';
   activeTab: any = 'Active-Post';
+ 
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _service: SharedService,
@@ -66,16 +66,16 @@ export class ChannelDetailsComponent implements OnInit {
     this.username = this._ActivatedRoute.snapshot.paramMap.get('param3');
     // console.log('this.username: ', this.username);
     this.getActivePost();
-    Pusher.logToConsole = true;
-    const pusher = new Pusher('523e3cf86c481c43e5a5', {
-      cluster: 'ap2',
-    });
-    const channel = pusher.subscribe('channel');
-    channel.bind('my-event', (data: any) => {
-      // alert(JSON.stringify(data));
-      this.messages.push(data);
-      console.log(' this.messages: ', this.messages);
-    });
+    // Pusher.logToConsole = true;
+    // const pusher = new Pusher('523e3cf86c481c43e5a5', {
+    //   cluster: 'ap2',
+    // });
+    // const channel = pusher.subscribe('channel');
+    // channel.bind('my-event', (data: any) => {
+    //   // alert(JSON.stringify(data));
+    //   this.messages.push(data);
+    //   console.log(' this.messages: ', this.messages);
+    // });
   }
 
   goBack() {
@@ -155,22 +155,22 @@ export class ChannelDetailsComponent implements OnInit {
     ]);
   }
 
-  onChnage(event: any) {
-    // console.log('event: ', event.target.value);
-    this.message = event.target.value;
-  }
+    // onChnage(event: any) {
+    //   // console.log('event: ', event.target.value);
+    //   this.message = event.target.value;
+    // }
 
-  submit(): void {
-    this.message = '';
-    console.log('this.message: ', this.message);
-    return;
-    this.http
-      .post('http://localhost/api/messages', {
-        username: this.username,
-        message: this.message,
-      })
-      .subscribe(() => {
-        this.message = '';
-      });
-  }
+  // submit(): void {
+  //   this.message = '';
+  //   console.log('this.message: ', this.message);
+  //   return;
+  //   this.http
+  //     .post('http://localhost/api/messages', {
+  //       username: this.username,
+  //       message: this.message,
+  //     })
+  //     .subscribe(() => {
+  //       this.message = '';
+  //     });
+  // }
 }

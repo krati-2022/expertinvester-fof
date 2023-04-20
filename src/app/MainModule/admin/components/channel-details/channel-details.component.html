@@ -683,52 +683,8 @@
             </div>
             <div class="tab-pane fade" id="bordered-justified-Chat" role="tabpanel" aria-labelledby="Chat-tab">
               <!-- <div class="example" style="height: 65vh; overflow: auto;"> -->
-              <div class="card list-card my-3 m-4my-3">
-                <div class="card-body">
-                  <div class="d-flex justify-content-center container">
-                    <div class="container">
-                      <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
-                        <div
-                          class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-
-                          <sapn class="fs-5 fw-semibold" style="text-transform: capitalize;">{{username}}</sapn>
-                        </div>
-                        <div class="list-group list-group-flush border-bottom scrollarea">
-                          <div class="list-group-item list-group-item-action py-3 lh-tight"
-                            *ngFor=" let msg of messages">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                              <strong class="mb-1">{{msg.username}}</strong>
-
-                            </div>
-                            <div class="col-10 mb-1 small">{{msg.message}}</div>
-                          </div>
-                        </div>
-                      </div>
-                      <form (ngSubmit)="submit()">
-                        <!-- <input class="form-control" placeholder="Write a message"
-                          [value]="message" (change)="onChnage($event)" />
-                        
-                          <div class="icondiv d-flex justify-content-end align-content-center text-center ml-2"> <i
-                              class="fa fa-paperclip icon1"></i> <i class="fa fa-arrow-circle-right icon2"></i> </div> -->
-                        <div class="">
-                          <div class="row d-flex justify-content-between align-items-center">
-                            <div class="col-10">
-                              <input class="form-control" placeholder="Type a message..." [value]="message"
-                                (change)="onChnage($event)">
-                            </div>
-                            <div class="col-2 d-flex justify-content-center">
-                              <i class="fa fa-paperclip icon1"></i>
-                              <i (click)="submit()" class="fa fa-arrow-circle-right icon2"></i>
-                            </div>
-
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+                
+             <app-chat-box [username]="username"></app-chat-box>
               <!-- </div> -->
             </div><!-- End Bordered Tabs Justified -->
           </div>
