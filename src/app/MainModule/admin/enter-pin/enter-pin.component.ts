@@ -17,7 +17,7 @@ export class EnterPinComponent implements OnInit {
   mobile_No:any = localStorage.getItem('mobile_number')
   message!: string
   mobile : string = ''
-  
+
   config = {
     allowNumbersOnly: true,
     length: 4,
@@ -25,8 +25,8 @@ export class EnterPinComponent implements OnInit {
     disableAutoFocus: false,
     placeholder: '',
     inputStyles: {
-      width: '50px',
-      height: '50px',
+      width: '40px',
+      height: '40px',
     },
   };
   constructor(private router: Router, private _service: SharedService) {}
@@ -70,15 +70,15 @@ export class EnterPinComponent implements OnInit {
             this.router.navigate(['user-set-up'])
           }
           })
-        
+
       }else{
         this.router.navigate(['user-set-up'])
       }
     }else if(this.password != this.pin && this.password.length == 4){
-      
+
       this.message = 'Incorrect Pin'
     }
-    
+
   }
 
   onClick() {
