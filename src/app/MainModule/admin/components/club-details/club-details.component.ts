@@ -38,7 +38,7 @@ export class ClubDetailsComponent implements OnInit {
     this._service
       .GetClubDetails(this.mobile_number, this.clubListId)
       .subscribe((res: any) => {
-        console.log('res: ', res.data[0]);
+        // console.log('res: ', res.data[0]);
         this.clubDetails = res.data;
       });
   }

@@ -1,144 +1,55 @@
 <section class="container">
-    <div class="row">
-      <div class="mx-auto">
-        <div class="card list-card">
-          <div class="mx-1">
-            <h5 class="card-title"></h5>
-            <!-- Bordered Tabs Justified -->
-            <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist" >
-              <li class="nav-item flex-fill" role="presentation" (click)="getTab($event)">
-                <button class="nav-link w-100 active" id="Active-Post" data-bs-toggle="tab"
-                  data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home"
-                  aria-selected="true">Active Post</button>
-              </li>
-              <li class="nav-item flex-fill" role="presentation" id="past-post" (click)="getTab($event)">
-                <button class="nav-link w-100" id="Past-Post" data-bs-toggle="tab"
-                  data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile"
-                  aria-selected="false">Past Post</button>
-              </li>
-              <li class="nav-item flex-fill" role="presentation" id="profile" (click)="getTab($event)">
-                <button class="nav-link w-100" id="Profile" data-bs-toggle="tab"
-                  data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact"
-                  aria-selected="false">Profile</button>
-              </li>
-              <li class="nav-item flex-fill" role="presentation" id="chat" (click)="getTab($event)">
-                <button class="nav-link w-100" id="Chat" data-bs-toggle="tab"
-                  data-bs-target="#bordered-justified-Chat" type="button" role="tab" aria-controls="Chat"
-                  aria-selected="false">Chat</button>
-              </li>
-            </ul>
-            <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-              <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
-                aria-labelledby="home-tab">
+  <div class="row">
+    <div class="mx-auto">
+      <div class="card">
+        <div class="pagetitle">
+          <div class="d-flex justify-content-between align-items-baseline p-2">
+            <div>
+              <h1 class="pt-2"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i>{{activeTab}}</h1>
+            </div>
+            <div *ngIf="activeTab == 'Active-Post'">
+              <button type="button" class="btn btn-outline-secondary" (click)="addPost()"><i
+                  class="bi bi-plus-circle"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="m-2">
 
-                <div class="example" style="height: 65vh; overflow: auto;" *ngIf="activePostDetails.length != 0">
+          <!-- Bordered Tabs Justified -->
+          <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+            <li class="nav-item flex-fill" role="presentation" (click)="getTab($event)">
+              <button class="nav-link w-100 active" id="Active-Post" data-bs-toggle="tab"
+                data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home"
+                aria-selected="true">Active Post</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation" id="past-post" (click)="getTab($event)">
+              <button class="nav-link w-100" id="Past-Post" data-bs-toggle="tab"
+                data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile"
+                aria-selected="false">Past Post</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation" id="profile" (click)="getTab($event)">
+              <button class="nav-link w-100" id="Profile" data-bs-toggle="tab"
+                data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact"
+                aria-selected="false">Profile</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation" id="chat" (click)="getTab($event)">
+              <button class="nav-link w-100 " id="Chat" data-bs-toggle="tab" data-bs-target="#bordered-justified-Chat"
+                type="button" role="tab" aria-controls="Chat" aria-selected="false">Chat</button>
+            </li>
+          </ul>
+          <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+            <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
+              aria-labelledby="home-tab">
+
+              <div class="example" style="height: 65vh; overflow: auto;" *ngIf="activePostDetails.length != 0">
 
 
-                      <div class="card list-card my-3" *ngFor="let items of activePostDetails">
-                        <div class="m-2">
-                          <div class="container">
-                            <div class=" row user_informatiom">
-                              <div class="col-1">
-                                <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                              </div>
-                              <div class="col-8 mx-3 py-2">
-                                <div class="user_name">{{items.username}}</div>
-                                <div class="detail">{{items.sebi}}</div>
-                                <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                              </div>
-
-                            </div>
-                          </div>
-
-                          <div class="container">
-                            <div class="row">
-                              <div class="d-flex justify-content-between align-items-baseline py-2">
-                                <h6 class="heading">{{items.channelname}}</h6>
-                                <span class=" subscript" *ngIf="items.subscription =='Free Access'"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
-                              </div>
-
-                            </div>
-                          </div>
-                          <div class="container">
-                            <div class="row">
-                              <div class="channel-name">
-                                <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                              </div>
-                              <div class="channel-detail">
-                                {{items.stockname}}
-                              </div>
-                              <div class="date">27 Jan 2023, 06:43 PM</div>
-                            </div>
-                          </div>
-                          <div class="container">
-                            <div class="row expect-section my-3">
-                              <div class="expect-inf d-flex justify-content-between pb-2 ">
-                                <div>
-                                  <div class="expect">
-                                    Expected Move
-                                  </div>
-                                  <div class="expect-percent">18.0%</div>
-                                </div>
-                                <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button>
-                                </div>
-                              </div>
-                              <div>
-                                <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
-                                <div class="row d-flex text-center py-2">
-                                  <div class="col-4">
-                                    <div class="price">Entry Price</div>
-                                    <div class="rate">{{items.entryprice}} </div>
-                                  </div>
-                                  <div class="col-4">
-                                    <div class="price">Target Price</div>
-                                    <div class="rate">{{items.targetprice}} </div>
-                                  </div>
-                                  <div class="col-4">
-                                    <div class="price">Stop Loss</div>
-                                    <div class="rate"> {{items.stoploss}}</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="container">
-                            <div class="row mb-2">
-                              <div class="col-4 risk">
-                                <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="6" cy="6" r="6" fill="#ED1C24" />
-                                  </svg>
-                                  High Risk</div>
-                              </div>
-                              <div class="col-8 months">
-                                <div class=" position-btn"><i class="bi bi-clock px-1"></i>Positional Trading (1-3
-                                  Months)</div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="container">
-                            <div class="row">
-                              <img
-                                [src]="items.imageurl"
-                                alt="">
-                            </div>
-                          </div>
-                          <div class="container">
-                            <div class="row py-2">
-                              <h6 class="dis-line">{{items.stockname}}:</h6>
-                              <p class="dis">{{items.description}}</p>
-                            </div>
-                          </div>
-                          <div class="d-flex justify-content-between">
-                            <div>
-                              <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
-                              <span><i class="bi bi-share-fill"></i></span>
-                            </div>
-                            <div>
-                              <i class="bi bi-bookmark-fill"></i>
-                            </div>
-                          </div>
+                <div class="card list-card my-3 m-4my-3" *ngFor="let items of activePostDetails">
+                  <div class="m-2">
+                    <div class="container">
+                      <div class=" row user_informatiom">
+                        <div class="col-1">
+                          <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                         </div>
                         <div class="col-8 mx-3 py-2">
                           <div class="user_name">{{items.username}}</div>
@@ -147,101 +58,32 @@
                         </div>
 
                       </div>
+                    </div>
 
-                </div>
-                <div class="example d-flex justify-content-center" style="font-size: 20px;" *ngIf="activePostDetails.length == 0">
-                    <span>{{notFound}}</span>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
-                <div class="example" style="height: 65vh; overflow: auto;" *ngIf="pastPostDetails.length != 0">
-
-                    <div class="card list-card my-3" *ngFor="let items of pastPostDetails">
-                      <div class="card-body">
-                        <div class="container">
-                          <div class=" row user_informatiom">
-                            <div class="col-1">
-                              <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                            </div>
-                            <div class="col-8 mx-3 py-2">
-                              <div class="user_name">{{items.username}}</div>
-                              <div class="detail">{{items.sebi}}</div>
-                              <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                            </div>
-                          </div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="d-flex justify-content-between align-items-baseline py-2">
+                          <h6 class="heading">{{items.channelname}}</h6>
+                          <span class=" subscript" *ngIf="items.subscription =='Free Access'"><i
+                              class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
                         </div>
-                        <div class="container">
-                          <div class="row">
-                            <div class="d-flex justify-content-between align-items-baseline py-2">
-                              <h6 class="heading">{{items.channelname}}</h6>
-                              <span class=" subscript" *ngIf="items.subscription =='Free Access'"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
-                            </div>
-                          </div>
+
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="channel-name">
+                          <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
                         </div>
                         <div class="channel-detail">
                           {{items.stockname}}
                         </div>
-                        <div class="container">
-                          <div class="row expect-section my-3">
-                            <div class="expect-inf d-flex justify-content-between pb-2 ">
-                              <div>
-                                <div class="expect">
-                                  Expected Move
-                                </div>
-                                <div class="expect-percent">18.0%</div>
-                              </div>
-                              <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button>
-                              </div>
-                            </div>
-                            <div>
-                              <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
-                              <div class="row d-flex text-center py-2">
-                                <div class="col-4">
-                                  <div class="price">Entry Price</div>
-                                  <div class="rate">{{items.entryprice}} </div>
-                                </div>
-                                <div class="col-4">
-                                  <div class="price">Target Price</div>
-                                  <div class="rate">{{items.targetprice}} </div>
-                                </div>
-                                <div class="col-4">
-                                  <div class="price">Stop Loss</div>
-                                  <div class="rate"> {{items.stoploss}}</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="container">
-                          <div class="row mb-2">
-                            <div class="col-4 risk">
-                              <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
-                                  fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <circle cx="6" cy="6" r="6" fill="#ED1C24" />
-                                </svg>
-                                High Risk</div>
-                            </div>
-                            <div class="col-8 months">
-                              <div class=" position-btn"><i class="bi bi-clock px-1"></i>Positional Trading (1-3
-                                Months)</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="container">
-                          <div class="row">
-                            <img
-                              [src]="items.imageurl"
-                              alt="">
-                          </div>
-                        </div>
-                        <div class="container">
-                          <div class="row py-2">
-                            <h6 class="dis-line">{{items.stockname}}:</h6>
-                            <p class="dis">{{items.description}}</p>
-                          </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="date">27 Jan 2023, 06:43 PM</div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row expect-section my-3">
+                        <div class="expect-inf d-flex justify-content-between pb-2 ">
                           <div>
                             <div class="expect">
                               Expected Move
@@ -271,54 +113,119 @@
                       </div>
                     </div>
 
+                    <div class="container">
+                      <div class="row mb-2">
+                        <div class="col-4 risk">
+                          <div class=" position-btn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="6" cy="6" r="6" fill="#ED1C24" />
+                            </svg>
+                            High Risk</div>
+                        </div>
+                        <div class="col-8 months">
+                          <div class=" position-btn"><i class="bi bi-clock px-1"></i>Positional Trading (1-3
+                            Months)</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row"
+                        *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
+                        <img [src]="items.imageurl" alt="">
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row py-2">
+                        <h6 class="dis-line">{{items.stockname}}:</h6>
+                        <p class="dis">{{items.description}}</p>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
+                        <span><i class="bi bi-share-fill"></i></span>
+                      </div>
+                      <div>
+                        <i class="bi bi-bookmark-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
               <div class="example d-flex justify-content-center" style="font-size: 20px;"
                 *ngIf="activePostDetails.length == 0">
                 <span>{{notFound}}</span>
               </div>
-              </div>
-              <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
-                <div class="example" style="height: 65vh; overflow: auto;" *ngFor="let items of profile">
-                  <div class="card list-card my-3">
-                    <div class="card-body">
-                      <div class=" row user_informatiom d-flex align-items-center">
-                        <div class="col-2">
+            </div>
+            <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="example" style="height: 65vh; overflow: auto;" *ngIf="pastPostDetails.length != 0">
+
+                <div class="card list-card my-3 m-4my-3" *ngFor="let items of pastPostDetails">
+                  <div class="m-2">
+                    <div class="container">
+                      <div class=" row user_informatiom">
+                        <div class="col-1">
                           <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                         </div>
-                        <div class="col-6 mx-3 py-2">
+                        <div class="col-8 mx-3 py-2">
                           <div class="user_name">{{items.username}}</div>
                           <div class="detail">{{items.sebi}}</div>
-
-                        </div>
-                        <div class="col-3 text-end "><button type="button" class="btn follow-btn">Followed</button>
+                          <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                         </div>
 
                       </div>
                     </div>
 
-                    <div class="container my-2">
+                    <div class="container">
                       <div class="row">
-                        <div class="accordion" id="accordionExample">
-                          <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                              <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Benefits:
-                              </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                              data-bs-parent="#accordionExample">
-                              <div class="accordion-body">
-                                <ul class="" *ngFor="let data of items.benefits">
-                                  <li class="benefit-line">
-                                    {{data.benefits}}
-                                  </li>
+                        <div class="d-flex justify-content-between align-items-baseline py-2">
+                          <h6 class="heading">{{items.channelname}}</h6>
+                          <span class=" subscript" *ngIf="items.subscription =='Free Access'"><i
+                              class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
+                        </div>
 
-                                </ul>
-                              </div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="channel-name">
+                          <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
+                        </div>
+                        <div class="channel-detail">
+                          {{items.stockname}}
+                        </div>
+                        <div class="date">27 Jan 2023, 06:43 PM</div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row expect-section my-3">
+                        <div class="expect-inf d-flex justify-content-between pb-2 ">
+                          <div>
+                            <div class="expect">
+                              Expected Move
+                            </div>
+                            <div class="expect-percent">18.0%</div>
+                          </div>
+                          <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button>
+                          </div>
+                        </div>
+                        <div>
+                          <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
+                          <div class="row d-flex text-center py-2">
+                            <div class="col-4">
+                              <div class="price">Entry Price</div>
+                              <div class="rate">{{items.entryprice}} </div>
+                            </div>
+                            <div class="col-4">
+                              <div class="price">Target Price</div>
+                              <div class="rate">{{items.targetprice}} </div>
+                            </div>
+                            <div class="col-4">
+                              <div class="price">Stop Loss</div>
+                              <div class="rate"> {{items.stoploss}}</div>
                             </div>
                           </div>
-
                         </div>
                       </div>
                     </div>
@@ -339,7 +246,8 @@
                       </div>
                     </div>
                     <div class="container">
-                      <div class="row" *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
+                      <div class="row"
+                        *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
                         <img [src]="items.imageurl" alt="">
                       </div>
                     </div>
@@ -369,56 +277,56 @@
             </div>
             <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
               <div class="example" style="height: 65vh; overflow: auto;" *ngFor="let items of profile">
-                <div class="card list-card my-3">
+                <div class="card list-card my-3 ">
                   <div class="m-2">
-              <div class="container">
-                <div class=" row user_informatiom d-flex align-items-center">
-                  <div class="col-2">
-                    <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                  </div>
-                  <div class="col-6 mx-2 py-2">
-                    <div class="user_name">{{items.username}}</div>
-                    <div class="detail">{{items.sebi}}</div>
+                   <div class="container">
+                    <div class=" row user_informatiom d-flex align-items-center">
+                      <div class="col-2">
+                        <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                      </div>
+                      <div class="col-6 mx-2 py-2">
+                        <div class="user_name">{{items.username}}</div>
+                        <div class="detail">{{items.sebi}}</div>
 
-                  </div>
-                  <div class="col-3 text-end "><button type="button" class="btn follow-btn">Followed</button>
-                  </div>
-                </div>
-              </div>
+                      </div>
+                      <div class="col-3 text-end "><button type="button" class="btn follow-btn">Followed</button>
+                      </div>
+                    </div>
+                   </div>
                     <div class="py-2">
                       <p class="profile-detail">{{items.description}}</p>
                     </div>
-                  <div class="container">
-                    <div class="row">
-                      <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Benefits:
-                            </button>
-                          </h2>
-                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                              <ul class="" *ngFor="let data of items.benefits">
-                                <li class="benefit-line">
-                                  {{data.benefits}}
-                                </li>
+                    <div class="container">
+                      <div class="row">
+                        <div class="accordion" id="accordionExample">
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Benefits:
+                              </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                              data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                <ul class="" *ngFor="let data of items.benefits">
+                                  <li class="benefit-line">
+                                    {{data.benefits}}
+                                  </li>
 
-                              </ul>
+                                </ul>
+                              </div>
                             </div>
                           </div>
-                        </div>
 
+                        </div>
                       </div>
                     </div>
-                  </div>
                   <div class="container">
                     <div class="row py-2">
                       <h6 class="profile-line">INSTRUMENTS</h6>
                       <div class="py-2">
-                        <span class="profile-option mx-2" *ngFor="let item of items.idealfor">{{item.idealfor}}</span>
+                        <span class="profile-option mx-1" *ngFor="let item of items.idealfor">{{item.idealfor}}</span>
                       </div>
                     </div>
                   </div>
@@ -426,7 +334,7 @@
                     <div class="row py-2">
                       <h6 class="profile-line">TIME HORIZON</h6>
                       <div class="py-2">
-                        <span class="profile-option ">Intraday</span> <span class="profile-option mx-3">Swing Trading
+                        <span class="profile-option ">Intraday</span> <span class="profile-option mx-1">Swing Trading
                           (2:30 days)</span>
                       </div>
                     </div>
@@ -435,36 +343,36 @@
                     <div class="row py-2">
                       <h6 class="profile-line">CAPITAL REQUIRED</h6>
                       <div class="py-2">
-                        <span class="profile-option ">Less than INR 1 Lac</span> <span class="profile-option mx-3">INR
+                        <span class="profile-option ">Less than INR 1 Lac</span> <span class="profile-option mx-1">INR
                           1 - 3 Lacs</span>
                       </div>
                     </div>
                   </div>
-                 <div class="container">
-                  <div class="row py-2">
-                    <h6 class="profile-line">KNOWLEDGE LEVEL</h6>
-                    <div class="py-2">
-                      <span class="profile-option ">Beginner</span> <span
-                        class="profile-option mx-3">Intermediate</span> <span class="profile-option">Pro</span>
+                   <div class="container">
+                    <div class="row py-2">
+                      <h6 class="profile-line">KNOWLEDGE LEVEL</h6>
+                      <div class="py-2">
+                        <span class="profile-option ">Beginner</span> <span
+                          class="profile-option mx-1">Intermediate</span> <span class="profile-option">Pro</span>
+                      </div>
                     </div>
-                  </div>
-                 </div>
-                <div class="container">
-                  <div class="row py-2">
-                    <h6 class="profile-line">PARTICIPANT TYPE</h6>
-                    <div class="py-2">
-                      <span class="profile-option ">Trader</span>
+                   </div>
+                   <div class="container">
+                    <div class="row py-2">
+                      <h6 class="profile-line">PARTICIPANT TYPE</h6>
+                      <div class="py-2">
+                        <span class="profile-option ">Trader</span>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                  <div class="container">
+                   </div>
+                   <div class="container">
                     <div class="row py-2">
                       <h6 class="profile-line">RISK TYPE</h6>
                       <div class="py-2">
                         <span class="profile-option ">High</span>
                       </div>
                     </div>
-                  </div>
+                   </div>
                     <!-- <div class="my-4">
                         <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
                           <li class="nav-item flex-fill" role="presentation">
@@ -482,8 +390,8 @@
                           <div class="tab-pane fade show active" id="bordered-justified-Active" role="tabpanel"
                             aria-labelledby="Active-tab">
 
-                            <div class="card my-3">
-                              <div class="card-body">
+                            <div class="card list-card my-3 m-4my-3">
+                              <div class="m-2">
                                 <div class="container">
                                   <div class=" row user_informatiom">
                                     <div class="col-1">
@@ -597,7 +505,7 @@
                           <div class="tab-pane fade" id="bordered-justified-Past" role="tabpanel"
                             aria-labelledby="Past-tab">
                             <div class="card list-card my-3 m-4my-3">
-                              <div class="card-body">
+                              <div class="m-2">
                                 <div class=" row user_informatiom">
                                   <div class="col-1">
                                     <span class="user-icon"><i class="bi bi-person-circle"></i></span>
@@ -691,7 +599,7 @@
                               </div>
                             </div>
                             <div class="card list-card my-3 m-4">
-                              <div class="card-body">
+                              <div class="m-2">
                                 <div class=" row user_informatiom">
                                   <div class="col-1">
                                     <span class="user-icon"><i class="bi bi-person-circle"></i></span>
@@ -788,70 +696,53 @@
                   </div>
                 </div>
               </div>
-              <div class="tab-pane fade" id="bordered-justified-Chat" role="tabpanel" aria-labelledby="Chat-tab">
-                <div class="card list-card my-3">
-                  <div class="container">
-                    <div class="row clearfix">
-                        <div class="col-lg-12">
-                            <div class="card list-card chat-app">
-                                <div class="chat">
-                                    <div class="container  chat-header clearfix">
-                                        <div class="row">
-                                            <div class="col-lg-6 d-flex">
-                                                <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                                </a>
-                                                <div class="chat-about">
-                                                    <h6 class="m-b-0 user-name">Aiden Chavez</h6>
-                                                    <small class="date">Last seen: 2 hours ago</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 d-none d-md-none d-lg-block text-end">
-                                                <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-outline-primary mx-1"><i class="fa fa-image"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-outline-warning mx-1"><i class="fa fa-question"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat-history">
-                                        <ul class="m-b-0">
-                                            <li class="clearfix">
-                                                <div class="message-data text-end">
-                                                    <span class="message-data-time">10:10 AM, Today</span>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                                </div>
-                                                <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div>
-                                            </li>
-                                            <li class="clearfix">
-                                                <div class="message-data">
-                                                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                                    <span class="message-data-time">10:12 AM, Today</span>
-                                                </div>
-                                                <div class="message my-message">Are we meeting today?</div>
-                                            </li>
-                                            <li class="clearfix">
-                                                <div class="message-data">
-                                                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                                    <span class="message-data-time">10:15 AM, Today</span>
-                                                </div>
-                                                <div class="message my-message">Project has been already finished and I have results to show you.</div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="chat-message clearfix">
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control search-bar" placeholder="Enter text here...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            </div>
+            <div class="tab-pane fade" id="bordered-justified-Chat" role="tabpanel" aria-labelledby="Chat-tab">
+              <!-- <div class="example" style="height: 65vh; overflow: auto;"> -->
+              <div class="card list-card my-3">
+                <div class="m-2">
+                  <div class="d-flex justify-content-center container">
+                    <div class="container">
+                      <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
+                        <div
+                          class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+
+                          <sapn class="fs-5 fw-semibold" style="text-transform: capitalize;">{{username}}</sapn>
                         </div>
+                        <div class="list-group list-group-flush border-bottom scrollarea">
+                          <div class="list-group-item list-group-item-action py-3 lh-tight"
+                            *ngFor=" let msg of messages">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                              <strong class="mb-1">{{msg.username}}</strong>
+
+                            </div>
+                            <div class="col-10 mb-1 small">{{msg.message}}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <form (ngSubmit)="submit()">
+                        <!-- <input class="form-control" placeholder="Write a message"
+                          [value]="message" (change)="onChnage($event)" />
+
+                          <div class="icondiv d-flex justify-content-end align-content-center text-center ml-2"> <i
+                              class="fa fa-paperclip icon1"></i> <i class="fa fa-arrow-circle-right icon2"></i> </div> -->
+                        <div class="">
+                          <div class="row d-flex justify-content-between align-items-center">
+                            <div class="col-10">
+                              <input class="form-control" placeholder="Type a message..." [value]="message"
+                                (change)="onChnage($event)">
+                            </div>
+                            <div class="col-2 d-flex justify-content-center">
+                              <i class="fa fa-paperclip icon1"></i>
+                              <i (click)="submit()" class="fa fa-arrow-circle-right icon2"></i>
+                            </div>
+
+                          </div>
+                        </div>
+                      </form>
                     </div>
-                    </div>
+                  </div>
+
                 </div>
               </div>
               <!-- </div> -->
@@ -859,7 +750,8 @@
           </div>
         </div>
       </div>
-
-
     </div>
-  </section>
+
+
+  </div>
+</section>
