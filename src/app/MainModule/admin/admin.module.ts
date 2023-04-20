@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy ,LocationStrategy } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -48,6 +48,8 @@ import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { ResponsiveViewComponent } from './components/responsive-view/responsive-view.component';
 import { ClubDetailsComponent } from './components/club-details/club-details.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
+import { SharedService } from 'src/app/Service/shared.service';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,7 @@ import { ClubDetailsComponent } from './components/club-details/club-details.com
     PinRecoveryComponent,
     ResponsiveViewComponent,
     ClubDetailsComponent,
+    ChatBoxComponent,
 
   ],
   imports: [
@@ -107,6 +110,7 @@ import { ClubDetailsComponent } from './components/club-details/club-details.com
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
-  ]
+  ],
+  providers:[SharedService, {provide: LocationStrategy, useClass: HashLocationStrategy}]
 })
 export class AdminModule {}
