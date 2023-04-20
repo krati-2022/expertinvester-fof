@@ -263,9 +263,6 @@ export class FeedComponent implements OnInit {
   }
 
   getDetails(id: string, recordType: string) {
-    // console.log('recordType: ', recordType);
-    // console.log('id: ', id);
-    // return
     switch (recordType) {
       case 'ClubRecord':
         this.router.navigate(['home/details/' + id + '/' + this.mobile_number]);

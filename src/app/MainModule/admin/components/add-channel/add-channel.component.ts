@@ -46,7 +46,7 @@ export interface ExpertList {
 export class AddChannelComponent implements OnInit {
   mobileNumber = localStorage.getItem('mobile_number') || '';
   AddChannelFrom: FormGroup | any;
-  ideaOn = ['Nifty', 'Bank Nifty', 'Stcok F & O'];
+  ideaOn = ['Nifty', 'Bank Nifty', 'Stock F & O'];
   fee_subscription = ['Free Access', 'Paid Access'];
   benefits: any = [];
   ideaOnlist: any = [];
@@ -60,6 +60,7 @@ export class AddChannelComponent implements OnInit {
   myForm: FormGroup | any;
   idealMessage: string = '';
   benefitMessage: string = '';
+  message: string = '';
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -75,7 +76,7 @@ export class AddChannelComponent implements OnInit {
       mobile_No: new FormControl(this.mobileNumber),
       name: new FormControl('', Validators.required),
       subscription: new FormControl(''),
-      coAdChannel: new FormControl(status),
+      coAdChannel: new FormControl(false),
       description: new FormControl('', Validators.required),
       imageurl: new FormControl(''),
       ideaOn: new FormControl(false),
@@ -116,25 +117,6 @@ export class AddChannelComponent implements OnInit {
     });
   }
 
-  goToExpertProfilePage(data: any, status: boolean) {
-    if (data.isSelected == false) {
-      data.isSelected = true;
-    } else {
-      data.isSelected = false;
-    }
-    // console.log('data: ', data);
-    if (status == true) {
-      this.coAdList.push({ expertId: data.id, name: data.name });
-      // console.log('this.coAdList: ', this.coAdList);
-    } else {
-      this.coAdList
-        .filter((i: any) => i.expertId == data.id)
-        .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
-      // console.log('this.coAdList: ', this.coAdList);
-    }
-    // console.log('this.coAdList: ', this.coAdList);
-  }
-
   removeCoAdList(id: string) {
     this.coAdList
       .filter((i: any) => i.expertId == id)
@@ -164,10 +146,10 @@ export class AddChannelComponent implements OnInit {
     }
   }
 
-  coAddChannel() {
-    if (this.AddChannelFrom.value.coAdChannel) {
+  coAddChannel(event: any) {
+    if (!event == true) {
       (<any>$('.bd-example-modal-lg')).modal('show');
-    } else if (this.AddChannelFrom.value.coAdChannel == false) {
+    } else if (!event == false) {
       // console.log('this.coAdList: ', this.expertList);
       this.expertList.map((i: any) => {
         if (i.isSelected == true) {
@@ -176,6 +158,7 @@ export class AddChannelComponent implements OnInit {
       });
       // return
       this.coAdList.splice(0, this.coAdList.length);
+      console.log('this.coAdList: ', this.coAdList);
 
       // this.coAdList = [
       //   {
@@ -186,11 +169,31 @@ export class AddChannelComponent implements OnInit {
     }
   }
 
+  goToExpertProfilePage(data: any, status: boolean) {
+    if (data.isSelected == false) {
+      data.isSelected = true;
+    } else {
+      data.isSelected = false;
+    }
+    // console.log('data: ', data);
+    if (status == true) {
+      this.coAdList.push({ expertId: data.id, name: data.name });
+      // console.log('this.coAdList: ', this.coAdList);
+    } else {
+      this.coAdList
+        .filter((i: any) => i.expertId == data.id)
+        .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
+      // console.log('this.coAdList: ', this.coAdList);
+    }
+    // console.log('this.coAdList: ', this.coAdList);
+  }
+
   close() {
     (<any>$('.bd-example-modal-lg')).modal('hide');
   }
 
   addBenefits(data: string) {
+    console.log('data: ', data);
     if (this.benefits.length >= 4) {
       const Toast = Swal.mixin({
         toast: true,
@@ -214,6 +217,9 @@ export class AddChannelComponent implements OnInit {
       return;
     }
 
+    if (data == '' || data == null) {
+      return;
+    }
     this.benefits.push({ id: this.benefits.length, benefits: data });
     this.AddChannelFrom.get('addBenefits')?.reset();
     // this.AddChannelFrom.value.benefits =  this.benefits

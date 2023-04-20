@@ -228,7 +228,7 @@
                 </div>
             <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
               <div class="example" style="height: 55vh; overflow: auto;">
-                <div class="card list-card my-2" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
+                <div class="card list-card my-2" *ngFor="let items of channelDetails | filter : searchKey : 'name'">
                   <div class="m-2">
                     <div class="container" (click)="getChannelDetails(items)">
                       <div class=" row user_informatiom d-flex align-items-center">
@@ -236,7 +236,7 @@
                           <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                         </div>
                         <div class="col-8 mx-3 py-2">
-                          <div class="user_name">{{items.username}}</div>
+                          <div class="user_name">{{items.name}}</div>
                           <div class="detail">{{items.sebi}}</div>
                           <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                         </div>

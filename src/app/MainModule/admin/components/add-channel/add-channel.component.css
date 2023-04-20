@@ -2,3 +2,9 @@
     display: contents
   }
   
+    .cstm-cls{
+      pointer-events: none;
+    }
+    .cls{
+      pointer-events: all;
+    }

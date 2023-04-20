@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./expert.component.css'],
 })
 export class ExpertComponent implements OnInit {
-  apiUrl = environment.apiUrl
+  apiUrl = environment.apiUrl;
   AddExpertForm: FormGroup | any;
   formData = new FormData();
   submitted: boolean = false;
@@ -24,12 +24,15 @@ export class ExpertComponent implements OnInit {
   country: Array<any> = [];
   file: File[] | any;
   url: any;
-  experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year']
-  knowledgeLevel = ['Beginner', 'Intermediate', 'Professional']
-  ismobileNumberExist = localStorage.getItem('mobile_number')
+  experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year'];
+  knowledgeLevel = ['Beginner', 'Intermediate', 'Professional'];
+  ismobileNumberExist = localStorage.getItem('mobile_number');
   usertype = sessionStorage.getItem('usertype');
-  isLoading:boolean = false
-  isSebi = [{status:"Yes", value:true} , {status:"No", value:false}]
+  isLoading: boolean = false;
+  isSebi = [
+    { status: 'Yes', value: true },
+    { status: 'No', value: false },
+  ];
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -40,17 +43,11 @@ export class ExpertComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log('this.ismobileNumberExist: ', this.ismobileNumberExist);
-    if(!this.ismobileNumberExist){
-      this.router.navigate([''])
-     }
+    if (!this.ismobileNumberExist) {
+      this.router.navigate(['']);
+    }
     this.AddExpertForm = this.formBuilder.group({
-      name: [
-        '',
-        Validators.compose([
-          Validators.required,
-          this.coreHelperService.getNameValidation(),
-        ]),
-      ],
+      name: ['', Validators.required],
       email: ['', Validators.compose([Validators.email, Validators.required])],
       mobileno: [this.ismobileNumberExist, Validators.required],
       usertype: [this.usertype, Validators.required],
@@ -70,6 +67,17 @@ export class ExpertComponent implements OnInit {
       this.country = response.data;
       // console.log('this.country: ', this.country);
     });
+
+    this.AddExpertForm.get('IsSEBI').valueChanges.subscribe((value:any) => {
+    // console.log('value: ', value);
+      if (value === true) {
+        this.AddExpertForm.get('SEBIRegNo').setValidators([Validators.required]);
+      } else {
+        this.AddExpertForm.get('SEBIRegNo').clearValidators();
+      }
+      this.AddExpertForm.get('SEBIRegNo').updateValueAndValidity();
+    });
+  
   }
 
   get ExpertControl() {
@@ -103,9 +111,11 @@ export class ExpertComponent implements OnInit {
   //   this.router.navigate(['home/expertList']);
   // }
 
+
+
   onSelectFile(event: any) {
     const file = event.target.files[0];
-    this.imageSrc = event.target.files[0].name
+    this.imageSrc = event.target.files[0].name;
     this.AddExpertForm.patchValue({
       certificateURL: file,
     });
@@ -115,11 +125,33 @@ export class ExpertComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.submitPhone = true;
+    
     if (this.AddExpertForm.invalid) {
       return;
     }
- 
-    var formData: any = new FormData();
+
+    if (
+      this.AddExpertForm.get('IsSEBI').value == true &&
+      this.AddExpertForm.get('certificateURL').value == null
+    ){
+       const Toast = Swal.mixin({
+         toast: true,
+         position: 'top',
+         showConfirmButton: false,
+         timer: 3000,
+         timerProgressBar: true,
+         didOpen: (toast) => {
+           toast.addEventListener('mouseenter', Swal.stopTimer);
+           toast.addEventListener('mouseleave', Swal.resumeTimer);
+         },
+       });
+       Toast.fire({
+         icon: 'error',
+         title: 'Certificate is required',
+       });
+       return
+    }
+      var formData: any = new FormData();
     formData.append('name', this.AddExpertForm.get('name').value);
     formData.append('email', this.AddExpertForm.get('email').value);
     formData.append('mobileno', this.AddExpertForm.get('mobileno').value);
@@ -142,18 +174,18 @@ export class ExpertComponent implements OnInit {
     formData.append(
       'bankIFSCcode',
       this.AddExpertForm.get('bankIFSCcode').value
-      );
-      formData.append(
-        'certificateURL',
-        this.AddExpertForm.get('certificateURL').value
-        );
-        // console.log('formData: ', formData);
-        this.isLoading = true
-        // return
-        this.http
-        // .post('https://api.expertinvester.com/api/ExpertInvestor/AddExpert', formData)
-        .post(this.apiUrl + 'api/ExpertInvestor/AddExpert', formData)
-        .subscribe({
+    );
+    formData.append(
+      'certificateURL',
+      this.AddExpertForm.get('certificateURL').value
+    );
+    // console.log('formData: ', formData);
+    this.isLoading = true;
+    // return
+    this.http
+      // .post('https://api.expertinvester.com/api/ExpertInvestor/AddExpert', formData)
+      .post(this.apiUrl + 'api/ExpertInvestor/AddExpert', formData)
+      .subscribe({
         next: (response) => {
           console.log('response: ', response);
           // debugger;
@@ -162,7 +194,7 @@ export class ExpertComponent implements OnInit {
           this.submitPhone = false;
           sessionStorage.removeItem('usertype');
           this.router.navigate(['club-list']);
-          this.isLoading = false
+          this.isLoading = false;
         },
         error: (error) => {
           if (error.status == '400') {
@@ -181,7 +213,7 @@ export class ExpertComponent implements OnInit {
               icon: 'error',
               title: 'Something went wrong please try again',
             });
-            this.isLoading = false
+            this.isLoading = false;
           }
         },
       });
