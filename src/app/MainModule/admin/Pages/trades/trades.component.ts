@@ -56,9 +56,14 @@ export class TradesComponent implements OnInit {
   }
 
   keyPressNumbers(event: any) {
+  
     var charCode = event.which ? event.which : event.keyCode;
     // Only Numbers 0-9
+   
     if (charCode < 48 || charCode > 57) {
+      if(charCode == 46){
+        return true
+      }
       event.preventDefault();
       return false;
     } else {
@@ -111,7 +116,7 @@ export class TradesComponent implements OnInit {
     this.isLoading = true;
 
     this._service.AddPost(formData).subscribe((res) => {
-      console.log('res: ', res);
+      // console.log('res: ', res);
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',

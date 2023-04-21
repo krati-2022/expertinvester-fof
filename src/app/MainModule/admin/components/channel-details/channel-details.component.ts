@@ -32,8 +32,8 @@ export interface PostDetails {
   entryprice: string;
   stoploss: string;
   targetprice: string;
-  benefits:any
-  idealfor:any
+  benefits: any;
+  idealfor: any;
 }
 
 @Component({
@@ -44,14 +44,15 @@ export interface PostDetails {
 export class ChannelDetailsComponent implements OnInit {
   id: any;
   mobile_No: any;
+  usersMobileNumber: any = localStorage.getItem('mobile_number');
   username: any;
-
+  isSubscribed: any;
   activePostDetails: PostDetails[] = [];
   pastPostDetails: PostDetails[] = [];
   profile: PostDetails[] = [];
   notFound: any = '';
   activeTab: any = 'Active-Post';
- 
+
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _service: SharedService,
@@ -64,8 +65,15 @@ export class ChannelDetailsComponent implements OnInit {
     this.id = this._ActivatedRoute.snapshot.paramMap.get('param1');
     this.mobile_No = this._ActivatedRoute.snapshot.paramMap.get('param2');
     this.username = this._ActivatedRoute.snapshot.paramMap.get('param3');
+    this.isSubscribed = this._ActivatedRoute.snapshot.paramMap.get('param4');
+    console.log('this.isSubscribed: ', this.isSubscribed);
     // console.log('this.username: ', this.username);
-    this.getActivePost();
+    if (this.isSubscribed == 'true') {
+      this.getActivePost();
+    }else if(this.isSubscribed == 'false'){
+      this.GetPastPost()
+      this.activeTab = 'Past-Post';
+    }
     // Pusher.logToConsole = true;
     // const pusher = new Pusher('523e3cf86c481c43e5a5', {
     //   cluster: 'ap2',
@@ -142,10 +150,10 @@ export class ChannelDetailsComponent implements OnInit {
         this.GetProfile();
         break;
       case 'Chat':
-        this.GetPastPost();
+        // this.GetPastPost();
         break;
       default:
-        this.getActivePost();
+        this.isSubscribed == 'true' ? this.getActivePost() : this.GetPastPost();
     }
   }
 
@@ -155,10 +163,10 @@ export class ChannelDetailsComponent implements OnInit {
     ]);
   }
 
-    // onChnage(event: any) {
-    //   // console.log('event: ', event.target.value);
-    //   this.message = event.target.value;
-    // }
+  // onChnage(event: any) {
+  //   // console.log('event: ', event.target.value);
+  //   this.message = event.target.value;
+  // }
 
   // submit(): void {
   //   this.message = '';

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
 import { FollowClub } from '../club/club.classes';
+import { Location } from '@angular/common';
 
 export interface GetFeedDetails {
   clubName: string;
-  clubBlock: boolean
+  clubBlock: boolean;
   clublistId: string;
   description: string;
   email: string;
@@ -29,7 +30,7 @@ export interface GetFeedDetails {
   tradetype: string;
   username: string;
   usertype: string;
-  isSelfPost: boolean
+  isSelfPost: boolean;
 }
 
 export interface ChannelListDetails {
@@ -56,7 +57,7 @@ export interface ChannelListDetails {
   subscription: string;
   username: string;
   usertype: string;
-  clubBlock: boolean
+  clubBlock: boolean;
 }
 
 export interface ClubList {
@@ -93,7 +94,7 @@ export interface ChannelListDetails {
   subscription: string;
   username: string;
   usertype: string;
-  clubBlock: boolean
+  clubBlock: boolean;
 }
 
 export interface ClubList {
@@ -125,11 +126,16 @@ export class FeedComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 2;
   searchKey: string = '';
-  
-  constructor(private router: Router, private _service: SharedService) {}
+
+  constructor(
+    private router: Router,
+    private _service: SharedService,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
     // this.itemsToDisplay = this.paginate(this.current, this.perPage);
+
     this.GetFeed();
     this._service.search.subscribe((val: any) => {
       this.searchKey = val;
@@ -186,11 +192,10 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  getLikes(id:any){
-    this._service.GetLikes(id).subscribe(res =>{
+  getLikes(id: any) {
+    this._service.GetLikes(id).subscribe((res) => {
       console.log(res);
-      
-    })
+    });
   }
 
   followClub(clublistId: string) {
@@ -229,13 +234,13 @@ export class FeedComponent implements OnInit {
     this._service
       .GetFeed(mobile_No, pageNumber, this.perPage)
       .subscribe((res) => {
-      // console.log('res: ', res.items);
-        if(res.items.length != 0){
+        // console.log('res: ', res.items);
+        if (res.items.length != 0) {
           this.feedDetails.push(...res.items);
-        }else {
-          this.current--
+        } else {
+          this.current--;
         }
-        
+
         // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
       });
   }
@@ -275,11 +280,29 @@ export class FeedComponent implements OnInit {
     }
   }
 
-  getClubDetails(clublistId:string, clubName:string){
+  getClubDetails(clublistId: string, clubName: string) {
     // console.log('clublistId: ', clublistId);
-      this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobile_number + '/' + clubName])
-    }
+    this.router.navigate([
+      'home/add-trade/' +
+        clublistId +
+        '/' +
+        this.mobile_number +
+        '/' +
+        clubName,
+    ]);
+  }
 
+  getChannelDetails(item: any) {
+    this.router.navigate([
+      'home/channel-details/' +
+        item.channelMasterId +
+        '/' +
+        item.mobile_No +
+        '/' +
+        item.username,
+    ]);
+  }
+  
   blockUnblockPost(id: string, status: boolean) {
     // console.log('status: ', status);
     // console.log('id: ', id);
@@ -298,7 +321,7 @@ export class FeedComponent implements OnInit {
       });
   }
 
-  like(id:string, status:boolean){
+  like(id: string, status: boolean) {
     let mobile_No = '';
     var splitString = this.mobile_number.split('');
     if (splitString[0] == '+') {
@@ -314,8 +337,4 @@ export class FeedComponent implements OnInit {
         // this.getLikes(id)
       });
   }
-
-  
-
-
 }

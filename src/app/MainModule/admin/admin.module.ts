@@ -50,6 +50,7 @@ import { ResponsiveViewComponent } from './components/responsive-view/responsive
 import { ClubDetailsComponent } from './components/club-details/club-details.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { SharedService } from 'src/app/Service/shared.service';
+import { ScrollDirective } from 'src/app/Utils/scroll-directive';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,7 @@ import { SharedService } from 'src/app/Service/shared.service';
     ResponsiveViewComponent,
     ClubDetailsComponent,
     ChatBoxComponent,
-
+    ScrollDirective
   ],
   imports: [
     CommonModule,

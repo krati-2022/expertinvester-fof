@@ -70,4 +70,5 @@ export class ClubListComponent implements OnInit {
   goToHomePage(){
     this.router.navigate(['home'])
   }
+  
 }

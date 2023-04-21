@@ -57,8 +57,8 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-end mb-2" *ngIf="count >= 2">
-        <button class="btn follow-btn" (click)="goToHomePage()">Next</button>
+      <div class="d-flex justify-content-end mb-2" >
+        <button class="btn follow-btn"  [disabled]="count < 3" (click)="goToHomePage()">Next</button>
       </div>
     </div>
 

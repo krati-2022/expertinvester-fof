@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/Service/shared.service';
 import { Router } from '@angular/router';
 import {  GetFeedDetails } from '../feed/feed.component';
@@ -34,14 +34,28 @@ export class ResponsiveViewComponent implements OnInit {
   public perPage = 10;
   approveRejectDetail = new ChannelApproveReject();
   channelSubscriber = new ChannelSubscriber();
+  screenWidth: any;
+
   constructor(private _service: SharedService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getMasterData();
-    this.GetFeed();
+    this.getWindowSize();
     this._service.search.subscribe((val: any) => {
       this.searchKey = val;
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.getWindowSize();
+  }
+
+  getWindowSize() {
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth < 1440) {
+      this.getMasterData();
+      this.GetFeed();
+    }
   }
 
   getMasterData() {
@@ -90,7 +104,7 @@ export class ResponsiveViewComponent implements OnInit {
     }
 
     this._service.GetChannel(mobile_No).subscribe((res) => {
-      console.log('res: ', res);
+      // console.log('res: ', res);
       this.channelDetails = res.data;
       // console.log('this.channelDetails: ', this.channelDetails);
     });
@@ -178,7 +192,8 @@ export class ResponsiveViewComponent implements OnInit {
         '/' +
         item.mobile_No +
         '/' +
-        item.username,
+        item.username +
+      +'/' + item.isSubscribed,
     ]);
   }
 

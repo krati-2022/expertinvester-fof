@@ -35,7 +35,7 @@ export class ClubComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMasterData();
-    this.GetFeed()
+    // this.GetFeed()
     this._service.search.subscribe((val:any)=>{
       this.searchKey = val;
     })
@@ -59,24 +59,7 @@ export class ClubComponent implements OnInit {
     });
   }
 
-  GetFeed(){
-    let mobile_No = '';
-    var splitString = this.mobileNumber.split('');
-    if (splitString[0] == '+') {
-      splitString[0] = '%2B';
-      var joinString = splitString.join('');
-      mobile_No = joinString;
-    }
-    this._service
-      .GetFeed(mobile_No, this.current, this.perPage)
-      .subscribe((res) => {
-        this.feedDetails = res.items;
-        // console.log('this.feedDetails: ', this.feedDetails);
-        // console.log(this.feedDetails);
-        
-        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
-      });
-  }
+
   getChannel(){
     let mobile_No = ''
     var splitString = this.mobileNumber.split("")
@@ -116,25 +99,7 @@ export class ClubComponent implements OnInit {
     })
   }
 
-  onScroll(){
-    var pageNumber = ++this.current;
-    // console.log('pageNumber: ', pageNumber);
-    // this.GetFeed()
-    let mobile_No = '';
-    var splitString = this.mobileNumber.split('');
-    if (splitString[0] == '+') {
-      splitString[0] = '%2B';
-      var joinString = splitString.join('');
-      mobile_No = joinString;
-    }
-    this._service
-      .GetFeed(mobile_No, pageNumber, this.perPage)
-      .subscribe((res) => {
-        this.feedDetails.push(...res.items);
-        
-        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
-      });
-  }
+
 
  
   AddChannel(){
@@ -162,29 +127,7 @@ export class ClubComponent implements OnInit {
         break;
     }
   }
-
-  getChannelDetails(item:any){
-    // console.log(item);
-    this.router.navigate(['home/channel-details/' + item.channelMasterId + '/' + item.mobile_No])
-  }
-
-  getTab(event: any) {
-    console.log('event: ', event.target.id);
-    switch (event.target.id) {
-      case 'home-tab':
-        this.GetFeed();
-        break;
-      case 'profile-tab':
-        this.getMasterData();
-        break;
-        case 'contact-tab':
-        this.getChannel();
-        break;
-     
-      default:
-        this.GetFeed();
-    }
-  }
+ 
 
   blockUnblockPost(id: string, status: boolean) {
     // console.log('status: ', status);
@@ -199,8 +142,6 @@ export class ClubComponent implements OnInit {
     this._service
       .BlockUnblockFeedPost(id, mobile_No, status)
       .subscribe((res) => {
-        console.log('res: ', res);
-        this.GetFeed();
       });
   }
 }

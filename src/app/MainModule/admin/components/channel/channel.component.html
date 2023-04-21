@@ -18,7 +18,7 @@
           <div class="example" style="height: 65vh; overflow: auto;" *ngIf="channelDetails.length != 0">
             <div class="card list-card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'name'">
               <div class="m-2" >
-                <div class="container" (click)="getChannelDetails(items)">
+                <div class="container" (click)="getChannelDetails(items)" style="cursor: pointer;">
                   <div class=" row user_informatiom">
                     <div class="col-1">
                       <span class="user-icon"><i class="bi bi-person-circle"></i></span>

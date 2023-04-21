@@ -234,7 +234,7 @@
               <div class="card list-card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
                 <div class="card-body">
                   <div class="container">
-                    <div class=" row user_informatiom">
+                    <div class=" row user_informatiom" (click)="getChannelDetails(items)">
                       <div class="col-1">
                         <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                       </div>
@@ -248,12 +248,12 @@
                   <div class="container">
                     <div class="row">
                       <div class="d-flex justify-content-between align-items-baseline py-2">
-                        <h6 class="heading">{{items.name}}</h6>
+                        <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
                         <span class=" subscript"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
                       </div>
                     </div>
                   </div>
-                  <div class="container">
+                  <div class="container" (click)="getChannelDetails(items)">
                     <div class="row">
                       <div class="channel-name">
                         <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
@@ -278,12 +278,12 @@
                       <div class="date">27 Jan 2023, 06:43 PM</div>
                     </div>
                   </div>
-                  <div class="container">
+                  <div class="container" (click)="getChannelDetails(items)">
                     <div class="row">
                       <p class="club-dis">{{items.description}}</p>
                     </div>
                   </div>
-                  <div class="container expect-section my-2">
+                  <div class="container expect-section my-2" (click)="getChannelDetails(items)">
                     <div class="grid-data d-flex expect-sections ">
                       <div class="col-3 border-end ">
                         <div class="d-flex club-icons"><span class="club-icon "><i
