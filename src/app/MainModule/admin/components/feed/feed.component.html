@@ -152,7 +152,7 @@
                    </div>
                     <div class="container">
                       <div class="row py-2" (click)="getDetails(items.id, items.recordType)">
-                        <h6 class="dis-line">IBR Infra CMP 305 :</h6>
+                        <!-- <h6 class="dis-line">IBR Infra CMP 305 :</h6> -->
                         <p class="dis">{{items.description}}</p>
                       </div>
                     </div>
@@ -162,14 +162,14 @@
                           <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isUserLiked == false">{{items.likeCount}}</i>
                           <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isUserLiked == true">{{items.likeCount}}</i>
                         </span>
-                        <span><i class="bi bi-share-fill px-2"></i></span>
-                        <span><i class="bi bi-bookmark-fill px-2"></i></span>
                       </div>
                       <div>
-                        <button class="btn follow-btn" style="background: blue;" (click)="getDetails(items.id, items.recordType)">
+                        <span><i class="bi bi-share-fill px-2"></i></span>
+                        <span><i class="bi bi-bookmark-fill px-2"></i></span>
+                        <!-- <button class="btn follow-btn" style="background: blue;" (click)="getDetails(items.id, items.recordType)">
                           <span *ngIf="items.recordType == 'ChannelRecord'">Channel Details</span>
                           <span *ngIf="items.recordType == 'ClubRecord'">Club Details</span>
-                        </button>
+                        </button> -->
                       </div>
                     </div>
                    </div>
