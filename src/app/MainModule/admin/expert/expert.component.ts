@@ -29,6 +29,7 @@ export class ExpertComponent implements OnInit {
   ismobileNumberExist = localStorage.getItem('mobile_number');
   usertype = sessionStorage.getItem('usertype');
   isLoading: boolean = false;
+  
   isSebi = [
     { status: 'Yes', value: true },
     { status: 'No', value: false },
@@ -115,6 +116,7 @@ export class ExpertComponent implements OnInit {
 
   onSelectFile(event: any) {
     const file = event.target.files[0];
+    
     this.imageSrc = event.target.files[0].name;
     this.AddExpertForm.patchValue({
       certificateURL: file,

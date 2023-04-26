@@ -61,6 +61,7 @@ export class AddChannelComponent implements OnInit {
   idealMessage: string = '';
   benefitMessage: string = '';
   message: string = '';
+  maxFileSize: number = 200 * 1024;
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -238,6 +239,26 @@ export class AddChannelComponent implements OnInit {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
 
+      if (file.size > this.maxFileSize) {
+        // alert('');
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+          Toast.fire({
+            icon: 'warning',
+            title: 'File size exceeds the limit of 200kb',
+          });
+        return;
+      }
       reader.onload = () => {
         let ext = event.target.files[0].name.split('.').pop().toLowerCase();
         this.fileName = event.target.files[0].name;

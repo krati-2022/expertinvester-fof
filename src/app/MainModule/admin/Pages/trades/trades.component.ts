@@ -20,6 +20,8 @@ export class TradesComponent implements OnInit {
   tradetype: string = 'BUY';
   submitted: boolean = false;
   isLoading: boolean = false;
+  maxFileSize: number = 200 * 1024;
+
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -56,13 +58,12 @@ export class TradesComponent implements OnInit {
   }
 
   keyPressNumbers(event: any) {
-  
     var charCode = event.which ? event.which : event.keyCode;
     // Only Numbers 0-9
-   
+
     if (charCode < 48 || charCode > 57) {
-      if(charCode == 46){
-        return true
+      if (charCode == 46) {
+        return true;
       }
       event.preventDefault();
       return false;
@@ -73,6 +74,26 @@ export class TradesComponent implements OnInit {
 
   onSelectFile(event: any) {
     const file = event.target.files[0];
+    if (file.size > this.maxFileSize) {
+      // alert('');
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: 'warning',
+        title: 'File size exceeds the limit of 200kb',
+      });
+      return;
+    }
     this.imageSrc = event.target.files[0].name;
     this.addPostForm.patchValue({
       imageurl: file,

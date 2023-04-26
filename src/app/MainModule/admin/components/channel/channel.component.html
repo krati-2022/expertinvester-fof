@@ -18,19 +18,39 @@
           <div class="example" style="height: 65vh; overflow: auto;" *ngIf="channelDetails.length != 0">
             <div class="card list-card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'name'">
               <div class="m-2" >
-                <div class="container" (click)="getChannelDetails(items)" style="cursor: pointer;">
-                  <div class=" row user_informatiom">
-                    <div class="col-1">
-                      <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                <div class="container"  style="cursor: pointer;">
+                    <div class="container">
+                      <div class=" row user_informatiom d-flex justify-content-between align-items-center" style="cursor: pointer;">
+                        <div class="d-flex col-8" (click)="getChannelDetails(items)">
+                          <div class="col-2">
+                            <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                          </div>
+                          <div class="col-6 mx-3 py-2">
+                            <div class="user_name">{{items.username}}</div>
+                            <div class="detail">{{items.sebi}}</div>
+                            <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                          </div>
+                        </div>
+                    
+                        <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
+                          <div class="dropdown">
+                            <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
+                              data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi bi-three-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            
+                              <li *ngIf="items.isSubscribed == false" (click)="subscribe(items)"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
+                              <li *ngIf="items.isSubscribed == true" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-lock-fill "></i>Subscribed</a></li>
+                              <li  style="cursor: pointer;" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
+                    
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-8 mx-3 py-2" >
-                      <div class="user_name">{{items.name}}</div>
-                      <div class="detail">{{items.sebi}}</div>
-                      <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
-                    </div>
-                  </div>
                 </div>
-                <div class="container">
+                <!-- <div class="container">
                   <div class="row">
                     <div class="d-flex justify-content-between align-items-baseline py-2">
                       <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
@@ -38,7 +58,7 @@
                       <span class=" subscript" *ngIf="items.isSubscribed == true" style="cursor: pointer;"><i class="bi bi-lock-fill lock-icon"></i>Subscribed</span>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="container" (click)="getChannelDetails(items)">
                   <div class="row">
                     <div class="channel-name">
@@ -61,7 +81,7 @@
                           rate: 20%</button>
                       </div>
                     </div>
-                    <div class="date">27 Jan 2023, 06:43 PM</div>
+                    <div class="date">{{items.createdDate | date: 'fullDate'}} {{items.createdDate | date: 'shortTime'}}</div>
                   </div>
                 </div>
                 <div class="container" (click)="getChannelDetails(items)">

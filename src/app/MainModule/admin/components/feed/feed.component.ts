@@ -153,7 +153,7 @@ export class FeedComponent implements OnInit {
     this._service
       .GetFeed(mobile_No, this.current, this.perPage)
       .subscribe((res) => {
-        // console.log('res: ', res.items);
+        // console.log('res: ', res.items[0]);
         this.feedDetails = res.items;
         // console.log('this.feedDetails: ', this.feedDetails);
         // console.log(this.feedDetails);
