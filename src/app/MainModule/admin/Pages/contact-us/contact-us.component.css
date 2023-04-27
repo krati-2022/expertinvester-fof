@@ -33,9 +33,7 @@ input:focus, textarea:focus, keygen:focus, select:focus {
 
 
 /* Contact Form Styling */
-.container {
-	padding: 0 50px 70px;
-}
+
 .textcenter {
 	text-align: center;
 }

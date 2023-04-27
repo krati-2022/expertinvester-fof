@@ -19,20 +19,6 @@
                   </div>
                 </div>
                 <!-- <div class="row mb-3">
-                  <label for="inputText" class="col-lg-4 col-form-label form-line"><i class="bi bi-tablet px-2"></i>Mobile No.</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="mobileno"
-                    [ngClass]="{ 'is-invalid': (submitted || submitPhone) && ExpertControl.mobileno.errors  }">
-                    <div *ngIf="(submitted || submitPhone )  && ExpertControl.mobileno?.errors " class="invalid-feedback">
-                      <div *ngIf="ExpertControl.mobileno.errors?.validatePhoneNumber ">Phone number is invalid.</div>
-                      <div *ngIf="ExpertControl.mobileno.errors?.maxLength ">Phone number is invalid.</div>
-                      <div *ngIf="ExpertControl.mobileno.errors?.required ">Phone number is required.</div>
-                    </div>
-                  </div>
-                </div> -->
-
-
-                <div class="row mb-3">
                   <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i class="bi bi-envelope px-2"></i>Expert Type</label>
                   <div class="col-lg-8">
                     <input type="text" class="form-control" formControlName="experttype" [ngClass]="{ 'is-invalid': submitted && ExpertControl.experttype.errors }">
@@ -40,14 +26,16 @@
                       <div *ngIf="ExpertControl.experttype.errors.required">Expert Type is required.</div>
                     </div>
                   </div>
-                </div>
+                </div> -->
             <fieldset class="row mt-2 mb-3">
               <legend class="col-form-label col-lg-6 pt-0 form-line"><i class="bi bi-r-circle px-2"></i>Are you SEBI registered</legend>
               <div class="col-lg-6 d-flex justify-content-around">
                 <div class="form-check" *ngFor="let item of isSebi">
-                  <input class="form-check-input" type="radio" [value]="item.value" formControlName="IsSEBI" >
+                  <input class="form-check-input" type="radio" [value]="item.value" formControlName="IsSEBI" [ngClass]="{ 'is-invalid': submitted && ExpertControl.IsSEBI.errors }">
                   <label class="form-check-label">{{item.status}}</label>
                 </div>
+               
+
                 <!-- <div class="form-check">
                   <input class="form-check-input" type="radio"  [value]="false" formControlName="IsSEBI">
                   <label class="form-check-label" >No</label>
@@ -67,17 +55,17 @@
                     <i class="bi bi-paperclip"></i>Attached SEBI reg. certificate PDF
                     <p *ngIf="imageSrc != ''">{{imageSrc}}</p>
                 </label>
-                <input id="file-input" type="file" accept="pdf" class="cstm-file" (change)="onSelectFile($event)">
+                <input id="file-input" type="file" accept="application/pdf" class="cstm-file" (change)="onSelectFile($event)">
               </div>
               </div>
             </div>
 
             <div class="row mb-3">
-              <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-person-vcard px-2"></i>Account Name</label>
+              <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-person-vcard px-2"></i>Account Holder Name</label>
               <div class="col-lg-8">
                 <input type="text" class="form-control" formControlName="accountname"  [ngClass]="{ 'is-invalid': submitted && ExpertControl.accountname.errors }">
                 <div *ngIf=" submitted && ExpertControl.accountname.errors" class="invalid-feedback">
-                  <div *ngIf="ExpertControl.accountname.errors.required">Account Name is required.</div>
+                  <div *ngIf="ExpertControl.accountname.errors.required">Account Holder Name is required.</div>
                 </div>
               </div>
             </div>

@@ -81,15 +81,17 @@ export class ChannelComponent implements OnInit {
   }
 
   getChannelDetails(item: any) {
-    // console.log(item);
-    this.router.navigate([
-      'home/channel-details/' +
-        item.channelMasterId +
+ 
+      this.router.navigate([
+        'home/channel-details/' +
+          item.channelMasterId +
+          '/' +
+          item.mobile_No +
+          '/' +
+          item.name +
         '/' +
-        item.mobile_No +
-        '/' +
-        item.username,
-    ]);
+        item.isSubscribed,
+      ]);
   }
 
   getMasterData() {
@@ -131,30 +133,6 @@ export class ChannelComponent implements OnInit {
       this.getMasterData();
     });
   }
-
-  onScroll() {
-    var pageNumber = ++this.current;
-    // console.log('pageNumber: ', pageNumber);
-    // this.GetFeed()
-    let mobile_No = '';
-    var splitString = this.mobileNumber.split('');
-    if (splitString[0] == '+') {
-      splitString[0] = '%2B';
-      var joinString = splitString.join('');
-      mobile_No = joinString;
-    }
-    this._service
-      .GetFeed(mobile_No, pageNumber, this.perPage)
-      .subscribe((res) => {
-        this.feedDetails.push(...res.items);
-
-        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
-      });
-  }
-
-  
-
-
 
   subscribe(item: any) {
     // console.log('item: ', item);

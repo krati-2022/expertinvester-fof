@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CoreHelperService } from 'src/app/providers/core-helper/core-helper.service';
 import { SharedService } from 'src/app/Service/shared.service';
 import { ExpertInvestorManagementDetails } from './expert-and-investor.classes';
+import Swal from 'sweetalert2';
 declare var $ : any
 
 interface Country {
@@ -42,13 +43,7 @@ export class ExpertAndInvestorComponent implements OnInit {
       this.router.navigate([''])
      }
     this.AddExpertInvestorForm = this._fb.group({
-      name: [
-        '',
-        Validators.compose([
-          Validators.required,
-          this.coreHelperService.getNameValidation(),
-        ]),
-      ],
+      name: ['', Validators.required],
       email: ['', Validators.compose([Validators.email, Validators.required])],
       mobileno: [this.ismobileNumberExist,Validators.required],
       usertype: [this.usertype, Validators.required],
@@ -72,6 +67,18 @@ export class ExpertAndInvestorComponent implements OnInit {
     this._service.GetCountry().subscribe(response => {
       this.country = response.data
     })
+
+    this.AddExpertInvestorForm.get('IsSEBI').valueChanges.subscribe((value: any) => {
+      // console.log('value: ', value);
+      if (value === true) {
+        this.AddExpertInvestorForm.get('SEBIRegNo').setValidators([
+          Validators.required,
+        ]);
+      } else {
+        this.AddExpertInvestorForm.get('SEBIRegNo').clearValidators();
+      }
+      this.AddExpertInvestorForm.get('SEBIRegNo').updateValueAndValidity();
+    });
   }
 
   get ExpertInvestorControl() { return this.AddExpertInvestorForm.controls; }
@@ -167,10 +174,29 @@ export class ExpertAndInvestorComponent implements OnInit {
     
     this.submitted  = true
     this.submitPhone = true;
+    
     if(this.AddExpertInvestorForm.invalid){
-        return
-      }
-    const splitString = this.imageSrc.split('data:application/pdf;base64,')
+      return
+    }
+    if (this.AddExpertInvestorForm.value.IsSEBI == true && this.imageSrc == ''){
+       const Toast = Swal.mixin({
+         toast: true,
+         position: 'top',
+         showConfirmButton: false,
+         timer: 3000,
+         timerProgressBar: true,
+         didOpen: (toast) => {
+           toast.addEventListener('mouseenter', Swal.stopTimer);
+           toast.addEventListener('mouseleave', Swal.resumeTimer);
+         },
+       });
+       Toast.fire({
+         icon: 'error',
+         title: 'Certificate is required',
+       });
+       return;
+    }
+        const splitString = this.imageSrc.split('data:application/pdf;base64,');
     let formData = {
       mobileno: this.AddExpertInvestorForm.value.mobileno,
       name: this.AddExpertInvestorForm.value.name,

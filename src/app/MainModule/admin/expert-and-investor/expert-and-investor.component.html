@@ -70,17 +70,17 @@
                     <i class="bi bi-paperclip"></i>Attached SEBI reg. certificate PDF
                     <p *ngIf="fileName != ''">{{fileName}}</p>
                 </label>
-                <input id="file-input" type="file" accept="pdf" class="cstm-file" (change)="onSelectFile($event)">
+                <input id="file-input" type="file" accept="application/pdf" class="cstm-file" (change)="onSelectFile($event)">
               </div>
               </div>
             </div>
 
             <div class="row mb-3">
-              <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-person-vcard px-2"></i>Account Name</label>
+              <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-person-vcard px-2"></i>Account Holder Name</label>
               <div class="col-lg-8">
                 <input type="text" class="form-control" formControlName="accountname"  [ngClass]="{ 'is-invalid': submitted && ExpertInvestorControl.accountname.errors }">
                 <div *ngIf=" submitted && ExpertInvestorControl.accountname.errors" class="invalid-feedback">
-                  <div *ngIf="ExpertInvestorControl.accountname.errors.required">Account Name is required.</div>
+                  <div *ngIf="ExpertInvestorControl.accountname.errors.required">Account Holder Name is required.</div>
                 </div>
               </div>
             </div>

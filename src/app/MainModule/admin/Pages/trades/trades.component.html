@@ -66,7 +66,7 @@
                   <div class="form-group">
                     <label class="form-line" for="">Entry Price</label>
                     <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="entryprice"
-                      id="" aria-describedby="emailHelp" placeholder="Entry Price"
+                      id="" AddExpertInvestorForm placeholder="Entry Price"
                       [ngClass]="{ 'is-invalid': submitted && addPostControl.entryprice.errors }">
                     <div *ngIf=" submitted && addPostControl.entryprice.errors" class="invalid-feedback">
                       <div *ngIf="addPostControl.entryprice.errors.required">Entry Price is required.</div>
@@ -78,7 +78,7 @@
                     <div class="form-group">
                       <label class="form-line" for="">Target Price</label>
                       <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="targetprice"
-                        id="" aria-describedby="emailHelp" placeholder="Target Price"
+                        id="" AddExpertInvestorForm placeholder="Target Price"
                         [ngClass]="{ 'is-invalid': submitted && addPostControl.targetprice.errors }">
                       <div *ngIf=" submitted && addPostControl.targetprice.errors" class="invalid-feedback">
                         <div *ngIf="addPostControl.targetprice.errors.required">Target Price is required.</div>
@@ -89,7 +89,7 @@
                     <div class="form-group">
                       <label class="form-line" for="exampleInputEmail2">Stop Loss</label>
                       <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="stoploss"
-                        id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Stop Loss"
+                        id="exampleInputEmail2" AddExpertInvestorForm placeholder="Stop Loss"
                         [ngClass]="{ 'is-invalid': submitted && addPostControl.stoploss.errors }">
                       <div *ngIf=" submitted && addPostControl.stoploss.errors" class="invalid-feedback">
                         <div *ngIf="addPostControl.stoploss.errors.required">Stop Loss is required.</div>
@@ -101,7 +101,7 @@
                   <div class="form-group">
                     <label class="form-line" for="exampleInputEmail3">External Link</label>
                     <input type="text" class="form-control" formControlName="externallink" id="exampleInputEmail3"
-                      aria-describedby="emailHelp" placeholder="External Link"
+                      AddExpertInvestorForm placeholder="External Link"
                       [ngClass]="{ 'is-invalid': submitted && addPostControl.externallink.errors }">
                     <div *ngIf=" submitted && addPostControl.externallink.errors" class="invalid-feedback">
                       <div *ngIf="addPostControl.externallink.errors.required">External Link is required.</div>
@@ -112,7 +112,7 @@
                   <div class="form-group">
                     <label class="form-line" for="exampleInputEmail4">Enter Description</label>
                     <textarea type="text" class="form-control" formControlName="description" id="exampleInputEmail4"
-                      aria-describedby="emailHelp" placeholder="Enter Description"
+                      AddExpertInvestorForm placeholder="Enter Description"
                       [ngClass]="{ 'is-invalid': submitted && addPostControl.description.errors }"></textarea>
                     <div *ngIf=" submitted && addPostControl.description.errors" class="invalid-feedback">
                       <div *ngIf="addPostControl.description.errors.required">Description is required.</div>

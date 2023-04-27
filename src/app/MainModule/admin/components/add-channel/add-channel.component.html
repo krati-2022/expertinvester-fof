@@ -97,6 +97,7 @@
                     <div class="col-lg-6">
                       <input type="text" formControlName="addBenefits" placeholder="Enter benefits"
                         class="form-control">
+                
                        
                      <div *ngIf="benefits.length == 0  && benefitMessage!=''" style="color:red" class="d-flex justify-content-center">{{benefitMessage}}</div>
                       <div>
@@ -131,7 +132,7 @@
                     <div class="col-lg-3">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                          formControlName="coAdChannel" [checked]="coAdList.length != 0" (click)="coAddChannel()">
+                          formControlName="coAdChannel" [checked]="coAdList.length != 0" (click)="coAddChannel(AddChannelFrom.value.coAdChannel)">
                         <label class="form-check-label" for="flexCheckChecked">
                           Co-Ad Channel 
                         </label>
@@ -197,17 +198,17 @@
                         </div>
                         <div class="col-9 px-3 py-2">
                           <div class="user_name">{{items.name}}</div>
-                          <div class="detail">Sr Wealth is led by an SEBI</div>
+                          <div class="detail" *ngIf="items.isSEBI == true">Led by and SEBI</div>
+                          <div class="detail" *ngIf="items.isSEBI == false">Not Led by and SEBI</div>
                           <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                         </div>
                         <div class="col-1 d-flex justify-content-end">
                           <div class="form-check">
                             <form [formGroup]="myForm">
-                              <input class="form-check-input" formControlName="adOn" [checked]="items.isSelected" type="checkbox" [id]="items.id"
-                                (change)="goToExpertProfilePage(items, myForm.value.adOn)">
+                              <input class="form-check-input" formControlName="adOn"  [checked]="items.isSelected" type="checkbox" [id]="items.id"
+                                (change)="goToExpertProfilePage(items, myForm.value.adOn)" [ngClass]="{'cstm-cls' : coAdList.length == 2, 'cls' : items.isSelected}">
                               <label class="form-check-label" for="flexCheckChecked">
                               </label>
-
                             </form>
                           </div>
                         </div>

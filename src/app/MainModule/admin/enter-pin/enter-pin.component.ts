@@ -28,6 +28,7 @@ export class EnterPinComponent implements OnInit {
       width: '40px',
       height: '40px',
     },
+    
   };
   constructor(private router: Router, private _service: SharedService) {}
 
