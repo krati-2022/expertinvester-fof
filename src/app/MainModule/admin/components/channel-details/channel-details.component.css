@@ -971,3 +971,8 @@ span.profile-option {
     font-family: "Poppins", sans-serif;
   }
 }
+
+.sub-section{
+  background: black;
+  opacity:0.2;
+}

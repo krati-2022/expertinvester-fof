@@ -43,7 +43,7 @@ export class ChannelComponent implements OnInit {
   feedDetails: GetFeedDetails[] = [];
   followClubDetails = new FollowClub();
   channelSubscriber = new ChannelSubscriber();
-  approveRejectDetail = new ChannelApproveReject()
+  approveRejectDetail = new ChannelApproveReject();
   count: any;
   public current = 0;
   public itemsToDisplay: any;
@@ -81,17 +81,16 @@ export class ChannelComponent implements OnInit {
   }
 
   getChannelDetails(item: any) {
- 
-      this.router.navigate([
-        'home/channel-details/' +
-          item.channelMasterId +
-          '/' +
-          item.mobile_No +
-          '/' +
-          item.name +
+    this.router.navigate([
+      'home/channel-details/' +
+        item.channelMasterId +
+        '/' +
+        item.mobile_No +
+        '/' +
+        item.name +
         '/' +
         item.isSubscribed,
-      ]);
+    ]);
   }
 
   getMasterData() {
@@ -149,18 +148,38 @@ export class ChannelComponent implements OnInit {
     });
   }
 
-  approveRejectChannel(channelMasterId: string, expertId: string, approve: boolean, reject:boolean) {
-  
-  this.approveRejectDetail = new ChannelApproveReject({
-    channelMasterId: channelMasterId,
-    expertId: expertId,
-    approve: approve,
-    reject: reject,
-  });
-  // console.log(' this.approveRejectDetail: ',  this.approveRejectDetail);
-    this._service.ApproveRejectChannel(this.approveRejectDetail).subscribe(res => {
-    // console.log('res: ', res);
-      this.getChannel();
-    })
+  approveRejectChannel(
+    channelMasterId: string,
+    expertId: string,
+    approve: boolean,
+    reject: boolean
+  ) {
+    this.approveRejectDetail = new ChannelApproveReject({
+      channelMasterId: channelMasterId,
+      expertId: expertId,
+      approve: approve,
+      reject: reject,
+    });
+    // console.log(' this.approveRejectDetail: ',  this.approveRejectDetail);
+    this._service
+      .ApproveRejectChannel(this.approveRejectDetail)
+      .subscribe((res) => {
+        // console.log('res: ', res);
+        this.getChannel();
+      });
+  }
+
+  Edit(item: any){
+    // console.log('item: ', item);
+     this.router.navigate([
+       'home/trades/' +
+         'FINOLEXIND' +
+         '/' +
+         item.channelMasterId +
+         '/' +
+         this.mobileNumber +
+         '/' +
+         item.username,
+     ]);
   }
 }

@@ -27,7 +27,7 @@ export class SideBarComponent implements OnInit {
 
   getWindowSize() {
     this.screenWidth = window.innerWidth;
-    console.log('this.screenWidth: ', this.screenWidth);
+    // console.log('this.screenWidth: ', this.screenWidth);
     if (this.screenWidth < 1200 ) {
       this.hide = false;
     } else {

@@ -66,14 +66,13 @@ export class ChannelDetailsComponent implements OnInit {
     this.mobile_No = this._ActivatedRoute.snapshot.paramMap.get('param2');
     this.username = this._ActivatedRoute.snapshot.paramMap.get('param3');
     this.isSubscribed = this._ActivatedRoute.snapshot.paramMap.get('param4');
-    console.log('this.isSubscribed: ', this.isSubscribed);
     // console.log('this.username: ', this.username);
-    if (this.isSubscribed == 'true') {
-      this.getActivePost();
-    }else if(this.isSubscribed == 'false'){
-      this.GetPastPost()
-      this.activeTab = 'Past-Post';
-    }
+    this.getActivePost();
+    // if (this.isSubscribed == 'true') {
+    // }else if(this.isSubscribed == 'false'){
+    //   this.GetPastPost()
+    //   this.activeTab = 'Past-Post';
+    // }
     // Pusher.logToConsole = true;
     // const pusher = new Pusher('523e3cf86c481c43e5a5', {
     //   cluster: 'ap2',
@@ -153,7 +152,8 @@ export class ChannelDetailsComponent implements OnInit {
         // this.GetPastPost();
         break;
       default:
-        this.isSubscribed == 'true' ? this.getActivePost() : this.GetPastPost();
+        // this.isSubscribed == 'true' ? this.getActivePost() : this.GetPastPost();
+        this.getActivePost();
     }
   }
 
@@ -181,4 +181,8 @@ export class ChannelDetailsComponent implements OnInit {
   //       this.message = '';
   //     });
   // }
+
+  jumoToChannel(){
+    this.router.navigate(['home/channel'])
+  }
 }
