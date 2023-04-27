@@ -4,6 +4,7 @@ import { FollowClub } from './club.classes';
 import { Router } from '@angular/router';
 import { ChannelListDetails, GetFeedDetails } from '../feed/feed.component';
 import Swal from 'sweetalert2';
+declare var $: any;
 
 export interface ClubList {
   id: string;
@@ -161,5 +162,12 @@ export class ClubComponent implements OnInit {
     this._service
       .BlockUnblockFeedPost(id, mobile_No, status)
       .subscribe((res) => {});
+  }
+
+  open() {
+    (<any>$('#filter')).modal('show');
+  }
+  close() {
+    (<any>$('#filter')).modal('hide');
   }
 }
