@@ -44,6 +44,8 @@ const routes: Routes = [
   { path: 'set-up-pin', component: SetuUpPinComponent },
   { path: 'club-list', component: ClubListComponent },
   { path: 'pin-recovery', component: PinRecoveryComponent },
+  { path: 'terms-of-services', component: TermsServicesComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent }, 
   {
     path: 'home',
     component: HomePageComponent,
@@ -66,7 +68,10 @@ const routes: Routes = [
         path: 'add-trade/:param1/:param2/:param3',
         component: AddTradeComponent,
       },
-      { path: 'trades/:param1/:param2/:param3/:param4', component: TradesComponent },
+      {
+        path: 'trades/:param1/:param2/:param3/:param4',
+        component: TradesComponent,
+      },
       {
         path: 'club-details/:param1/:param2/:param3',
         component: ClubDetailsComponent,

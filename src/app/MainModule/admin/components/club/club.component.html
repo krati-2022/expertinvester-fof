@@ -1,5 +1,5 @@
 
-<section class="container d-none d-md-none d-lg-block">
+<section class="d-none d-md-none d-lg-block">
 
   <div class="row">
     <div class=" mx-auto">
@@ -19,7 +19,7 @@
                  <div class="">
                   <div class="row">
                     <div class="channel-name d-flex col-12">
-                      <div class="col-8" (click)="getDetails(items.id, items.name)">
+                      <div class="col-8" (click)="getDetails(items)">
                         <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span>
                       </div>
                       <div class="col-4 d-flex justify-content-end">
@@ -31,10 +31,10 @@
                     </div>
                   </div>
                   <div class="">
-                   <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
+                   <p class="club-dis" (click)="getDetails(items)">{{items.description}}</p>
                   </div>
                  </div>
-                   <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
+                   <div class="container expect-section my-2 " (click)="getDetails(items)">
                      <div class="grid-data d-flex">
                        <div class="col-5  border-end ">
                          <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span

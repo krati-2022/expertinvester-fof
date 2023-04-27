@@ -1,4 +1,4 @@
-<section class="container d-lg-none d-md-block d-sm-block">
+<section class="d-lg-none d-md-block d-sm-block">
     <div class="row">
       <div class="mx-auto">
         <div class="card">
@@ -31,7 +31,7 @@
                         <div class="m-2">
                           <div class="container">
                             <div class=" row user_informatiom d-flex justify-content-between align-items-center" style="cursor: pointer;">
-                              <div class="d-flex col-8" (click)="getDetails(items.id, items.recordType)">
+                              <div class="d-flex col-8" (click)="getFeedDetails(items.id, items.recordType)">
                                 <div class="col-2">
                                   <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                                 </div>
@@ -75,7 +75,7 @@
                             <div class="container">
                               <div class="row">
                                 <div class="d-flex justify-content-between align-items-baseline py-2">
-                                  <h6 class="heading" (click)="getDetails(items.id, items.recordType)">{{items.clubName}}L
+                                  <h6 class="heading" (click)="getFeedDetails(items.id, items.recordType)">{{items.clubName}}L
                                   </h6>
                   
                                 </div>
@@ -84,7 +84,7 @@
                             <div class="container">
                               <div class="row" *ngIf="items.recordType == 'ClubRecord'">
                                 <div class="channel-name d-flex justify-content-between align-items-center">
-                                  <span (click)="getDetails(items.id, items.recordType)"> <i class="bi bi-lightbulb"></i>Chat
+                                  <span (click)="getFeedDetails(items.id, items.recordType)"> <i class="bi bi-lightbulb"></i>Chat
                                     Barter</span>
                                   <!-- <span class=""><button type="button"
                                             class="btn follow-btn">Follow</button></span> -->
@@ -116,6 +116,7 @@
                                     </div>
                                     <div class="expect-percent">18.0%</div>
                                   </div>
+                                  <div class="channel-detail">{{items.stockname}}</div>
                                   <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button></div>
                                 </div>
                                 <div>
@@ -161,7 +162,7 @@
                               </div>
                             </div>
                             <div class="container">
-                              <div class="row py-2" (click)="getDetails(items.id, items.recordType)">
+                              <div class="row py-2" (click)="getFeedDetails(items.id, items.recordType)">
                                 <!-- <h6 class="dis-line">IBR Infra CMP 305 :</h6> -->
                                 <p class="dis">{{items.description}}</p>
                               </div>
@@ -200,7 +201,7 @@
                         <div class="row">
                        
                           <div class="channel-name d-flex col-12">
-                           <div class="col-8" (click)="getDetails(items.id, items.name)">
+                           <div class="col-8" (click)="getDetails(items)">
                              <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span>
                            </div>
                            <div class="col-4 d-flex justify-content-end" >
@@ -211,11 +212,11 @@
                            </div>
                          </div>
                          <div class="">
-                           <p class="club-dis" (click)="getDetails(items.id, items.name)">{{items.description}}</p>
+                           <p class="club-dis" (click)="getDetails(items)">{{items.description}}</p>
                           </div>
                          </div>
                        </div>
-                         <div class="container expect-section my-2 " (click)="getDetails(items.id, items.name)">
+                         <div class="container expect-section my-2 " (click)="getDetails(items)">
                            <div class="grid-data d-flex  ">
                              <div class="col-5  border-end ">
                                <div class="d-flex align-items-center "><span class="club-icon  "><i class="bi bi-eye"></i></span><span
@@ -258,7 +259,7 @@
                           </div>
                         </div>
                     
-                        <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
+                        <!-- <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
                           <div class="dropdown">
                             <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                               data-bs-toggle="dropdown" aria-expanded="false">
@@ -275,20 +276,33 @@
                     
                             </ul>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
-                    <!-- <div class="container">
-                      <div class="row">
-                        <div class="d-flex justify-content-between align-items-baseline py-2">
-                          <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
-                          <span class=" subscript" *ngIf="items.isSubscribed == false" (click)="subscribe(items)"
-                            style="cursor: pointer;"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
-                          <span class=" subscript" *ngIf="items.isSubscribed == true" style="cursor: pointer;"><i
-                              class="bi bi-lock-fill lock-icon"></i>Subscribed</span>
+                      <div class="container">
+                        <div class="row">
+                          <div class="d-flex justify-content-between align-items-baseline py-2">
+                            <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
+                            <div *ngIf="items.isSubscribed == true"><i class="bi bi-lock-fill "></i>Subscribed</div>
+                            <div class="dropdown">
+                              <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                              </a>
+                      
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      
+                                <li *ngIf="items.isSubscribed == false" (click)="subscribe(items)" style="cursor: pointer;"><a
+                                    class="dropdown-item"><i class="bi bi-unlock-fill"
+                                      [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
+                                <li style="cursor: pointer;" (click)="Edit(items)"><a class="dropdown-item"><i
+                                      class="bi bi-pencil-square"></i>Edit</a></li>
+                      
+                              </ul>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div> -->
                     <div class="container" (click)="getChannelDetails(items)">
                       <div class="row">
                         <div class="channel-name">
@@ -300,10 +314,14 @@
                               <div>{{items.post}}</div>
                               <div class="channel-name">Post</div>
                             </div>
-                            <div>
-                              <div>23k</div>
-                              <div class="channel-name">Subscriber</div>
-                            </div>
+                          <div class="px-3">
+                            <div>{{items.followersCount}}</div>
+                            <div class="channel-name">Subscriber</div>
+                          </div>
+                          <div>
+                            <div>1</div>
+                            <div class="channel-name">Active Post</div>
+                          </div>
                           </div>
                           <div class="col-6 d-flex justify-content-end">
                             <button type="button" class="btn position-btn"><i class="bi bi-graph-up-arrow px-2"></i>Success

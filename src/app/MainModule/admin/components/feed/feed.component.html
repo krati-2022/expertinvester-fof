@@ -1,11 +1,11 @@
-<section class="container  ">
+<section class="p-2">
   <div class="row">
     <div class="mx-auto">
       <div class="card">
         <div class="pagetitle">
           <div class="d-flex justify-content-between align-items-baseline">
             <div>
-              <h1 class="px-3 py-1">Feed</h1>
+              <h1 class="px-3 py-1 d-lg-block d-md-none d-sm-none">Feed</h1>
             </div>
           </div>
         </div>
@@ -54,30 +54,19 @@
                           </div>
                         </div>
 
-                        <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
-                          <!-- <button class="btn follow-btn" *ngIf="items.isSelfPost != true">
-                          <span *ngIf="items.clubBlock == false" (click)="blockUnblockPost(items.id, true)" style="padding: inherit;">Block</span>
-                          <span *ngIf="items.clubBlock == true" (click)="blockUnblockPost(items.id, false)" style="padding: inherit;">Unblock</span>
-                        </button> -->
+                        <div class="col-4" style="display: flex;justify-content: end;height: fit-content;" *ngIf="items.clubBlock == true">
+
                           <div class="dropdown">
-                            <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                          aria-expanded="false">
-                          Dropdown button
-                        </button> -->
+
                             <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                               data-bs-toggle="dropdown" aria-expanded="false">
                               <i class="bi bi-three-dots-vertical"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                               <li *ngIf="items.isSelfPost != true">
-                                <a class="dropdown-item" *ngIf="items.clubBlock == false"
-                                  (click)="blockUnblockPost(items.id, true)"><i class="bi bi-slash-circle"></i>Block</a>
                                 <a class="dropdown-item" *ngIf="items.clubBlock == true"
                                   (click)="blockUnblockPost(items.id, false)"><i class="bi bi-circle"></i>UnBlock</a>
                               </li>
-                              <li *ngIf="items.isSelfPost != true"><a class="dropdown-item"><i
-                                    class="bi bi-unlock-fill"></i>Free Access</a></li>
-
                             </ul>
                           </div>
                         </div>
@@ -89,7 +78,24 @@
                           <div class="d-flex justify-content-between align-items-baseline py-2">
                             <h6 class="heading" (click)="getDetails(items.id, items.recordType)">{{items.clubName}}L
                             </h6>
+                            <div class="dropdown" *ngIf="items.clubBlock == false">
 
+                              <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li *ngIf="items.isSelfPost != true">
+                                  <a class="dropdown-item" *ngIf="items.clubBlock == false"
+                                    (click)="blockUnblockPost(items.id, true)"><i
+                                      class="bi bi-slash-circle"></i>Block</a>
+                                 
+                                </li>
+                                <li *ngIf="items.isSelfPost != true"><a class="dropdown-item"><i
+                                      class="bi bi-unlock-fill"></i>Free Access</a></li>
+
+                              </ul>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -104,7 +110,8 @@
                           <div class="channel-detail">
                             {{items.stockname}}
                           </div>
-                          <div class="date">{{items.createdDate | date : 'fullDate'}} {{items.createdDate | date : 'shortTime'}}</div>
+                          <div class="date">{{items.createdDate | date : 'fullDate'}} {{items.createdDate | date :
+                            'shortTime'}}</div>
                         </div>
                       </div>
                       <div class="container">
@@ -127,6 +134,7 @@
                               </div>
                               <div class="expect-percent">18.0%</div>
                             </div>
+                            <div class="channel-detail">{{items.stockname}}</div>
                             <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button></div>
                           </div>
                           <div>

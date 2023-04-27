@@ -5,6 +5,7 @@ import {  GetFeedDetails } from '../feed/feed.component';
 import { FollowClub } from '../club/club.classes';
 import { ChannelApproveReject, ChannelSubscriber } from '../channel/channel.classes';
 import { ChannelListDetails } from '../channel/channel.component';
+import Swal from 'sweetalert2';
 
 export interface ClubList {
   id: string;
@@ -156,23 +157,41 @@ export class ResponsiveViewComponent implements OnInit {
     this.router.navigate(['home/add-channel']);
   }
 
-  getDetails(clublistId: string, clubName: string) {
+  getDetails(item: any) {
+    // console.log('items: ', item);
+    // return
+    if (item.follow == 'Follow') {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: 'error',
+        title: 'Follow First',
+      });
+      return;
+    }
     // console.log('clublistId: ', clublistId);
     // this.router.navigate(['home/add-trade/' + clublistId + '/' + this.mobileNumber + '/' + clubName])
     this.router.navigate([
       'home/club-details/' +
-        clublistId +
+        item.id +
         '/' +
         this.mobileNumber +
         '/' +
-        clubName,
+        item.name,
     ]);
   }
 
   getFeedDetails(id: string, recordType: string) {
-    // console.log('recordType: ', recordType);
-    // console.log('id: ', id);
-    // return
     switch (recordType) {
       case 'ClubRecord':
         this.router.navigate(['home/details/' + id + '/' + this.mobileNumber]);
@@ -285,6 +304,20 @@ export class ResponsiveViewComponent implements OnInit {
         console.log('res: ', res);
         this.getChannel();
       });
+  }
+
+  Edit(item: any) {
+    // console.log('item: ', item);
+    this.router.navigate([
+      'home/trades/' +
+        'FINOLEXIND' +
+        '/' +
+        item.channelMasterId +
+        '/' +
+        this.mobileNumber +
+        '/' +
+        item.username,
+    ]);
   }
 }
 

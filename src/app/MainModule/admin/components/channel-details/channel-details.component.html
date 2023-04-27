@@ -1,4 +1,4 @@
-<section class="container">
+<section class="">
   <div class="row">
     <div class="mx-auto">
       <div class="card">
@@ -9,12 +9,11 @@
             </div>
             <div *ngIf="activeTab == 'Active-Post'">
               <button type="button" class="btn btn-outline-secondary" (click)="addPost()"><i
-                  class="bi bi-plus-circle"></i></button>
+                  class="bi bi-pencil-square"></i></button>
             </div>
           </div>
         </div>
         <div class="card-body">
-          <h5 class="card-title"></h5>
           <!-- Bordered Tabs Justified -->
           <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
             <li class="nav-item flex-fill" role="presentation" (click)="getTab($event)" >

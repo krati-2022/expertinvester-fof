@@ -1,6 +1,10 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-      <div class="d-lg d-md-block d-sm-block" >
+      <div class="d-lg d-md-block d-sm-block" *ngIf="screenWidth < 1200">
+        <i class="bi bi-list toggle-sidebar-btn" *ngIf="hide == true" (click)="openSidebar()"></i>
+        <i class="bi bi-x toggle-sidebar-btn" *ngIf="hide == false" (click)="openSidebar()"></i>
+      </div>
+      <div class="d-lg d-md-block d-sm-block" *ngIf="screenWidth > 1200">
         <i class="bi bi-list toggle-sidebar-btn" (click)="openSidebar()"></i>
       </div>
       <!-- <button type="button" id="btnNav" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">

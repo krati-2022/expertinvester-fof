@@ -1,5 +1,5 @@
 <!-- End Page Title -->
-<section class="container d-none d-md-none d-lg-block">
+<section class="d-none d-md-none d-lg-block">
   <div class="row">
     <div class="mx-auto">
       <div class="card">
@@ -32,21 +32,7 @@
                           </div>
                         </div>
                     
-                        <!-- <div class="col-4" style="display: flex;justify-content: end;height: fit-content;">
-                          <div class="dropdown">
-                            <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
-                              data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="bi bi-three-dots-vertical"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            
-                              <li *ngIf="items.isSubscribed == false" (click)="subscribe(items)"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
-                              <li *ngIf="items.isSubscribed == true" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-lock-fill "></i>Subscribed</a></li>
-                              <li  style="cursor: pointer;" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
-                    
-                            </ul>
-                          </div>
-                        </div> -->
+                     
                       </div>
                     </div>
                 </div>
@@ -54,15 +40,16 @@
                   <div class="row">
                     <div class="d-flex justify-content-between align-items-baseline py-2">
                       <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
+                      <div *ngIf="items.isSubscribed == true"><i class="bi bi-lock-fill "></i>Subscribed</div>
                      <div class="dropdown">
                             <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                               data-bs-toggle="dropdown" aria-expanded="false">
                               <i class="bi bi-three-dots-vertical"></i>
                             </a>
+                            
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             
-                              <li *ngIf="items.isSubscribed == false" (click)="subscribe(items)"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
-                              <li *ngIf="items.isSubscribed == true" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-lock-fill "></i>Subscribed</a></li>
+                              <li *ngIf="items.isSubscribed == false" (click)="subscribe(items)" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
                               <li  style="cursor: pointer;" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
                     
                             </ul>
@@ -81,9 +68,13 @@
                           <div>{{items.post}}</div>
                           <div class="channel-name">Post</div>
                         </div>
-                        <div>
-                          <div>23k</div>
+                        <div class="px-3">
+                          <div>{{items.followersCount}}</div>
                           <div class="channel-name">Subscriber</div>
+                        </div>
+                        <div>
+                          <div>1</div>
+                          <div class="channel-name">Active Post</div>
                         </div>
                       </div>
                       <div class="col-6 d-flex justify-content-end">
