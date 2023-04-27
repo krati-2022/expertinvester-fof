@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
 
@@ -10,10 +10,11 @@ import { SharedService } from 'src/app/Service/shared.service';
 export class SideBarComponent implements OnInit {
   hide: boolean = true;
   screenWidth: any;
-
   constructor(private coreService: SharedService, private router: Router) {}
 
   ngOnInit(): void {
+    
+    
     this.getWindowSize();
     this.coreService.toggleSidebar.subscribe(() => {
       this.hide = !this.hide;
@@ -27,8 +28,7 @@ export class SideBarComponent implements OnInit {
 
   getWindowSize() {
     this.screenWidth = window.innerWidth;
-    // console.log('this.screenWidth: ', this.screenWidth);
-    if (this.screenWidth < 1200 ) {
+    if (this.screenWidth < 1200) {
       this.hide = false;
     } else {
       this.hide = true;
@@ -36,8 +36,10 @@ export class SideBarComponent implements OnInit {
   }
 
   Feed() {
-     this.router.navigate(['home/feed']).then(() => {
-       window.location.reload()
-     });
+    this.router.navigate(['home/feed']).then(() => {
+      window.location.reload();
+    });
   }
+
+  
 }
