@@ -42,7 +42,6 @@ export class HomePageComponent implements OnInit {
       //open your sidebar by setting classes, whatever
       this.toggleSideBar = !this.toggleSideBar;
     });
-    
   }
 
   @HostListener('window:resize', ['$event'])
@@ -52,8 +51,12 @@ export class HomePageComponent implements OnInit {
 
   getWindowSize() {
     this.screenWidth = window.innerWidth;
-    if (this.screenWidth >= 1536){
-      this.toggleSideBar = true 
+    if (this.screenWidth >= 1536) {
+      this.toggleSideBar = true;
     }
+  }
+
+  close(){
+    this.toggleSideBar = true
   }
 }

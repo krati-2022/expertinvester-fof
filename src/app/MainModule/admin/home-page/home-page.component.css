@@ -1,3 +1,8 @@
 .cstm{
     margin-left: 0 !important;
+   
+}
+.my-cls{
+    opacity: 0.5;
+    pointer-events: none;
 }
