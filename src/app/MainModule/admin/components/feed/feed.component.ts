@@ -126,7 +126,7 @@ export class FeedComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 2;
   searchKey: string = '';
-
+  data = ['Expert', 'Invester', 'Expert&Invester']
   constructor(
     private router: Router,
     private _service: SharedService,
