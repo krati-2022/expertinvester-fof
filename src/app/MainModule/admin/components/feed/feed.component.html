@@ -39,7 +39,7 @@
               <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
                 [infiniteScrollContainer]="'.example'" [scrollWindow]="true" [fromRoot]="true" (scrolled)="onScroll()">
 
-                <div class="card list-card my-3" *ngFor="let items of feedDetails | filter : searchKey : 'username'">
+                <div class="card list-card" *ngFor="let items of feedDetails | filter : searchKey : 'username'">
                   <div class="m-2">
                     <div class="container">
                       <div class=" row user_informatiom d-flex justify-content-between align-items-center"
