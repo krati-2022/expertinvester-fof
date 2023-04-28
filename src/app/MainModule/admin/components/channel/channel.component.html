@@ -18,7 +18,7 @@
        </div>
       <div class="m-2">
 
-        <div class="example" style="height: 75vh; overflow: auto;" *ngIf="channelDetails.length != 0">
+        <div class="example" *ngIf="channelDetails.length != 0">
           <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey : 'username'">
             <div class="m-2" >
               <div class="container"  style="cursor: pointer;">

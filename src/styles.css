@@ -683,3 +683,9 @@ span.club-inf {
 .ngx-gallery-arrow-left .ngx-gallery-arrow {
   display: none;
 }
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .pagetitle{
+    display: none;
+  }
+}

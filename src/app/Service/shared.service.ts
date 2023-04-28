@@ -29,7 +29,7 @@ export class SharedService {
   public toggleSidebar: EventEmitter<any> = new EventEmitter();
   public search = new BehaviorSubject<string>('');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   SendOtp(data: SendOtp): Observable<any> {
     return this.http.post(this.apiUrl + 'api/Login/SendOTP', data);
@@ -73,8 +73,8 @@ export class SharedService {
   GetIdeaonlist(countryname: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'api/ExpertInvestor/GetIdeaonlist?countryname=' +
-      countryname
+        'api/ExpertInvestor/GetIdeaonlist?countryname=' +
+        countryname
     );
   }
 
@@ -138,12 +138,12 @@ export class SharedService {
   ): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'GetFeedPost?Mobile_No=' +
-      mobile_No +
-      '&pageNumber=' +
-      pageNumber +
-      '&pageSize=' +
-      pageSize
+        'GetFeedPost?Mobile_No=' +
+        mobile_No +
+        '&pageNumber=' +
+        pageNumber +
+        '&pageSize=' +
+        pageSize
     );
   }
 
@@ -166,30 +166,30 @@ export class SharedService {
   GetActivePost(mobile_No: string, id: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'api/Channel/GetChannelActivePost?Mobile_No=' +
-      mobile_No +
-      '&channelid=' +
-      id
+        'api/Channel/GetChannelActivePost?Mobile_No=' +
+        mobile_No +
+        '&channelid=' +
+        id
     );
   }
 
   GetPastPost(mobile_No: string, id: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'api/Channel/GetChannelPastPost?Mobile_No=' +
-      mobile_No +
-      '&channelid=' +
-      id
+        'api/Channel/GetChannelPastPost?Mobile_No=' +
+        mobile_No +
+        '&channelid=' +
+        id
     );
   }
 
   GetProfile(mobile_No: string, id: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'api/Channel/GetChannelProfile?Mobile_No=' +
-      mobile_No +
-      '&channelid=' +
-      id
+        'api/Channel/GetChannelProfile?Mobile_No=' +
+        mobile_No +
+        '&channelid=' +
+        id
     );
   }
 
@@ -200,10 +200,10 @@ export class SharedService {
   GetFeedPostdetail(Mobileno: string, feedpostid: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'GetFeedPostdetail?Mobileno=' +
-      Mobileno +
-      '&feedpostid=' +
-      feedpostid
+        'GetFeedPostdetail?Mobileno=' +
+        Mobileno +
+        '&feedpostid=' +
+        feedpostid
     );
   }
 
@@ -215,12 +215,12 @@ export class SharedService {
     const data = {};
     return this.http.post(
       this.apiUrl +
-      'FeedPostblock?FeedPostID=' +
-      id +
-      '&mobileno=' +
-      mobile_No +
-      '&block=' +
-      status,
+        'FeedPostblock?FeedPostID=' +
+        id +
+        '&mobileno=' +
+        mobile_No +
+        '&block=' +
+        status,
       data
     );
   }
@@ -233,12 +233,12 @@ export class SharedService {
     const data = {};
     return this.http.post(
       this.apiUrl +
-      'UpdateFeedPostlike?FeedPostID=' +
-      FeedPostID +
-      '&like=' +
-      status +
-      '&Mobileno=' +
-      mobile_No,
+        'UpdateFeedPostlike?FeedPostID=' +
+        FeedPostID +
+        '&like=' +
+        status +
+        '&Mobileno=' +
+        mobile_No,
       data
     );
   }
@@ -253,10 +253,10 @@ export class SharedService {
   GetClubDetails(mobileNumber: string, id: string) {
     return this.http.get(
       this.apiUrl +
-      'api/Club/GetUserClublistDetail?mobileno=' +
-      mobileNumber +
-      '&clublistid=' +
-      id
+        'api/Club/GetUserClublistDetail?mobileno=' +
+        mobileNumber +
+        '&clublistid=' +
+        id
     );
   }
 
@@ -271,7 +271,26 @@ export class SharedService {
     return this.http.post(this.apiUrl + 'api/channel/AddChannelPost', data);
   }
 
-  ApproveRejectChannel(data: ChannelApproveReject): Observable<any>{
-    return this.http.post(this.apiUrl + 'api/channel/UpdateChannelMasterApproveReject', data)
+  ApproveRejectChannel(data: ChannelApproveReject): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'api/channel/UpdateChannelMasterApproveReject',
+      data
+    );
+  }
+
+  FilterData(
+    mobile_No: number,
+    Club: string,
+    Channel: string,
+    Expert: string,
+    Investor: string,
+    ExpertAndInvestor: string,
+    pageNumber:number,
+    pageSize:number
+  ): Observable<any> {
+    return this.http.get(
+      this.apiUrl +
+        'GetFeedPost?Mobile_No='+mobile_No+'&Club='+Club+'&Channel='+Channel+'&Expert='+Expert+'&Investor='+Investor+'&ExpertAndInvestor='+ExpertAndInvestor+'&pageNumber='+pageNumber+'&pageSize='+ pageSize
+    );
   }
 }
