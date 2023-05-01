@@ -51,6 +51,7 @@ import { ClubDetailsComponent } from './components/club-details/club-details.com
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { SharedService } from 'src/app/Service/shared.service';
 import { ScrollDirective } from 'src/app/Utils/scroll-directive';
+import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { ScrollDirective } from 'src/app/Utils/scroll-directive';
     ResponsiveViewComponent,
     ClubDetailsComponent,
     ChatBoxComponent,
-    ScrollDirective
+    ScrollDirective,
+    EditChannelComponent
   ],
   imports: [
     CommonModule,

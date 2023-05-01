@@ -308,16 +308,17 @@ export class ResponsiveViewComponent implements OnInit {
 
   Edit(item: any) {
     // console.log('item: ', item);
-    this.router.navigate([
-      'home/trades/' +
-        'FINOLEXIND' +
-        '/' +
-        item.channelMasterId +
-        '/' +
-        this.mobileNumber +
-        '/' +
-        item.username,
-    ]);
+    // this.router.navigate([
+    //   'home/trades/' +
+    //     'FINOLEXIND' +
+    //     '/' +
+    //     item.channelMasterId +
+    //     '/' +
+    //     this.mobileNumber +
+    //     '/' +
+    //     item.username,
+    // ]);
+    this.router.navigate(['home/edit-channel/' + item.channelMasterId]);
   }
 }
 

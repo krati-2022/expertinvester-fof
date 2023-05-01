@@ -690,4 +690,15 @@ span.club-inf {
   }
 }
 
+@media screen and (min-width: 320px) and (max-width: 991px) {
 
+  .fixadd {
+    position: relative !important;
+    font-size: 12px;
+    
+  }
+  .search-bar{
+    padding: 0 !important;
+  }
+
+}

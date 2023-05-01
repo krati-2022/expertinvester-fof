@@ -286,12 +286,31 @@ export class SharedService {
     Expert: string,
     Investor: string,
     ExpertAndInvestor: string,
-    pageNumber:number,
-    pageSize:number
+    pageNumber: number,
+    pageSize: number
   ): Observable<any> {
     return this.http.get(
       this.apiUrl +
-        'GetFeedPost?Mobile_No='+mobile_No+'&Club='+Club+'&Channel='+Channel+'&Expert='+Expert+'&Investor='+Investor+'&ExpertAndInvestor='+ExpertAndInvestor+'&pageNumber='+pageNumber+'&pageSize='+ pageSize
+        'GetFeedPost?Mobile_No=' +
+        mobile_No +
+        '&Club=' +
+        Club +
+        '&Channel=' +
+        Channel +
+        '&Expert=' +
+        Expert +
+        '&Investor=' +
+        Investor +
+        '&ExpertAndInvestor=' +
+        ExpertAndInvestor +
+        '&pageNumber=' +
+        pageNumber +
+        '&pageSize=' +
+        pageSize
     );
+  }
+
+  GetChannelDetails(mobile_No: string, ChannelMasterId:string): Observable<any> {
+    return this.http.get(this.apiUrl + 'api/Channel/GetChannelMasterforEdit?Mobile_No='+ mobile_No +'&ChannelMasterId=' + ChannelMasterId)
   }
 }
