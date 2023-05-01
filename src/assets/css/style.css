@@ -57,6 +57,7 @@ h6 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
+  height: 3rem;
   color: #012970;
 }
 
@@ -415,7 +416,7 @@ h6 {
   padding: 0 20px;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1000px) {
   .header .search-bar {
     position: fixed;
     top: 50px;
@@ -429,7 +430,7 @@ h6 {
     visibility: hidden;
     opacity: 0;
   }
-
+  
   .header .search-bar-show {
     top: 60px;
     visibility: visible;
@@ -452,6 +453,16 @@ h6 {
   width: 100%;
 }
 
+.header .search-bar {
+  min-width: 341px;
+  padding: 0 20px;
+}
+
+.cstm-srch {
+  position: absolute;
+  top: 5rem;
+  right: 0rem !important;
+}
 .header .search-form input:focus,
 .header .search-form input:hover {
   outline: none;

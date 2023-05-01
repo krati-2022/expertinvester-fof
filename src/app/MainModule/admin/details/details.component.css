@@ -552,3 +552,10 @@ span.club-inf {
 .row.py-2.sds {
   margin-top: -3rem;
 }
+
+.pagetitle {
+  position: sticky;
+  top: 10px;
+  z-index: 999;
+  background: #fff;
+}

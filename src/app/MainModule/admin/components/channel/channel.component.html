@@ -3,7 +3,7 @@
   <div class="row">
     <div class="card">
       <div class="pagetitle">
-        <div class="d-flex justify-content-between align-items-baseline p-2">
+        <div class="d-flex justify-content-between align-items-baseline">
          <div>
            <h1 class="px-3">Channel</h1>
          </div>
@@ -194,7 +194,7 @@
 <app-responsive-view></app-responsive-view>
 
 <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
-  <form>
+  <form [formGroup]="filterForm">
     <div class="modal-dialog" role="document" style="width: 40%; ">
       <div class="modal-content">
         <div class="modal-header">
@@ -207,38 +207,13 @@
           <div class="">
             <div class="row border-bottom  ">
               <div>
-                
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Accepted">
-                  <label class="form-check-label filter-text" for="flexRadioDefault3">
-                    Expert
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Pending">
-                  <label class="form-check-label filter-text" for="flexRadioDefault3">
-                    Investor
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Delivered">
-                  <label class="form-check-label filter-text" for="flexRadioDefault4">
-                    Expert & Investor
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Cancelled">
-                  <label class="form-check-label filter-text" for="flexRadioDefault5">
-                    Club
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Cancelled">
-                  <label class="form-check-label filter-text" for="flexRadioDefault5">
-                    Channel
-                  </label>
-                </div>
 
+                <div class="form-check" *ngFor="let item of data">
+                  <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)">
+                  <label class="form-check-label filter-text" for="flexRadioDefault3">
+                    {{item}}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -248,7 +223,7 @@
           <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary"
               style="width: inherit; font-size: 12px; font-weight: 500; " (click)="close()">CLEAR FILTER</button></div>
           <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger"
-              style="width: inherit; font-size: 12px; font-weight: 500;" (click)="close()">APPLY</button></div>
+              style="width: inherit; font-size: 12px; font-weight: 500;" (click)="apply()">APPLY</button></div>
         </div>
 
       </div>

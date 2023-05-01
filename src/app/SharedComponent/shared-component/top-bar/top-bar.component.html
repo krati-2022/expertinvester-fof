@@ -13,7 +13,7 @@
         <span class="d-none d-lg-block"></span>
       </a>
     </div><!-- End Logo -->
-    <div class="search-bar">
+    <div class="search-bar" [ngClass]="showSearch == true ? 'cstm-srch' : ''">
       <form class="search-form d-flex align-items-center" [formGroup]="searchFilterForm">
         <input type="text" placeholder="Search" formControlName="name" [(ngModel)]="searchTerm" (keyup)="search($event)" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
@@ -22,15 +22,19 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
         
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle">
-            <!-- <i class="bi bi-search" ></i> -->
-            <form class="search-form d-flex align-items-center" [formGroup]="searchFilterForm">
-              <input type="text" placeholder="Search" formControlName="name" [(ngModel)]="searchTerm" (keyup)="search($event)"
-                title="Enter search keyword">
-              <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
+        <li class="nav-item dropdown d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle"  data-bs-toggle="dropdown">
+            <i class="bi bi-search" ></i>
           </a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+              <li class="dropdown-header">
+              <form class="search-form d-flex align-items-center" [formGroup]="searchFilterForm" style="width: 220px;">
+                <input type="text" placeholder="Search" formControlName="name" [(ngModel)]="searchTerm" (keyup)="search($event)"
+                  title="Enter search keyword">
+                <!-- <button type="submit" title="Search"><i class="bi bi-search"></i></button> -->
+              </form>
+              </li>
+            </ul>
         </li><!-- End Search Icon-->
         <li class="nav-item dropdown">
           <a class="nav-link nav-icon"  data-bs-toggle="dropdown">

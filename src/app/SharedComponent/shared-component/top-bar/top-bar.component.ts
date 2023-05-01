@@ -12,6 +12,7 @@ export class TopBarComponent implements OnInit {
   public searchTerm!: string;
   searchFilterForm: FormGroup | any;
   hide: boolean = true;
+  showSearch: boolean = false;
   screenWidth: any;
 
   constructor(private _service: SharedService, private router: Router) {}
@@ -19,7 +20,11 @@ export class TopBarComponent implements OnInit {
     this.searchFilterForm = new FormGroup({
       name: new FormControl(''),
     });
-    this.getWindowSize()
+    this._service.showSearchBar.subscribe(() => {
+      this.showSearch = true;
+      console.log('this.showSearch: ', this.showSearch);
+    });
+    this.getWindowSize();
   }
   public openSidebar() {
     this._service.toggleSidebar.emit();
@@ -46,15 +51,23 @@ export class TopBarComponent implements OnInit {
 
   getWindowSize() {
     this.screenWidth = window.innerWidth;
-     this._service.toggleSidebar.subscribe(() => {
-       this.hide = !this.hide;
+    this._service.toggleSidebar.subscribe(() => {
+      this.hide = !this.hide;
       //  console.log('this.hide: ', this.hide);
-     });
+    });
     // console.log('this.screenWidth: ', this.screenWidth);
     // if (this.screenWidth < 1200) {
     //   this.hide = false;
     // } else {
     //   this.hide = true;
     // }
+  }
+
+  @HostListener('window:scroll', [])
+  public onScrolled() {
+   
+    if (window.pageYOffset < 100) {
+      this.showSearch = false;
+    }
   }
 }

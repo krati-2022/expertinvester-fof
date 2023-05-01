@@ -27,6 +27,7 @@ import { AddPostDetails } from '../MainModule/admin/Pages/trades/trades.classes'
 export class SharedService {
   apiUrl = environment.apiUrl;
   public toggleSidebar: EventEmitter<any> = new EventEmitter();
+  public showSearchBar: EventEmitter<any> = new EventEmitter();
   public search = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient) {}

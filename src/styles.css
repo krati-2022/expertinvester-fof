@@ -98,7 +98,7 @@ span.title-name {
 }
 
 .user_informatiom {
-  border-bottom: 2px solid #FFD859;
+  /* border-bottom: 2px solid #FFD859; */
   border-radius: 0px;
 }
 
@@ -689,3 +689,5 @@ span.club-inf {
     display: none;
   }
 }
+
+
