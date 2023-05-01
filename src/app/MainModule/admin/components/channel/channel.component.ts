@@ -4,6 +4,7 @@ import { SharedService } from 'src/app/Service/shared.service';
 import { ClubList, GetFeedDetails } from '../feed/feed.component';
 import { FollowClub } from '../club/club.classes';
 import { ChannelApproveReject, ChannelSubscriber } from './channel.classes';
+declare var $: any;
 
 export interface ChannelListDetails {
   channelApproved: boolean;
@@ -169,17 +170,23 @@ export class ChannelComponent implements OnInit {
       });
   }
 
-  Edit(item: any){
+  Edit(item: any) {
     // console.log('item: ', item);
-     this.router.navigate([
-       'home/trades/' +
-         'FINOLEXIND' +
-         '/' +
-         item.channelMasterId +
-         '/' +
-         this.mobileNumber +
-         '/' +
-         item.username,
-     ]);
+    this.router.navigate([
+      'home/trades/' +
+        'FINOLEXIND' +
+        '/' +
+        item.channelMasterId +
+        '/' +
+        this.mobileNumber +
+        '/' +
+        item.username,
+    ]);
+  }
+  open() {
+    (<any>$('#filter')).modal('show');
+  }
+  close() {
+    (<any>$('#filter')).modal('hide');
   }
 }

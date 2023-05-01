@@ -20,8 +20,8 @@ export class SetuUpPinComponent implements OnInit {
     disableAutoFocus: false,
     placeholder: '',
     inputStyles: {
-      width: '50px',
-      height: '50px',
+      width: '40px',
+      height: '40px',
     },
   };
   constructor(private router: Router, private _service: SharedService) { }
@@ -40,7 +40,7 @@ export class SetuUpPinComponent implements OnInit {
       this.pinDetails = new SetPin({
         mobileno: number,
         password: this.password
-        
+
       });
       this._service.SetPin(this.pinDetails).subscribe(res =>{
       // console.log('res: ', res);

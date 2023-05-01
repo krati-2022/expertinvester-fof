@@ -36,7 +36,7 @@ export class SignInComponent implements OnInit {
   isExistUser = localStorage.getItem('mobile_number')
   @ViewChild('ngOtpInput', { static: false }) ngOtpInput: any;
   isLoading:boolean = false
-  countryCodes = Codes 
+  countryCodes = Codes
   config = {
     allowNumbersOnly: false,
     length: 6,
@@ -44,8 +44,8 @@ export class SignInComponent implements OnInit {
     disableAutoFocus: false,
     placeholder: '',
     inputStyles: {
-      width: '50px',
-      height: '50px',
+      width: '40px',
+      height: '40px',
     },
   };
 
@@ -72,7 +72,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.countryCodes);
-    
+
     // console.log('this.isExistUser: ', this.isExistUser);
     // if(this.isExistUser != null){
     //   this.router.navigate(['enter-pin'])
@@ -99,7 +99,7 @@ export class SignInComponent implements OnInit {
   }
 
   sendOtp() {
-    
+
     this.submitted = true;
     if (this.SendOtpForm.invalid) {
       return;
@@ -143,14 +143,14 @@ export class SignInComponent implements OnInit {
               title: response.message + ' ' +response.data.otp,
             });
             this.submitted = false;
-            
+
             (<any>$('#exampleModal')).modal('show');
           }
         });
     // this._service.UserIsExist(this.mobile).subscribe(res =>{
     //   this.status = res.message
     // })
-   
+
   }
 
   verifyOtp() {
@@ -205,7 +205,7 @@ export class SignInComponent implements OnInit {
           icon: 'error',
           title: response.message,
         });
-        
+
       }
     });
   }

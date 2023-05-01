@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
 import { FollowClub } from '../club/club.classes';
 import { Location } from '@angular/common';
-
+declare var $ : any
 export interface GetFeedDetails {
   clubName: string;
   clubBlock: boolean;
@@ -126,7 +126,7 @@ export class FeedComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 2;
   searchKey: string = '';
-
+  data = ['Expert', 'Invester', 'Expert&Invester'];
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -302,7 +302,7 @@ export class FeedComponent implements OnInit {
         item.username,
     ]);
   }
-  
+
   blockUnblockPost(id: string, status: boolean) {
     // console.log('status: ', status);
     // console.log('id: ', id);
@@ -336,5 +336,12 @@ export class FeedComponent implements OnInit {
         this.GetFeed();
         // this.getLikes(id)
       });
+  }
+
+  open() {
+    (<any>$('#filter')).modal('show');
+  }
+  close() {
+    (<any>$('#filter')).modal('hide');
   }
 }

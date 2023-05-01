@@ -7,14 +7,7 @@
       <div class="d-lg d-md-block d-sm-block" *ngIf="screenWidth > 1200">
         <i class="bi bi-list toggle-sidebar-btn" (click)="openSidebar()"></i>
       </div>
-      <!-- <button type="button" id="btnNav" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">yguytgyu</span>
-      </button> -->
-      <!-- <div>
-        <button mat-icon-button >
-          <i class="bi bi-list toggle-sidebar-btn"></i>
-        </button>
-      </div> -->
+     
       <a (click)="homePage()" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block"></span>
@@ -28,9 +21,15 @@
     </div><!-- End Search Bar -->
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
+        
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle">
-            <i class="bi bi-search"></i>
+            <!-- <i class="bi bi-search" ></i> -->
+            <form class="search-form d-flex align-items-center" [formGroup]="searchFilterForm">
+              <input type="text" placeholder="Search" formControlName="name" [(ngModel)]="searchTerm" (keyup)="search($event)"
+                title="Enter search keyword">
+              <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
           </a>
         </li><!-- End Search Icon-->
         <li class="nav-item dropdown">

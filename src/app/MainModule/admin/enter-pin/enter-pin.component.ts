@@ -25,10 +25,10 @@ export class EnterPinComponent implements OnInit {
     disableAutoFocus: false,
     placeholder: '',
     inputStyles: {
-      width: '40px',
-      height: '40px',
+      width: '50px',
+      height: '50px',
     },
-    
+
   };
   constructor(private router: Router, private _service: SharedService) {}
 

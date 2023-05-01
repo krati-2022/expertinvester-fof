@@ -59,13 +59,13 @@
 
                   <div class="col-12">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" formControlName="PrivacyPolicy" name="remember" value="true" id="rememberMe" 
+                      <input class="form-check-input" type="checkbox" formControlName="PrivacyPolicy" name="remember" value="true" id="rememberMe"
                       [ngClass]="{ 'is-invalid' : submitted && SendOtpFormControl['PrivacyPolicy']['errors']}">
                       <label class="form-check-label" >I agree to the <span class="login-line" routerLink="terms-of-services">Terms of
                           Service </span> and <span class="login-line" routerLink="privacy-policy">Privacy Policy</span></label>
                             <div *ngIf="submitted && SendOtpFormControl['PrivacyPolicy']['errors']" class="invalid-feedback">
                               <div *ngIf="SendOtpFormControl['PrivacyPolicy']['errors']['required']">Required *</div>
-                             
+
                             </div>
 
                     </div>
