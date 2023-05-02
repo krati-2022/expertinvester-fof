@@ -62,63 +62,49 @@
                 </div>
                 <div class="col-lg-6">
 
-                  <!-- <div class="row mb-3">
-                    <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>Mobile Number
-                    </label>
-                    <div class="col-lg-8">
-                    <input type="text" class="form-control" formControlName="mobileno"(keypress)="keyPressNumbers($event)" formControlName="mobileno"
-                    [ngClass]="{ 'is-invalid': (submitted || submitPhone) && InvestorControl.mobileno.errors  }">
-                    <div *ngIf="(submitted || submitPhone )  && InvestorControl.mobileno?.errors " class="invalid-feedback">
-                      <div *ngIf="InvestorControl.mobileno.errors?.validatePhoneNumber ">Phone number is invalid.</div>
-                      <div *ngIf="InvestorControl.mobileno.errors?.maxLength ">Phone number is invalid.</div>
-                      <div *ngIf="InvestorControl.mobileno.errors?.required ">Phone number is required.</div>
+                    <div class="row mb-3">
+                      <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-book px-2"></i>Knowledge
+                        Level</label>
+                      <div class="col-lg-8">
+                        <!-- <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }"> -->
+                        <select class="form-select" aria-label="Default select example" formControlName="knowledgelevel"
+                          [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }">
+                          <option [value]="item" *ngFor="let item of knowledgeLevel">{{item}}</option>
+                        </select>
+                        <div *ngIf=" submitted && InvestorControl.knowledgelevel.errors" class="invalid-feedback">
+                          <div *ngIf="InvestorControl.knowledgelevel.errors.required">Knowledge Level is required.</div>
+                        </div>
+                    
+                      </div>
                     </div>
-                    </div>
-                  </div> -->
+
 
                   <div class="row mb-3">
-                    <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am advice in </label>
+                    <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am Expert in </label>
                     <div class="col-lg-8">
-                      <select class="form-select" aria-label="Default select example" formControlName="country" (change)="getCountry(AddInvestorForm.value.country)" >
-
+                      <select class="form-select" aria-label="Default select example" formControlName="experttype" (change)="getCountry(AddInvestorForm.value.experttype)" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experttype.errors }" >
                         <option [value]="item.countryName" *ngFor="let item of country">{{item.countryName}}</option>
                       </select>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i
-                        class="bi bi-book px-2"></i>Knowledge Level</label>
-                    <div class="col-lg-8">
-                      <!-- <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }"> -->
-                      <select class="form-select" aria-label="Default select example" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }">
-                        <option [value]="item" *ngFor="let item of knowledgeLevel">{{item}}</option>
-                      </select>
-                      <div *ngIf=" submitted && InvestorControl.knowledgelevel.errors" class="invalid-feedback">
-                        <div *ngIf="InvestorControl.knowledgelevel.errors.required">Knowledge Level is required.</div>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i
-                        class="bi bi-book px-2"></i>Expert Type</label>
-                    <div class="col-lg-8">
-                      <input type="text" class="form-control" formControlName="experttype" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experttype.errors }">
                       <div *ngIf=" submitted && InvestorControl.experttype.errors" class="invalid-feedback">
-                        <div *ngIf="InvestorControl.experttype.errors.required">Expert Type is required.</div>
+                        <div *ngIf="InvestorControl.experttype.errors.required">Expert type is required.</div>
                       </div>
-
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label class="col-lg-4 col-form-label form-line"><i class="bi bi-person-video3 px-2"></i>I Want idea
                       on </label>
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 mb-2">
                       <button type="button" class="btn btn-primary w-100" [disabled]="ideaOn.length == 0" (click)="openPopUp()">I Want idea on</button>
                       <div *ngIf="submitted && ideaOnlist.length == 0" style="color: red;">Please select at least one</div>
+                      <div *ngIf="isData == 0" style="color: red;">No Data</div>
+                      <div class="" *ngFor="let item of ideaOnlist">
+                        <div class="row">
+                          <div class="col-3">
+                            <span class="badge bg-primary">{{item.ideaOn}}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -155,7 +141,7 @@
           <div class="modal-body">
             <div class="d-flex" *ngFor="let item of ideaOn">
               <input type="checkbox" formControlName="ideaOn" (change)="getIdeaOn(AddInvestorForm.value.ideaOn,item,item.ideaOn)">
-              <label for="scales">{{item.ideaOn}}</label>
+              &nbsp;<label for="scales">{{item.ideaOn}}</label>
             </div>
           </div>
           <div class="modal-footer">

@@ -163,6 +163,9 @@ export class SharedService {
   AddChannel(data: any): Observable<any> {
     return this.http.post(this.apiUrl + 'api/Channel/AddchannelMaster', data);
   }
+  UpdateChannel(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + 'api/Channel/UpdatechannelMaster', data);
+  }
 
   GetActivePost(mobile_No: string, id: string): Observable<any> {
     return this.http.get(

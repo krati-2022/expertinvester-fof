@@ -18,73 +18,80 @@ interface IdeaOn {
 @Component({
   selector: 'app-expert-and-investor',
   templateUrl: './expert-and-investor.component.html',
-  styleUrls: ['./expert-and-investor.component.css']
+  styleUrls: ['./expert-and-investor.component.css'],
 })
 export class ExpertAndInvestorComponent implements OnInit {
-
-  AddExpertInvestorForm: FormGroup | any
-  country:Array<any> = []
-  usertype = sessionStorage.getItem('usertype')
-  ismobileNumberExist = localStorage.getItem('mobile_number')
+  AddExpertInvestorForm: FormGroup | any;
+  country: Array<any> = [];
+  usertype = sessionStorage.getItem('usertype');
+  ismobileNumberExist = localStorage.getItem('mobile_number');
   ideaOn: Array<IdeaOn> = [];
   ideaOnlist: Array<any> = [];
-  submitted: boolean = false
+  submitted: boolean = false;
   submitPhone: boolean = false;
-  imageSrc: string = ''
-  extention: string = ''
-  fileName: string = ''
-  experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year']
-  knowledgeLevel = ['Beginner', 'Intermediate', 'Professional']
-  isLoading: boolean= false
-  constructor(private router: Router, private _service: SharedService, private _fb: FormBuilder, private coreHelperService: CoreHelperService) { }
+  imageSrc: string = '';
+  extention: string = '';
+  fileName: string = '';
+  experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year'];
+  knowledgeLevel = ['Beginner', 'Intermediate', 'Professional'];
+  isLoading: boolean = false;
+  isData: any;
+  constructor(
+    private router: Router,
+    private _service: SharedService,
+    private _fb: FormBuilder,
+    private coreHelperService: CoreHelperService
+  ) {}
 
   ngOnInit(): void {
-    if(!this.ismobileNumberExist){
-      this.router.navigate([''])
-     }
+    if (!this.ismobileNumberExist) {
+      this.router.navigate(['']);
+    }
     this.AddExpertInvestorForm = this._fb.group({
       name: ['', Validators.required],
       email: ['', Validators.compose([Validators.email, Validators.required])],
-      mobileno: [this.ismobileNumberExist,Validators.required],
+      mobileno: [this.ismobileNumberExist, Validators.required],
       usertype: [this.usertype, Validators.required],
       aboutus: ['', Validators.required],
       experttype: ['', Validators.required],
       IsSEBI: ['', Validators.required],
       SEBIRegNo: [''],
-      file : [''],
-      filetype : [''],
+      file: [''],
+      filetype: [''],
       experience: ['', Validators.required],
       knowledgelevel: ['', Validators.required],
       accountname: ['', Validators.required],
       accountnumber: ['', Validators.required],
       bankname: ['', Validators.required],
       bankIFSCcode: ['', Validators.required],
-      country: ['', Validators.required],
       ideaOn: [],
       ideaOnlist: this._fb.array([]),
-    })
-
-    this._service.GetCountry().subscribe(response => {
-      this.country = response.data
-    })
-
-    this.AddExpertInvestorForm.get('IsSEBI').valueChanges.subscribe((value: any) => {
-      // console.log('value: ', value);
-      if (value === true) {
-        this.AddExpertInvestorForm.get('SEBIRegNo').setValidators([
-          Validators.required,
-        ]);
-      } else {
-        this.AddExpertInvestorForm.get('SEBIRegNo').clearValidators();
-      }
-      this.AddExpertInvestorForm.get('SEBIRegNo').updateValueAndValidity();
     });
+
+    this._service.GetCountry().subscribe((response) => {
+      this.country = response.data;
+    });
+
+    this.AddExpertInvestorForm.get('IsSEBI').valueChanges.subscribe(
+      (value: any) => {
+        // console.log('value: ', value);
+        if (value === true) {
+          this.AddExpertInvestorForm.get('SEBIRegNo').setValidators([
+            Validators.required,
+          ]);
+        } else {
+          this.AddExpertInvestorForm.get('SEBIRegNo').clearValidators();
+        }
+        this.AddExpertInvestorForm.get('SEBIRegNo').updateValueAndValidity();
+      }
+    );
   }
 
-  get ExpertInvestorControl() { return this.AddExpertInvestorForm.controls; }
+  get ExpertInvestorControl() {
+    return this.AddExpertInvestorForm.controls;
+  }
 
   onSelectFile(event: any) {
-
     // console.log('event: ', event);
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -94,17 +101,15 @@ export class ExpertAndInvestorComponent implements OnInit {
 
       reader.onload = () => {
         let ext = event.target.files[0].name.split('.').pop().toLowerCase();
+        this.extention = ext
+        // console.log('this.extention: ', this.extention);
         this.fileName = event.target.files[0].name;
         let accpt = ['pdf'];
         if (accpt.includes(ext)) {
           this.imageSrc = reader.result as string;
           // console.log('this.imageSrc: ', this.imageSrc);
-          
         }
-
       };
-   
-
     }
   }
 
@@ -115,6 +120,7 @@ export class ExpertAndInvestorComponent implements OnInit {
   getCountry(event: string) {
     this._service.GetIdeaonlist(event).subscribe((response) => {
       this.ideaOn = response.data;
+      this.isData = this.ideaOn;
     });
   }
 
@@ -157,7 +163,7 @@ export class ExpertAndInvestorComponent implements OnInit {
       return true;
     }
   }
-  
+
   omit_special_char(event: any) {
     var k;
     k = event.charCode;
@@ -169,34 +175,35 @@ export class ExpertAndInvestorComponent implements OnInit {
       (k >= 48 && k <= 57)
     );
   }
-  onSubmit(){
-    
-    
-    this.submitted  = true
+  onSubmit() {
+    this.submitted = true;
     this.submitPhone = true;
-    
-    if(this.AddExpertInvestorForm.invalid){
-      return
+
+    if (this.AddExpertInvestorForm.invalid) {
+      return;
     }
-    if (this.AddExpertInvestorForm.value.IsSEBI == true && this.imageSrc == ''){
-       const Toast = Swal.mixin({
-         toast: true,
-         position: 'top',
-         showConfirmButton: false,
-         timer: 3000,
-         timerProgressBar: true,
-         didOpen: (toast) => {
-           toast.addEventListener('mouseenter', Swal.stopTimer);
-           toast.addEventListener('mouseleave', Swal.resumeTimer);
-         },
-       });
-       Toast.fire({
-         icon: 'error',
-         title: 'Certificate is required',
-       });
-       return;
+    if (
+      this.AddExpertInvestorForm.value.IsSEBI == true &&
+      this.imageSrc == ''
+    ) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: 'error',
+        title: 'Certificate is required',
+      });
+      return;
     }
-        const splitString = this.imageSrc.split('data:application/pdf;base64,');
+    const splitString = this.imageSrc.split('data:application/pdf;base64,');
     let formData = {
       mobileno: this.AddExpertInvestorForm.value.mobileno,
       name: this.AddExpertInvestorForm.value.name,
@@ -215,19 +222,18 @@ export class ExpertAndInvestorComponent implements OnInit {
       bankIFSCcode: this.AddExpertInvestorForm.value.bankIFSCcode,
       file: splitString[1],
       filetype: this.extention,
-    }
+    };
     // console.log('formData: ', formData);
     // return
-    this.isLoading = true
-    this._service.AddExpertInvestor(formData).subscribe(response =>{
-    // console.log('response: ', response);
-    this.AddExpertInvestorForm.reset()
-    this.submitted = false
-    this.submitPhone = false
-    this.isLoading = false
-    sessionStorage.removeItem('usertype')
-    this.router.navigate(['club-list']);
-    })
+    this.isLoading = true;
+    this._service.AddExpertInvestor(formData).subscribe((response) => {
+      // console.log('response: ', response);
+      this.AddExpertInvestorForm.reset();
+      this.submitted = false;
+      this.submitPhone = false;
+      this.isLoading = false;
+      sessionStorage.removeItem('usertype');
+      this.router.navigate(['club-list']);
+    });
   }
-
 }

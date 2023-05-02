@@ -268,7 +268,7 @@ export class ChannelComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           // debugger;
-          this.feedDetails = response.items;
+          this.channelDetails = response.items;
         },
         error: (error) => {
           if (error.status == '400') {

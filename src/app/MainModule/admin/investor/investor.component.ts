@@ -34,6 +34,7 @@ export class InvestorComponent implements OnInit {
   message: string = ''
   experience = ['1 Year', '2 Year', '3 Year', '4 Year', '5 Year']
   knowledgeLevel = ['Beginner', 'Intermediate', 'Professional']
+  isData :any
   isLoading:boolean = false
   constructor(
     private router: Router,
@@ -48,7 +49,6 @@ export class InvestorComponent implements OnInit {
     this.AddInvestorForm = this.formBuilder.group({
       mobileno: [this.ismobileNumberExist, Validators.required],
       name: ['', Validators.required],
-      country: ['', Validators.required],
       ideaOn: [],
       usertype: [this.usertype, Validators.required],
       aboutus: ['', Validators.required],
@@ -76,6 +76,8 @@ export class InvestorComponent implements OnInit {
   getCountry(event: string) {
     this._service.GetIdeaonlist(event).subscribe((response) => {
       this.ideaOn = response.data;
+      this.isData = this.ideaOn
+      // console.log('this.isData: ', this.isData);
     });
   }
 
@@ -120,10 +122,6 @@ export class InvestorComponent implements OnInit {
   }
 
   onSubmit() {
-    
-    // this.InvestorDetails = this.AddInvestorForm.getRawValue() as InvestorManagementDetails;
-    // console.log('this.InvestorDetails: ', this.InvestorDetails);
-    
     this.submitted = true;
     this.submitPhone = true;
     if (this.AddInvestorForm.invalid) {
@@ -142,6 +140,8 @@ export class InvestorComponent implements OnInit {
       ideaOnlist: this.AddInvestorForm.value.ideaOnlist,
     };
     // console.log('formData: ', formData);
+    // console.log('formData: ', formData);
+    // return
     // return;
     this.isLoading = true
     this._service.AddInvestor(formData).subscribe(

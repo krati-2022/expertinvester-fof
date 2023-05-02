@@ -34,21 +34,18 @@
 
                   <div class="row">
                     <div class="channel-name d-flex justify-content-between align-items-center py-2">
-                      <span> <i class="bi bi-lightbulb"></i>Chat Barter</span> <span class=""><button type="button"
-                          class="btn follow-btn">Follow</button></span>
+                      <span> <i class="bi bi-lightbulb"></i>{{items.clubName}}</span> 
                     </div>
-                    <div class="channel-detail">
-                      DSSL DYNACON SYSTEM
-                    </div>
-                    <div class="date">27 Jan 2023, 06:43 PM</div>
+                    
+                    <div class="date">{{items.createdDate | date : 'fullDate'}}{{items.createdDate | date : 'shortTime'}}</div>
                   </div>
                   <div class="row"
                     *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
                     <img [src]="items.imageurl" style="object-fit:fill; height:500px" alt="">
                   </div>
                   <div class="row py-2">
-                    <h6 class="dis-line">IBR Infra CMP 305 :</h6>
-                    <p class="dis">{{items.description}}</p>
+                    <h6 class="dis-line">{{items.description}}</h6>
+                    <!-- <p class="dis">{{items.description}}</p> -->
                   </div>
                   <div class="d-flex justify-content-between">
                     <div>

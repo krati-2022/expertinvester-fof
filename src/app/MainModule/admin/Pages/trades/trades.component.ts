@@ -44,7 +44,7 @@ export class TradesComponent implements OnInit {
       targetprice: ['', Validators.required],
       stoploss: ['', Validators.required],
       imageurl: [null],
-      externallink: ['', Validators.required],
+      externallink: [''],
       description: ['', Validators.required],
       tradetype: [this.tradetype, Validators.required],
     });
@@ -161,7 +161,7 @@ export class TradesComponent implements OnInit {
           '/' +
           this.mobileNumber +
           '/' +
-          this.userName,
+          this.userName + '/true',
       ]);
       this.isLoading = false;
     });

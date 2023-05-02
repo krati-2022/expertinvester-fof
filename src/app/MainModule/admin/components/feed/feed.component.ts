@@ -353,14 +353,16 @@ export class FeedComponent implements OnInit {
   }
 
   getChannelDetails(item: any) {
-    this.router.navigate([
-      'home/channel-details/' +
-        item.channelMasterId +
-        '/' +
-        item.mobile_No +
-        '/' +
-        item.username,
-    ]);
+   this.router.navigate([
+     'home/channel-details/' +
+       item.channelMasterId +
+       '/' +
+       item.mobile_No +
+       '/' +
+       item.name +
+       '/' +
+       item.isSubscribed,
+   ]);
   }
 
   blockUnblockPost(id: string, status: boolean) {

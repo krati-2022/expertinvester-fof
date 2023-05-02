@@ -117,10 +117,15 @@ export class EditChannelComponent implements OnInit {
       this.model.coAdChannel = this.data.coAdChannel;
       this.model.subscription = this.data.subscription;
       this.coAdList = this.data.coAdList
+      this.coAdList.map((i:any)=>{
+        i.expertId = i.id;
+        delete i.id
+      })
       this.benefits = this.data.benefits;
-     const dd = this.ideaOn.filter((i) =>
-     this.data.idealfor.some((e:any) => i == e.idealfor)
-     );
+      this.benefits.map((i:any,index:any)=>{
+        i.id = index;
+      })
+     
     })
   }
 
@@ -147,6 +152,7 @@ export class EditChannelComponent implements OnInit {
   }
 
   removeCoAdList(id: string) {
+  console.log('id: ', id);
     this.coAdList
       .filter((i: any) => i.expertId == id)
       .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
@@ -222,7 +228,6 @@ export class EditChannelComponent implements OnInit {
   }
 
   addBenefits(data: string) {
-    console.log('data: ', data);
     if (this.benefits.length >= 4) {
       const Toast = Swal.mixin({
         toast: true,
@@ -256,6 +261,8 @@ export class EditChannelComponent implements OnInit {
   }
 
   remove(id: string) {
+      // console.log('id: ', id);
+
     this.benefits
       .filter((i: any) => i.id == id)
       .forEach((x: any) => this.benefits.splice(this.benefits.indexOf(x), 1));
@@ -301,73 +308,74 @@ export class EditChannelComponent implements OnInit {
   }
 
   onSubmit() {
-    // // this.AddChannelFrom.value.imageurl = this.base64;
-    // this.submitted = true;
-    // if (this.AddChannelFrom.invalid) {
-    //   return;
-    // }
-    // if (this.AddChannelFrom.value.coAdChannel == false) {
-    //   this.coAdList = [
-    //     {
-    //       expertId: '00000000-0000-0000-0000-000000000000',
-    //     },
-    //   ];
-    // }
-    // this.AddChannelFrom.value.idealfor = this.ideaOnlist;
-    // this.benefits.map((i: any) => {
-    //   delete i.id;
-    // });
-    // this.AddChannelFrom.value.benefits = this.benefits;
+    // this.AddChannelFrom.value.imageurl = this.base64;
+    this.submitted = true;
+    if (this.AddChannelFrom.invalid) {
+      return;
+    }
+    if (this.AddChannelFrom.value.coAdChannel == false) {
+      this.coAdList = [
+        {
+          expertId: '00000000-0000-0000-0000-000000000000',
+        },
+      ];
+    }
+    this.AddChannelFrom.value.idealfor = this.ideaOnlist;
+    this.benefits.map((i: any) => {
+      delete i.id;
+    });
+    this.AddChannelFrom.value.benefits = this.benefits;
 
-    // // console.log('this.AddChannelFrom.value.benefits: ', this.AddChannelFrom.value.benefits);
-    // // return
-    // this.AddChannelFrom.value.coAdList = this.coAdList;
-    // if (this.AddChannelFrom.value.idealfor.length == 0) {
-    //   this.idealMessage = 'Select at least one';
-    //   return;
-    // }
-    // // console.log('this.AddChannelFrom.value.benefits.length: ', this.AddChannelFrom.value.benefits.length);
-    // if (this.AddChannelFrom.value.benefits.length == 0) {
-    //   this.benefitMessage = 'Add at least one';
-    //   return;
-    // }
+    // console.log('this.AddChannelFrom.value.benefits: ', this.AddChannelFrom.value.benefits);
+    // return
+    this.AddChannelFrom.value.coAdList = this.coAdList;
+    if (this.AddChannelFrom.value.idealfor.length == 0) {
+      this.idealMessage = 'Select at least one';
+      return;
+    }
+    // console.log('this.AddChannelFrom.value.benefits.length: ', this.AddChannelFrom.value.benefits.length);
+    if (this.AddChannelFrom.value.benefits.length == 0) {
+      this.benefitMessage = 'Add at least one';
+      return;
+    }
 
-    // var splitString = this.base64.split('data:image/jpeg;base64,');
-    // // console.log('splitString: ', splitString);
-    // this.formData = {
-    //   mobile_No: this.AddChannelFrom.value.mobile_No,
-    //   name: this.AddChannelFrom.value.name,
-    //   idealfor: this.AddChannelFrom.value.idealfor,
-    //   benefits: this.AddChannelFrom.value.benefits,
-    //   subscription: this.AddChannelFrom.value.subscription,
-    //   coAdChannel: this.AddChannelFrom.value.coAdChannel,
-    //   description: this.AddChannelFrom.value.description,
-    //   imageurl: splitString[1],
-    //   coAdList: this.AddChannelFrom.value.coAdList,
-    // };
-    // // console.log('formData: ', this.formData);
-    // // return
-    // this.isLoading = true;
-    // this._service.AddChannel(this.formData).subscribe((res) => {
-    //   // console.log('res: ', res);
-    //   const Toast = Swal.mixin({
-    //     toast: true,
-    //     position: 'top-right',
-    //     showConfirmButton: false,
-    //     timer: 3000,
-    //     timerProgressBar: true,
+    var splitString = this.base64.split('data:image/jpeg;base64,');
+    // console.log('splitString: ', splitString);
+    this.formData = {
+      id: this.channelId[0],
+      mobile_No: this.AddChannelFrom.value.mobile_No,
+      name: this.AddChannelFrom.value.name,
+      idealfor: this.AddChannelFrom.value.idealfor,
+      benefits: this.AddChannelFrom.value.benefits,
+      subscription: this.AddChannelFrom.value.subscription,
+      coAdChannel: this.AddChannelFrom.value.coAdChannel,
+      description: this.AddChannelFrom.value.description,
+      imageurl: splitString[1],
+      coAdList: this.AddChannelFrom.value.coAdList,
+    };
+    // console.log('formData: ', this.formData);
+    // return
+    this.isLoading = true;
+    this._service.UpdateChannel(this.formData).subscribe((res) => {
+      // console.log('res: ', res);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
 
-    //     didOpen: (toast) => {
-    //       toast.addEventListener('mouseenter', Swal.stopTimer);
-    //       toast.addEventListener('mouseleave', Swal.resumeTimer);
-    //     },
-    //   });
-    //   Toast.fire({
-    //     icon: 'success',
-    //     title: 'Channel Added Successfully',
-    //   });
-    //   this.isLoading = false;
-    //   this.router.navigate(['home/channel']);
-    // });
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: 'success',
+        title: 'Channel Updated Successfully',
+      });
+      this.isLoading = false;
+      this.router.navigate(['home/channel']);
+    });
   }
 }

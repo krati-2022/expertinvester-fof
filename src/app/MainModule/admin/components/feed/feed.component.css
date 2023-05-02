@@ -713,3 +713,10 @@ span.club-inf {
     font-family: "Poppins", sans-serif;
 }
 }
+
+.club-block{
+pointer-events: none;
+}
+.club{
+pointer-events: all;
+}
