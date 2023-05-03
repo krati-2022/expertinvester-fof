@@ -2,11 +2,11 @@
   <div class="row">
     <div class="card">
       <div class="pagetitle">
-        <div class="d-flex justify-content-between align-items-baseline p-2">
+        <div class="d-flex justify-content-between align-items-baseline">
           <div>
             <h1 class="px-3"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i>{{username}}</h1>
           </div>
-          <div *ngIf="activeTab == 'Active-Post'">
+          <div *ngIf="activeTab == 'Active-Post'" [ngClass]="isUserChannel == true ? 'd-block' : 'd-none'">
             <button type="button" class="btn btn-outline-secondary" (click)="addPost()"><i
                 class="bi bi-pencil-square"></i></button>
           </div>
@@ -38,10 +38,10 @@
         <div class="tab-content pt-2" id="borderedTabJustifiedContent">
           <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
             aria-labelledby="home-tab" >
-            <div class="example"  style="height: 75vh; overflow: auto;" *ngIf="activePostDetails.length != 0">
+            <div class="example"  *ngIf="activePostDetails.length != 0">
 
-              <div class="card list-card my-3 m-4" [ngClass]="{'sub-section': isSubscribed == 'false'}" *ngFor="let items of activePostDetails">
-                <div class="card-body" *ngIf="isSubscribed == 'true'">
+              <div class="card list-card my-3 m-4" [ngClass]="{'sub-section': items.isUserChannel == false}" *ngFor="let items of activePostDetails">
+                <div class="card-body" *ngIf="items.isUserChannel == true">
                   <div class="container">
                     <div class=" row user_informatiom">
                       <div class="col-1">
@@ -144,19 +144,22 @@
                     </div>
                   </div>
                 </div>
-                <div class="card-body" style="height: 65vh; display: flex; justify-content: center; align-items: center;" *ngIf="isSubscribed == 'false'">
+                <div class="card-body" style="height: 65vh; display: flex; justify-content: center; align-items: center;" *ngIf="items.isUserChannel == false">
                   <button class="btn btn-primary" (click)="jumoToChannel()">Please Subscribe</button>
                 </div>
               </div>
 
             </div>
             <div class="example d-flex justify-content-center" style="font-size: 20px;"
-              *ngIf="activePostDetails.length == 0 && isSubscribed == 'true'">
+              *ngIf="activePostDetails.length == 0 ">
               <span>{{notFound}}</span>
             </div>
           </div>
+
+
+          
           <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab" >
-            <div class="example" style="height: 65vh; overflow: auto;" *ngIf="pastPostDetails.length != 0">
+            <div class="example"  *ngIf="pastPostDetails.length != 0">
 
               <div class="card list-card my-3 m-4my-3" *ngFor="let items of pastPostDetails">
                 <div class="card-body">
@@ -273,7 +276,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
-            <div class="example" style="height: 65vh; overflow: auto;" *ngFor="let items of profile">
+            <div class="example"  *ngFor="let items of profile">
               <div class="card list-card my-3 m-4 my-3">
                 <div class="card-body">
                   <div class=" row user_informatiom d-flex align-items-center">
@@ -679,7 +682,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="bordered-justified-Chat" role="tabpanel" aria-labelledby="Chat-tab">
-            <!-- <div class="example" style="height: 65vh; overflow: auto;"> -->
+            <!-- <div class="example" > -->
 
            <app-chat-box [username]="username"></app-chat-box>
             <!-- </div> -->

@@ -18,7 +18,7 @@ export interface PostDetails {
   imageurl: string;
   isChannelApprove: boolean;
   isChannelLiked: boolean;
-  isSubscribed: boolean;
+  isUserChannel: boolean;
   likecount: number;
   post: number;
   reputation: number;
@@ -46,13 +46,12 @@ export class ChannelDetailsComponent implements OnInit {
   mobile_No: any;
   usersMobileNumber: any = localStorage.getItem('mobile_number');
   username: any;
-  isSubscribed: any;
   activePostDetails: PostDetails[] = [];
   pastPostDetails: PostDetails[] = [];
   profile: PostDetails[] = [];
   notFound: any = '';
   activeTab: any = 'Active-Post';
-
+  isUserChannel:boolean = false
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _service: SharedService,
@@ -65,7 +64,6 @@ export class ChannelDetailsComponent implements OnInit {
     this.id = this._ActivatedRoute.snapshot.paramMap.get('param1');
     this.mobile_No = this._ActivatedRoute.snapshot.paramMap.get('param2');
     this.username = this._ActivatedRoute.snapshot.paramMap.get('param3');
-    this.isSubscribed = this._ActivatedRoute.snapshot.paramMap.get('param4');
     // console.log('this.username: ', this.username);
     this.getActivePost();
     // if (this.isSubscribed == 'true') {
@@ -101,6 +99,8 @@ export class ChannelDetailsComponent implements OnInit {
     this._service.GetActivePost(mobile_No, this.id).subscribe((res) => {
       this.notFound = res.message;
       this.activePostDetails = res.data;
+     
+      this.isUserChannel = this.activePostDetails[0].isUserChannel;
       // console.log('this.channelDetails: ', this.channelDetails);
     });
   }
@@ -182,7 +182,7 @@ export class ChannelDetailsComponent implements OnInit {
   //     });
   // }
 
-  jumoToChannel(){
-    this.router.navigate(['home/channel'])
+  jumoToChannel() {
+    this.router.navigate(['home/channel']);
   }
 }

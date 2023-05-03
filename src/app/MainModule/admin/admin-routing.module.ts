@@ -56,7 +56,7 @@ const routes: Routes = [
       { path: 'club', component: ClubComponent },
       { path: 'channel', component: ChannelComponent },
       {
-        path: 'channel-details/:param1/:param2/:param3/:param4',
+        path: 'channel-details/:param1/:param2/:param3',
         component: ChannelDetailsComponent,
       },
       { path: 'add-channel', component: AddChannelComponent },

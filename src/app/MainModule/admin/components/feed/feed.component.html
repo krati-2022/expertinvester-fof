@@ -183,7 +183,7 @@
                       <div class="container">
                         <div class="row"
                           *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
-                          <img (click)="getDetails(items.id, items.recordType)" [src]="items.imageurl" style="object-fit:fill; height:500px" alt="">
+                          <img (click)="getDetails(items.id, items.recordType)" [src]="items.imageurl"  alt="" class="manageimg">
                         </div>
                       </div>
                       <div class="container">
@@ -432,8 +432,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="filterLabel">Filter</h5>
-          <button type="button" class="close" (click)="close()">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="close " (click)="close()" style="border: 0;background: #fff;">
+            <i class="bi bi-x-lg"></i>
           </button>
         </div>
         <div class="container">

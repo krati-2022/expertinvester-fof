@@ -165,4 +165,7 @@ input:focus, textarea:focus, keygen:focus, select:focus {
 	.section1 h1 {
 		font-size: 28px;
 	}
+
+	iframe{width: 100%;}
+
 }

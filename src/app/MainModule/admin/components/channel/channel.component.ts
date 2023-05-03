@@ -112,9 +112,7 @@ export class ChannelComponent implements OnInit {
         '/' +
         item.mobile_No +
         '/' +
-        item.name +
-        '/' +
-        item.isSubscribed,
+        item.name
     ]);
   }
 
@@ -185,7 +183,6 @@ export class ChannelComponent implements OnInit {
       approve: approve,
       reject: reject,
     });
-    // console.log(' this.approveRejectDetail: ',  this.approveRejectDetail);
     this._service
       .ApproveRejectChannel(this.approveRejectDetail)
       .subscribe((res) => {
@@ -195,17 +192,6 @@ export class ChannelComponent implements OnInit {
   }
 
   Edit(item: any) {
-    // console.log('item: ', item);
-    // this.router.navigate([
-    //   'home/trades/' +
-    //     'FINOLEXIND' +
-    //     '/' +
-    //     item.channelMasterId +
-    //     '/' +
-    //     this.mobileNumber +
-    //     '/' +
-    //     item.username,
-    // ]);
     this.router.navigate(['home/edit-channel/' + item.channelMasterId]);
   }
   open() {
@@ -263,7 +249,8 @@ export class ChannelComponent implements OnInit {
           '&Investor=' +
           this.Investor +
           '&ExpertAndInvestor=' +
-          this.ExpertAndInvestor
+          this.ExpertAndInvestor +
+          'pageNumber=0&pageSize=100'
       )
       .subscribe({
         next: (response: any) => {

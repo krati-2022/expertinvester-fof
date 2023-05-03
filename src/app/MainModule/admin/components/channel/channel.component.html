@@ -44,7 +44,7 @@
                   <div class="d-flex justify-content-between align-items-baseline py-2">
                     <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
                     <div *ngIf="items.isSubscribed == true"><i class="bi bi-lock-fill "></i>Subscribed</div>
-                   <div class="dropdown">
+                   <div class="dropdown" *ngIf="items.isSubscribed == false">
                           <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
@@ -52,8 +52,8 @@
 
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                            <li *ngIf="items.isSubscribed == false" (click)="subscribe(items)" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
-                            <li  style="cursor: pointer;" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
+                            <li *ngIf="items.isSubscribed == false && items.channel_madeby_them == false" (click)="subscribe(items)" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
+                            <li  style="cursor: pointer;" *ngIf="items.channel_madeby_them == true" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
 
                           </ul>
                         </div>
@@ -199,8 +199,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="filterLabel">Filter</h5>
-          <button type="button" class="close" (click)="close()">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="close " (click)="close()" style="border: 0;background: #fff;">
+            <i class="bi bi-x-lg"></i>
           </button>
         </div>
         <div class="container">

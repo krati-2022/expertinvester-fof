@@ -46,7 +46,11 @@ export interface ExpertList {
 export class EditChannelComponent implements OnInit {
   mobileNumber = localStorage.getItem('mobile_number') || '';
   AddChannelFrom: FormGroup | any;
-  ideaOn = ['Nifty', 'Bank Nifty', 'Stock F & O'];
+  ideaOn = [
+    { idealfor: 'Nifty', isSelectd: false },
+    { idealfor: 'Bank Nifty', isSelectd: false },
+    { idealfor: 'Stock F & O', isSelectd: false },
+  ];
   fee_subscription = ['Free Access', 'Paid Access'];
   benefits: any = [];
   ideaOnlist: any = [];
@@ -62,9 +66,10 @@ export class EditChannelComponent implements OnInit {
   benefitMessage: string = '';
   message: string = '';
   maxFileSize: number = 200 * 1024;
-  channelId:any
-  data:any
-  model : any = {}
+  channelId: any;
+  data: any;
+  model: any = {};
+  selectedCheckboxes: any[] = [];
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -74,9 +79,9 @@ export class EditChannelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._ActivatedRoute.paramMap.subscribe(param =>{
-      this.channelId = param.getAll('param1')
-    })
+    this._ActivatedRoute.paramMap.subscribe((param) => {
+      this.channelId = param.getAll('param1');
+    });
     this.AddChannelFrom = new FormGroup({
       mobile_No: new FormControl(this.mobileNumber),
       name: new FormControl('', Validators.required),
@@ -94,39 +99,47 @@ export class EditChannelComponent implements OnInit {
       adOn: new FormControl(false),
     });
     this.getExpertList();
-    this.getChannelDetails()
+    this.getChannelDetails();
   }
 
   goBack() {
     this.location.back();
   }
 
-  getChannelDetails(){
-     let mobile_number = '';
-     var splitString = this.mobileNumber.split('');
-     if (splitString[0] == '+') {
-       splitString[0] = '%2B';
-       var joinString = splitString.join('');
-       mobile_number = joinString;
-     }
-    this._service.GetChannelDetails(mobile_number, this.channelId).subscribe(res => {
-    console.log('res: ', res);
-      this.data = res.data[0]
-      this.model.name = this.data.name
-      this.model.description = this.data.description;
-      this.model.coAdChannel = this.data.coAdChannel;
-      this.model.subscription = this.data.subscription;
-      this.coAdList = this.data.coAdList
-      this.coAdList.map((i:any)=>{
-        i.expertId = i.id;
-        delete i.id
-      })
-      this.benefits = this.data.benefits;
-      this.benefits.map((i:any,index:any)=>{
-        i.id = index;
-      })
-     
-    })
+  getChannelDetails() {
+    let mobile_number = '';
+    var splitString = this.mobileNumber.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      mobile_number = joinString;
+    }
+    this._service
+      .GetChannelDetails(mobile_number, this.channelId)
+      .subscribe((res) => {
+        console.log('res: ', res);
+        this.data = res.data[0];
+        this.model.name = this.data.name;
+        this.model.description = this.data.description;
+        this.model.coAdChannel = this.data.coAdChannel;
+        this.model.subscription = this.data.subscription;
+        this.coAdList = this.data.coAdList;
+        this.coAdList.map((i: any) => {
+          i.expertId = i.id;
+          delete i.id;
+        });
+        this.benefits = this.data.benefits;
+        this.benefits.map((i: any, index: any) => {
+          i.id = index;
+        });
+        this.model.subscription = this.data.subscription;
+        const data = this.ideaOn.filter((i:any) => this.data.idealfor.some((e:any) => i.idealfor == e.idealfor ? i.isSelectd = true : i.isSelectd= false))
+        const intersection = this.ideaOn.filter((element) =>
+        data.includes(element)
+        );
+       
+        console.log('this.ideaOn: ', this.ideaOn);
+      });
   }
 
   get AddChannelControl() {
@@ -152,7 +165,6 @@ export class EditChannelComponent implements OnInit {
   }
 
   removeCoAdList(id: string) {
-  console.log('id: ', id);
     this.coAdList
       .filter((i: any) => i.expertId == id)
       .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
@@ -165,19 +177,22 @@ export class EditChannelComponent implements OnInit {
     }
   }
 
-  getIdeaFor(status: boolean, item: string) {
+  getIdeaFor(status: boolean, item: any) {
     if (status == true) {
-      this.ideaOnlist.push({ idealfor: item });
+      item.isSelectd = true
+      this.ideaOnlist.push(item);
       // console.log('this.ideaOnlist: ', this.ideaOnlist);
     } else {
+      item.isSelectd = false;
       let removeIndexValue = -1;
       for (let i = 0; i < this.ideaOnlist.length; i++) {
-        if (name == this.ideaOnlist[i].ideaOn) {
+        if (item.idealfor == this.ideaOnlist[i].idealfor) {
           removeIndexValue = i;
           break;
         }
       }
       this.ideaOnlist.splice(removeIndexValue, 1);
+      // console.log('this.ideaOnlist: ', this.ideaOnlist);
     }
   }
 
@@ -261,7 +276,7 @@ export class EditChannelComponent implements OnInit {
   }
 
   remove(id: string) {
-      // console.log('id: ', id);
+    // console.log('id: ', id);
 
     this.benefits
       .filter((i: any) => i.id == id)
@@ -306,9 +321,8 @@ export class EditChannelComponent implements OnInit {
       };
     }
   }
-
+  
   onSubmit() {
-    // this.AddChannelFrom.value.imageurl = this.base64;
     this.submitted = true;
     if (this.AddChannelFrom.invalid) {
       return;
@@ -320,15 +334,17 @@ export class EditChannelComponent implements OnInit {
         },
       ];
     }
+    
+    this.ideaOnlist = this.ideaOn.filter((i: any) => i.isSelectd == true);
+
     this.AddChannelFrom.value.idealfor = this.ideaOnlist;
+    
     this.benefits.map((i: any) => {
       delete i.id;
     });
     this.AddChannelFrom.value.benefits = this.benefits;
-
-    // console.log('this.AddChannelFrom.value.benefits: ', this.AddChannelFrom.value.benefits);
-    // return
     this.AddChannelFrom.value.coAdList = this.coAdList;
+    
     if (this.AddChannelFrom.value.idealfor.length == 0) {
       this.idealMessage = 'Select at least one';
       return;

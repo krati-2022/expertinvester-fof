@@ -211,9 +211,7 @@ export class ResponsiveViewComponent implements OnInit {
         '/' +
         item.mobile_No +
         '/' +
-        item.name +
-        '/' +
-        item.isSubscribed,
+        item.name 
     ]);
   }
 
