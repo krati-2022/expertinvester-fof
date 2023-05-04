@@ -28,33 +28,47 @@
           <h3 class="sec2frmtitle">Want to Know More?? Drop Us a Mail</h3>
           <form [formGroup]="contactUsForm" (ngSubmit)="submit()">
             <div class="clearfix">
-              <input class="col2 first" type="text" formControlName="firstName" placeholder="FirstName" [ngClass]="{ 'is-invalid': submitted && contactUsControl.firstName.errors }">
-              <div *ngIf=" submitted && contactUsControl.firstName.errors" class="invalid-feedback">
-                <div *ngIf="contactUsControl.firstName.errors.required">First Name is required.</div>
-              </div>
-              <input class="col2 last" type="text" formControlName="lastName" placeholder="LastName" [ngClass]="{ 'is-invalid': submitted && contactUsControl.lastName.errors }">
-              <div *ngIf=" submitted && contactUsControl.lastName.errors" class="invalid-feedback">
-                <div *ngIf="contactUsControl.lastName.errors.required">Last Name is required.</div>
-              </div>
-            </div>
-            <div class="clearfix">
-              <input class="col2 first" type="Email" formControlName="email" placeholder="Email"
-                [ngClass]="{ 'is-invalid': submitted && contactUsControl.email.errors }" maxlength="50">
-              <div *ngIf=" submitted && contactUsControl.email.errors" class="invalid-feedback">
-                <div *ngIf="contactUsControl.email.errors.required">Email is required.</div>
-                <div *ngIf="contactUsControl.email.errors.email">Email is invalid.</div>
-              </div>
-              <input class="col2 last" type="text" formControlName="mobileNumber" placeholder="Contact Number" [ngClass]="{ 'is-invalid': submitted && contactUsControl.mobileNumber.errors }">
-              <div *ngIf=" submitted && contactUsControl.mobileNumber.errors" class="invalid-feedback">
-                <div *ngIf="contactUsControl.mobileNumber.errors.required">Mobile Number is required.</div>
-              </div>
-            </div>
-            <div class="clearfix">
-              <textarea name="textarea" id="" cols="30" formControlName="description"
-                rows="7">Your message here...</textarea>
-                <div *ngIf=" submitted && contactUsControl.description.errors" class="invalid-feedback" [ngClass]="{ 'is-invalid': submitted && contactUsControl.description.errors }">
-                  <div *ngIf="contactUsControl.description.errors.required">Message is required.</div>
+              <div class="row">
+                <div class="col-6 p-2">
+                  <input class="first w-100" type="text" formControlName="firstName" placeholder="FirstName" [ngClass]="{ 'is-invalid': submitted && contactUsControl.firstName.errors }">
+                  <div *ngIf=" submitted && contactUsControl.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="contactUsControl.firstName.errors.required">First Name is required.</div>
+                  </div>
                 </div>
+                <div class="col-6 p-2">
+                  <input class="last w-100" type="text" formControlName="lastName" placeholder="LastName" [ngClass]="{ 'is-invalid': submitted && contactUsControl.lastName.errors }">
+                  <div *ngIf=" submitted && contactUsControl.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="contactUsControl.lastName.errors.required">Last Name is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix">
+              <div class="row">
+                <div class="col-6 p-2">
+                  <input class="first w-100" type="Email" formControlName="email" placeholder="Email"
+                    [ngClass]="{ 'is-invalid': submitted && contactUsControl.email.errors }" maxlength="50">
+                  <div *ngIf=" submitted && contactUsControl.email.errors" class="invalid-feedback">
+                    <div *ngIf="contactUsControl.email.errors.required">Email is required.</div>
+                    <div *ngIf="contactUsControl.email.errors.email">Email is invalid.</div>
+                  </div>
+                </div>
+                <div class="col-6 p-2">
+                  <input class="last w-100" type="text" formControlName="mobileNumber" placeholder="Contact Number" [ngClass]="{ 'is-invalid': submitted && contactUsControl.mobileNumber.errors }">
+                  <div *ngIf=" submitted && contactUsControl.mobileNumber.errors" class="invalid-feedback">
+                    <div *ngIf="contactUsControl.mobileNumber.errors.required">Contact Number is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix">
+              <div class="col-12 p-2">
+                <textarea name="textarea" id="" cols="30" formControlName="description"
+                  rows="7" placeholder="Your message here..." [ngClass]="{ 'is-invalid': submitted && contactUsControl.description.errors }"></textarea>
+                  <div *ngIf=" submitted && contactUsControl.description.errors" class="invalid-feedback" >
+                    <div *ngIf="contactUsControl.description.errors.required">Message is required.</div>
+                  </div>
+              </div>
             </div>
             <div class="clearfix"><input type="submit" value="Send"></div>
           </form>

@@ -134,6 +134,7 @@ export class FeedComponent implements OnInit {
   filterForm: FormGroup | any;
   scrollPosition = 0;
   data = ['Expert', 'Investor', 'Expert&Invester', 'Club', 'Channel'];
+  ideaTracker = ['Target', 'Stop Loss'];
   Club: string = '';
   Channel: string = '';
   Expert: string = '';
@@ -353,16 +354,16 @@ export class FeedComponent implements OnInit {
   }
 
   getChannelDetails(item: any) {
-   this.router.navigate([
-     'home/channel-details/' +
-       item.channelMasterId +
-       '/' +
-       item.mobile_No +
-       '/' +
-       item.name +
-       '/' +
-       item.isSubscribed,
-   ]);
+    this.router.navigate([
+      'home/channel-details/' +
+        item.channelMasterId +
+        '/' +
+        item.mobile_No +
+        '/' +
+        item.name +
+        '/' +
+        item.isSubscribed,
+    ]);
   }
 
   blockUnblockPost(id: string, status: boolean) {
@@ -407,6 +408,13 @@ export class FeedComponent implements OnInit {
     (<any>$('#filter')).modal('hide');
   }
 
+  openIdeaTracke() {
+    <any>$('#exampleModalCenter').modal('show');
+  }
+
+  closeIdeaTracke() {
+    <any>$('#exampleModalCenter').modal('hide');
+  }
   onFilter(event: any) {
     // console.log('event: ', event);
     //   console.log(this.filterForm.value.name);
@@ -475,6 +483,6 @@ export class FeedComponent implements OnInit {
   public onScrolled() {
     if (window.pageYOffset >= 100) {
       this._service.showSearchBar.emit();
-    } 
+    }
   }
 }

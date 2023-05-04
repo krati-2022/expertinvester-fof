@@ -24,6 +24,7 @@ export interface ChannelListDetails {
   isChannelApprove: boolean;
   isChannelLiked: boolean;
   isSubscribed: boolean;
+  isUserChannel: boolean;
   likecount: number;
   post: number;
   reputation: number;
@@ -112,7 +113,7 @@ export class ChannelComponent implements OnInit {
         '/' +
         item.mobile_No +
         '/' +
-        item.name
+        item.name + '/' + item.isUserChannel
     ]);
   }
 

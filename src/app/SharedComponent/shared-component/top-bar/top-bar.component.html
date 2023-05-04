@@ -1,6 +1,8 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
+
       <div class="d-lg d-md-block d-sm-block" *ngIf="screenWidth < 1200">
+        <i class="bi bi-arrow-left px-2" style="font-size: 30px;" (click)="goBack()"></i>
         <i class="bi bi-list toggle-sidebar-btn" *ngIf="hide == true" (click)="openSidebar()"></i>
         <i class="bi bi-x toggle-sidebar-btn" *ngIf="hide == false" (click)="openSidebar()"></i>
       </div>
@@ -39,12 +41,12 @@
               </li>
             </ul>
         </li><!-- End Search Icon-->
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link nav-icon"  data-bs-toggle="dropdown">
             <i class="bi bi-bell-fill"></i>
 
             <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
+          </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               You have 4 new notifications
@@ -101,14 +103,14 @@
             <li class="dropdown-footer">
               <a >Show all notifications</a>
             </li>
-          </ul><!-- End Notification Dropdown Items -->
-        </li><!-- End Notification Nav -->
-        <li class="nav-item dropdown">
+          </ul>
+        </li> -->
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link nav-icon"  data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
 
             <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
+          </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
               You have 3 new messages
@@ -159,8 +161,8 @@
             <li class="dropdown-footer">
               <a >Show all messages</a>
             </li>
-          </ul><!-- End Messages Dropdown Items -->
-        </li><!-- End Messages Nav -->
+          </ul>
+        </li> -->
         <li class="nav-item dropdown pe-3">
           <a class="nav-link nav-profile d-flex align-items-center pe-0"  data-bs-toggle="dropdown" style="cursor: pointer;">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ39ExF8Rr-DSUKz7-VPwfeK0hiHOSh3BMzae5C2g3ZXA8aPObmAEGaRw7C28I4Tw68IrY&usqp=CAU" alt="Profile" class="rounded-circle">

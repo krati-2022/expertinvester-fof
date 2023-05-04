@@ -21,6 +21,7 @@ import {
 import { ChannelApproveReject, ChannelSubscriber } from '../MainModule/admin/components/channel/channel.classes';
 import { AddPostDetails } from '../MainModule/admin/Pages/trades/trades.classes';
 import { ContactUs } from '../MainModule/admin/Pages/contact-us/contact-us.classes';
+import { IdeaTracker } from '../MainModule/admin/components/channel-details/channel-details.classes';
 
 @Injectable({
   providedIn: 'root',
@@ -344,7 +345,16 @@ export class SharedService {
     );
   }
 
-  ContactUs(data: ContactUs):Observable<ContactUs>{
-    return this.http.post(this.apiUrl + 'api/ExpertInvestor/AddContactDetails', data)
+  ContactUs(data: ContactUs): Observable<ContactUs> {
+    return this.http.post(
+      this.apiUrl + 'api/ExpertInvestor/AddContactDetails',
+      data
+    );
+  }
+
+  IdeaTracker(data: IdeaTracker): Observable<IdeaTracker> {
+    return this.http.post(
+      this.apiUrl + 'api/Channel/UpdateChannelPostActivePast', data
+    );
   }
 }

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,7 +19,7 @@ export class TopBarComponent implements OnInit {
   model: any = {};
   data: any;
   sharedData: any;
-  constructor(private _service: SharedService, private router: Router) {}
+  constructor(private _service: SharedService, private router: Router, private location: Location) {}
   ngOnInit(): void {
     this.searchFilterForm = new FormGroup({
       name: new FormControl(''),
@@ -34,6 +35,10 @@ export class TopBarComponent implements OnInit {
   }
   public openSidebar() {
     this._service.toggleSidebar.emit();
+  }
+
+  goBack(){
+    this.location.back()
   }
 
   getUserDetails() {

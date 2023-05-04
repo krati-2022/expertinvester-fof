@@ -19,7 +19,7 @@
       <div class="m-2">
 
         <div class="example" *ngIf="channelDetails.length != 0">
-          <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey : 'username'">
+          <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey :  'name'">
             <div class="m-2" >
               <div class="container"  style="cursor: pointer;">
                   <div class="container">
@@ -29,9 +29,9 @@
                           <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                         </div>
                         <div class="col-6 mx-3 py-2">
-                          <div class="user_name">{{items.username}}</div>
+                          <div class="user_name">{{items.name}}</div>
                           <div class="detail">{{items.sebi}}</div>
-                          <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                          <!-- <div class="percent">Accuracy 57.7% Profitability -13.5%</div> -->
                         </div>
                       </div>
 
@@ -43,8 +43,8 @@
                 <div class="row">
                   <div class="d-flex justify-content-between align-items-baseline py-2">
                     <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
-                    <div *ngIf="items.isSubscribed == true"><i class="bi bi-lock-fill "></i>Subscribed</div>
-                   <div class="dropdown" *ngIf="items.isSubscribed == false">
+                    <button class="btn follow-btn" *ngIf="items.isUserChannel == false"><i class="bi bi-lock-fill "></i>&nbsp;Subscribed</button>
+                   <div class="dropdown" *ngIf="items.isUserChannel == true">
                           <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
@@ -52,8 +52,8 @@
 
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                            <li *ngIf="items.isSubscribed == false && items.channel_madeby_them == false" (click)="subscribe(items)" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
-                            <li  style="cursor: pointer;" *ngIf="items.channel_madeby_them == true" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
+                            <li *ngIf="items.isUserChannel == false" (click)="subscribe(items)" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
+                            <li  style="cursor: pointer;" *ngIf="items.isUserChannel == true" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
 
                           </ul>
                         </div>
@@ -160,13 +160,13 @@
                 </div>
               </div>
 
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between mt-2">
                 <div>
                   <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
-                  <span><i class="bi bi-share-fill"></i></span>
                 </div>
                 <div>
-                  <i class="bi bi-bookmark-fill"></i>
+                  <span><i class="bi bi-share-fill px-2"></i></span>
+                  <i class="bi bi-bookmark-fill px-2"></i>
                 </div>
               </div>
               <div class="py-3" >

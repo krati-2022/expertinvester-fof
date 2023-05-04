@@ -128,7 +128,7 @@
                               <div class="expect-percent">18.0%</div>
                             </div>
                             <div class="channel-detail">{{items.stockname}}</div>
-                            <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button></div>
+                            <div><button type="button" class="btn btn-danger danger-btn" (click)="openIdeaTracke()">Idea tracker</button></div>
                           </div>
                           <div>
                             <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
@@ -266,9 +266,9 @@
                           <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                         </div>
                         <div class="col-6 mx-3 py-2">
-                          <div class="user_name">{{items.username}}</div>
+                          <div class="user_name">{{items.name}}</div>
                           <div class="detail">{{items.sebi}}</div>
-                          <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                          <!-- <div class="percent">Accuracy 57.7% Profitability -13.5%</div> -->
                         </div>
                       </div>
 
@@ -279,8 +279,9 @@
                     <div class="row">
                       <div class="d-flex justify-content-between align-items-baseline py-2">
                         <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
-                        <div *ngIf="items.isSubscribed == true"><i class="bi bi-lock-fill "></i>Subscribed</div>
-                        <div class="dropdown">
+                      <button class="btn follow-btn" *ngIf="items.isSubscribed == true"><i
+                          class="bi bi-lock-fill "></i>&nbsp;Subscribed</button>
+                        <div class="dropdown" *ngIf="items.isSubscribed == false">
                           <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
@@ -434,3 +435,31 @@
     </div>
   </div>
 </section>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Idea Tracker</h5>
+        <button type="button" class="close" (click)="closeIdeaTracke()" style="border: 0;background: #fff;">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check" *ngFor="let item of ideaTracker">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" [id]="item">
+          <label class="form-check-label" [for]="item">
+            {{item}}
+          </label>
+        </div>
+
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn follow-btn">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>

@@ -16,7 +16,7 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     // this.getUserDetails();
     this._service.getData().subscribe((data) => {
-    console.log('data: ', data);
+    // console.log('data: ', data);
       this.data = data
       this.model.aboutUs = this.data.aboutUs;
       this.model.name = this.data.name;

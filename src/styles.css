@@ -792,10 +792,6 @@ span.club-inf {
 }
 
 @media screen and (min-width: 320px) and (max-width: 991px) {
-
-
-
-
   .example {
     height: auto !important;
   }
@@ -809,6 +805,9 @@ span.club-inf {
   .search-bar {
     padding: 0 !important;
   }
+    .pagetitle{
+      display: none;
+    }
 
 }
 

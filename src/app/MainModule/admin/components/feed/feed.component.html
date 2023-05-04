@@ -142,7 +142,7 @@
                               <div class="expect-percent">{{items.expected_Move | number : '1.2-2'}} %</div>
                             </div>
                             <div class="channel-detail">{{items.stockname}}</div>
-                            <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button></div>
+                            <div><button type="button" class="btn btn-danger danger-btn" (click)="openIdeaTracke()">Idea tracker</button></div>
                           </div>
                           <div>
                             <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
@@ -463,4 +463,32 @@
       </div>
     </div>
   </form>
+</div>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Idea Tracker</h5>
+        <button type="button" class="close" (click)="closeIdeaTracke()" style="border: 0;background: #fff;">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check" *ngFor="let item of ideaTracker">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" [id]="item">
+          <label class="form-check-label" [for]="item">
+            {{item}}
+          </label>
+        </div>
+
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn follow-btn">Save changes</button>
+      </div> -->
+    </div>
+  </div>
 </div>
