@@ -133,15 +133,15 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-            <button type="button" class="close" (click)="closePopUp()">
-              <span aria-hidden="true">&times;</span>
+            <h5 class="modal-title" id="exampleModalLongTitle">I Want idea on</h5>
+            <button type="button" class="close" style="border: 0;background: #fff;" (click)="closePopUp()">
+              <i class="bi bi-x-lg"></i>
             </button>
           </div>
           <div class="modal-body">
             <div class="d-flex" *ngFor="let item of ideaOn">
-              <input type="checkbox" formControlName="ideaOn" (change)="getIdeaOn(AddInvestorForm.value.ideaOn,item,item.ideaOn)">
-              &nbsp;<label for="scales">{{item.ideaOn}}</label>
+              <input type="checkbox" formControlName="ideaOn" [id]="item.ideaOn" (change)="getIdeaOn(AddInvestorForm.value.ideaOn,item,item.ideaOn)">
+              &nbsp;<label for="scales" [for]="item.ideaOn">{{item.ideaOn}}</label>
             </div>
           </div>
           <div class="modal-footer">

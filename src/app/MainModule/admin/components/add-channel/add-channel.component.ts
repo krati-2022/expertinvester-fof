@@ -48,6 +48,7 @@ export class AddChannelComponent implements OnInit {
   AddChannelFrom: FormGroup | any;
   ideaOn = ['Nifty', 'Bank Nifty', 'Stock F & O'];
   fee_subscription = ['Free Access', 'Paid Access'];
+  isSEBIReg = ['Led By SEBI Reg', 'Led By SEBI Reg'];
   benefits: any = [];
   ideaOnlist: any = [];
   fileName: string = '';
@@ -70,9 +71,7 @@ export class AddChannelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.coAddOn);
-    // let status = this.coAddOn != '' ? true : false;
-    // console.log('status: ', status);
+   
     this.AddChannelFrom = new FormGroup({
       mobile_No: new FormControl(this.mobileNumber),
       name: new FormControl('', Validators.required),
@@ -110,7 +109,7 @@ export class AddChannelComponent implements OnInit {
     }
     this._service.GetExpertList(mobile_number).subscribe((res) => {
       this.expertList = res.data;
-      // console.log('this.expertList: ', this.expertList);
+
       this.expertList.map((i: any) => {
         i.isSelected = false;
       });
@@ -159,7 +158,6 @@ export class AddChannelComponent implements OnInit {
       });
       // return
       this.coAdList.splice(0, this.coAdList.length);
-      console.log('this.coAdList: ', this.coAdList);
 
       // this.coAdList = [
       //   {
@@ -178,9 +176,19 @@ export class AddChannelComponent implements OnInit {
     }
     // console.log('data: ', data);
     if (status == true) {
-      this.coAdList.push({ expertId: data.id, name: data.name });
-      // console.log('this.coAdList: ', this.coAdList);
+      if (data.isSEBI == false) {
+        this.expertList = this.expertList.filter((i: any) => i.isSEBI == true );
+      }
+      this.coAdList.push({
+        expertId: data.id,
+        name: data.name,
+        isSEBI: data.isSEBI,
+      });
     } else {
+      if (status == false && data.isSEBI == false) {
+        this.getExpertList();
+      }
+
       this.coAdList
         .filter((i: any) => i.expertId == data.id)
         .forEach((x: any) => this.coAdList.splice(this.coAdList.indexOf(x), 1));
@@ -241,22 +249,22 @@ export class AddChannelComponent implements OnInit {
 
       if (file.size > this.maxFileSize) {
         // alert('');
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
 
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer);
-              toast.addEventListener('mouseleave', Swal.resumeTimer);
-            },
-          });
-          Toast.fire({
-            icon: 'warning',
-            title: 'File size exceeds the limit of 200kb',
-          });
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+        Toast.fire({
+          icon: 'warning',
+          title: 'File size exceeds the limit of 200kb',
+        });
         return;
       }
       reader.onload = () => {

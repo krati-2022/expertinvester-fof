@@ -1,10 +1,15 @@
-.cstm-file{
-    display: contents
-  }
-  
-    .cstm-cls{
-      pointer-events: none;
-    }
-    .cls{
-      pointer-events: all;
-    }
+.cstm-file {
+  display: contents
+}
+
+.cstm-cls {
+  pointer-events: none;
+}
+
+.cls {
+  pointer-events: all;
+}
+.font{
+  font-size: 13px;
+  padding: 4px;
+}

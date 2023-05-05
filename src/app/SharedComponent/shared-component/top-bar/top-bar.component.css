@@ -23,6 +23,10 @@
         width: 280px !important;
     }
 
+    .header-nav .notifications {
+        inset: -69px -7px auto auto !important;
+    }
+
     .manageserchbar {
         top: -67px !important;
         padding-bottom: 0px;
@@ -38,6 +42,10 @@
         padding-bottom: 0px;
         margin-top: 9px;
         width: 600px !important;
+    }
+
+    .header-nav .notifications {
+        inset: -66px -3px auto auto !important;
     }
 
     .manageserchbar {
