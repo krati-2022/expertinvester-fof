@@ -69,3 +69,22 @@ label.form-label {
   width: 140px;
  color: #F61C7A;
 }
+
+
+
+@media screen and (min-width: 260px) and (max-width: 767px) {
+
+
+
+  .container {
+    padding: 5px;
+  }
+
+  .form-control {
+    padding: 5px 3px;
+  }
+
+
+
+
+}

@@ -39,8 +39,10 @@ export class ClubListComponent implements OnInit {
     }
     this._service.GetMasterData(mobile_No).subscribe((res) => {
       this.clubList = res.data;
+      console.log('this.clubList: ', this.clubList);
       // console.log('this.clubList : ', this.clubList);
       let data = this.clubList.filter(i => i.follow == 'Followed')
+      console.log('data: ', data);
       this.count = data.length
     });
   }

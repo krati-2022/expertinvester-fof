@@ -3,7 +3,7 @@
   <div class="row">
     <div class="card">
       <div class="pagetitle">
-        <div class="d-flex justify-content-between align-items-baseline p-2">
+        <div class="d-flex justify-content-between align-items-baseline">
          <div>
            <h1 class="px-3">Channel</h1>
          </div>
@@ -19,7 +19,7 @@
       <div class="m-2">
 
         <div class="example" *ngIf="channelDetails.length != 0">
-          <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey : 'username'">
+          <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey :  'name'">
             <div class="m-2" >
               <div class="container"  style="cursor: pointer;">
                   <div class="container">
@@ -29,9 +29,9 @@
                           <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                         </div>
                         <div class="col-6 mx-3 py-2">
-                          <div class="user_name">{{items.username}}</div>
+                          <div class="user_name">{{items.name}}</div>
                           <div class="detail">{{items.sebi}}</div>
-                          <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
+                          <!-- <div class="percent">Accuracy 57.7% Profitability -13.5%</div> -->
                         </div>
                       </div>
 
@@ -43,8 +43,8 @@
                 <div class="row">
                   <div class="d-flex justify-content-between align-items-baseline py-2">
                     <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
-                    <div *ngIf="items.isSubscribed == true"><i class="bi bi-lock-fill "></i>Subscribed</div>
-                   <div class="dropdown">
+                    <button class="btn follow-btn" *ngIf="items.isUserChannel == false"><i class="bi bi-lock-fill "></i>&nbsp;Subscribed</button>
+                   <div class="dropdown" *ngIf="items.isUserChannel == true">
                           <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
@@ -52,8 +52,8 @@
 
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                            <li *ngIf="items.isSubscribed == false" (click)="subscribe(items)" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
-                            <li  style="cursor: pointer;" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
+                            <li *ngIf="items.isUserChannel == false" (click)="subscribe(items)" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
+                            <li  style="cursor: pointer;" *ngIf="items.isUserChannel == true" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
 
                           </ul>
                         </div>
@@ -160,17 +160,23 @@
                 </div>
               </div>
 
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between mt-2">
                 <div>
                   <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
-                  <span><i class="bi bi-share-fill"></i></span>
                 </div>
                 <div>
-                  <i class="bi bi-bookmark-fill"></i>
+                  <span><i class="bi bi-share-fill px-2"></i></span>
+                  <i class="bi bi-bookmark-fill px-2"></i>
                 </div>
               </div>
               <div class="py-3" >
-                <div class="percent" *ngIf="items.coAdChannel == true">Co-ad channels</div>
+                <div class="percent" *ngIf="items.coAdChannel == true">
+                  <span>Co-ad channels</span>
+                  <div *ngFor="let experts of items.coAdExperts">
+                    <span style="color: black;">{{experts.expert_Name}}</span>
+                  </div>
+                </div>
+
                 <div class="d-flex justify-content-end" *ngIf="items.isChannelApprove == true && items.channelApproved == false">
                   <span class="px-4"><button type="button"
                       class="btn btn-primary danger-btn" (click)="approveRejectChannel(items.channelMasterId, items.expertId, true, false)">Approve</button></span>
@@ -194,51 +200,26 @@
 <app-responsive-view></app-responsive-view>
 
 <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
-  <form>
+  <form [formGroup]="filterForm">
     <div class="modal-dialog" role="document" style="width: 40%; ">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="filterLabel">Filter</h5>
-          <button type="button" class="close" (click)="close()">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="close " (click)="close()" style="border: 0;background: #fff;">
+            <i class="bi bi-x-lg"></i>
           </button>
         </div>
         <div class="container">
           <div class="">
             <div class="row border-bottom  ">
               <div>
-                
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Accepted">
-                  <label class="form-check-label filter-text" for="flexRadioDefault3">
-                    Expert
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Pending">
-                  <label class="form-check-label filter-text" for="flexRadioDefault3">
-                    Investor
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Delivered">
-                  <label class="form-check-label filter-text" for="flexRadioDefault4">
-                    Expert & Investor
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Cancelled">
-                  <label class="form-check-label filter-text" for="flexRadioDefault5">
-                    Club
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Cancelled">
-                  <label class="form-check-label filter-text" for="flexRadioDefault5">
-                    Channel
-                  </label>
-                </div>
 
+                <div class="form-check" *ngFor="let item of data">
+                  <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)">
+                  <label class="form-check-label filter-text" for="flexRadioDefault3">
+                    {{item}}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -248,7 +229,7 @@
           <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary"
               style="width: inherit; font-size: 12px; font-weight: 500; " (click)="close()">CLEAR FILTER</button></div>
           <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger"
-              style="width: inherit; font-size: 12px; font-weight: 500;" (click)="close()">APPLY</button></div>
+              style="width: inherit; font-size: 12px; font-weight: 500;" (click)="apply()">APPLY</button></div>
         </div>
 
       </div>

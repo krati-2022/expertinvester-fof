@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section p-2">
   <div class="row">
     <div class="col-lg-12 mx-auto">
       <div class="card list-card ">
@@ -180,9 +180,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Expert List</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <marquee width="60%" direction="right" style="font-weight: 600;">
+          Please select at least one SEBI Reg.
+        </marquee>
+            <button type="button" class="close " (click)="close()" style="border: 0;background: #fff;">
+              <i class="bi bi-x-lg"></i>
+            </button>
       </div>
       <div class="modal-body">
         <section class="container-fluid">

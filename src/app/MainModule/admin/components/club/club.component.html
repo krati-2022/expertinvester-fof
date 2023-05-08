@@ -16,7 +16,7 @@
         <div class="" >
           <div class="" >
             <div class="example">
-              <div class="card list-card m-4 p-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
+              <div class="card list-card  p-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
                <div class="">
                 <div class="row">
                   <div class="channel-name d-flex col-12">
@@ -71,8 +71,8 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="filterLabel">Filter</h5>
-            <button type="button" class="close" (click)="close()">
-              <span aria-hidden="true">&times;</span>
+            <button type="button" class="close " (click)="close()" style="border: 0;background: #fff;">
+              <i class="bi bi-x-lg"></i>
             </button>
           </div>
           <div class="container">

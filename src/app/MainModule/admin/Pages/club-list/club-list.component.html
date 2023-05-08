@@ -1,13 +1,16 @@
-<section class="container">
+<section class="container-fluid">
   <div class="row">
-    <div class="col-lg-10 mx-auto">
+    <div class="col-lg-12 mx-auto">
       <h1 class="px-3 mt-2">Club List</h1>
-      <div class="card list-card" style="height: 70vh; overflow: auto;">
+      <div class="alert alert-warning d-flex justify-content-center" *ngIf="count < 3">
+       <span> Please Follow &nbsp; <strong>{{3 - count}}</strong> &nbsp; <span *ngIf="count > 0">More</span> Club </span> 
+      </div>
+
+      <div class="card list-card" style="height: 70vh; overflow: auto; border: inherit; ">
         <div class="card-body" >
-
           <!-- Bordered Tabs Justified -->
-
-          <div class="card pt-2" id="borderedTabJustifiedContent" *ngFor="let data of clubList">
+ 
+          <div class="card pt-2 mb-3" id="borderedTabJustifiedContent" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;" *ngFor="let data of clubList">
             <div class="" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
               <div class="example" >
                 <div class=" py-3">

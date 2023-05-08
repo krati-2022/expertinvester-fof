@@ -1,12 +1,15 @@
-<section class="p-2">
+<section class="p-2" [style.marginTop.px]="scrollPosition">
   <div class="row">
     <div class="mx-auto">
       <div class="card">
-        <div class="pagetitle">
+        <div class="pagetitle" >
           <div class="d-flex justify-content-between align-items-baseline">
             <div>
               <h1 class="px-3 py-1 d-lg-block d-md-none d-sm-none ">Feed</h1>
             </div>
+            <!-- <div>
+              <h1 class="px-3 py-1 d-lg-block d-md-none d-sm-none " *ngIf="showSearch">Search</h1>
+            </div> -->
             <button type="button" class="btn btn-outline-secondary d-lg-block d-md-none d-sm-none" (click)="open()"><i class="bi bi-sliders"
                 style="width: 12px; padding-right: 7px;"></i><span style="padding-left: 12px;">Filter</span></button>
           </div>
@@ -41,7 +44,8 @@
 
                 <div class="card list-card" *ngFor="let items of feedDetails | filter : searchKey : 'username'">
                   <div class="m-2">
-                    <div class="container">
+                    <!-- {{items.clubBlock}} -->
+                    <div class="container" [ngClass]="items.clubBlock == true ? 'club-block' : ''">
                       <div class=" row user_informatiom d-flex justify-content-between align-items-center"
                         style="cursor: pointer;">
                         <div class="d-flex col-8" (click)="getDetails(items.id, items.recordType)">
@@ -56,7 +60,7 @@
                         </div>
 
                         <div class="col-4" style="display: flex;justify-content: end;height: fit-content;"
-                          *ngIf="items.clubBlock == true">
+                          *ngIf="items.clubBlock == true" [ngClass]="items.clubBlock == true ? 'club' : ''">
 
                           <div class="dropdown">
 
@@ -78,7 +82,7 @@
                       <div class="container">
                         <div class="row">
                           <div class="d-flex justify-content-between align-items-baseline py-2">
-                            <h6 class="heading" (click)="getDetails(items.id, items.recordType)">{{items.clubName}}L
+                            <h6 class="heading" (click)="getDetails(items.id, items.recordType)" style="width: 800px;">{{items.clubName}}
                             </h6>
                             <div class="dropdown" *ngIf="items.clubBlock == false">
 
@@ -104,15 +108,15 @@
                       <div class="container">
                         <div class="row" *ngIf="items.recordType == 'ClubRecord'">
                           <div class="channel-name d-flex justify-content-between align-items-center">
-                            <span (click)="getDetails(items.id, items.recordType)"> <i class="bi bi-lightbulb"></i>Chat
-                              Barter</span>
+                            <!-- <span (click)="getDetails(items.id, items.recordType)"> <i class="bi bi-lightbulb"></i>Chat
+                              Barter</span> -->
                             <!-- <span class=""><button type="button"
                           class="btn follow-btn">Follow</button></span> -->
                           </div>
                           <div class="channel-detail">
                             {{items.stockname}}
                           </div>
-                          <div class="date">{{items.createdDate | date : 'fullDate'}} {{items.createdDate | date :
+                          <div class="date mb-2">{{items.createdDate | date : 'fullDate'}} {{items.createdDate | date :
                             'shortTime'}}</div>
                         </div>
                       </div>
@@ -124,7 +128,8 @@
                           <div class="channel-detail">
                             {{items.stockname}}
                           </div>
-                          <div class="date">27 Jan 2023, 06:43 PM</div>
+                          <div class="date">{{items.createdDate | date : 'fullDate'}} {{items.createdDate | date :
+                          'shortTime'}}</div>
                         </div>
                       </div>
                       <div class="container">
@@ -137,7 +142,7 @@
                               <div class="expect-percent">{{items.expected_Move | number : '1.2-2'}} %</div>
                             </div>
                             <div class="channel-detail">{{items.stockname}}</div>
-                            <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button></div>
+                            <div><button type="button" class="btn btn-danger danger-btn" (click)="openIdeaTracke()">Idea tracker</button></div>
                           </div>
                           <div>
                             <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
@@ -178,13 +183,13 @@
                       <div class="container">
                         <div class="row"
                           *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
-                          <img [src]="items.imageurl" style="object-fit:fill; height:500px" alt="">
+                          <img (click)="getDetails(items.id, items.recordType)" [src]="items.imageurl"  alt="" class="manageimg">
                         </div>
                       </div>
                       <div class="container">
-                        <div class="row py-2" (click)="getDetails(items.id, items.recordType)">
-                          <!-- <h6 class="dis-line">IBR Infra CMP 305 :</h6> -->
-                          <p class="dis">{{items.description}}</p>
+                        <div class="row py-2" style="cursor: pointer;">
+                          <h6 class="dis-line"  (click)="getDetails(items.id, items.recordType)">{{items.description}}</h6>
+                          <p class="dis" style="opacity: 0.6;">{{items.externallink}}</p>
                         </div>
                       </div>
                       <div class="d-flex justify-content-between">
@@ -427,8 +432,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="filterLabel">Filter</h5>
-          <button type="button" class="close" (click)="close()">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="close " (click)="close()" style="border: 0;background: #fff;">
+            <i class="bi bi-x-lg"></i>
           </button>
         </div>
         <div class="container">
@@ -458,4 +463,32 @@
       </div>
     </div>
   </form>
+</div>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Idea Tracker</h5>
+        <button type="button" class="close" (click)="closeIdeaTracke()" style="border: 0;background: #fff;">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check" *ngFor="let item of ideaTracker">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" [id]="item">
+          <label class="form-check-label" [for]="item">
+            {{item}}
+          </label>
+        </div>
+
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn follow-btn">Save changes</button>
+      </div> -->
+    </div>
+  </div>
 </div>

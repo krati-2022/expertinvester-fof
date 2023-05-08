@@ -6,7 +6,7 @@ import { FollowClub } from '../club/club.classes';
 import { ChannelApproveReject, ChannelSubscriber } from '../channel/channel.classes';
 import { ChannelListDetails } from '../channel/channel.component';
 import Swal from 'sweetalert2';
-
+declare var $ : any
 export interface ClubList {
   id: string;
   description: string;
@@ -36,7 +36,7 @@ export class ResponsiveViewComponent implements OnInit {
   approveRejectDetail = new ChannelApproveReject();
   channelSubscriber = new ChannelSubscriber();
   screenWidth: any;
-
+  ideaTracker = ['Target', 'Stop Loss'];
   constructor(private _service: SharedService, private router: Router) {}
 
   ngOnInit(): void {
@@ -213,7 +213,7 @@ export class ResponsiveViewComponent implements OnInit {
         '/' +
         item.name +
         '/' +
-        item.isSubscribed,
+        item.isUserChannel,
     ]);
   }
 
@@ -308,16 +308,25 @@ export class ResponsiveViewComponent implements OnInit {
 
   Edit(item: any) {
     // console.log('item: ', item);
-    this.router.navigate([
-      'home/trades/' +
-        'FINOLEXIND' +
-        '/' +
-        item.channelMasterId +
-        '/' +
-        this.mobileNumber +
-        '/' +
-        item.username,
-    ]);
+    // this.router.navigate([
+    //   'home/trades/' +
+    //     'FINOLEXIND' +
+    //     '/' +
+    //     item.channelMasterId +
+    //     '/' +
+    //     this.mobileNumber +
+    //     '/' +
+    //     item.username,
+    // ]);
+    this.router.navigate(['home/edit-channel/' + item.channelMasterId]);
+  }
+
+  openIdeaTracke() {
+    <any>$('#exampleModalCenter').modal('show');
+  }
+
+  closeIdeaTracke() {
+    <any>$('#exampleModalCenter').modal('hide');
   }
 }
 

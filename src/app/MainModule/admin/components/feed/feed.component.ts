@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
 import { FollowClub } from '../club/club.classes';
@@ -132,12 +132,15 @@ export class FeedComponent implements OnInit {
   scrollUpDistance = 2;
   searchKey: string = '';
   filterForm: FormGroup | any;
+  scrollPosition = 0;
   data = ['Expert', 'Investor', 'Expert&Invester', 'Club', 'Channel'];
+  ideaTracker = ['Target', 'Stop Loss'];
   Club: string = '';
   Channel: string = '';
   Expert: string = '';
   Investor: string = '';
   ExpertAndInvestor: string = '';
+  showSearch: boolean = false;
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -247,7 +250,13 @@ export class FeedComponent implements OnInit {
       mobile_No = joinString;
     }
     // console.log(this.Channel);
-    if(this.Club != '' || this.Channel != '' || this.Expert != '' || this.ExpertAndInvestor != '' || this.Investor != ''){
+    if (
+      this.Club != '' ||
+      this.Channel != '' ||
+      this.Expert != '' ||
+      this.ExpertAndInvestor != '' ||
+      this.Investor != ''
+    ) {
       this.http
         .get(
           this.apiUrl +
@@ -281,7 +290,7 @@ export class FeedComponent implements OnInit {
             }
           },
         });
-    }else{
+    } else {
       this._service
         .GetFeed(mobile_No, pageNumber, this.perPage)
         .subscribe((res) => {
@@ -291,10 +300,9 @@ export class FeedComponent implements OnInit {
           } else {
             this.current--;
           }
-  
+
           // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
         });
-
     }
   }
 
@@ -352,7 +360,9 @@ export class FeedComponent implements OnInit {
         '/' +
         item.mobile_No +
         '/' +
-        item.username,
+        item.name +
+        '/' +
+        item.isSubscribed,
     ]);
   }
 
@@ -398,23 +408,32 @@ export class FeedComponent implements OnInit {
     (<any>$('#filter')).modal('hide');
   }
 
+  openIdeaTracke() {
+    <any>$('#exampleModalCenter').modal('show');
+  }
+
+  closeIdeaTracke() {
+    <any>$('#exampleModalCenter').modal('hide');
+  }
   onFilter(event: any) {
-    // console.log(this.filterForm.value.name);
+    // console.log('event: ', event);
+    //   console.log(this.filterForm.value.name);
     switch (event) {
       case 'Club':
-        this.Club = 'Club';
+        this.Club = this.filterForm.value.name == true ? 'Club' : '';
         break;
       case 'Channel':
-        this.Channel = 'Channel';
+        this.Channel = this.filterForm.value.name == true ? 'Channel' : '';
         break;
       case 'Expert':
-        this.Expert = 'Expert';
+        this.Expert = this.filterForm.value.name == true ? 'Expert' : '';
         break;
       case 'Investor':
-        this.Investor = 'Investor';
+        this.Investor = this.filterForm.value.name == true ? 'Investor' : '';
         break;
       case 'Expert&Invester':
-        this.ExpertAndInvestor = 'ExpertAndInvestor';
+        this.ExpertAndInvestor =
+          this.filterForm.value.name == true ? 'ExpertAndInvestor' : '';
         break;
     }
   }
@@ -449,15 +468,21 @@ export class FeedComponent implements OnInit {
           this.perPage
       )
       .subscribe({
-        next: (response:any) => {
+        next: (response: any) => {
           // debugger;
-          this.feedDetails = response.items
-          
+          this.feedDetails = response.items;
         },
         error: (error) => {
           if (error.status == '400') {
           }
         },
       });
+  }
+
+  @HostListener('window:scroll', [])
+  public onScrolled() {
+    if (window.pageYOffset >= 100) {
+      this._service.showSearchBar.emit();
+    }
   }
 }

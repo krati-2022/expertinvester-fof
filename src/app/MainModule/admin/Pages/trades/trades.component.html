@@ -101,11 +101,11 @@
                   <div class="form-group">
                     <label class="form-line" for="exampleInputEmail3">External Link</label>
                     <input type="text" class="form-control" formControlName="externallink" id="exampleInputEmail3"
-                      AddExpertInvestorForm placeholder="External Link"
-                      [ngClass]="{ 'is-invalid': submitted && addPostControl.externallink.errors }">
-                    <div *ngIf=" submitted && addPostControl.externallink.errors" class="invalid-feedback">
+                      AddExpertInvestorForm placeholder="External Link" >
+                      <!-- [ngClass]="{ 'is-invalid': submitted && addPostControl.externallink.errors }"> -->
+                    <!-- <div *ngIf=" submitted && addPostControl.externallink.errors" class="invalid-feedback">
                       <div *ngIf="addPostControl.externallink.errors.required">External Link is required.</div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <div class="row py-3">

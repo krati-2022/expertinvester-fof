@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/Service/shared.service';
 import { FollowClub } from './club.classes';
 import { Router } from '@angular/router';
@@ -169,5 +169,12 @@ export class ClubComponent implements OnInit {
   }
   close() {
     (<any>$('#filter')).modal('hide');
+  }
+
+  @HostListener('window:scroll', [])
+  public onScrolled() {
+    if (window.pageYOffset >= 100) {
+      this._service.showSearchBar.emit();
+    }
   }
 }

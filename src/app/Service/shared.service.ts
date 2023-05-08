@@ -20,6 +20,8 @@ import {
 } from '../MainModule/admin/pin-recovery/pin-recovery.classes';
 import { ChannelApproveReject, ChannelSubscriber } from '../MainModule/admin/components/channel/channel.classes';
 import { AddPostDetails } from '../MainModule/admin/Pages/trades/trades.classes';
+import { ContactUs } from '../MainModule/admin/Pages/contact-us/contact-us.classes';
+import { IdeaTracker } from '../MainModule/admin/components/channel-details/channel-details.classes';
 
 @Injectable({
   providedIn: 'root',
@@ -27,9 +29,18 @@ import { AddPostDetails } from '../MainModule/admin/Pages/trades/trades.classes'
 export class SharedService {
   apiUrl = environment.apiUrl;
   public toggleSidebar: EventEmitter<any> = new EventEmitter();
+  public showSearchBar: EventEmitter<any> = new EventEmitter();
   public search = new BehaviorSubject<string>('');
+  private data = new BehaviorSubject<string>('initial data');
 
   constructor(private http: HttpClient) {}
+  getData(): Observable<any> {
+    return this.data.asObservable();
+  }
+
+  setData(newData: any): void {
+    this.data.next(newData);
+  }
 
   SendOtp(data: SendOtp): Observable<any> {
     return this.http.post(this.apiUrl + 'api/Login/SendOTP', data);
@@ -45,6 +56,7 @@ export class SharedService {
   VerifyOtp(data: VerifyOtp): Observable<any> {
     return this.http.post(this.apiUrl + 'api/Login/ConfirmOTP', data);
   }
+
   VerifyRecoverPinOtp(data: VerifyOtpForRecovery): Observable<any> {
     return this.http.post(
       this.apiUrl + 'api/Login/ForgotPasswordConfirmOTP',
@@ -66,6 +78,11 @@ export class SharedService {
     return this.http.post(this.apiUrl + 'api/Login/SetPIN', data);
   }
 
+  GetUserDetails(mobile_No: string): Observable<any> {
+    return this.http.get(
+      this.apiUrl + 'api/ExpertInvestor/GetUserDetails?mobileno=' + mobile_No
+    );
+  }
   GetCountry(): Observable<any> {
     return this.http.get(this.apiUrl + 'api/ExpertInvestor/GetCountrylist');
   }
@@ -161,6 +178,12 @@ export class SharedService {
 
   AddChannel(data: any): Observable<any> {
     return this.http.post(this.apiUrl + 'api/Channel/AddchannelMaster', data);
+  }
+  UpdateChannel(data: any): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'api/Channel/UpdatechannelMaster',
+      data
+    );
   }
 
   GetActivePost(mobile_No: string, id: string): Observable<any> {
@@ -285,12 +308,53 @@ export class SharedService {
     Expert: string,
     Investor: string,
     ExpertAndInvestor: string,
-    pageNumber:number,
-    pageSize:number
+    pageNumber: number,
+    pageSize: number
   ): Observable<any> {
     return this.http.get(
       this.apiUrl +
-        'GetFeedPost?Mobile_No='+mobile_No+'&Club='+Club+'&Channel='+Channel+'&Expert='+Expert+'&Investor='+Investor+'&ExpertAndInvestor='+ExpertAndInvestor+'&pageNumber='+pageNumber+'&pageSize='+ pageSize
+        'GetFeedPost?Mobile_No=' +
+        mobile_No +
+        '&Club=' +
+        Club +
+        '&Channel=' +
+        Channel +
+        '&Expert=' +
+        Expert +
+        '&Investor=' +
+        Investor +
+        '&ExpertAndInvestor=' +
+        ExpertAndInvestor +
+        '&pageNumber=' +
+        pageNumber +
+        '&pageSize=' +
+        pageSize
+    );
+  }
+
+  GetChannelDetails(
+    mobile_No: string,
+    ChannelMasterId: string
+  ): Observable<any> {
+    return this.http.get(
+      this.apiUrl +
+        'api/Channel/GetChannelMasterforEdit?Mobile_No=' +
+        mobile_No +
+        '&ChannelMasterId=' +
+        ChannelMasterId
+    );
+  }
+
+  ContactUs(data: ContactUs): Observable<ContactUs> {
+    return this.http.post(
+      this.apiUrl + 'api/ExpertInvestor/AddContactDetails',
+      data
+    );
+  }
+
+  IdeaTracker(data: IdeaTracker): Observable<IdeaTracker> {
+    return this.http.post(
+      this.apiUrl + 'api/Channel/UpdateChannelPostActivePast', data
     );
   }
 }

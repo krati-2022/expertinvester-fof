@@ -1171,3 +1171,10 @@ height: 0
 .user-name{
 margin: 0;
 }
+.club-block {
+  pointer-events: none;
+}
+
+.club {
+  pointer-events: all;
+}

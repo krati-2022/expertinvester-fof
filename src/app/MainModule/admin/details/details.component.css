@@ -1,4 +1,11 @@
 @media screen and (min-width: 320px) and (max-width: 416px) {
+
+  .p-4 {
+      padding: 0px !important;
+    }
+    
+
+    
   span.profile-option {
     padding: 5px 10px;
     font-size: 11px;
@@ -551,4 +558,11 @@ span.club-inf {
 }
 .row.py-2.sds {
   margin-top: -3rem;
+}
+
+.pagetitle {
+  position: sticky;
+  top: 10px;
+  z-index: 999;
+  background: #fff;
 }
