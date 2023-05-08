@@ -5,11 +5,10 @@
         <div class="pagetitle">
           <div class="d-flex justify-content-between align-items-baseline">
             <div>
-              <h1 class="px-3 py-1 d-lg-block d-md-none d-sm-none">Feed</h1>
+              <h1 class="px-3 py-1 d-lg-block d-md-none d-sm-none ">Feed</h1>
             </div>
-            <button type="button" class="btn btn-outline-secondary" (click)="open()"><i
-              class="bi bi-sliders" style="width: 12px; padding-right: 7px;"></i><span
-              style="padding-left: 12px;">Filter</span></button>
+            <button type="button" class="btn btn-outline-secondary d-lg-block d-md-none d-sm-none" (click)="open()"><i class="bi bi-sliders"
+                style="width: 12px; padding-right: 7px;"></i><span style="padding-left: 12px;">Filter</span></button>
           </div>
         </div>
         <div class="d-lg-none d-md-block d-sm-block">
@@ -37,9 +36,8 @@
         <div class="tab-content pt-2" id="borderedTabJustifiedContent">
           <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
             aria-labelledby="home-tab">
-            <div class="example" style="height: 75vh; overflow: auto;">
-              <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-                [infiniteScrollContainer]="'.example'" [scrollWindow]="true" [fromRoot]="true" (scrolled)="onScroll()">
+            <div class="example">
+              <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
 
                 <div class="card list-card" *ngFor="let items of feedDetails | filter : searchKey : 'username'">
                   <div class="m-2">
@@ -136,7 +134,7 @@
                               <div class="expect">
                                 Expected Move
                               </div>
-                              <div class="expect-percent">18.0%</div>
+                              <div class="expect-percent">{{items.expected_Move | number : '1.2-2'}} %</div>
                             </div>
                             <div class="channel-detail">{{items.stockname}}</div>
                             <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button></div>
@@ -424,7 +422,7 @@
 
 
 <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
-  <form >
+  <form [formGroup]="filterForm">
     <div class="modal-dialog" role="document" style="width: 40%; ">
       <div class="modal-content">
         <div class="modal-header">
@@ -434,55 +432,28 @@
           </button>
         </div>
         <div class="container">
-          <div class="" >
+          <div class="">
             <div class="row border-bottom  ">
               <div>
-                
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Accepted"
-                    >
-                  <label class="form-check-label filter-text" for="flexRadioDefault3">
-                    Expert
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Pending"
-                    >
-                  <label class="form-check-label filter-text" for="flexRadioDefault3">
-                    Investor
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Delivered"
-                    >
-                  <label class="form-check-label filter-text" for="flexRadioDefault4">
-                    Expert & Investor
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Cancelled"
-                    >
-                  <label class="form-check-label filter-text" for="flexRadioDefault5">
-                    Club
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Cancelled"
-                    >
-                  <label class="form-check-label filter-text" for="flexRadioDefault5">
-                    Channel
-                  </label>
-                </div>
 
+                <div class="form-check" *ngFor="let item of data">
+                  <input class="form-check-input" type="checkbox" formControlName="name"
+                    (change)="onFilter(item)">
+                  <label class="form-check-label filter-text" for="flexRadioDefault3">
+                    {{item}}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="row px-3 py-3 text-center">
-                    <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary" style="width: inherit; font-size: 12px; font-weight: 500; " (click)="close()">CLEAR FILTER</button></div>
-                    <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger"   style="width: inherit; font-size: 12px; font-weight: 500;" (click)="close()">APPLY</button></div>
-                </div>
+          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary"
+              style="width: inherit; font-size: 12px; font-weight: 500; " (click)="close()">CLEAR FILTER</button></div>
+          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger"
+              style="width: inherit; font-size: 12px; font-weight: 500;" (click)="apply()">APPLY</button></div>
+        </div>
 
       </div>
     </div>

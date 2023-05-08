@@ -2,6 +2,14 @@
   padding: 12px;
 }
 
+
+.pagetitle {
+  position: sticky;
+  top: 10px;
+  z-index: 999;
+  background: #fff;
+}
+
 .search-form input {
   border: 0;
   font-size: 14px;

@@ -5,8 +5,11 @@
 .list-card{
   padding: 8px !important;
 }
-}
+  }
+
+
 @media screen and (min-width: 415px) and (max-width: 501px) {
+
 
 }
 .card-header{

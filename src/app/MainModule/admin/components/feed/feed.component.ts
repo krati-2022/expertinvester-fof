@@ -3,7 +3,11 @@ import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
 import { FollowClub } from '../club/club.classes';
 import { Location } from '@angular/common';
-declare var $ : any
+import { FormControl, FormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+
+declare var $: any;
 export interface GetFeedDetails {
   clubName: string;
   clubBlock: boolean;
@@ -113,6 +117,7 @@ export interface ClubList {
 })
 export class FeedComponent implements OnInit {
   mobile_number = localStorage.getItem('mobile_number') || '{}';
+  apiUrl = environment.apiUrl;
   feedDetails: GetFeedDetails[] = [];
   public current = 0;
   public itemsToDisplay: any;
@@ -126,11 +131,18 @@ export class FeedComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 2;
   searchKey: string = '';
-  data = ['Expert', 'Invester', 'Expert&Invester'];
+  filterForm: FormGroup | any;
+  data = ['Expert', 'Investor', 'Expert&Invester', 'Club', 'Channel'];
+  Club: string = '';
+  Channel: string = '';
+  Expert: string = '';
+  Investor: string = '';
+  ExpertAndInvestor: string = '';
   constructor(
     private router: Router,
     private _service: SharedService,
-    private location: Location
+    private location: Location,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -139,6 +151,9 @@ export class FeedComponent implements OnInit {
     this.GetFeed();
     this._service.search.subscribe((val: any) => {
       this.searchKey = val;
+    });
+    this.filterForm = new FormGroup({
+      name: new FormControl(false),
     });
   }
 
@@ -231,18 +246,56 @@ export class FeedComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-    this._service
-      .GetFeed(mobile_No, pageNumber, this.perPage)
-      .subscribe((res) => {
-        // console.log('res: ', res.items);
-        if (res.items.length != 0) {
-          this.feedDetails.push(...res.items);
-        } else {
-          this.current--;
-        }
+    // console.log(this.Channel);
+    if(this.Club != '' || this.Channel != '' || this.Expert != '' || this.ExpertAndInvestor != '' || this.Investor != ''){
+      this.http
+        .get(
+          this.apiUrl +
+            'api/Filter/GetFeedPostFilter?Mobile_No=' +
+            mobile_No +
+            '&Club=' +
+            this.Club +
+            '&Channel=' +
+            this.Channel +
+            '&Expert=' +
+            this.Expert +
+            '&Investor=' +
+            this.Investor +
+            '&ExpertAndInvestor=' +
+            this.ExpertAndInvestor +
+            '&pageNumber=' +
+            pageNumber +
+            '&pageSize=' +
+            this.perPage
+        )
+        .subscribe({
+          next: (response: any) => {
+            if (response.items.length != 0) {
+              this.feedDetails.push(...response.items);
+            } else {
+              this.current--;
+            }
+          },
+          error: (error) => {
+            if (error.status == '400') {
+            }
+          },
+        });
+    }else{
+      this._service
+        .GetFeed(mobile_No, pageNumber, this.perPage)
+        .subscribe((res) => {
+          // console.log('res: ', res.items);
+          if (res.items.length != 0) {
+            this.feedDetails.push(...res.items);
+          } else {
+            this.current--;
+          }
+  
+          // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+        });
 
-        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
-      });
+    }
   }
 
   AddChannel() {
@@ -343,5 +396,68 @@ export class FeedComponent implements OnInit {
   }
   close() {
     (<any>$('#filter')).modal('hide');
+  }
+
+  onFilter(event: any) {
+    // console.log(this.filterForm.value.name);
+    switch (event) {
+      case 'Club':
+        this.Club = 'Club';
+        break;
+      case 'Channel':
+        this.Channel = 'Channel';
+        break;
+      case 'Expert':
+        this.Expert = 'Expert';
+        break;
+      case 'Investor':
+        this.Investor = 'Investor';
+        break;
+      case 'Expert&Invester':
+        this.ExpertAndInvestor = 'ExpertAndInvestor';
+        break;
+    }
+  }
+
+  apply() {
+    let mobile_No = '';
+    var splitString = this.mobile_number.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      mobile_No = joinString;
+    }
+    (<any>$('#filter')).modal('hide');
+    this.http
+      .get(
+        this.apiUrl +
+          'api/Filter/GetFeedPostFilter?Mobile_No=' +
+          mobile_No +
+          '&Club=' +
+          this.Club +
+          '&Channel=' +
+          this.Channel +
+          '&Expert=' +
+          this.Expert +
+          '&Investor=' +
+          this.Investor +
+          '&ExpertAndInvestor=' +
+          this.ExpertAndInvestor +
+          '&pageNumber=' +
+          this.current +
+          '&pageSize=' +
+          this.perPage
+      )
+      .subscribe({
+        next: (response:any) => {
+          // debugger;
+          this.feedDetails = response.items
+          
+        },
+        error: (error) => {
+          if (error.status == '400') {
+          }
+        },
+      });
   }
 }

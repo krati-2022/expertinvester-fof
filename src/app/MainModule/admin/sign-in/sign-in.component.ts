@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from 'src/app/Service/shared.service';
 import Swal from 'sweetalert2';
 import { SendOtp, VerifyOtp } from './sign-in.class';
-import {Codes} from '../../../Utils/country-codes'
+import { Codes } from '../../../Utils/country-codes';
 declare var $: any;
 
 export interface SignInRespose {
@@ -27,16 +27,16 @@ export class SignInComponent implements OnInit {
   submitted: boolean = false;
   SendOtpModel = new SendOtp();
   VerifyOtpModel = new VerifyOtp();
-  mobileNumbr!: string ;
+  mobileNumbr!: string;
   otp: string = '';
   showOtpComponent = true;
-  message: string = ''
-  status: string = ''
-  mobile: string = ''
-  isExistUser = localStorage.getItem('mobile_number')
+  message: string = '';
+  status: string = '';
+  mobile: string = '';
+  isExistUser = localStorage.getItem('mobile_number');
   @ViewChild('ngOtpInput', { static: false }) ngOtpInput: any;
-  isLoading:boolean = false
-  countryCodes = Codes
+  isLoading: boolean = false;
+  countryCodes = Codes;
   config = {
     allowNumbersOnly: false,
     length: 6,
@@ -48,7 +48,6 @@ export class SignInComponent implements OnInit {
       height: '40px',
     },
   };
-
 
   constructor(
     private router: Router,
@@ -64,15 +63,17 @@ export class SignInComponent implements OnInit {
     }
 
     this.SendOtpForm = this.formBuilder.group({
-      mobile_No: [mobileNumber, [Validators.required,Validators.pattern("^[0-9]{10}$")]],
+      mobile_No: [
+        mobileNumber,
+        [Validators.required, Validators.pattern('^[0-9]{10}$')],
+      ],
       code: ['', [Validators.required]],
-      PrivacyPolicy: ['', [Validators.required]]
+      PrivacyPolicy: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
     // console.log(this.countryCodes);
-
     // console.log('this.isExistUser: ', this.isExistUser);
     // if(this.isExistUser != null){
     //   this.router.navigate(['enter-pin'])
@@ -99,58 +100,59 @@ export class SignInComponent implements OnInit {
   }
 
   sendOtp() {
-
     this.submitted = true;
     if (this.SendOtpForm.invalid) {
       return;
     }
-    if(this.SendOtpForm.value.PrivacyPolicy == false || this.SendOtpForm.value.PrivacyPolicy == ''){
-      return
+    if (
+      this.SendOtpForm.value.PrivacyPolicy == false ||
+      this.SendOtpForm.value.PrivacyPolicy == ''
+    ) {
+      return;
     }
-    this.isLoading = true
+    this.isLoading = true;
     this.SendOtpModel = new SendOtp({
       mobile_No: this.SendOtpForm.value.code + this.SendOtpForm.value.mobile_No,
     });
-    var splitString = this.SendOtpModel.mobile_No.split("")
-    if( splitString[0] == '+'){
-      splitString[0] = '%2B'
-      var joinString =  splitString.join("")
-      this.mobile = joinString
-    }else{
-      this.mobile = this.SendOtpModel.mobile_No
+    var splitString = this.SendOtpModel.mobile_No.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      this.mobile = joinString;
+    } else {
+      this.mobile = this.SendOtpModel.mobile_No;
     }
     this._service
-        .SendOtp(this.SendOtpModel)
-        .subscribe((response: SignInRespose) => {
-          // console.log('response: ', response);
-          this.isLoading = false
-          this.mobileNumbr = this.SendOtpModel.mobile_No;
-          console.log('this.mobileNumbr: ', response.data.otp);
-          if (response.status == 'Success') {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 5000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer);
-                toast.addEventListener('mouseleave', Swal.resumeTimer);
-              },
-            });
-            Toast.fire({
-              icon: 'success',
-              title: response.message + ' ' +response.data.otp,
-            });
-            this.submitted = false;
+      .SendOtp(this.SendOtpModel)
+      .subscribe((response: SignInRespose) => {
+        // console.log('response: ', response);
+        this.isLoading = false;
+        this.mobileNumbr = this.SendOtpModel.mobile_No;
+        console.log('this.mobileNumbr: ', response.data.otp);
+        if (response.status == 'Success') {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+          Toast.fire({
+            icon: 'success',
+            title: response.message + ' ' + response.data.otp,
+          });
+          this.submitted = false;
 
-            (<any>$('#exampleModal')).modal('show');
-          }
-        });
+          (<any>$('#exampleModal')).modal('show');
+        }
+      });
     // this._service.UserIsExist(this.mobile).subscribe(res =>{
     //   this.status = res.message
     // })
-
   }
 
   verifyOtp() {
@@ -183,11 +185,11 @@ export class SignInComponent implements OnInit {
           title: response.message,
         });
         (<any>$('#exampleModal')).modal('hide');
-        if(response.data[0]?.isRegistered){
-          localStorage.setItem('isRegistered', response.data[0]?.isRegistered)
-          this.router.navigate(['enter-pin'])
-        }else {
-          this.router.navigate(['set-up-pin'])
+        if (response.data[0]?.isRegistered) {
+          localStorage.setItem('isRegistered', response.data[0]?.isRegistered);
+          this.router.navigate(['enter-pin']);
+        } else {
+          this.router.navigate(['set-up-pin']);
         }
       } else if (response.status == 'Failed') {
         const Toast = Swal.mixin({
@@ -205,7 +207,6 @@ export class SignInComponent implements OnInit {
           icon: 'error',
           title: response.message,
         });
-
       }
     });
   }
