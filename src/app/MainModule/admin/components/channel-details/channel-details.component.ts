@@ -52,6 +52,7 @@ export class ChannelDetailsComponent implements OnInit {
   mobile_No: any;
   usersMobileNumber: any = localStorage.getItem('mobile_number');
   username: any;
+  isSubscribed: any;
   channelPostId: any;
   activePostDetails: PostDetails[] = [];
   pastPostDetails: PostDetails[] = [];
@@ -74,6 +75,7 @@ export class ChannelDetailsComponent implements OnInit {
     this.mobile_No = this._ActivatedRoute.snapshot.paramMap.get('param2');
     this.username = this._ActivatedRoute.snapshot.paramMap.get('param3');
     this.isUserChannel = this._ActivatedRoute.snapshot.paramMap.get('param4');
+    this.isSubscribed = this._ActivatedRoute.snapshot.paramMap.get('param5');
     // console.log('this.username: ', this.username);
     this.getActivePost();
     // if (this.isSubscribed == 'true') {
@@ -213,9 +215,9 @@ export class ChannelDetailsComponent implements OnInit {
     });
   }
 
-  subscribe(item:any) {
-  console.log('item: ', item);
-  // return
+  subscribe(item: any) {
+    console.log('item: ', item);
+    // return
     this.channelSubscriber = new ChannelSubscriber({
       channelId: item.channelId,
       subscriber: !item.isSubscribe,
@@ -223,10 +225,10 @@ export class ChannelDetailsComponent implements OnInit {
     });
     // console.log('this.channelSubscriber: ', this.channelSubscriber);
     // return
-    
+
     this._service.ChannelSubscribe(this.channelSubscriber).subscribe((res) => {
-    console.log('res: ', res);
-      this.GetProfile()
+      console.log('res: ', res);
+      this.GetProfile();
     });
   }
 }

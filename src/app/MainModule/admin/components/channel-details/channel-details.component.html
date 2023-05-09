@@ -40,8 +40,8 @@
             aria-labelledby="home-tab" >
             <div class="example"  *ngIf="activePostDetails.length != 0">
 
-              <div class="card list-card my-3 m-4" [ngClass]="{'sub-section': isUserChannel == 'false'}" *ngFor="let items of activePostDetails">
-                <div class="card-body" *ngIf="isUserChannel == 'true'">
+              <div class="card list-card my-3 m-4" [ngClass]="{'sub-section': (isUserChannel == 'false' && isSubscribed == 'false')}" *ngFor="let items of activePostDetails">
+                <div class="card-body" *ngIf="isSubscribed == 'true' || isUserChannel == 'true'">
                   <div class="container">
                     <div class=" row user_informatiom">
                       <div class="col-1">
@@ -144,7 +144,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="card-body" style="height: 65vh; display: flex; justify-content: center; align-items: center;" *ngIf="isUserChannel == 'false'">
+                <div class="card-body" style="height: 65vh; display: flex; justify-content: center; align-items: center;" *ngIf="isUserChannel == 'false' && isSubscribed == 'false'">
                   <button class="btn btn-primary" (click)="jumoToChannel()">Please Subscribe</button>
                 </div>
               </div>

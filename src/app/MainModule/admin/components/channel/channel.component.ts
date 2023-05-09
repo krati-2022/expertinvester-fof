@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Service/shared.service';
 import { ClubList, GetFeedDetails } from '../feed/feed.component';
 import { FollowClub } from '../club/club.classes';
-import { ChannelApproveReject, ChannelSubscriber } from './channel.classes';
+import { ChannelApproveReject, ChannelSubscriber, DATA } from './channel.classes';
 import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -61,13 +61,7 @@ export class ChannelComponent implements OnInit {
   public perPage = 10;
   searchKey: string = '';
   filterForm: FormGroup | any;
-  data = [
-    'Expert',
-    'Investor',
-    'Expert&Invester',
-    'Free Access',
-    'Paid Access',
-  ];
+  data = DATA;
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -113,7 +107,11 @@ export class ChannelComponent implements OnInit {
         '/' +
         item.mobile_No +
         '/' +
-        item.name + '/' + item.isUserChannel
+        item.name +
+        '/' +
+        item.isUserChannel +
+        '/' +
+        item.isSubscribed,
     ]);
   }
 
@@ -205,7 +203,7 @@ export class ChannelComponent implements OnInit {
   onFilter(event: any) {
     // console.log('event: ', event);
     //   console.log(this.filterForm.value.name);
-    switch (event) {
+    switch (event.name) {
       case 'Free Access':
         this.FreeAccess =
           this.filterForm.value.name == true ? 'FreeAccess' : '';
@@ -265,6 +263,13 @@ export class ChannelComponent implements OnInit {
       });
   }
 
+  ClearAll(){
+    this.data.map((i: any) => {
+      i.checked = false;
+    });
+    // (<any>$('#filter')).modal('hide');
+    this.getChannel();
+  }
   @HostListener('window:scroll', [])
   public onScrolled() {
     if (window.pageYOffset >= 100) {

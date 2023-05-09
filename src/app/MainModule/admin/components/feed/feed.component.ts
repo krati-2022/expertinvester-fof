@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { DATA } from './feed.classes';
 
 declare var $: any;
 export interface GetFeedDetails {
@@ -133,7 +134,7 @@ export class FeedComponent implements OnInit {
   searchKey: string = '';
   filterForm: FormGroup | any;
   scrollPosition = 0;
-  data = ['Expert', 'Investor', 'Expert&Invester', 'Club', 'Channel'];
+  data = DATA
   ideaTracker = ['Target', 'Stop Loss'];
   Club: string = '';
   Channel: string = '';
@@ -379,7 +380,7 @@ export class FeedComponent implements OnInit {
     this._service
       .BlockUnblockFeedPost(id, mobile_No, status)
       .subscribe((res) => {
-        console.log('res: ', res);
+        // console.log('res: ', res);
         this.GetFeed();
       });
   }
@@ -416,9 +417,8 @@ export class FeedComponent implements OnInit {
     <any>$('#exampleModalCenter').modal('hide');
   }
   onFilter(event: any) {
-    // console.log('event: ', event);
-    //   console.log(this.filterForm.value.name);
-    switch (event) {
+    event.checked = true
+    switch (event.name) {
       case 'Club':
         this.Club = this.filterForm.value.name == true ? 'Club' : '';
         break;
@@ -477,6 +477,15 @@ export class FeedComponent implements OnInit {
           }
         },
       });
+  }
+
+  ClearAll(){
+    // console.log(this.data);
+    this.data.map((i:any) => {
+      i.checked = false
+    });
+    // (<any>$('#filter')).modal('hide');
+    this.GetFeed()
   }
 
   @HostListener('window:scroll', [])

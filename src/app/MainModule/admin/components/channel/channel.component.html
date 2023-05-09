@@ -215,9 +215,9 @@
               <div>
 
                 <div class="form-check" *ngFor="let item of data">
-                  <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)">
+                  <input class="form-check-input" type="checkbox" formControlName="name" [(ngModel)]="item.checked" (change)="onFilter(item)">
                   <label class="form-check-label filter-text" for="flexRadioDefault3">
-                    {{item}}
+                    {{item.name}}
                   </label>
                 </div>
               </div>
@@ -227,7 +227,7 @@
 
         <div class="row px-3 py-3 text-center">
           <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary"
-              style="width: inherit; font-size: 12px; font-weight: 500; " (click)="close()">CLEAR FILTER</button></div>
+              style="width: inherit; font-size: 12px; font-weight: 500; " (click)="ClearAll()">CLEAR FILTER</button></div>
           <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger"
               style="width: inherit; font-size: 12px; font-weight: 500;" (click)="apply()">APPLY</button></div>
         </div>

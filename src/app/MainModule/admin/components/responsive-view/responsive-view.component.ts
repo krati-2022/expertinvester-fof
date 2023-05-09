@@ -205,16 +205,18 @@ export class ResponsiveViewComponent implements OnInit {
   }
 
   getChannelDetails(item: any) {
-    this.router.navigate([
-      'home/channel-details/' +
-        item.channelMasterId +
-        '/' +
-        item.mobile_No +
-        '/' +
-        item.name +
-        '/' +
-        item.isUserChannel,
-    ]);
+     this.router.navigate([
+       'home/channel-details/' +
+         item.channelMasterId +
+         '/' +
+         item.mobile_No +
+         '/' +
+         item.name +
+         '/' +
+         item.isUserChannel +
+         '/' +
+         item.isSubscribed,
+     ]);
   }
 
   getTab(event: any) {

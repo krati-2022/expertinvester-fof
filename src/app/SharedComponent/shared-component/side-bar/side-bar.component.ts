@@ -13,8 +13,6 @@ export class SideBarComponent implements OnInit {
   constructor(private coreService: SharedService, private router: Router) {}
 
   ngOnInit(): void {
-    
-    
     this.getWindowSize();
     this.coreService.toggleSidebar.subscribe(() => {
       this.hide = !this.hide;
@@ -35,11 +33,13 @@ export class SideBarComponent implements OnInit {
     }
   }
 
-  Feed() {
-    this.router.navigate(['home/feed']).then(() => {
-      window.location.reload();
-    });
-  }
+  // Feed() {
+  //   this.router.navigate(['home/feed']).then(() => {
+  //     window.location.reload();
+  //   });
+  // }
 
-  
+  homePage() {
+    this.router.navigate(['home']);
+  }
 }

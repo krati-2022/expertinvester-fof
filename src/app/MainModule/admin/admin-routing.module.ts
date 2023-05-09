@@ -34,6 +34,7 @@ import { ChannelDetailsComponent } from './components/channel-details/channel-de
 import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 import { ClubDetailsComponent } from './components/club-details/club-details.component';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -51,12 +52,12 @@ const routes: Routes = [
     path: 'home',
     component: HomePageComponent,
     children: [
-      { path: '', component: FeedComponent },
+      { path: '', component: DashboardComponent },
       { path: 'feed', component: FeedComponent },
       { path: 'club', component: ClubComponent },
       { path: 'channel', component: ChannelComponent },
       {
-        path: 'channel-details/:param1/:param2/:param3/:param4',
+        path: 'channel-details/:param1/:param2/:param3/:param4/:param5',
         component: ChannelDetailsComponent,
       },
       { path: 'add-channel', component: AddChannelComponent },
