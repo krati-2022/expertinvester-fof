@@ -32,8 +32,6 @@
                 aria-selected="false">CHANNEL</button>
             </li>
           </ul>
-
-
         </div>
         <!-- Bordered Tabs Justified -->
         <div class="tab-content pt-2" id="borderedTabJustifiedContent">
@@ -58,12 +56,9 @@
                             <div class="percent">Accuracy 57.7% Profitability -13.5%</div>
                           </div>
                         </div>
-
                         <div class="col-4" style="display: flex;justify-content: end;height: fit-content;"
                           *ngIf="items.clubBlock == true" [ngClass]="items.clubBlock == true ? 'club' : ''">
-
                           <div class="dropdown">
-
                             <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                               data-bs-toggle="dropdown" aria-expanded="false">
                               <i class="bi bi-three-dots-vertical"></i>
@@ -85,7 +80,6 @@
                             <h6 class="heading" (click)="getDetails(items.id, items.recordType)" style="width: 800px;">{{items.clubName}}
                             </h6>
                             <div class="dropdown" *ngIf="items.clubBlock == false">
-
                               <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-three-dots-vertical"></i>
@@ -95,11 +89,9 @@
                                   <a class="dropdown-item" *ngIf="items.clubBlock == false"
                                     (click)="blockUnblockPost(items.id, true)"><i
                                       class="bi bi-slash-circle"></i>Block</a>
-
                                 </li>
                                 <li *ngIf="items.isSelfPost != true"><a class="dropdown-item"><i
                                       class="bi bi-unlock-fill"></i>Free Access</a></li>
-
                               </ul>
                             </div>
                           </div>
@@ -214,7 +206,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
             <div class="example d-flex justify-content-center"
               style="height: 75vh; overflow: auto; align-items: center;" *ngIf="feedDetails.length == 0">
@@ -226,7 +217,7 @@
               <div class="card list-card py-2 px-2" *ngFor="let items of clubList | filter : searchKey : 'name'">
                 <div class="container">
                   <div class="row">
-                    <div class="channel-name d-flex col-12">
+                    <div class="channel-name d-flex">
                       <div class="col-8" (click)="getClubDetails(items.id, items.name)">
                         <span class="club-header" style="cursor: pointer;"> {{items.name}}</span>
                       </div>
@@ -239,7 +230,6 @@
                         </span>
                       </div>
                     </div>
-
                   </div>
                   <div class="">
                     <p class="club-dis" (click)="getClubDetails(items.id, items.name)">{{items.description}}</p>
@@ -247,7 +237,6 @@
                 </div>
                 <div class="container expect-section my-2 " (click)="getClubDetails(items.id, items.name)">
                   <div class="grid-data d-flex  ">
-
                     <div class="col-5  border-end ">
                       <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
                           class="club-inf">Impression</span></div>
@@ -264,8 +253,6 @@
                       <div class="club-icon px-3">{{items.postcount}}</div>
                     </div>
                   </div>
-
-
                 </div>
               </div>
             </div>
@@ -273,7 +260,7 @@
           <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
             <div class="example" style="height: 55vh; overflow: auto;">
               <div class="card list-card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
-                <div class="card-body">
+                <div class="m-2">
                   <div class="container">
                     <div class=" row user_informatiom" (click)="getChannelDetails(items)">
                       <div class="col-1">
@@ -416,16 +403,11 @@
               </div>
             </div>
           </div>
-
-
         </div>
-
       </div>
     </div>
   </div>
 </section>
-
-
 <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
   <form [formGroup]="filterForm">
     <div class="modal-dialog" role="document" style="width: 40%; ">
@@ -440,7 +422,6 @@
           <div class="">
             <div class="row border-bottom  ">
               <div>
-
                 <div class="form-check" *ngFor="let item of data">
                   <input class="form-check-input" type="checkbox" formControlName="name"
                     (change)="onFilter(item)">
@@ -452,20 +433,16 @@
             </div>
           </div>
         </div>
-
         <div class="row px-3 py-3 text-center">
           <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary"
               style="width: inherit; font-size: 12px; font-weight: 500; " (click)="close()">CLEAR FILTER</button></div>
           <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger"
               style="width: inherit; font-size: 12px; font-weight: 500;" (click)="apply()">APPLY</button></div>
         </div>
-
       </div>
     </div>
   </form>
 </div>
-
-
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -483,7 +460,6 @@
             {{item}}
           </label>
         </div>
-
       </div>
       <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

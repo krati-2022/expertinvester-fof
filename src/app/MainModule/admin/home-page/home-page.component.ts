@@ -24,6 +24,10 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getWindowSize();
+    // console.log(this.router.url);
+    if(this.router.url == '/home'){
+      this.hide = true;
+    }
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {

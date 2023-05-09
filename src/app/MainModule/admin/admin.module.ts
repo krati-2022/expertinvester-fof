@@ -52,6 +52,7 @@ import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { SharedService } from 'src/app/Service/shared.service';
 import { ScrollDirective } from 'src/app/Utils/scroll-directive';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,7 @@ import { EditChannelComponent } from './components/edit-channel/edit-channel.com
     ClubDetailsComponent,
     ChatBoxComponent,
     ScrollDirective,
-    EditChannelComponent
+    EditChannelComponent,
   ],
   imports: [
     CommonModule,
@@ -108,7 +109,8 @@ import { EditChannelComponent } from './components/edit-channel/edit-channel.com
     ReactiveFormsModule,
     NgOtpInputModule,
     InfiniteScrollModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    NgChartsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

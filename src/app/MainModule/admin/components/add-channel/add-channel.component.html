@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-12 mx-auto">
       <div class="card list-card ">
-        <div class="card-body">
+        <div class="m-2">
           <div class="d-flex justify-content-between align-items-baseline mb-3">
             <h5 class="card-title"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i> Add-Channel</h5>
             <!-- <h4 class=" "><i class="bi bi-cloud-arrow-up px-2"></i> Upload image</h4> -->
@@ -97,8 +97,8 @@
                     <div class="col-lg-6">
                       <input type="text" formControlName="addBenefits" placeholder="Enter benefits"
                         class="form-control">
-                
-                       
+
+
                      <div *ngIf="benefits.length == 0  && benefitMessage!=''" style="color:red" class="d-flex justify-content-center">{{benefitMessage}}</div>
                       <div>
                         <ul class="d-flex justify-content-between" *ngFor="let items of benefits">
@@ -134,7 +134,7 @@
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
                           formControlName="coAdChannel" [checked]="coAdList.length != 0" (click)="coAddChannel(AddChannelFrom.value.coAdChannel)">
                         <label class="form-check-label" for="flexCheckChecked">
-                          Co-Ad Channel 
+                          Co-Ad Channel
                         </label>
                       </div>
                     </div>
@@ -163,7 +163,7 @@
                   <span *ngIf="!isLoading">Submit</span>
                 </button>
               </div>
-             
+
             </div>
           </form>
           <!-- End General Form Elements -->
