@@ -35,6 +35,7 @@ import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 import { ClubDetailsComponent } from './components/club-details/club-details.component';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -83,7 +84,7 @@ const routes: Routes = [
       { path: 'upgrade-plan', component: UpgradePlanComponent },
       { path: 'profile-page', component: ProfilePageComponent },
       { path: 'faq', component: FaqComponent },
-      { path: 'contact', component: ContactUsComponent },
+      { path: 'contact', component: UserListComponent },
       { path: 'about', component: AboutUsComponent },
       { path: 'terms', component: TermsConditionsComponent },
       { path: 'privacy-policy', component: PrivacyPolicyComponent },

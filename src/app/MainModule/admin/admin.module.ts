@@ -53,6 +53,7 @@ import { SharedService } from 'src/app/Service/shared.service';
 import { ScrollDirective } from 'src/app/Utils/scroll-directive';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
 import { NgChartsModule } from 'ng2-charts';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { NgChartsModule } from 'ng2-charts';
     ChatBoxComponent,
     ScrollDirective,
     EditChannelComponent,
+    UserListComponent,
   ],
   imports: [
     CommonModule,
