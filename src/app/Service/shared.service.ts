@@ -22,6 +22,7 @@ import { ChannelApproveReject, ChannelSubscriber } from '../MainModule/admin/com
 import { AddPostDetails } from '../MainModule/admin/Pages/trades/trades.classes';
 import { ContactUs } from '../MainModule/admin/Pages/contact-us/contact-us.classes';
 import { IdeaTracker } from '../MainModule/admin/components/channel-details/channel-details.classes';
+import { UpdateProfileDetails } from '../MainModule/admin/Pages/profile-page/profile-page.classe';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,7 @@ export class SharedService {
   private data = new BehaviorSubject<string>('initial data');
 
   constructor(private http: HttpClient) {}
+  
   getData(): Observable<any> {
     return this.data.asObservable();
   }
@@ -356,5 +358,9 @@ export class SharedService {
     return this.http.post(
       this.apiUrl + 'api/Channel/UpdateChannelPostActivePast', data
     );
+  }
+
+  UpdateUserDetails(data: UpdateProfileDetails): Observable<UpdateProfileDetails>{
+    return this.http.post(this.apiUrl + 'api/ExpertInvestor/UpdateUserDetails', data)
   }
 }
