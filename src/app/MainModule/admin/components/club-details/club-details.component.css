@@ -5,3 +5,7 @@
         margin: -0.5rem !important;
     }
 }
+.row.user_informatiom{
+    border-bottom: 2px solid #FFD859;
+    border-radius: 3px;
+}

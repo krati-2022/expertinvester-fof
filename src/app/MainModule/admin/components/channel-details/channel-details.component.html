@@ -130,7 +130,7 @@
                   </div>
                   <div class="container">
                     <div class="row py-2">
-                      <h6 class="dis-line">{{items.description}}</h6>
+                      <h6 class="dis-line" [innerHTML]="items.description"></h6>
                       <p class="dis">{{items.externallink}}</p>
                     </div>
                   </div>
@@ -253,7 +253,7 @@
                   </div>
                   <div class="container">
                     <div class="row py-2">
-                      <h6 class="dis-line">{{items.description}}:</h6>
+                      <h6 class="dis-line" [innerHTML]="items.description"></h6>
                       <p class="dis">{{items.externallink}}</p>
                     </div>
                   </div>
@@ -296,7 +296,7 @@
                     </div>
                   </div>
                   <div class="py-2">
-                    <p class="profile-detail">{{items.description}}</p>
+                    <p class="profile-detail" [innerHTML]="items.description"></p>
                   </div>
                   <div class="row">
                     <div class="accordion" id="accordionExample">

@@ -27,8 +27,9 @@
                     <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i
                         class="bi bi-pencil px-2"></i>Channel Description</label>
                     <div class="col-lg-8">
-                      <textarea type="text" formControlName="description" placeholder="Enter Description"
-                        class="form-control"[ngClass]="{ 'is-invalid': submitted && AddChannelControl.description.errors }"></textarea>
+                      <!-- <textarea type="text" formControlName="description" placeholder="Enter Description"
+                        class="form-control"[ngClass]="{ 'is-invalid': submitted && AddChannelControl.description.errors }"></textarea> -->
+                          <angular-editor placeholder="Enter Description" formControlName="description" [config]="editorConfig"></angular-editor>
 
                     <div *ngIf=" submitted && AddChannelControl.description.errors" class="invalid-feedback">
                       <div *ngIf="AddChannelControl.description.errors.required">Description is required.</div>

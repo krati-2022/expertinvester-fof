@@ -53,6 +53,7 @@ import { SharedService } from 'src/app/Service/shared.service';
 import { ScrollDirective } from 'src/app/Utils/scroll-directive';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
 import { NgChartsModule } from 'ng2-charts';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { NgChartsModule } from 'ng2-charts';
     NgOtpInputModule,
     InfiniteScrollModule,
     NgxGalleryModule,
-    NgChartsModule
+    NgChartsModule,
+    AngularEditorModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

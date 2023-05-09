@@ -111,9 +111,11 @@
                 <div class="row py-3">
                   <div class="form-group">
                     <label class="form-line" for="exampleInputEmail4">Enter Description</label>
-                    <textarea type="text" class="form-control" formControlName="description" id="exampleInputEmail4"
+                    <!-- <textarea type="text" class="form-control" formControlName="description" id="exampleInputEmail4"
                       AddExpertInvestorForm placeholder="Enter Description"
-                      [ngClass]="{ 'is-invalid': submitted && addPostControl.description.errors }"></textarea>
+                      [ngClass]="{ 'is-invalid': submitted && addPostControl.description.errors }"></textarea> -->
+                      <angular-editor placeholder="Enter Description" formControlName="description" [config]="editorConfig"></angular-editor>
+
                     <div *ngIf=" submitted && addPostControl.description.errors" class="invalid-feedback">
                       <div *ngIf="addPostControl.description.errors.required">Description is required.</div>
                     </div>

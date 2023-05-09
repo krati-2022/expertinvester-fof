@@ -29,7 +29,7 @@
                 <div class="row py-2"
                   [ngClass]="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null ? 'sds' : 'dd'"
                   style="object-fit:cover;  width: 100%;">
-                  <h6 class="dis-line">{{items.description}} </h6>
+                  <h6 class="dis-line" [innerHTML]="items.description"></h6>
                   <!-- <p class="dis">{{items.description}}</p><br> -->
                   <!-- <p class="dis">https://twitter.com/riteshdaga83/status/162155698582558594?t=
                         4uQBU0aHDxGijcx3oXrqQ&s=35</p> -->

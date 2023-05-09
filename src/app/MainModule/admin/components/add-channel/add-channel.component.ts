@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { SharedService } from 'src/app/Service/shared.service';
 import Swal from 'sweetalert2';
 declare var $: any;
@@ -63,6 +64,17 @@ export class AddChannelComponent implements OnInit {
   benefitMessage: string = '';
   message: string = '';
   maxFileSize: number = 200 * 1024;
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '5rem',
+    minHeight: '5rem',
+    translate: 'no',
+    rawPaste: false,
+    showToolbar: false,
+    
+  };
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -71,7 +83,6 @@ export class AddChannelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-   
     this.AddChannelFrom = new FormGroup({
       mobile_No: new FormControl(this.mobileNumber),
       name: new FormControl('', Validators.required),
@@ -177,7 +188,7 @@ export class AddChannelComponent implements OnInit {
     // console.log('data: ', data);
     if (status == true) {
       if (data.isSEBI == false) {
-        this.expertList = this.expertList.filter((i: any) => i.isSEBI == true );
+        this.expertList = this.expertList.filter((i: any) => i.isSEBI == true);
       }
       this.coAdList.push({
         expertId: data.id,

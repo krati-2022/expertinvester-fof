@@ -188,7 +188,7 @@
                       </div>
                       <div class="container">
                         <div class="row py-2" style="cursor: pointer;">
-                          <h6 class="dis-line"  (click)="getDetails(items.id, items.recordType)">{{items.description}}</h6>
+                          <h6 class="dis-line"  (click)="getDetails(items.id, items.recordType)" [innerHTML]="items.description"></h6>
                           <p class="dis" style="opacity: 0.6;">{{items.externallink}}</p>
                         </div>
                       </div>
@@ -242,7 +242,7 @@
 
                   </div>
                   <div class="">
-                    <p class="club-dis" (click)="getClubDetails(items.id, items.name)">{{items.description}}</p>
+                    <p class="club-dis" (click)="getClubDetails(items.id, items.name)" [innerHTML]="items.description"></p>
                   </div>
                 </div>
                 <div class="container expect-section my-2 " (click)="getClubDetails(items.id, items.name)">
@@ -321,7 +321,7 @@
                   </div>
                   <div class="container" (click)="getChannelDetails(items)">
                     <div class="row">
-                      <p class="club-dis">{{items.description}}</p>
+                      <p class="club-dis" [innerHTML]="items.description"></p>
                     </div>
                   </div>
                   <div class="container expect-section my-2" (click)="getChannelDetails(items)">

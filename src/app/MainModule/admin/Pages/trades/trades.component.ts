@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { SharedService } from 'src/app/Service/shared.service';
 import Swal from 'sweetalert2';
 
@@ -22,6 +23,15 @@ export class TradesComponent implements OnInit {
   isLoading: boolean = false;
   maxFileSize: number = 200 * 1024;
 
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '5rem',
+    minHeight: '10rem',
+    translate: 'no',
+    rawPaste: false,
+    showToolbar: false,
+  };
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -161,7 +171,8 @@ export class TradesComponent implements OnInit {
           '/' +
           this.mobileNumber +
           '/' +
-          this.userName + '/true',
+          this.userName +
+          '/true',
       ]);
       this.isLoading = false;
     });

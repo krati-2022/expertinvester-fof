@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { SharedService } from 'src/app/Service/shared.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -22,6 +23,17 @@ export class AddTradeComponent implements OnInit {
   submitted: boolean = false;
   formData: any = new FormData();
   isLoading: boolean = false;
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '5rem',
+    minHeight: '10rem',
+    translate: 'no',
+    rawPaste: false,
+    showToolbar: false
+  };
+
   constructor(
     private _service: SharedService,
     private router: Router,

@@ -91,7 +91,7 @@
               </div>
               <div class="container" (click)="getChannelDetails(items)">
                 <div class="row">
-                  <p class="club-dis">{{items.description}}</p>
+                  <p class="club-dis" [innerHTML]="items.description"></p>
                 </div>
               </div>
               <div class="container expect-section my-2" (click)="getChannelDetails(items)">
