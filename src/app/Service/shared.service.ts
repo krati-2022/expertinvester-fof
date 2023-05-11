@@ -2,27 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ExpertInvestorManagementDetails } from '../MainModule/admin/expert-and-investor/expert-and-investor.classes';
-import { ExpertManagementDetails } from '../MainModule/admin/expert/expert.classes';
-import { InvestorManagementDetails } from '../MainModule/admin/investor/investor.classes';
-import {
-  SendOtp,
-  UserIsExist,
-  VerifyOtp,
-} from '../MainModule/admin/sign-in/sign-in.class';
-import { SetPin } from '../MainModule/admin/setu-up-pin/set-up-pin.classes';
-import { Login } from '../MainModule/admin/enter-pin/enter-pin.classes';
-import { FollowClub } from '../MainModule/admin/Pages/club-list/club-list.classes';
-import { AddTrade } from '../MainModule/admin/Pages/add-trade/add-trade.classes';
-import {
-  SendOtpForRecoverPin,
-  VerifyOtpForRecovery,
-} from '../MainModule/admin/pin-recovery/pin-recovery.classes';
-import { ChannelApproveReject, ChannelSubscriber } from '../MainModule/admin/components/channel/channel.classes';
-import { AddPostDetails } from '../MainModule/admin/Pages/trades/trades.classes';
-import { ContactUs } from '../MainModule/admin/Pages/contact-us/contact-us.classes';
-import { IdeaTracker } from '../MainModule/admin/components/channel-details/channel-details.classes';
-import { UpdateProfileDetails } from '../MainModule/admin/Pages/profile-page/profile-page.classe';
+import { SendOtp, VerifyOtp } from '../MainModule/website/sign-in/sign-in.class';
+import { SendOtpForRecoverPin, VerifyOtpForRecovery } from '../MainModule/website/pin-recovery/pin-recovery.classes';
+import { Login } from '../MainModule/website/enter-pin/enter-pin.classes';
+import { SetPin } from '../MainModule/website/setu-up-pin/set-up-pin.classes';
+import { InvestorManagementDetails } from '../MainModule/website/investor/investor.classes';
+import { ExpertInvestorManagementDetails } from '../MainModule/website/expert-and-investor/expert-and-investor.classes';
+import { FollowClub } from '../MainModule/website/components/club/club.classes';
+import { AddTrade } from '../MainModule/website/Pages/add-trade/add-trade.classes';
+import { ChannelApproveReject, ChannelSubscriber } from '../MainModule/website/components/channel/channel.classes';
+import { AddPostDetails } from '../MainModule/website/Pages/trades/trades.classes';
+import { ContactUs } from '../MainModule/website/Pages/contact-us/contact-us.classes';
+import { IdeaTracker } from '../MainModule/website/components/channel-details/channel-details.classes';
+import { UpdateProfileDetails } from '../MainModule/website/Pages/profile-page/profile-page.classe';
+
 
 @Injectable({
   providedIn: 'root',
