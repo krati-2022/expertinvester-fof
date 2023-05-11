@@ -205,18 +205,18 @@ export class ResponsiveViewComponent implements OnInit {
   }
 
   getChannelDetails(item: any) {
-     this.router.navigate([
-       'home/channel-details/' +
-         item.channelMasterId +
-         '/' +
-         item.mobile_No +
-         '/' +
-         item.name +
-         '/' +
-         item.isUserChannel +
-         '/' +
-         item.isSubscribed,
-     ]);
+    this.router.navigate([
+      'home/channel-details/' +
+        item.channelMasterId +
+        '/' +
+        item.mobile_No +
+        '/' +
+        item.name +
+        '/' +
+        item.isUserChannel +
+        '/' +
+        item.isSubscribed,
+    ]);
   }
 
   getTab(event: any) {
@@ -270,6 +270,19 @@ export class ResponsiveViewComponent implements OnInit {
         this.GetFeed();
         // this.getLikes(id)
       });
+  }
+
+  IsChannellike(id: string, status: boolean) {
+    let formData = {
+      channelId: id,
+      like: status,
+      mobileno: this.mobileNumber,
+    };
+    // console.log('formData: ', formData);
+    // return
+    this._service.ChannelPostLikeDislike(formData).subscribe((res) => {
+      this.getChannel();
+    });
   }
 
   subscribe(item: any) {

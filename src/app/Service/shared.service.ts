@@ -2,20 +2,29 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { SendOtp, VerifyOtp } from '../MainModule/website/sign-in/sign-in.class';
-import { SendOtpForRecoverPin, VerifyOtpForRecovery } from '../MainModule/website/pin-recovery/pin-recovery.classes';
+import {
+  SendOtp,
+  VerifyOtp,
+} from '../MainModule/website/sign-in/sign-in.class';
+import {
+  SendOtpForRecoverPin,
+  VerifyOtpForRecovery,
+} from '../MainModule/website/pin-recovery/pin-recovery.classes';
 import { Login } from '../MainModule/website/enter-pin/enter-pin.classes';
 import { SetPin } from '../MainModule/website/setu-up-pin/set-up-pin.classes';
 import { InvestorManagementDetails } from '../MainModule/website/investor/investor.classes';
 import { ExpertInvestorManagementDetails } from '../MainModule/website/expert-and-investor/expert-and-investor.classes';
 import { FollowClub } from '../MainModule/website/components/club/club.classes';
 import { AddTrade } from '../MainModule/website/Pages/add-trade/add-trade.classes';
-import { ChannelApproveReject, ChannelSubscriber } from '../MainModule/website/components/channel/channel.classes';
+import {
+  ChannelApproveReject,
+  ChannelLike,
+  ChannelSubscriber,
+} from '../MainModule/website/components/channel/channel.classes';
 import { AddPostDetails } from '../MainModule/website/Pages/trades/trades.classes';
 import { ContactUs } from '../MainModule/website/Pages/contact-us/contact-us.classes';
 import { IdeaTracker } from '../MainModule/website/components/channel-details/channel-details.classes';
 import { UpdateProfileDetails } from '../MainModule/website/Pages/profile-page/profile-page.classe';
-
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +37,7 @@ export class SharedService {
   private data = new BehaviorSubject<string>('initial data');
 
   constructor(private http: HttpClient) {}
-  
+
   getData(): Observable<any> {
     return this.data.asObservable();
   }
@@ -261,8 +270,11 @@ export class SharedService {
     );
   }
 
-  ChannelPostLikeDislike(data: any): Observable<any> {
-    return this.http.post(this.apiUrl + 'UpdateChannelMasterLike', data);
+  ChannelPostLikeDislike(data: ChannelLike): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'api/Channel/UpdateChannelMasterLike',
+      data
+    );
   }
   GetLikes(id: string): Observable<any> {
     return this.http.get(this.apiUrl + 'GetLikeCount?id=' + id);
@@ -349,11 +361,17 @@ export class SharedService {
 
   IdeaTracker(data: IdeaTracker): Observable<IdeaTracker> {
     return this.http.post(
-      this.apiUrl + 'api/Channel/UpdateChannelPostActivePast', data
+      this.apiUrl + 'api/Channel/UpdateChannelPostActivePast',
+      data
     );
   }
 
-  UpdateUserDetails(data: UpdateProfileDetails): Observable<UpdateProfileDetails>{
-    return this.http.post(this.apiUrl + 'api/ExpertInvestor/UpdateUserDetails', data)
+  UpdateUserDetails(
+    data: UpdateProfileDetails
+  ): Observable<UpdateProfileDetails> {
+    return this.http.post(
+      this.apiUrl + 'api/ExpertInvestor/UpdateUserDetails',
+      data
+    );
   }
 }

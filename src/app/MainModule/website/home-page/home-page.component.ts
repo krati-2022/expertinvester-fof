@@ -14,12 +14,15 @@ export class HomePageComponent implements OnInit {
   toggleSideBar: boolean = true;
   screenWidth: any;
   constructor(private router: Router, private coreService: SharedService) {
-    if (
-      this.router.url == '/home/profile-page' ||
-      this.router.url == '/home/contact'
-    ) {
-      this.hide = true;
-    }
+   if (
+     this.router.url == '/home/profile-page' ||
+     this.router.url == '/home/contact' ||
+     this.router.url == '/home' ||
+     this.router.url == '/home/user-list' ||
+     this.router.url == '/home/payment-list'
+   ) {
+     this.hide = true;
+   }
   }
 
   ngOnInit(): void {
@@ -32,16 +35,17 @@ export class HomePageComponent implements OnInit {
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         // console.log('Route changed:', event.url);
-        if (
-          event.url == '/home/profile-page' ||
-          event.url == '/home/contact' ||
-          event.url == '/home'
-        ) {
-          this.hide = true;
-         
-        } else {
-          this.hide = false;
-        }
+       if (
+         event.url == '/home/profile-page' ||
+         event.url == '/home/contact' ||
+         event.url == '/home' ||
+         event.url == '/home/user-list' ||
+         event.url == '/home/payment-list'
+       ) {
+         this.hide = true;
+       } else {
+         this.hide = false;
+       }
         // do something when the route changes
       });
     if (!this.ismobileNumberExist) {

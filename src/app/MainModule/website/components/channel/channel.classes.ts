@@ -16,6 +16,14 @@ export class ChannelApproveReject {
   }
 }
 
+export class ChannelLike {
+  channelId!: string;
+  mobileno!: string;
+  like!: boolean;
+  public constructor(init?: Partial<ChannelLike>) {
+    Object.assign(this, init);
+  }
+}
 export const DATA = [
   { name: 'Expert', checked: false },
   { name: 'Investor', checked: false },
