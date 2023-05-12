@@ -11,6 +11,7 @@ import { Login } from './enter-pin.classes';
 export class EnterPinComponent implements OnInit {
   pin: any = localStorage.getItem('pin');
   isRegistered = localStorage.getItem('isRegistered');
+  isReEnterPin = localStorage.getItem('reEnterPin');
   password!: string;
   showOtpComponent = true;
   loginDetails = new Login();
@@ -32,10 +33,10 @@ export class EnterPinComponent implements OnInit {
   constructor(private router: Router, private _service: SharedService) {}
 
   ngOnInit(): void {
-    // console.log('this.mobile_No: ', this.mobile_No);
-    if (this.mobile_No == null) {
-      this.router.navigate(['']);
-    }
+   
+      if (this.mobile_No == null) {
+        this.router.navigate(['']);
+      }
     var splitString = this.mobile_No.split('');
     if (splitString[0] == '+') {
       splitString[0] = '%2B';
@@ -64,6 +65,7 @@ export class EnterPinComponent implements OnInit {
         });
         this._service.LoginIn(loginDetailas).subscribe((res) => {
           // console.log('res: ', res);
+          localStorage.removeItem('reEnterPin');
           if (res.data[0]?.userDetail) {
             this.router.navigate(['home']);
           } else {

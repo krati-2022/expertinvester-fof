@@ -35,8 +35,7 @@ import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 import { ClubDetailsComponent } from './components/club-details/club-details.component';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { PaymentListComponent } from './payment-list/payment-list.component';
+
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -91,8 +90,7 @@ const routes: Routes = [
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'legal-disclamer', component: LegalDisclamerComponent },
       { path: 'terms-services', component: TermsServicesComponent },
-      { path: 'user-list', component: UserListComponent },
-      { path: 'payment-list', component: PaymentListComponent },
+     
     ],
   },
 ];

@@ -62,9 +62,7 @@ import { ScrollDirective } from 'src/app/Utils/scroll-directive';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
 import { NgChartsModule } from 'ng2-charts';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { UserListComponent } from './user-list/user-list.component';
 import { MessagePageComponent } from './message-page/message-page.component';
-import { PaymentListComponent } from './payment-list/payment-list.component';
 
 
 @NgModule({
@@ -114,9 +112,7 @@ import { PaymentListComponent } from './payment-list/payment-list.component';
     ChatBoxComponent,
     ScrollDirective,
     EditChannelComponent,
-    UserListComponent,
     MessagePageComponent,
-    PaymentListComponent
   ],
   imports: [
     CommonModule,

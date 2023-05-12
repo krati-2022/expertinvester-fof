@@ -10,11 +10,15 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./MainModule/website/website.module').then(m => m.WebsiteModule)
   },
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./MainModule/main/main.module').then(m => m.MainModule)
+  // },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { scrollPositionRestoration : 'enabled'}),
   ],
   exports: [RouterModule],
 })

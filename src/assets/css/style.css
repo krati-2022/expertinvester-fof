@@ -53,6 +53,7 @@ h6 {
 }
 
 .pagetitle h1 {
+  text-transform: uppercase;
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;

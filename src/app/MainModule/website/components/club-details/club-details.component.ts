@@ -42,6 +42,12 @@ export class ClubDetailsComponent implements OnInit {
         this.clubDetails = res.data;
       });
   }
+
+  getDetails(id: string) {
+    this.router.navigate(['home/details/' + id + '/' + this.mobile_number]);
+    
+  }
+
   AddClub() {
     // console.log('clublistId: ', clublistId);
     this.router.navigate([

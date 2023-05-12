@@ -75,9 +75,9 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.countryCodes);
     // console.log('this.isExistUser: ', this.isExistUser);
-    // if(this.isExistUser != null){
-    //   this.router.navigate(['enter-pin'])
-    // }
+    if(this.isExistUser != null){
+      this.router.navigate(['enter-pin'])
+    }
   }
   onOtpChange(otp: string) {
     this.otp = otp;
@@ -128,7 +128,7 @@ export class SignInComponent implements OnInit {
         // console.log('response: ', response);
         this.isLoading = false;
         this.mobileNumbr = this.SendOtpModel.mobile_No;
-        console.log('this.mobileNumbr: ', response.data.otp);
+        // console.log('this.mobileNumbr: ', response.data.otp);
         if (response.status == 'Success') {
           const Toast = Swal.mixin({
             toast: true,
