@@ -1,7 +1,51 @@
 .search-bar {
   padding: 12px;
+  width: 52%;
+  
 }
 
+
+.modal-header{    background: #4154f1;
+}
+
+.modal-title {
+  color: #fff;
+}
+
+
+div.row.border-bottom {
+  padding: 15px;
+}
+
+.form-check{    margin-bottom: 16px}
+
+
+.setfillterbtn{    font-size: 14px;
+  font-weight: 500;
+  width: 137px;
+  height: 40px;
+  border-radius: 20px;}
+
+
+  .setapplyfiltter{    font-size: 14px;
+    font-weight: 500;
+    width: 137px;
+    height: 40px;
+    border-radius: 20px;}
+
+
+.btn-outline-secondary{
+  background: #6038dd;
+  color: #fff;
+  border: 0;
+  box-shadow: 0 0.75rem 8rem 4px rgb(8 22 38 / 25%);
+}
+
+
+.addstyletitel{padding: 18px;
+  background: #f61c7a;
+  border-radius: 10px 10px 0px 0px;
+  color: #FFF;}
 
 .main .row {
   margin: 0px;
@@ -37,7 +81,7 @@
 }
 
 .user-icon {
-  font-size: 50px;
+  font-size: 66px;
   color: #FDCDE7;
 }
 
@@ -72,11 +116,14 @@
 
 .trending-name {
   font-size: 14px;
+    font-weight: bold;
+    color: #4B6635;
+    text-transform: capitalize;
 }
 
 span.title-name {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: black;
 }
 
@@ -91,8 +138,9 @@ span.title-name {
 }
 
 .user_name {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
   color: #496333;
 }
 
@@ -143,7 +191,7 @@ i.lock-icon {
 }
 
 h6.heading {
-  font-size: 16px;
+  font-size: 18p!important;
   font-weight: 600;
   color: #496333;
 }
@@ -155,7 +203,7 @@ h6.heading {
 
 .expect-section {
   padding: 9px 5px;
-  border: 2px solid #F61C7A;
+  border: 1px solid #F61C7A!important;
   border-radius: 8px;
 }
 
@@ -234,8 +282,9 @@ span.equity-btn {
 
 .dis-line {
   font-size: 16px;
-  font-weight: 600;
   color: #000;
+  font-family: 'Inter Tight', sans-serif;
+  line-height: 28px;
 }
 
 .dis {
@@ -273,14 +322,22 @@ button.btn.follow-btn {
 span.club-inf {
   font-size: 14px;
   font-weight: 600;
-  color: #979797;
+  color: #000000!important;
 }
 
 .club-dis {
-  font-size: 14px;
-  color: #496333;
-  font-weight: 600;
+  font-size: 16px!important;
+  font-family: 'Inter Tight', sans-serif;
+  line-height: 28px;
+  color: #000;
+  font-weight: normal!important;
 }
+
+
+li.dropdown-header h6 {
+  margin-bottom: 16px;
+}
+
 
 .example::-webkit-scrollbar {
   display: none;
@@ -813,7 +870,7 @@ span.club-inf {
 
 .pagetitle {
   position: sticky;
-  top: 10px;
+  top: 4px;
   z-index: 999;
   background: #fff;
 }

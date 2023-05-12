@@ -1,6 +1,5 @@
-main {
-  background: #f3edff;
-}
+
+main{ background: #f3edff;}
 
 .logo img {
   max-height: 90px;
@@ -9,7 +8,7 @@ main {
 }
 
 .card {
-  border: none !important;
+  border: none!important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +24,7 @@ main {
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 30px !important;
+  font-size: 30px!important;
 }
 
 
@@ -44,7 +43,7 @@ button.btn.btn-primary.w-100 {
 
 .form-control {
   padding: 10px 15px;
-
+ 
 }
 
 label.form-label {
@@ -53,34 +52,47 @@ label.form-label {
   font-size: 14px;
 }
 
-.marktext {
-  padding: 0px 0 15px 0;
+.marktext{padding: 0px 0 15px 0;
   color: #000;
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 30px !important;
+  font-size: 30px!important;
 }
 
 
-.card-header h5 {
-  text-transform: uppercase;
+.card-header h5 {text-transform: uppercase;
   font-weight: bold;
   font-size: 18px;
   color: #000;
 }
 
-.login-line {
-  font-weight: 600;
+.login-line{    font-weight: 600;
   color: #000;
   font-size: 20px;
-  margin-bottom: 10px;
-}
+  margin-bottom: 10px;}
 
 
-.input-container {
-  margin-bottom: 10px;
-}
+  .input-container{margin-bottom: 10px;}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (min-width: 320px) and (max-width: 416px) {
   svg.enter-icon {
     width: 91px;

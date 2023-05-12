@@ -8,9 +8,13 @@
           <span class="d-none d-lg-block"></span>
         </a>
       </div>
-      <div class="col-lg-4 mx-auto">
+
+      <div class="col-lg-5 mx-auto">
         <div class="card list-card  py-4 text-center">
-          <div class="card-header ">
+
+
+          
+          <div class="">
             <h5 class="mb-2 "><svg class="enter-icon" width="140" height="150" viewBox="0 0 140 150" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <circle cx="70" cy="80" r="70" fill="#F3F3FF" />
@@ -68,10 +72,10 @@
               <span class="login-line">Enter Your PIN</span>
             </div> -->
             <div>
-              <span class="login-line"><sapn *ngIf="isReEnterPin != null">Re-</sapn>Enter Your Pin Number</span>
+              <span class="login-line">Enter Your Pin Number</span>
             </div>
           </div>
-          <div class="input-container d-flex flex-row justify-content-center ">
+          <div class="input-container d-flex flex-row justify-content-center " style="    margin-top: 15px;">
             <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
               [config]="config"></ng-otp-input>
             <button class="btn btn-transparent" (click)="onClick()">
@@ -87,7 +91,7 @@
           <div>
             <small>
 
-              <a *ngIf="isReEnterPin == null" class="text-decoration-none" style="cursor: pointer;" (click)="forgotPin()">Forgot PIN number</a>
+              <a class="text-decoration-none" style="cursor: pointer;" (click)="forgotPin()">Forgot PIN number</a>
             </small>
           </div>
           <div class="mt-3 ">

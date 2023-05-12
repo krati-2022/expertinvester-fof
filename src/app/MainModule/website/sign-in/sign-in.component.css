@@ -1,6 +1,5 @@
-main {
-  background: #f3edff;
-}
+
+main{ background: #f3edff;}
 
 .logo img {
   max-height: 90px;
@@ -9,7 +8,7 @@ main {
 }
 
 .card {
-  border: none !important;
+  border: none!important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +24,7 @@ main {
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 30px !important;
+  font-size: 30px!important;
 }
 
 
@@ -44,7 +43,7 @@ button.btn.btn-primary.w-100 {
 
 .form-control {
   padding: 10px 15px;
-
+ 
 }
 
 label.form-label {
@@ -53,18 +52,16 @@ label.form-label {
   font-size: 14px;
 }
 
-.marktext {
-  padding: 0px 0 15px 0;
+.marktext{padding: 0px 0 15px 0;
   color: #000;
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 30px !important;
+  font-size: 30px!important;
 }
 
 
-.card-header h5 {
-  text-transform: uppercase;
+.card-header h5 {text-transform: uppercase;
   font-weight: bold;
   font-size: 18px;
   color: #000;
@@ -84,63 +81,62 @@ label.form-label {
 
 
 .input-group-text {
-  display: flex;
-  align-items: center;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  text-align: center;
-  white-space: nowrap;
-  /* background-color: #e9ecef; */
-  border: 1px solid #ced4da;
-  border-radius: 0.375rem;
-}
+    display: flex;
+    align-items: center;
+     padding: 0.375rem 0.75rem; 
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    /* background-color: #e9ecef; */
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+  }
+  
+  .country-option {
+    width: 17%;
+  }
 
-.country-option {
-  width: 17%;
+  label.form-check-label {
+    font-size: 12px;
 }
-
-label.form-check-label {
-  font-size: 12px;
-}
-
 span.login-line {
   color: blue;
 }
 
 
 
-.card {
+.card{
   border: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.card-header {
+.card-header{
   color: #03314B !important;
-  background: #dae1f759 !important;
-  text-align: center;
-  margin-bottom: 14px;
+    background: #dae1f759 !important;
+    text-align: center;
+    margin-bottom: 14px;
 }
 
-.card-header>img {
+.card-header > img{
   width: 180px;
 }
 
-.input-container input {
+.input-container input{
   width: 40px;
   height: 40px;
 }
 
-.form-control:focus {
+.form-control:focus{
   box-shadow: none !important;
   border: 1px solid #3366FF !important;
 }
 
-.verify-btn {
+.verify-btn{
   margin-top: 24px;
   border-radius: 20px !important;
   border: 0px !important;
@@ -153,11 +149,11 @@ span.login-line {
   box-shadow: rgb(0 0 0 / 18%) 0px 2px 8px;
 }
 
-.Resend-btn {
+.Resend-btn{
   border-radius: 20px !important;
-  border: 1px solid #F61C7A !important;
+  border: 1px solid #F61C7A!important;
   width: 100%;
-  color: #F61C7A;
+ color: #F61C7A;
 }
 
 

@@ -1,6 +1,8 @@
 .cstm-srch {
     position: absolute;
-    top: 5rem;
+    top: 13px;
+    width: 18%;
+    right: 186px !important;
 }
 
 .searchset {

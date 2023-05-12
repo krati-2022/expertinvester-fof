@@ -36,7 +36,6 @@ import { ClubDetailsComponent } from './components/club-details/club-details.com
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-
 const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'user-set-up', component: UserSetUpComponent },
@@ -90,7 +89,6 @@ const routes: Routes = [
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'legal-disclamer', component: LegalDisclamerComponent },
       { path: 'terms-services', component: TermsServicesComponent },
-     
     ],
   },
 ];

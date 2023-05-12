@@ -3,9 +3,15 @@
 }
 
 
+.btn-outline-secondary{    background: #6038dd;
+  color: #fff;
+  border: 0;
+  box-shadow: 0 0.75rem 8rem 4px rgb(8 22 38 / 25%);}
+
+
 .pagetitle {
   position: sticky;
-  top: 10px;
+  top: 4px;
   z-index: 999;
   background: #fff;
 }
@@ -38,7 +44,7 @@ border: 1px solid rgba(1, 41, 112, 0.3);
 }
 
 .user-icon {
-  font-size: 50px;
+  font-size: 66px;
   color: #FDCDE7;
 }
 .select-icon{
@@ -88,15 +94,16 @@ color: #0081C9;
 }
 
 .user_name {
-font-size: 16px;
-font-weight: 700;
-color: #496333;
+  font-size: 20px;
+  font-weight: 600;
+  color: #496333;
 }
 
 .detail {
 font-size: 14px;
 font-weight: 600;
 color: #03314B;
+margin-bottom: 5px;
 }
 
 .percent {
@@ -139,9 +146,12 @@ color: #979797;
 }
 
 h6.heading {
-font-size: 16px;
-font-weight: 600;
-color: #496333;
+  font-size: 19px;
+  font-weight: 600;
+  color: #496333;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  margin-top: 24px;
 }
 
 .expect-section {
@@ -208,7 +218,8 @@ background: #FDCDE7;
 
 .dis-line{
 font-size: 16px;
-font-weight: 600;
+font-family: 'Inter Tight', sans-serif;
+line-height: 28px;
 color: #000;
 }
 

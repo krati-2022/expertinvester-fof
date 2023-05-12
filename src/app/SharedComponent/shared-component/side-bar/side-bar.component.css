@@ -1,0 +1,8 @@
+a.nav-link.collapsed.active {
+    color: #3500d4;
+    font-weight: bold;
+}
+
+a.nav-link.collapsed.active i {
+    color: #3500d4;
+}

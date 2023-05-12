@@ -1,3 +1,12 @@
 .social-icon{
-  color: #012970;
+  color: #ffffff;
+  background: #03314B;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  text-align: center;
+  margin: 0px 5px!important;
+  padding: 0;
+  line-height: 28px;
 }

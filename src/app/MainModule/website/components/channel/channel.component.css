@@ -3,6 +3,9 @@
 }
 
 
+.pad0{padding: 0px!important;}
+
+
 .pagetitle {
   position: sticky;
   top: 6px;
@@ -87,11 +90,11 @@ span.title-name {
   color: #0081C9;
 }
 
-.user_name {
+/* .user_name {
   font-size: 16px;
   font-weight: 700;
   color: #496333;
-}
+} */
 
 .detail {
   font-size: 14px;

@@ -62,7 +62,6 @@ import { ScrollDirective } from 'src/app/Utils/scroll-directive';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
 import { NgChartsModule } from 'ng2-charts';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { MessagePageComponent } from './message-page/message-page.component';
 
 
 @NgModule({
@@ -112,7 +111,6 @@ import { MessagePageComponent } from './message-page/message-page.component';
     ChatBoxComponent,
     ScrollDirective,
     EditChannelComponent,
-    MessagePageComponent,
   ],
   imports: [
     CommonModule,

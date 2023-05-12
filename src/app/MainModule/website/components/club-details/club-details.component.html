@@ -17,13 +17,13 @@
           <div class="m-2">
             <div class="example" >
               <div class="card list-card " *ngFor="let items of clubDetails | filter : searchKey : 'username'">
-                <div class="m-2" (click)="getDetails(items.id)">
+                <div class="m-2">
                   <div class=" row user_informatiom d-flex justify-content-between" style="cursor: pointer;">
-                    <div class="d-flex col-12">
+                    <div class="d-flex col-8">
                       <div class="col-2">
                         <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                       </div>
-                      <div class="col-10 mx-3 py-2" >
+                      <div class="col-10 mx-3 py-2">
                         <div class="user_name">{{items.username}}</div>
                         <div class="detail">{{items.sebi}}</div>
                         <div class="percent">Accuracy 57.7% Profitability -13.5%</div>

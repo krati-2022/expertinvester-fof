@@ -21,8 +21,8 @@
         <div class="example" *ngIf="channelDetails.length != 0">
           <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey :  'name'">
             <div class="m-2" >
-              <div class="container"  style="cursor: pointer;">
-                  <div class="container">
+              <div class="container pad0"  style="cursor: pointer;">
+                  <div class="container  pad0">
                     <div class=" row user_informatiom d-flex justify-content-between align-items-center" style="cursor: pointer;">
                       <div class="d-flex col-8" (click)="getChannelDetails(items)">
                         <div class="col-2">
@@ -39,7 +39,7 @@
                     </div>
                   </div>
               </div>
-              <div class="container">
+              <div class="container  pad0">
                 <div class="row">
                   <div class="d-flex justify-content-between align-items-baseline py-2">
                     <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
@@ -60,7 +60,7 @@
                   </div>
                 </div>
               </div>
-              <div class="container" (click)="getChannelDetails(items)">
+              <div class="container  pad0" (click)="getChannelDetails(items)">
                 <div class="row">
                   <div class="channel-name">
                     <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
@@ -89,12 +89,12 @@
                   <div class="date">{{items.createdDate | date: 'fullDate'}} {{items.createdDate | date: 'shortTime'}}</div>
                 </div>
               </div>
-              <div class="container" (click)="getChannelDetails(items)">
+              <div class="container  pad0" (click)="getChannelDetails(items)">
                 <div class="row">
                   <p class="club-dis" [innerHTML]="items.description"></p>
                 </div>
               </div>
-              <div class="container expect-section my-2" (click)="getChannelDetails(items)">
+              <div class="container  expect-section my-2" (click)="getChannelDetails(items)">
                 <div class="grid-data d-flex expect-sections ">
                   <div class="col-3 border-end ">
                     <div class="d-flex club-icons"><span class="club-icon "><i
@@ -117,7 +117,7 @@
                     <div class="club-icon px-3">{{items.post}}</div>
                   </div>
                 </div>
-                <div class="container-fluid ">
+                <div class="container-fluid  pad0 ">
                   <div class="row py-2">
                     <div class="col-6">
                       <div class=" risk-btn w-100 d-flex justify-content-between">
@@ -144,7 +144,7 @@
                     investing</p>
                 </div>
               </div>
-              <div class="container" (click)="getChannelDetails(items)">
+              <div class="container pad0" (click)="getChannelDetails(items)">
                 <div class="row">
                   <div class="col-4 risk">
                     <button type="button" class="btn position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
@@ -162,11 +162,7 @@
 
               <div class="d-flex justify-content-between mt-2">
                 <div>
-                  <!-- <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span> -->
-                  <span (click)="like(items.channelMasterId, !items.isChannelLiked)">
-                    <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isChannelLiked == false">{{items.likecount}}</i>
-                    <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
-                  </span>
+                  <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
                 </div>
                 <div>
                   <span><i class="bi bi-share-fill px-2"></i></span>
@@ -230,10 +226,8 @@
         </div>
 
         <div class="row px-3 py-3 text-center">
-          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary"
-              style="width: inherit; font-size: 12px; font-weight: 500; " (click)="ClearAll()">CLEAR FILTER</button></div>
-          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger"
-              style="width: inherit; font-size: 12px; font-weight: 500;" (click)="apply()">APPLY</button></div>
+          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary setfillterbtn" (click)="ClearAll()">CLEAR FILTER</button></div>
+          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger setapplyfiltter" (click)="apply()">APPLY</button></div>
         </div>
 
       </div>

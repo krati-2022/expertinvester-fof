@@ -31,4 +31,3 @@ export const DATA = [
   { name: 'Free Access', checked: false },
   { name: 'Paid Access', checked: false },
 ];
-

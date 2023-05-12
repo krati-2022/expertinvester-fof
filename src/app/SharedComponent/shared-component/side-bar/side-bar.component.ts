@@ -12,6 +12,9 @@ export class SideBarComponent implements OnInit {
   screenWidth: any;
   constructor(private coreService: SharedService, private router: Router) {}
 
+
+  
+
   ngOnInit(): void {
     this.getWindowSize();
     this.coreService.toggleSidebar.subscribe(() => {

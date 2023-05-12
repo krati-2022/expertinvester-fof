@@ -170,20 +170,6 @@ export class ChannelComponent implements OnInit {
     });
   }
 
-  like(id: string, status: boolean) {
-    let formData = {
-      channelId: id,
-      like: status,
-      mobileno: this.mobileNumber,
-    };
-    // console.log('formData: ', formData);
-    // return
-    this._service.ChannelPostLikeDislike(formData).subscribe(res => {
-      this.getChannel()
-    })
-      
-  }
-
   approveRejectChannel(
     channelMasterId: string,
     expertId: string,
@@ -277,7 +263,7 @@ export class ChannelComponent implements OnInit {
       });
   }
 
-  ClearAll() {
+  ClearAll(){
     this.data.map((i: any) => {
       i.checked = false;
     });

@@ -46,7 +46,6 @@ export class SetuUpPinComponent implements OnInit {
       // console.log('res: ', res);
         // localStorage.removeItem('mobile_number')
         localStorage.setItem('pin', this.password)
-        localStorage.setItem('reEnterPin', 'Re-Enter')
         this.router.navigate(['enter-pin'])
       // console.log('res: ', res);
 
