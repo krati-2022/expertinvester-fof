@@ -52,7 +52,7 @@ const routes: Routes = [
     path: 'home',
     component: HomePageComponent,
     children: [
-      { path: '', component: DashboardComponent },
+      { path: '', component: FeedComponent },
       { path: 'feed', component: FeedComponent },
       { path: 'club', component: ClubComponent },
       { path: 'channel', component: ChannelComponent },

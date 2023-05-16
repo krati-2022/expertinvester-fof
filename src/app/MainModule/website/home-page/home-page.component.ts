@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
     if (
       this.router.url == '/home/profile-page' ||
       this.router.url == '/home/contact'
+      
     ) {
       this.hide = true;
     }
@@ -25,20 +26,17 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.getWindowSize();
     // console.log('this.router.url: ', this.router.url);
-    if (this.router.url == '/home') {
-      this.hide = true;
-    }
+    
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         // console.log('Route changed:', event.url);
         if (
           event.url == '/home/profile-page' ||
-          event.url == '/home/contact' ||
-          event.url == '/home'
+          event.url == '/home/contact'
+          
         ) {
           this.hide = true;
-         
         } else {
           this.hide = false;
         }

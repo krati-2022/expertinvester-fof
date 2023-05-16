@@ -30,7 +30,7 @@ import { UpdateProfileDetails } from '../MainModule/website/Pages/profile-page/p
   providedIn: 'root',
 })
 export class SharedService {
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.baseUrlForWebsite;
   public toggleSidebar: EventEmitter<any> = new EventEmitter();
   public showSearchBar: EventEmitter<any> = new EventEmitter();
   public search = new BehaviorSubject<string>('');

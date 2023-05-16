@@ -2,6 +2,7 @@ import { Component, HostListener, OnChanges, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { SharedService } from 'src/app/Service/shared.service';
+import { AdminService } from '../admin.service';
 @Component({
   selector: 'app-admin-home',
   templateUrl: './admin-home.component.html',
@@ -11,7 +12,7 @@ export class AdminHomeComponent implements OnInit {
   hide: boolean = false;
   toggleSideBar: boolean = true;
   screenWidth: any;
-  constructor(private router: Router, private coreService: SharedService) {
+  constructor(private router: Router, private coreService: AdminService) {
    
   }
 
@@ -21,7 +22,6 @@ export class AdminHomeComponent implements OnInit {
     if (this.router.url == '/home') {
       this.hide = true;
     }
-   
    
     this.coreService.toggleSidebar.subscribe(() => {
       //open your sidebar by setting classes, whatever

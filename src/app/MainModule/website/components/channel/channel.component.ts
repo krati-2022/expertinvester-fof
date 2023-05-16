@@ -43,7 +43,7 @@ export interface ChannelListDetails {
 })
 export class ChannelComponent implements OnInit {
   mobileNumber = localStorage.getItem('mobile_number') || '';
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.baseUrlForWebsite;
   channelDetails: ChannelListDetails[] = [];
   clubList: ClubList[] = [];
   feedDetails: GetFeedDetails[] = [];

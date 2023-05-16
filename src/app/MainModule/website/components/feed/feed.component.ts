@@ -118,7 +118,7 @@ export interface ClubList {
 })
 export class FeedComponent implements OnInit {
   mobile_number = localStorage.getItem('mobile_number') || '{}';
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.baseUrlForWebsite;
   feedDetails: GetFeedDetails[] = [];
   public current = 0;
   public itemsToDisplay: any;

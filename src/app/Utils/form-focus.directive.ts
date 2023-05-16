@@ -10,7 +10,7 @@ import {
   selector: 'form',
 })
 export class FormFocusDirective implements AfterContentInit {
-  focusables = ['input', 'select', 'textarea'];
+  focusables = ['input', 'select', 'textarea', 'angular-editor'];
 
   constructor(private element: ElementRef) {}
 

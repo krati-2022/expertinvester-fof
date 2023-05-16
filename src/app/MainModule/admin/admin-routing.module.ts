@@ -7,14 +7,17 @@ import { UserListComponent } from './Components/user-list/user-list.component';
 import { PaymentListComponent } from './Components/payment-list/payment-list.component';
 import { ClubListComponent } from './Components/club-list/club-list.component';
 import { SettingsComponent } from './Components/settings/settings.component';
+import { AuthGuard } from './Authentication/auth.guard';
+import { AddClubComponent } from './Components/add-club/add-club.component';
 
 const routes: Routes = [
   {
     path: 'home',
-    component: AdminHomeComponent,
+    component: AdminHomeComponent, canActivate: [AuthGuard],
     children: [
       { path: '', component: AdminDashboardComponent },
       { path: 'club-list', component: ClubListComponent },
+      { path: 'add-club', component: AddClubComponent },
       { path: 'user-list', component: UserListComponent },
       { path: 'payment-list', component: PaymentListComponent },
       { path: 'setting', component: SettingsComponent },

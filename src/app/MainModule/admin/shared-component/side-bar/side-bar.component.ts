@@ -8,6 +8,7 @@ import { SharedService } from 'src/app/Service/shared.service';
   styleUrls: ['./side-bar.component.css'],
 })
 export class SideBarComponent implements OnInit {
+  sideBarCollaps: boolean = false
   hide: boolean = true;
   screenWidth: any;
   constructor(private coreService: SharedService, private router: Router) {}

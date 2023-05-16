@@ -1,0 +1,90 @@
+<section class="section p-2">
+    <div class="row">
+        <div class="col-lg-12 mx-auto">
+            <div class="card list-card ">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-baseline mb-3">
+                        <h5 class="card-title"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i> Add Club</h5>
+                        <!-- <h4 class=" "><i class="bi bi-cloud-arrow-up px-2"></i> Upload image</h4> -->
+                    </div>
+                    <!-- General Form Elements -->
+                    <form [formGroup]="AddClubForm" (ngSubmit)="submit()">
+                        <div class="col-lg-12">
+                            <div class="">
+                                <div class="">
+                                    <div class="row mb-3">
+                                        <label for="inputText" class="col-lg-4 col-form-label form-line">Club Name</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" formControlName="clubName" placeholder="Enter Club Name"
+                                                class="form-control"  [ngClass]="{'is-invalid ' :
+                                                submitted &&
+                                                AddClubControl.clubName.errors }">
+                                                <div *ngIf=" submitted && AddClubControl.clubName.errors" class="invalid-feedback">
+                                                    <div *ngIf="AddClubControl.clubName.errors.required">Club Name is required.
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="">
+                                    <div class="row mb-3">
+                                        <label for="inputText" class="col-lg-4 col-form-label form-line">Description</label>
+                                        <div class="col-lg-8">
+                                            <angular-editor placeholder="Enter Description"
+                                                formControlName="clubDescription" [config]="editorConfig"  [ngClass]="{'is-invalid ' :
+                                                submitted &&
+                                                AddClubControl.clubDescription.errors }"></angular-editor>
+                                                <div *ngIf=" submitted && AddClubControl.clubDescription.errors" class="invalid-feedback">
+                                                    <div *ngIf="AddClubControl.clubDescription.errors.required">Description is required.
+                                                    </div>
+                                                </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="">
+                                    <div class="row mb-3">
+                                        <label for="inputText" class="col-lg-4 col-form-label form-line">Country</label>
+                                        <div class="col-lg-8">
+                                            <select class="form-select" aria-label="Default select example" formControlName="country"  [ngClass]="{'is-invalid ' :
+                                                submitted &&
+                                                AddClubControl.country.errors }">
+                                                <option [value]="item.CountryName" *ngFor="let item of countryCodes">
+                                                   {{item.CountryName}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf=" submitted && AddClubControl.country.errors" class="invalid-feedback">
+                                                <div *ngIf="AddClubControl.country.errors.required">Country is required.
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    <div class="row mb-3 mt-3">
+                        <div class="col-lg-6 mx-auto">
+                            <!-- <button class="btn btn-primary w-100 " type="submit">Submit</button> -->
+                            <button class="btn btn-primary w-100 " type="submit" [disabled]="isLoading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+                                <span *ngIf="!isLoading">Submit</span>
+                            </button>
+                        </div>
+                    
+                    </div>
+                    </form>
+                    <!-- End General Form Elements -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

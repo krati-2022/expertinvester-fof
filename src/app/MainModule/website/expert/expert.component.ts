@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./expert.component.css'],
 })
 export class ExpertComponent implements OnInit {
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.baseUrlForWebsite;
   AddExpertForm: FormGroup | any;
   formData = new FormData();
   submitted: boolean = false;

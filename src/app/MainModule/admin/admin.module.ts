@@ -14,6 +14,8 @@ import { UserListComponent } from './Components/user-list/user-list.component';
 import { PaymentListComponent } from './Components/payment-list/payment-list.component';
 import { ClubListComponent } from './Components/club-list/club-list.component';
 import { SettingsComponent } from './Components/settings/settings.component';
+import { AddClubComponent } from './Components/add-club/add-club.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { SettingsComponent } from './Components/settings/settings.component';
     PaymentListComponent,
     ClubListComponent,
     SettingsComponent,
+    AddClubComponent,
 
   ],
   imports: [
@@ -35,7 +38,8 @@ import { SettingsComponent } from './Components/settings/settings.component';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgChartsModule
+    NgChartsModule,
+    AngularEditorModule
   ],
   schemas: [],
   providers:[]

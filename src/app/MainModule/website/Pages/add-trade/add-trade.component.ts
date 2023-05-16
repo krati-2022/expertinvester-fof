@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class AddTradeComponent implements OnInit {
   AddFeedForm: FormGroup | any;
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.baseUrlForWebsite;
   mobile_number: any;
   clubListId: any;
   name: any;
