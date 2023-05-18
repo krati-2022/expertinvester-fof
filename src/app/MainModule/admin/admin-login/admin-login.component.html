@@ -1,0 +1,88 @@
+<main>
+    <div class="container">
+        <section class="section register min-vh-100 d-flex flex-column
+            align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 col-md-6 d-flex flex-column
+                        align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a class="logo d-flex align-items-center w-auto">
+                                <img src="../../../../assets/img/logo.png" alt="">
+                                <span class="d-none d-lg-block"></span>
+                            </a>
+                        </div>
+
+                        <div class="card list-card mb-3 w-100">
+                            <div class="card-body w-100">
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0
+                                        fs-4">Getting <span class="marktext">Started</span></h5>
+                                    <p class="text-center small">Create an
+                                        account to continue</p>
+                                </div>
+
+                                <form class="row g-3 needs-validation" [formGroup]="loginForm" (ngSubmit)="proceed()">
+                                    <div class="container">
+                                        <div class="col-12">
+                                            <label class="form-label">Email</label>
+                                            <input type="text" formControlName="email" class="form-control" [ngClass]="{'is-invalid ' :
+                                                submitted &&
+                                                loginControl.email.errors }" maxlength="50" />
+                                            <!-- <div *ngIf=" submitted && loginControl.email.errors" class="invalid-feedback">
+                                                    <div *ngIf="loginControl.email.errors.required">Email is required.</div>
+                                                    <div *ngIf="loginControl.email.errors.pattern">Email is invalid.</div>
+                                                </div> -->
+
+                                            <div *ngIf="submitted && loginControl.email.errors"
+                                                class="invalid-feedback">
+                                                <div *ngIf="loginControl.email.errors.required">Email is required</div>
+                                                <div
+                                                    *ngIf="loginControl.email.errors.email || loginControl.email.errors.pattern">
+                                                    Email must be a valid email address</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Password</label>
+                                            <input type="password" class="form-control" formControlName="password"
+                                                [ngClass]="{'is-invalid ' :
+                                                submitted &&
+                                                loginControl.password.errors }" />
+                                            <div *ngIf=" submitted && loginControl.password.errors"
+                                                class="invalid-feedback">
+                                                <div *ngIf="loginControl.password.errors.required">Password is required.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex
+                                            justify-content-center mt-2">
+                                            <button class="btn btn-primary
+                                                w-100" type="submit" style="
+                                                height: 50px;
+                                                font-size: 18px;
+                                                border-radius: 38px;
+                                                font-weight: 500;
+                                                box-shadow: rgb(0 0 0 / 18%) 0px
+                                                2px 8px;
+                                                width: 100%;" [disabled]="isLoading">
+                                                <span class="spinner-border spinner-border-sm" role="status"
+                                                    aria-hidden="true" *ngIf="isLoading"></span>
+                                                <span *ngIf="!isLoading">Submit</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main>

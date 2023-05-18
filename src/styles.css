@@ -1,50 +1,103 @@
 .search-bar {
-    padding: 12px;
+  padding: 12px;
+  width: 52%;
+  
+}
+
+
+.modal-header{    background: #4154f1;
+}
+
+.modal-title {
+  color: #fff;
+}
+
+
+div.row.border-bottom {
+  padding: 15px;
+}
+
+.form-check{    margin-bottom: 16px}
+
+
+.setfillterbtn{    font-size: 14px;
+  font-weight: 500;
+  width: 137px;
+  height: 40px;
+  border-radius: 20px;}
+
+
+  .setapplyfiltter{    font-size: 14px;
+    font-weight: 500;
+    width: 137px;
+    height: 40px;
+    border-radius: 20px;}
+
+
+.btn-outline-secondary{
+  background: #6038dd;
+  color: #fff;
+  border: 0;
+  box-shadow: 0 0.75rem 8rem 4px rgb(8 22 38 / 25%);
+}
+
+
+.addstyletitel{padding: 18px;
+  background: #f61c7a;
+  border-radius: 10px 10px 0px 0px;
+  color: #FFF;}
+
+.main .row {
+  margin: 0px;
 }
 
 .search-form input {
-    border: 0;
-    font-size: 14px;
-    color: #012970;
-    border: 1px solid rgba(1, 41, 112, 0.2);
-    padding: 7px 38px 7px 8px;
-    border-radius: 15px;
-    transition: 0.3s;
-    width: 100%;
-  }
+  border: 0;
+  font-size: 14px;
+  color: #012970;
+  border: 1px solid rgba(1, 41, 112, 0.2);
+  padding: 7px 38px 7px 8px;
+  border-radius: 15px;
+  transition: 0.3s;
+  width: 100%;
+}
 
-  .search-form input:focus,
- .search-form input:hover {
+.search-form input:focus,
+.search-form input:hover {
   outline: none;
   box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
   border: 1px solid rgba(1, 41, 112, 0.3);
 }
+
 .search-form button {
-    border: 0;
-    padding: 0;
-    margin-left: -30px;
-    background: none;
-  }
-  .search-form button i {
-    color: #012970;
-  }
+  border: 0;
+  padding: 0;
+  margin-left: -30px;
+  background: none;
+}
+
+.search-form button i {
+  color: #012970;
+}
 
 .user-icon {
-    font-size: 50px;
-    color: #FDCDE7;
+  font-size: 66px;
+  color: #FDCDE7;
 }
-.select-icon{
-  color:#F61C7A ;
+
+.select-icon {
+  color: #F61C7A;
 }
-.heading-line{
+
+.heading-line {
   color: #4D455D;
 }
 
-.follow-name{
+.follow-name {
   font-weight: 600;
 }
 
-.follow-dropdown{
+.follow-dropdown {
   list-style: none;
 }
 
@@ -57,16 +110,20 @@
   color: #0081C9;
 }
 
-.post-img{
+.post-img {
   border-radius: 12px;
 }
 
 .trending-name {
   font-size: 14px;
+    font-weight: bold;
+    color: #4B6635;
+    text-transform: capitalize;
 }
+
 span.title-name {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: black;
 }
 
@@ -74,14 +131,16 @@ span.title-name {
   font-size: 14px;
   color: #4D455D;
 }
+
 .hashtag {
   font-size: 14px;
   color: #0081C9;
 }
 
 .user_name {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
   color: #496333;
 }
 
@@ -98,7 +157,7 @@ span.title-name {
 }
 
 .user_informatiom {
-  border-bottom: 2px solid #FFD859;
+  /* border-bottom: 2px solid #FFD859; */
   border-radius: 0px;
 }
 
@@ -109,6 +168,7 @@ span.subscript {
   font-size: 14px;
   font-weight: 600;
 }
+
 i.lock-icon {
   color: #496333;
 }
@@ -131,19 +191,22 @@ i.lock-icon {
 }
 
 h6.heading {
-  font-size: 16px;
+  font-size: 18p!important;
   font-weight: 600;
   color: #496333;
 }
+
 .expect-sections {
-border-bottom: 2px solid #FFD859;
-border-radius: 0px;
+  border-bottom: 2px solid #FFD859;
+  border-radius: 0px;
 }
+
 .expect-section {
   padding: 9px 5px;
-  border: 2px solid #F61C7A;
+  border: 1px solid #F61C7A!important;
   border-radius: 8px;
 }
+
 .expect {
   font-size: 14px;
   font-weight: 600;
@@ -164,6 +227,7 @@ span.line {
   font-weight: 500;
   color: #E6A376;
 }
+
 span.equity-btn {
   padding: 5px;
   font-size: 10px;
@@ -172,10 +236,10 @@ span.equity-btn {
   border-radius: 4px;
 }
 
-.prices{
-    font-size: 14px;
-    font-weight: 600;
-    color: #496333;
+.prices {
+  font-size: 14px;
+  font-weight: 600;
+  color: #496333;
 }
 
 .price {
@@ -190,15 +254,16 @@ span.equity-btn {
   color: #E6A376;
 }
 
-.dot{
+.dot {
   font-size: 20px;
   color: red;
 }
-.risks-btn{
-    padding: 10px;
-    color: #03314B;
-    border-radius: 10px;
-    background: #FDCDE7;
+
+.risks-btn {
+  padding: 10px;
+  color: #03314B;
+  border-radius: 10px;
+  background: #FDCDE7;
 }
 
 .risk-btn {
@@ -207,20 +272,22 @@ span.equity-btn {
   border-radius: 10px;
   background: #DEF4FF;
 }
-.position-btn{
+
+.position-btn {
   padding: 10px;
   color: black;
   border-radius: 10px;
   background: #FDCDE7;
 }
 
-.dis-line{
+.dis-line {
   font-size: 16px;
-  font-weight: 600;
   color: #000;
+  font-family: 'Inter Tight', sans-serif;
+  line-height: 28px;
 }
 
-.dis{
+.dis {
   font-size: 14px;
   font-weight: 600;
   color: #3500D4;
@@ -232,16 +299,17 @@ button.btn.follow-btn {
   font-weight: 700;
 }
 
-.club-dis{
+.club-dis {
   color: #496333;
 }
-.club-header{
+
+.club-header {
   font-size: 20px;
   font-weight: 600;
   color: #03314B;
 }
 
-.club{
+.club {
   border-right: 1px solid #979797;
 }
 
@@ -254,14 +322,22 @@ button.btn.follow-btn {
 span.club-inf {
   font-size: 14px;
   font-weight: 600;
-  color: #979797;
+  color: #000000!important;
 }
 
-.club-dis{
-  font-size: 14px;
-  color: #496333;
-  font-weight: 600;
+.club-dis {
+  font-size: 16px!important;
+  font-family: 'Inter Tight', sans-serif;
+  line-height: 28px;
+  color: #000;
+  font-weight: normal!important;
 }
+
+
+li.dropdown-header h6 {
+  margin-bottom: 16px;
+}
+
 
 .example::-webkit-scrollbar {
   display: none;
@@ -269,320 +345,376 @@ span.club-inf {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .example {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) {}
 
-}
 @media screen and (min-width: 320px) and (max-width: 416px) {
   .logo img {
     max-height: 19px;
     margin-right: 6px;
-}
+  }
+
   button.btn.follow-btn {
     font-size: 11px;
     background: #F61C7A;
     color: #fff;
     font-weight: 700;
-}
+  }
+
   .nav-tabs-bordered .nav-link {
     font-size: 12px;
     margin-bottom: -2px;
     border: none;
     color: #2c384e;
-}
+  }
+
   .nav-tabs-bordered .nav-link.active {
     font-size: 12px;
     background-color: #fff;
     color: #4154f1;
     border-bottom: 2px solid #4154f1;
-}
+  }
+
   .percent {
     font-size: 8px;
     font-weight: 600;
     color: #3500D4;
-}
+  }
+
   .detail {
     font-size: 10px;
     font-weight: 600;
     color: #03314B;
-}
+  }
+
   .club-icon {
     padding-right: 2px;
     padding-left: 0px;
     font-size: 9px;
     color: #F61C7A;
   }
+
   .user_name {
     font-size: 12px;
     font-weight: 700;
     color: #496333;
-}
+  }
+
   span.club-inf {
     font-size: 8px;
     font-weight: 600;
     color: #979797;
-}
-.user-icon {
-  font-size: 30px;
-  color: #FDCDE7;
-}
-.risk-btn {
-  font-size: 9px;
-  padding: 6px 4px;
-  color: #03314B;
-  border-radius: 2px;
-  background: #DEF4FF;
-}
-.price {
-  font-size: 9px;
-  font-weight: 600;
-  color: #03314B;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-.club-icons{
-  justify-content: center;
-}
-.card-title {
-  padding: 20px 0 15px 0;
-  font-size: 12px;
-  font-weight: 500;
-  color: #012970;
-  font-family: "Poppins", sans-serif;
-}
-.trending-name {
-  font-size: 12px;
-}
-span.title-name {
-  font-size: 12px;
-  font-weight: 600;
-  color: black;
-}
-.hashtag-line {
-  font-size: 12px;
-  color: #4D455D;
-}
-.hashtag {
-  font-size: 12px;
-  color: #0081C9;
-}
-.pagetitle h1 {
-  font-size: 15px;
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #012970;
-}
-.channel-name {
-  font-size: 7px;
-  font-weight: 600;
-  color: #F61C7A;
-}
-.fol {
-  font-size: 12px;
-}
-.prices {
-  font-size: 9px;
-  font-weight: 600;
-  color: #496333;
-  margin: 0;
-}
-h6.heading {
-  font-size: 13px;
-  font-weight: 600;
-  color: #496333;
-  margin: 0;
-  padding: 0;
-}
-span.subscript {
-  padding: 6px;
-  border: 2px solid #FFD859;
-  border-radius: 36px;
-  font-size: 9px;
-  font-weight: 600;
-}
-.club-dis {
-  font-size: 10px;
-  color: #496333;
-  font-weight: 600;
-}
-.risks-btn {
-  padding: 5px;
-  color: #03314B;
-  border-radius: 5px;
-  background: #FDCDE7;
-  font-size: 12px;
-}
-.position-btn {
-  padding: 6px;
-  color: black;
-  border-radius: 5px;
-  background: #FDCDE7;
-  font-size: 10px;
-}
-.heading-line{
-  color: #4D455D;
+  }
+
+  .user-icon {
+    font-size: 30px;
+    color: #FDCDE7;
+  }
+
+  .risk-btn {
+    font-size: 9px;
+    padding: 6px 4px;
+    color: #03314B;
+    border-radius: 2px;
+    background: #DEF4FF;
+  }
+
+  .price {
+    font-size: 9px;
+    font-weight: 600;
+    color: #03314B;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .club-icons {
+    justify-content: center;
+  }
+
+  .card-title {
+    padding: 20px 0 15px 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: #012970;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .trending-name {
+    font-size: 12px;
+  }
+
+  span.title-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+  }
+
+  .hashtag-line {
+    font-size: 12px;
+    color: #4D455D;
+  }
+
+  .hashtag {
+    font-size: 12px;
+    color: #0081C9;
+  }
+
+  .pagetitle h1 {
     font-size: 15px;
-}
-.user-icon {
-  font-size: 30px;
-  color: #FDCDE7;
-}
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #012970;
+  }
+
+  .channel-name {
+    font-size: 7px;
+    font-weight: 600;
+    color: #F61C7A;
+  }
+
+  .fol {
+    font-size: 12px;
+  }
+
+  .prices {
+    font-size: 9px;
+    font-weight: 600;
+    color: #496333;
+    margin: 0;
+  }
+
+  h6.heading {
+    font-size: 13px;
+    font-weight: 600;
+    color: #496333;
+    margin: 0;
+    padding: 0;
+  }
+
+  span.subscript {
+    padding: 6px;
+    border: 2px solid #FFD859;
+    border-radius: 36px;
+    font-size: 9px;
+    font-weight: 600;
+  }
+
+  .club-dis {
+    font-size: 10px;
+    color: #496333;
+    font-weight: 600;
+  }
+
+  .risks-btn {
+    padding: 5px;
+    color: #03314B;
+    border-radius: 5px;
+    background: #FDCDE7;
+    font-size: 12px;
+  }
+
+  .position-btn {
+    padding: 6px;
+    color: black;
+    border-radius: 5px;
+    background: #FDCDE7;
+    font-size: 10px;
+  }
+
+  .heading-line {
+    color: #4D455D;
+    font-size: 15px;
+  }
+
+  .user-icon {
+    font-size: 30px;
+    color: #FDCDE7;
+  }
 }
 
 @media screen and (min-width: 415px) and (max-width: 501px) {
   .logo img {
     max-height: 22px;
     margin-right: 6px;
-}
+  }
+
   button.btn.follow-btn {
     font-size: 11px;
     background: #F61C7A;
     color: #fff;
     font-weight: 700;
-}
+  }
+
   .nav-tabs-bordered .nav-link {
     font-size: 12px;
     margin-bottom: -2px;
     border: none;
     color: #2c384e;
-}
+  }
+
   .nav-tabs-bordered .nav-link.active {
     font-size: 12px;
     background-color: #fff;
     color: #4154f1;
     border-bottom: 2px solid #4154f1;
-}
+  }
+
   .percent {
     font-size: 10px;
     font-weight: 600;
     color: #3500D4;
-}
+  }
+
   .detail {
     font-size: 12px;
     font-weight: 600;
     color: #03314B;
-}
+  }
+
   .user-icon {
     font-size: 35px;
     color: #FDCDE7;
-}
-.user_name {
-  font-size: 12px;
-  font-weight: 700;
-  color: #496333;
-}
+  }
+
+  .user_name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #496333;
+  }
+
   .club-icon {
     padding-right: 1px;
     padding-left: 1px;
     font-size: 10px;
     color: #F61C7A;
   }
+
   span.club-inf {
     font-size: 10px;
     font-weight: 600;
     color: #979797;
-}
-.risk-btn {
-  font-size: 9px;
-  padding: 6px 4px;
-  color: #03314B;
-  border-radius: 2px;
-  background: #DEF4FF;
-}
-.risks-btn {
-  padding: 5px;
-  color: #03314B;
-  border-radius: 5px;
-  background: #FDCDE7;
-  font-size: 12px;
-}
-.position-btn {
-  padding: 6px;
-  color: black;
-  border-radius: 5px;
-  background: #FDCDE7;
-  font-size: 10px;
-}
-.price {
-  font-size: 10px;
-  font-weight: 600;
-  color: #03314B;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-.prices {
-  font-size: 9px;
-  font-weight: 600;
-  color: #496333;
-  margin: 0;
-}
-.card-title {
-  padding: 20px 0 15px 0;
-  font-size: 12px;
-  font-weight: 500;
-  color: #012970;
-  font-family: "Poppins", sans-serif;
-}
-.trending-name {
-  font-size: 12px;
-}
-span.title-name {
-  font-size: 12px;
-  font-weight: 600;
-  color: black;
-}
-.hashtag-line {
-  font-size: 12px;
-  color: #4D455D;
-}
-.hashtag {
-  font-size: 12px;
-  color: #0081C9;
-}
-.pagetitle h1 {
-  font-size: 15px;
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #012970;
-}
-.channel-name {
-  font-size: 11px;
-  font-weight: 600;
-  color: #F61C7A;
-}
-.fol {
-  font-size: 12px;
-}
-h6.heading {
-  font-size: 13px;
-  font-weight: 600;
-  color: #496333;
-  margin: 0;
-  padding: 0;
-}
-span.subscript {
-  padding: 6px;
-  border: 2px solid #FFD859;
-  border-radius: 36px;
-  font-size: 9px;
-  font-weight: 600;
-}
-.club-dis {
-  font-size: 10px;
-  color: #496333;
-  font-weight: 600;
-}
-.heading-line{
-  color: #4D455D;
+  }
+
+  .risk-btn {
+    font-size: 9px;
+    padding: 6px 4px;
+    color: #03314B;
+    border-radius: 2px;
+    background: #DEF4FF;
+  }
+
+  .risks-btn {
+    padding: 5px;
+    color: #03314B;
+    border-radius: 5px;
+    background: #FDCDE7;
+    font-size: 12px;
+  }
+
+  .position-btn {
+    padding: 6px;
+    color: black;
+    border-radius: 5px;
+    background: #FDCDE7;
+    font-size: 10px;
+  }
+
+  .price {
+    font-size: 10px;
+    font-weight: 600;
+    color: #03314B;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .prices {
+    font-size: 9px;
+    font-weight: 600;
+    color: #496333;
+    margin: 0;
+  }
+
+  .card-title {
+    padding: 20px 0 15px 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: #012970;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .trending-name {
+    font-size: 12px;
+  }
+
+  span.title-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+  }
+
+  .hashtag-line {
+    font-size: 12px;
+    color: #4D455D;
+  }
+
+  .hashtag {
+    font-size: 12px;
+    color: #0081C9;
+  }
+
+  .pagetitle h1 {
     font-size: 15px;
-}
-.user-icon {
-  font-size: 30px;
-  color: #FDCDE7;
-}
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #012970;
+  }
+
+  .channel-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #F61C7A;
+  }
+
+  .fol {
+    font-size: 12px;
+  }
+
+  h6.heading {
+    font-size: 13px;
+    font-weight: 600;
+    color: #496333;
+    margin: 0;
+    padding: 0;
+  }
+
+  span.subscript {
+    padding: 6px;
+    border: 2px solid #FFD859;
+    border-radius: 36px;
+    font-size: 9px;
+    font-weight: 600;
+  }
+
+  .club-dis {
+    font-size: 10px;
+    color: #496333;
+    font-weight: 600;
+  }
+
+  .heading-line {
+    color: #4D455D;
+    font-size: 15px;
+  }
+
+  .user-icon {
+    font-size: 30px;
+    color: #FDCDE7;
+  }
 }
 
 
@@ -590,58 +722,65 @@ span.subscript {
   .logo img {
     max-height: 24px;
     margin-right: 6px;
-}
+  }
 
   button.btn.follow-btn {
     font-size: 13px;
     background: #F61C7A;
     color: #fff;
     font-weight: 700;
-}
+  }
+
   .nav-tabs-bordered .nav-link {
     font-size: 14px;
     margin-bottom: -2px;
     border: none;
     color: #2c384e;
-}
+  }
+
   .nav-tabs-bordered .nav-link.active {
     font-size: 14px;
     background-color: #fff;
     color: #4154f1;
     border-bottom: 2px solid #4154f1;
-}
+  }
+
   .club-icon {
     padding-right: 4px;
     padding-left: 4px;
     font-size: 14px;
     color: #F61C7A;
-}
-span.club-inf {
-  font-size: 12px;
-  font-weight: 600;
-  color: #979797;
-}
-.risk-btn {
-  font-size: 12px;
-  padding: 14px 10px;
-  color: #03314B;
-  border-radius: 5px;
-  background: #DEF4FF;
-}
-.price {
-  font-size: 14px;
-  font-weight: 600;
-  color: #03314B;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-.card-title {
-  padding: 20px 0 15px 0;
-  font-size: 14px;
-  font-weight: 500;
-  color: #012970;
-  font-family: "Poppins", sans-serif;
-}
+  }
+
+  span.club-inf {
+    font-size: 12px;
+    font-weight: 600;
+    color: #979797;
+  }
+
+  .risk-btn {
+    font-size: 12px;
+    padding: 14px 10px;
+    color: #03314B;
+    border-radius: 5px;
+    background: #DEF4FF;
+  }
+
+  .price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #03314B;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .card-title {
+    padding: 20px 0 15px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #012970;
+    font-family: "Poppins", sans-serif;
+  }
 
 }
 
@@ -652,11 +791,13 @@ span.club-inf {
     font-size: 14px;
     color: #F61C7A;
   }
+
   span.club-inf {
     font-size: 12px;
     font-weight: 600;
     color: #979797;
   }
+
   .price {
     font-size: 14px;
     font-weight: 600;
@@ -664,13 +805,14 @@ span.club-inf {
     padding: 0 !important;
     margin: 0 !important;
   }
+
   .card-title {
     padding: 20px 0 15px 0;
     font-size: 18px;
     font-weight: 500;
     color: #012970;
     font-family: "Poppins", sans-serif;
-}
+  }
 }
 
 .ngx-gallery-layout.thumbnails-bottom ngx-gallery-thumbnails {
@@ -680,6 +822,71 @@ span.club-inf {
 .ngx-gallery-arrow-right .ngx-gallery-arrow {
   display: none;
 }
+
 .ngx-gallery-arrow-left .ngx-gallery-arrow {
   display: none;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .pagetitle {
+    display: none;
+  }
+
+  .mx-auto {
+    padding: 0px;
+  }
+
+  .p-2 {
+    padding: 0px !important;
+  }
+
+
+  .manageimg {
+    object-fit: cover;
+    height: 250px;
+  }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 991px) {
+  .example {
+    height: auto !important;
+  }
+
+  .fixadd {
+    position: relative !important;
+    font-size: 12px;
+
+  }
+
+  .search-bar {
+    padding: 0 !important;
+  }
+    .pagetitle{
+      display: none;
+    }
+
+}
+
+.pagetitle {
+  position: sticky;
+  top: 4px;
+  z-index: 999;
+  background: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: lightgray
 }

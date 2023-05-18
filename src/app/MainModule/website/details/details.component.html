@@ -1,0 +1,73 @@
+<!-- End Page Title -->
+<div class="d-flex justify-content-center" *ngIf="isLoading == true" style="height: 50vh; align-items: center;">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<section class="p-4" *ngIf="isLoading == false">
+  <div class="row">
+    <div class="card list-card  ">
+      <div class="pagetitle">
+        <h1 class="pt-2"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i>Detail Page</h1>
+      </div>
+       
+      <div class="" *ngFor="let items of feedPostDetail">
+        <!-- Bordered Tabs Justified -->
+        <div class="example" >
+          <div class="card ">
+            <div class="my-2 mx-2">
+              <div class="row">
+                <div class="channel-detail py-1" style="text-transform: uppercase;">
+                  <h4>{{items.username}}</h4>
+                  {{items.clubName}}
+                </div>
+                <div class="date">{{items.createdate | date : 'fullDate'}} {{items.createdate | date : 'shortTime'}}</div>
+                <div class="row py-2">
+                  <div class="col-lg-6 months">
+                    <button type="button" class="btn position-btn"><i class="bi bi-clock px-2"></i>Medium Term (6-12
+                      Months)</button>
+                  </div>
+                </div>
+                
+                <div class="gallery-wrapper"
+                  *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null">
+                  <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"
+                    style="object-fit:cover; height:300px; width: 100%; "></ngx-gallery>
+                </div>
+                <div class="row py-2"
+                  [ngClass]="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null ? 'sds' : 'dd'"
+                  style="object-fit:cover;  width: 100%;">
+                  <h6 class="dis-line" [innerHTML]="items.description"></h6>
+                  <!-- <p class="dis">{{items.description}}</p><br> -->
+                  <!-- <p class="dis">https://twitter.com/riteshdaga83/status/162155698582558594?t=
+                        4uQBU0aHDxGijcx3oXrqQ&s=35</p> -->
+                </div>
+                <div class="d-flex justify-content-between user_informatiom py-2">
+                  <div>
+                    <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likeCount}}</i></span>
+                    <span><i class="bi bi-share-fill"></i></span>
+                  </div>
+                  <div>
+                    <!-- <i class="bi bi-bookmark-fill"></i> -->
+                  </div>
+                </div>
+                <!-- <div class="py-3 ">
+                  <div class="row py-2">
+                    <h6 class="dis-line">Disclaimer </h6>
+                    <p class="dis">Ideas are shared on best effort basis with required due diligence and
+                      research integrity. These ideas can go wrong and incur losses considering market volatility. You
+                      are fully responsible for both profits
+                      and losses incurred from these ideas if you choose to follow and execute them. We recommend you to
+                      do your own research and take
+                      informed decicions</p>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

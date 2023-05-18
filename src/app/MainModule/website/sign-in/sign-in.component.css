@@ -1,0 +1,176 @@
+
+main{ background: #f3edff;}
+
+.logo img {
+  max-height: 90px;
+  margin-right: 6px;
+  width: 260px;
+}
+
+.card {
+  border: none!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 8px;
+  border-radius: 12px;
+}
+
+
+.card-title {
+  padding: 0px 0 15px 0;
+  font-weight: 500;
+  color: #0d6efd;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 30px!important;
+}
+
+
+button.btn.btn-primary.w-100 {
+  height: 50px;
+  font-size: 18px;
+  border-radius: 38px;
+  font-weight: 500;
+  box-shadow: rgb(0 0 0 / 18%) 0px 2px 8px;
+}
+
+.col-2 {
+  margin-right: 12px;
+}
+
+
+.form-control {
+  padding: 10px 15px;
+ 
+}
+
+label.form-label {
+  color: #242222;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.marktext{padding: 0px 0 15px 0;
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 30px!important;
+}
+
+
+.card-header h5 {text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+     padding: 0.375rem 0.75rem; 
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    /* background-color: #e9ecef; */
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+  }
+  
+  .country-option {
+    width: 17%;
+  }
+
+  label.form-check-label {
+    font-size: 12px;
+}
+span.login-line {
+  color: blue;
+}
+
+
+
+.card{
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-header{
+  color: #03314B !important;
+    background: #dae1f759 !important;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.card-header > img{
+  width: 180px;
+}
+
+.input-container input{
+  width: 40px;
+  height: 40px;
+}
+
+.form-control:focus{
+  box-shadow: none !important;
+  border: 1px solid #3366FF !important;
+}
+
+.verify-btn{
+  margin-top: 24px;
+  border-radius: 20px !important;
+  border: 0px !important;
+  width: 100%;
+  background-color: #3366FF !important;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 38px;
+  font-weight: 500;
+  box-shadow: rgb(0 0 0 / 18%) 0px 2px 8px;
+}
+
+.Resend-btn{
+  border-radius: 20px !important;
+  border: 1px solid #F61C7A!important;
+  width: 100%;
+ color: #F61C7A;
+}
+
+
+
+@media screen and (min-width: 260px) and (max-width: 767px) {
+
+
+
+  .container {
+    padding: 5px;
+  }
+
+  .form-control {
+    padding: 5px 3px;
+  }
+
+
+
+
+}

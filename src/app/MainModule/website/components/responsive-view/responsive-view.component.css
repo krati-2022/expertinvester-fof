@@ -1,0 +1,1180 @@
+.search-bar {
+  padding: 12px;
+}
+
+.search-form input {
+  border: 0;
+  font-size: 14px;
+  color: #012970;
+  border: 1px solid rgba(1, 41, 112, 0.2);
+  padding: 7px 38px 7px 8px;
+  border-radius: 15px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.search-form input:focus,
+.search-form input:hover {
+outline: none;
+box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
+border: 1px solid rgba(1, 41, 112, 0.3);
+}
+.search-form button {
+  border: 0;
+  padding: 0;
+  margin-left: -30px;
+  background: none;
+}
+.search-form button i {
+  color: #012970;
+}
+
+.user-icon {
+  font-size: 50px;
+  color: #FDCDE7;
+}
+.select-icon{
+color:#F61C7A ;
+}
+.heading-line{
+color: #4D455D;
+}
+
+.follow-name{
+font-weight: 600;
+}
+
+.follow-dropdown{
+list-style: none;
+}
+
+.user-name {
+color: black;
+font-weight: 600;
+}
+
+.verification-icon {
+color: #0081C9;
+}
+
+.post-img{
+border-radius: 12px;
+}
+
+.trending-name {
+font-size: 14px;
+}
+span.title-name {
+font-size: 16px;
+font-weight: 600;
+color: black;
+}
+
+.hashtag-line {
+font-size: 14px;
+color: #4D455D;
+}
+.hashtag {
+font-size: 14px;
+color: #0081C9;
+}
+
+.user_name {
+font-size: 16px;
+font-weight: 700;
+color: #496333;
+}
+
+.detail {
+font-size: 14px;
+font-weight: 600;
+color: #03314B;
+}
+
+.percent {
+font-size: 13px;
+font-weight: 600;
+color: #3500D4;
+}
+
+.row.user_informatiom {
+border-bottom: 2px solid #FFD859;
+border-radius: 3px;
+}
+
+span.subscript {
+padding: 9px;
+border: 2px solid #FFD859;
+border-radius: 36px;
+font-size: 14px;
+font-weight: 600;
+}
+i.lock-icon {
+color: #496333;
+}
+
+.channel-name {
+font-size: 15px;
+font-weight: 600;
+color: #F61C7A;
+}
+
+.channel-detail {
+font-weight: 600;
+color: #000;
+}
+
+.date {
+font-size: 13px;
+font-weight: 400;
+color: #979797;
+}
+
+h6.heading {
+font-size: 16px;
+font-weight: 600;
+color: #496333;
+}
+
+.expect-section {
+padding: 10px;
+border: 2px solid #F61C7A;
+border-radius: 8px;
+}
+.expect {
+font-size: 14px;
+font-weight: 600;
+color: #979797;
+}
+
+.expect-percent {
+font-size: 16px;
+font-weight: 500;
+color: #E6A376;
+}
+
+.expect-inf {
+border-bottom: 2px solid #FF9E03;
+}
+
+span.line {
+font-weight: 500;
+color: #E6A376;
+}
+span.equity-btn {
+padding: 5px;
+font-size: 10px;
+font-weight: 600;
+background: #F5F5F5;
+border-radius: 4px;
+}
+
+.price {
+font-size: 14px;
+font-weight: 400;
+color: #03314B;
+}
+
+.rate {
+font-size: 18px;
+font-weight: 400;
+color: #E6A376;
+}
+
+.dot{
+font-size: 20px;
+color: red;
+}
+.risk-btn {
+padding: 10px;
+color: black;
+border-radius: 10px;
+background: #FDCDE7;
+}
+.position-btn{
+padding: 10px;
+color: black;
+border-radius: 10px;
+background: #FDCDE7;
+}
+
+.dis-line{
+font-size: 16px;
+font-weight: 600;
+color: #000;
+}
+
+.dis{
+font-size: 14px;
+font-weight: 600;
+color: #3500D4;
+}
+
+button.btn.follow-btn {
+background: #F61C7A;
+color: #fff;
+font-weight: 700;
+}
+
+.club-dis{
+color: #496333;
+}
+.club-header{
+font-size: 20px;
+font-weight: 600;
+color: #03314B;
+}
+
+.club{
+border-right: 1px solid #979797;
+}
+
+.club-icon {
+color: #F61C7A;
+}
+
+span.club-inf {
+font-size: 14px;
+font-weight: 600;
+color: #979797;
+}
+
+.club-dis{
+font-size: 14px;
+color: #496333;
+font-weight: 600;
+}
+
+.profile-detail {
+padding: 12px;
+background: #F3FBED;
+border-radius: 5px;
+font-size: 14px;
+color: #849360;
+}
+
+.profile-line {
+font-weight: 700;
+color: #03314B;
+}
+span.profile-option {
+padding: 12px;
+font-size: 13px;
+font-weight: 500;
+background: #FCDDEC;
+border-radius: 10px;
+color: #D32276;
+}
+::-webkit-scrollbar {
+width: 10px
+}
+
+::-webkit-scrollbar-track {
+background: #eee
+}
+
+::-webkit-scrollbar-thumb {
+background: #888
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #555
+}
+.scroll {
+overflow-y: scroll;
+scroll-behavior: smooth;
+height: 325px
+}
+.img1 {
+border-radius: 50%;
+background-color: #66BB6A
+}
+.name {
+font-size: 8px
+}
+.msg {
+background-color: #fff;
+font-size: 11px;
+padding: 5px;
+border-radius: 5px;
+font-weight: 500;
+color: #3e3c3c
+}
+.between {
+font-size: 8px;
+font-weight: 500;
+color: #a09e9e
+}
+.navbar {
+border-bottom-left-radius: 8px;
+border-bottom-right-radius: 8px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+.form-control {
+font-size: 12px;
+font-weight: 400;
+width: 230px;
+height: 38px;
+
+}
+.form-control:focus {
+box-shadow: none;
+overflow: hidden;
+border: none
+}
+.form-control:focus {
+box-shadow: none !important
+}
+.icon1 {
+color: #7C4DFF !important;
+font-size: 18px !important;
+cursor: pointer
+}
+.icon2 {
+color: #512DA8 !important;
+font-size: 18px !important;
+position: relative;
+left: 8px;
+padding: 0px;
+cursor: pointer
+}
+.icondiv {
+border-radius: 50%;
+width: 15px;
+height: 15px;
+padding: 2px;
+position: relative;
+bottom: 1px
+}
+.wrapper{
+width: 100%;
+}
+.example::-webkit-scrollbar {
+display: none;
+}
+.example {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+@media screen and (min-width: 320px) and (max-width: 416px) {
+  .club-header {
+    font-size: 15px;
+    font-weight: 600;
+    color: #03314B;
+}
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap !important;
+  align-items: stretch;
+  width: 100%;
+}
+.chat .chat-history .other-message {
+  background: #e8f1f3;
+  text-align: right;
+  font-size: 12px !important;
+  font-weight: 600;
+  line-height: 21px !important;
+}
+.chat .chat-history .message-data-time {
+  color: #434651;
+  padding-left: 6px;
+  font-size: 12px;
+}
+
+.chat .chat-history .my-message {
+  background: #efefef;
+  color: #444;
+  padding: 18px 20px;
+  line-height: 21px !important;
+  font-weight: 600;
+  font-size: 12px !important;
+  border-radius: 7px;
+  display: inline-block;
+  position: relative;
+}
+
+span.profile-option {
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  background: #FCDDEC;
+  border-radius: 10px;
+  color: #D32276;
+}
+.profile-line {
+  font-size: 12px;
+  font-weight: 700;
+  color: #03314B;
+}
+li.benefit-line {
+  font-size: 12px;
+  color: #03314B;
+}
+.profile-detail {
+  font-weight: 600;
+  margin: 0;
+  padding: 8px;
+  background: #F3FBED;
+  border-radius: 5px;
+  font-size: 10px;
+  color: #849360;
+}
+.danger-btn {
+  font-size: 10px;
+}
+.percent {
+  font-size: 8px;
+  font-weight: 600;
+  color: #3500D4;
+}
+.detail {
+  font-size: 10px;
+  font-weight: 600;
+  color: #03314B;
+}
+.club-icon {
+  padding-right: 2px;
+  padding-left: 0px;
+  font-size: 12px;
+  color: #F61C7A;
+}
+.user_name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #496333;
+}
+span.club-inf {
+  font-size: 9px;
+  font-weight: 600;
+  color: #979797;
+}
+.user-icon {
+font-size: 30px;
+color: #FDCDE7;
+}
+.risk-btn {
+font-size: 9px;
+padding: 6px 4px;
+color: #03314B;
+border-radius: 2px;
+background: #DEF4FF;
+}
+.price {
+font-size: 9px;
+font-weight: 600;
+color: #03314B;
+padding: 0 !important;
+margin: 0 !important;
+}
+
+.card-title {
+padding: 20px 0 15px 0;
+font-size: 12px;
+font-weight: 500;
+color: #012970;
+font-family: "Poppins", sans-serif;
+}
+.trending-name {
+font-size: 12px;
+}
+span.title-name {
+font-size: 12px;
+font-weight: 600;
+color: black;
+}
+.hashtag-line {
+font-size: 12px;
+color: #4D455D;
+}
+.hashtag {
+font-size: 12px;
+color: #0081C9;
+}
+.pagetitle h1 {
+font-size: 15px;
+margin-bottom: 0;
+font-weight: 600;
+color: #012970;
+}
+.channel-name {
+font-size: 7px;
+font-weight: 600;
+color: #F61C7A;
+}
+.fol {
+font-size: 12px;
+}
+.prices {
+font-size: 9px;
+font-weight: 600;
+color: #496333;
+margin: 0;
+}
+h6.heading {
+font-size: 13px;
+font-weight: 600;
+color: #496333;
+margin: 0;
+padding: 0;
+}
+span.subscript {
+padding: 5px;
+border: 2px solid #FFD859;
+border-radius: 36px;
+font-size: 9px;
+font-weight: 600;
+}
+.club-dis {
+font-size: 10px;
+color: #496333;
+font-weight: 600;
+}
+.risks-btn {
+padding: 5px;
+color: #03314B;
+border-radius: 5px;
+background: #FDCDE7;
+font-size: 10px;
+}
+.dis-line {
+font-size: 12px;
+font-weight: 600;
+color: #000;
+}
+.position-btn {
+padding: 6px;
+color: black;
+border-radius: 5px;
+background: #FDCDE7;
+font-size: 9px;
+}
+.heading-line{
+color: #4D455D;
+  font-size: 15px;
+}
+.user-icon {
+font-size: 35px;
+color: #FDCDE7;
+}
+.select-icon {
+font-size: 14px;
+color: #F61C7A;
+}
+.primary-btn {
+font-size: 10px;
+}
+.channel-detail {
+font-size: 12px;
+font-weight: 600;
+color: #000;
+}
+.date {
+font-size: 10px;
+font-weight: 400;
+color: #979797;
+}
+.expect {
+font-size: 10px;
+font-weight: 500;
+color: #979797;
+}
+.expect-percent {
+font-size: 13px;
+font-weight: 500;
+color: #E6A376;
+}
+.rate {
+font-size: 13px;
+font-weight: 400;
+color: #E6A376;
+}
+span.line {
+font-weight: 500;
+font-size: 12px;
+color: #E6A376;
+}
+.dis {
+font-size: 10px;
+font-weight: 600;
+color: #3500D4;
+}
+button.btn.follow-btn {
+background: #F61C7A;
+color: #fff;
+font-weight: 700;
+font-size: 10px;
+padding: 4px;
+}
+.expect-section {
+padding: 2px;
+border: 2px solid #F61C7A;
+border-radius: 8px;
+}
+}
+@media screen and (min-width: 415px) and (max-width: 501px) {
+  .club-header {
+    font-size: 15px;
+    font-weight: 600;
+    color: #03314B;
+}
+.chat .chat-history .message-data-time {
+  color: #434651;
+  padding-left: 6px;
+  font-size: 12px;
+}
+.chat.chat-history .message {
+  color: #444;
+  padding: 18px 20px;
+  line-height: 21px;
+  font-weight: 600;
+  font-size: 12px;
+  border-radius: 7px;
+  display: inline-block;
+  position: relative;
+}
+.expect-section {
+  padding: 2px;
+  border: 2px solid #F61C7A;
+  border-radius: 8px;
+}
+span.profile-option {
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  background: #FCDDEC;
+  border-radius: 10px;
+  color: #D32276;
+}
+.profile-line {
+  font-size: 12px;
+  font-weight: 700;
+  color: #03314B;
+}
+li.benefit-line {
+  font-size: 12px;
+  color: #03314B;
+}
+.profile-detail {
+  font-weight: 600;
+  margin: 0;
+  padding: 8px;
+  background: #F3FBED;
+  border-radius: 5px;
+  font-size: 10px;
+  color: #849360;
+}
+.danger-btn {
+  font-size: 10px;
+}
+button.btn.follow-btn {
+  background: #F61C7A;
+  color: #fff;
+  font-weight: 700;
+  font-size: 10px;
+  padding: 4px;
+}
+.dis {
+  font-size: 10px;
+  font-weight: 600;
+  color: #3500D4;
+}
+.dis-line {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+}
+.percent {
+  font-size: 10px;
+  font-weight: 600;
+  color: #3500D4;
+}
+.detail {
+  font-size: 12px;
+  font-weight: 600;
+  color: #03314B;
+}
+.user-icon {
+  font-size: 35px;
+  color: #FDCDE7;
+}
+.user_name {
+font-size: 12px;
+font-weight: 700;
+color: #496333;
+}
+.club-icon {
+  padding-right: 1px;
+  padding-left: 1px;
+  font-size: 12px;
+  color: #F61C7A;
+}
+span.club-inf {
+  font-size: 12px;
+  font-weight: 600;
+  color: #979797;
+}
+.risk-btn {
+font-size: 9px;
+padding: 6px 4px;
+color: #03314B;
+border-radius: 2px;
+background: #DEF4FF;
+}
+.risks-btn {
+padding: 5px;
+color: #03314B;
+border-radius: 5px;
+background: #FDCDE7;
+font-size: 12px;
+}
+.position-btn {
+padding: 6px;
+color: black;
+border-radius: 5px;
+background: #FDCDE7;
+font-size: 10px;
+}
+.price {
+font-size: 10px;
+font-weight: 600;
+color: #03314B;
+padding: 0 !important;
+margin: 0 !important;
+}
+.prices {
+font-size: 9px;
+font-weight: 600;
+color: #496333;
+margin: 0;
+}
+.card-title {
+padding: 20px 0 15px 0;
+font-size: 12px;
+font-weight: 500;
+color: #012970;
+font-family: "Poppins", sans-serif;
+}
+.trending-name {
+font-size: 12px;
+}
+span.title-name {
+font-size: 12px;
+font-weight: 600;
+color: black;
+}
+.hashtag-line {
+font-size: 12px;
+color: #4D455D;
+}
+.hashtag {
+font-size: 12px;
+color: #0081C9;
+}
+.pagetitle h1 {
+font-size: 15px;
+margin-bottom: 0;
+font-weight: 600;
+color: #012970;
+}
+.channel-name {
+font-size: 11px;
+font-weight: 600;
+color: #F61C7A;
+}
+.fol {
+font-size: 12px;
+}
+h6.heading {
+font-size: 13px;
+font-weight: 600;
+color: #496333;
+margin: 0;
+padding: 0;
+}
+span.subscript {
+padding: 5px;
+border: 2px solid #FFD859;
+border-radius: 36px;
+font-size: 9px;
+font-weight: 600;
+}
+.club-dis {
+font-size: 10px;
+color: #496333;
+font-weight: 600;
+}
+.heading-line{
+color: #4D455D;
+  font-size: 15px;
+}
+.user-icon {
+font-size: 35px;
+color: #FDCDE7;
+}
+.select-icon {
+font-size: 16px;
+color: #F61C7A;
+}
+.primary-btn {
+font-size: 10px;
+}
+.date {
+font-size: 10px;
+font-weight: 400;
+color: #979797;
+}
+.expect {
+font-size: 10px;
+font-weight: 500;
+color: #979797;
+}
+.expect-percent {
+font-size: 13px;
+font-weight: 500;
+color: #E6A376;
+}
+.rate {
+font-size: 13px;
+font-weight: 400;
+color: #E6A376;
+}
+span.line {
+font-weight: 500;
+font-size: 12px;
+color: #E6A376;
+}
+}
+@media screen and (min-width: 500px) and (max-width: 769px) {
+.chat.chat-history .message {
+  color: #444;
+  padding: 18px 20px;
+  line-height: 21px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 7px;
+  display: inline-block;
+  position: relative;
+}
+.danger-btn {
+  font-size: 14px;
+}
+.club-icon {
+  padding-right: 4px;
+  padding-left: 4px;
+  font-size: 14px;
+  color: #F61C7A;
+}
+span.club-inf {
+font-size: 12px;
+font-weight: 600;
+color: #979797;
+}
+.risk-btn {
+font-size: 12px;
+padding: 14px 10px;
+color: #03314B;
+border-radius: 5px;
+background: #DEF4FF;
+}
+.price {
+font-size: 14px;
+font-weight: 600;
+color: #03314B;
+padding: 0 !important;
+margin: 0 !important;
+}
+.card-title {
+padding: 20px 0 15px 0;
+font-size: 14px;
+font-weight: 500;
+color: #012970;
+font-family: "Poppins", sans-serif;
+}
+
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+.club-icon {
+
+  font-size: 14px;
+  color: #F61C7A;
+}
+span.club-inf {
+  font-size: 12px;
+  font-weight: 600;
+  color: #979797;
+}
+.price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #03314B;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.card-title {
+  padding: 20px 0 15px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
+}
+}
+/* .card {
+background: #fff;
+transition: .5s;
+border: 0;
+margin-bottom: 30px;
+border-radius: .55rem;
+position: relative;
+width: 100%;
+box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+} */
+.chat-app .people-list {
+width: 280px;
+position: absolute;
+left: 0;
+top: 0;
+padding: 20px;
+z-index: 7
+}
+
+
+
+.people-list {
+-moz-transition: .5s;
+-o-transition: .5s;
+-webkit-transition: .5s;
+transition: .5s
+}
+
+.people-list .chat-list li {
+padding: 10px 15px;
+list-style: none;
+border-radius: 3px
+}
+
+.people-list .chat-list li:hover {
+background: #efefef;
+cursor: pointer
+}
+
+.people-list .chat-list li.active {
+background: #efefef
+}
+
+.people-list .chat-list li .name {
+font-size: 15px
+}
+
+.people-list .chat-list img {
+width: 45px;
+border-radius: 50%
+}
+
+.people-list img {
+float: left;
+border-radius: 50%
+}
+
+.people-list .about {
+float: left;
+padding-left: 8px
+}
+
+.people-list .status {
+color: #999;
+font-size: 13px
+}
+
+.chat .chat-header {
+padding: 15px 20px;
+border-bottom: 2px solid #f4f7f6
+}
+
+.chat .chat-header img {
+float: left;
+border-radius: 40px;
+width: 40px
+}
+
+.chat .chat-header .chat-about {
+float: left;
+padding-left: 10px
+}
+
+.chat .chat-history {
+padding: 20px;
+border-bottom: 2px solid #fff
+}
+
+.chat .chat-history ul {
+padding: 0
+}
+
+.chat .chat-history ul li {
+list-style: none;
+margin-bottom: 30px
+}
+
+.chat .chat-history ul li:last-child {
+margin-bottom: 0px
+}
+
+.chat .chat-history .message-data {
+margin-bottom: 15px
+}
+
+.chat .chat-history .message-data img {
+border-radius: 40px;
+width: 40px
+}
+
+.chat .chat-history .message-data-time {
+color: #434651;
+padding-left: 6px
+}
+
+.chat .chat-history .message {
+color: #444;
+padding: 18px 20px;
+line-height: 26px;
+font-size: 16px;
+border-radius: 7px;
+display: inline-block;
+position: relative
+}
+
+.chat .chat-history .message:after {
+bottom: 100%;
+left: 7%;
+border: solid transparent;
+content: " ";
+height: 0;
+width: 0;
+position: absolute;
+pointer-events: none;
+border-bottom-color: #fff;
+border-width: 10px;
+margin-left: -10px
+}
+
+.chat .chat-history .my-message {
+background: #efefef
+}
+
+.chat .chat-history .my-message:after {
+bottom: 100%;
+left: 30px;
+border: solid transparent;
+content: " ";
+height: 0;
+width: 0;
+position: absolute;
+pointer-events: none;
+border-bottom-color: #efefef;
+border-width: 10px;
+margin-left: -10px
+}
+
+.chat .chat-history .other-message {
+background: #e8f1f3;
+text-align: right
+}
+
+.chat .chat-history .other-message:after {
+border-bottom-color: #e8f1f3;
+left: 93%
+}
+
+.chat .chat-message {
+padding: 20px
+}
+
+.online,
+.offline,
+.me {
+margin-right: 2px;
+font-size: 8px;
+vertical-align: middle
+}
+
+.online {
+color: #86c541
+}
+
+.offline {
+color: #e47297
+}
+
+.me {
+color: #1d8ecd
+}
+
+.float-right {
+float: right
+}
+
+.clearfix:after {
+visibility: hidden;
+display: block;
+font-size: 0;
+content: " ";
+clear: both;
+height: 0
+}
+
+@media only screen and (max-width: 767px) {
+.chat-app .people-list {
+    height: 465px;
+    width: 100%;
+    overflow-x: auto;
+    background: #fff;
+    left: -400px;
+    display: none
+}
+.chat-app .people-list.open {
+    left: 0
+}
+.chat-app .chat {
+    margin: 0
+}
+.chat-app .chat .chat-header {
+    border-radius: 0.55rem 0.55rem 0 0
+}
+.chat-app .chat-history {
+    height: 300px;
+    overflow-x: auto
+}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+.chat-app .chat-list {
+    height: 650px;
+    overflow-x: auto
+}
+.chat-app .chat-history {
+    height: 600px;
+    overflow-x: auto
+}
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+.chat-app .chat-list {
+    height: 480px;
+    overflow-x: auto
+}
+.chat-app .chat-history {
+    height: calc(100vh - 350px);
+    overflow-x: auto
+}
+}
+.user-name{
+margin: 0;
+}
+.club-block {
+  pointer-events: none;
+}
+
+.club {
+  pointer-events: all;
+}

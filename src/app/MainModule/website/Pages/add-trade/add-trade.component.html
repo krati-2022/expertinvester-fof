@@ -1,0 +1,92 @@
+<!-- End Page Title -->
+
+<section class="container">
+  <form [formGroup]="AddFeedForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="mx-auto">
+        <div class="card list-card">
+          <!-- <div class="pagetitle">
+            <h1 class="px-3"><i class="bi bi-arrow-left"></i></h1>
+
+          </div> -->
+          <div class="card-body">
+            <div class="row border-bottom py-2">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <h4 class="px-2 heading-line"> <i class="bi bi-arrow-left px-2" (click)="goBack()"></i> {{name}}</h4>
+                  <div class="d-flex align-items-baseline justify-content-between">
+                    <div class="">
+                      <span class="date">Hangout of people who eat sleep and drink</span>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="upload-img">
+                  <!-- <i class="bi bi-cloud-arrow-up-fill"></i> -->
+                  <label for="file-input">
+                    <i class="bi bi-cloud-arrow-up-fill"></i>
+                    <p *ngIf="imageSrc != ''" style="font-size: 14px;">{{imageSrc}}</p>
+                  </label>
+                  <input id="file-input" type="file" accept="pdf" class="cstm-file" (change)="onSelectFile($event)">
+                </div>
+              </div>
+            </div>
+            <!-- Bordered Tabs Justified -->
+
+            <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+              <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
+                aria-labelledby="home-tab">
+                <div class="example">
+                  <div class="card my-3">
+                    <div class="card-body">
+
+                      <div class="row py-3">
+                        <div class="form-group">
+                          <label class="form-line" for="exampleInputEmail4">Enter Description</label>
+                          <!-- <textarea type="text" class="form-control" formControlName="description" id="exampleInputEmail4" aria-describedby="emailHelp"
+                            placeholder="Enter Description"[ngClass]="{ 'is-invalid': submitted && AddFeedControl.description.errors }"></textarea> -->
+                          <angular-editor placeholder="Enter Description" formControlName="description" [config]="editorConfig" ></angular-editor>
+
+                          <div *ngIf=" submitted && AddFeedControl.description.errors" class="invalid-feedback">
+                            <div *ngIf="AddFeedControl.description.errors.required">Description is required.</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row py-3">
+                        <div class="form-group">
+                          <label class="form-line" for="exampleInputEmail3">External Link</label>
+                          <input type="text" formControlName="externallink" class="form-control" id="exampleInputEmail3"
+                            aria-describedby="emailHelp" placeholder="External Link">
+                        </div>
+                      </div>
+
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-6 mx-auto d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">
+                              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                                *ngIf="isLoading"></span>
+                              <span *ngIf="!isLoading">Submit</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
+              </div>
+
+            </div><!-- End Bordered Tabs Justified -->
+
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </form>
+</section>

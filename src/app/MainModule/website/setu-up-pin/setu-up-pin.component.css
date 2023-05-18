@@ -1,0 +1,89 @@
+main{ background: #f3edff;}
+
+.logo img {
+  max-height: 90px;
+  margin-right: 6px;
+  width: 260px;
+}
+
+.card {
+  border: none!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 8px;
+  border-radius: 12px;
+}
+
+
+.card-title {
+  padding: 0px 0 15px 0;
+  font-weight: 500;
+  color: #0d6efd;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 30px!important;
+}
+
+
+button.btn.btn-primary.w-100 {
+  height: 50px;
+  font-size: 18px;
+  border-radius: 38px;
+  font-weight: 500;
+  box-shadow: rgb(0 0 0 / 18%) 0px 2px 8px;
+}
+
+.col-2 {
+  margin-right: 12px;
+}
+
+
+.form-control {
+  padding: 10px 15px;
+ 
+}
+
+label.form-label {
+  color: #242222;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.marktext{padding: 0px 0 15px 0;
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 30px!important;
+}
+
+
+.card-header h5 {text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  /* color: #000; */
+}
+
+
+
+
+
+.card-header {
+    border: none !important;
+}
+
+
+@media screen and (min-width: 300px) and (max-width: 767px) {
+
+    .align-items-center {
+        padding: 0px;
+    }
+
+    .px-5 {
+        padding-right: 5px !important;
+        padding-left: 5px !important;
+    }
+
+}

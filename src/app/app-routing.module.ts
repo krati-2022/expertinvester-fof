@@ -3,13 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'admin',
     loadChildren: () => import('./MainModule/admin/admin.module').then(m => m.AdminModule)
   },
+  {
+    path: '',
+    loadChildren: () => import('./MainModule/website/website.module').then(m => m.WebsiteModule)
+  },
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./MainModule/main/main.module').then(m => m.MainModule)
+  // },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration : 'enabled'}),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

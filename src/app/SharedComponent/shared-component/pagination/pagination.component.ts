@@ -8,7 +8,7 @@ import {  Component,
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+  styleUrls: ['./pagination.component.css'],
 })
 export class PaginationComponent implements OnChanges {
   @Input() current: number = 0;
@@ -21,7 +21,7 @@ export class PaginationComponent implements OnChanges {
   public pages: number[] = [];
 
   ngOnChanges(changes: SimpleChanges | any): void {
-  // console.log('changes: ', changes);
+    // console.log('changes: ', changes);
     if (
       (changes.current && changes.current.currentValue) ||
       (changes.total && changes.total.currentValue)
@@ -36,6 +36,9 @@ export class PaginationComponent implements OnChanges {
   }
 
   public onNext(): void {
+    this.next.emit(this.current);
+  }
+  public onScroll(): void {
     this.next.emit(this.current);
   }
 

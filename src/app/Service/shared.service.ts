@@ -2,34 +2,49 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ExpertInvestorManagementDetails } from '../MainModule/admin/expert-and-investor/expert-and-investor.classes';
-import { ExpertManagementDetails } from '../MainModule/admin/expert/expert.classes';
-import { InvestorManagementDetails } from '../MainModule/admin/investor/investor.classes';
 import {
   SendOtp,
-  UserIsExist,
   VerifyOtp,
-} from '../MainModule/admin/sign-in/sign-in.class';
-import { SetPin } from '../MainModule/admin/setu-up-pin/set-up-pin.classes';
-import { Login } from '../MainModule/admin/enter-pin/enter-pin.classes';
-import { FollowClub } from '../MainModule/admin/Pages/club-list/club-list.classes';
-import { AddTrade } from '../MainModule/admin/Pages/add-trade/add-trade.classes';
+} from '../MainModule/website/sign-in/sign-in.class';
 import {
   SendOtpForRecoverPin,
   VerifyOtpForRecovery,
-} from '../MainModule/admin/pin-recovery/pin-recovery.classes';
-import { ChannelApproveReject, ChannelSubscriber } from '../MainModule/admin/components/channel/channel.classes';
-import { AddPostDetails } from '../MainModule/admin/Pages/trades/trades.classes';
+} from '../MainModule/website/pin-recovery/pin-recovery.classes';
+import { Login } from '../MainModule/website/enter-pin/enter-pin.classes';
+import { SetPin } from '../MainModule/website/setu-up-pin/set-up-pin.classes';
+import { InvestorManagementDetails } from '../MainModule/website/investor/investor.classes';
+import { ExpertInvestorManagementDetails } from '../MainModule/website/expert-and-investor/expert-and-investor.classes';
+import { FollowClub } from '../MainModule/website/components/club/club.classes';
+import { AddTrade } from '../MainModule/website/Pages/add-trade/add-trade.classes';
+import {
+  ChannelApproveReject,
+  ChannelLike,
+  ChannelSubscriber,
+} from '../MainModule/website/components/channel/channel.classes';
+import { AddPostDetails } from '../MainModule/website/Pages/trades/trades.classes';
+import { ContactUs } from '../MainModule/website/Pages/contact-us/contact-us.classes';
+import { IdeaTracker } from '../MainModule/website/components/channel-details/channel-details.classes';
+import { UpdateProfileDetails } from '../MainModule/website/Pages/profile-page/profile-page.classe';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.baseUrlForWebsite;
   public toggleSidebar: EventEmitter<any> = new EventEmitter();
+  public showSearchBar: EventEmitter<any> = new EventEmitter();
   public search = new BehaviorSubject<string>('');
+  private data = new BehaviorSubject<string>('initial data');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+
+  getData(): Observable<any> {
+    return this.data.asObservable();
+  }
+
+  setData(newData: any): void {
+    this.data.next(newData);
+  }
 
   SendOtp(data: SendOtp): Observable<any> {
     return this.http.post(this.apiUrl + 'api/Login/SendOTP', data);
@@ -45,6 +60,7 @@ export class SharedService {
   VerifyOtp(data: VerifyOtp): Observable<any> {
     return this.http.post(this.apiUrl + 'api/Login/ConfirmOTP', data);
   }
+
   VerifyRecoverPinOtp(data: VerifyOtpForRecovery): Observable<any> {
     return this.http.post(
       this.apiUrl + 'api/Login/ForgotPasswordConfirmOTP',
@@ -66,6 +82,11 @@ export class SharedService {
     return this.http.post(this.apiUrl + 'api/Login/SetPIN', data);
   }
 
+  GetUserDetails(mobile_No: string): Observable<any> {
+    return this.http.get(
+      this.apiUrl + 'api/ExpertInvestor/GetUserDetails?mobileno=' + mobile_No
+    );
+  }
   GetCountry(): Observable<any> {
     return this.http.get(this.apiUrl + 'api/ExpertInvestor/GetCountrylist');
   }
@@ -73,8 +94,8 @@ export class SharedService {
   GetIdeaonlist(countryname: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'api/ExpertInvestor/GetIdeaonlist?countryname=' +
-      countryname
+        'api/ExpertInvestor/GetIdeaonlist?countryname=' +
+        countryname
     );
   }
 
@@ -138,12 +159,12 @@ export class SharedService {
   ): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'GetFeedPost?Mobile_No=' +
-      mobile_No +
-      '&pageNumber=' +
-      pageNumber +
-      '&pageSize=' +
-      pageSize
+        'GetFeedPost?Mobile_No=' +
+        mobile_No +
+        '&pageNumber=' +
+        pageNumber +
+        '&pageSize=' +
+        pageSize
     );
   }
 
@@ -163,33 +184,40 @@ export class SharedService {
     return this.http.post(this.apiUrl + 'api/Channel/AddchannelMaster', data);
   }
 
+  UpdateChannel(data: any): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'api/Channel/UpdatechannelMaster',
+      data
+    );
+  }
+
   GetActivePost(mobile_No: string, id: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'api/Channel/GetChannelActivePost?Mobile_No=' +
-      mobile_No +
-      '&channelid=' +
-      id
+        'api/Channel/GetChannelActivePost?Mobile_No=' +
+        mobile_No +
+        '&channelid=' +
+        id
     );
   }
 
   GetPastPost(mobile_No: string, id: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'api/Channel/GetChannelPastPost?Mobile_No=' +
-      mobile_No +
-      '&channelid=' +
-      id
+        'api/Channel/GetChannelPastPost?Mobile_No=' +
+        mobile_No +
+        '&channelid=' +
+        id
     );
   }
 
   GetProfile(mobile_No: string, id: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'api/Channel/GetChannelProfile?Mobile_No=' +
-      mobile_No +
-      '&channelid=' +
-      id
+        'api/Channel/GetChannelProfile?Mobile_No=' +
+        mobile_No +
+        '&channelid=' +
+        id
     );
   }
 
@@ -200,10 +228,22 @@ export class SharedService {
   GetFeedPostdetail(Mobileno: string, feedpostid: string): Observable<any> {
     return this.http.get(
       this.apiUrl +
-      'GetFeedPostdetail?Mobileno=' +
-      Mobileno +
-      '&feedpostid=' +
-      feedpostid
+        'GetFeedPostdetail?Mobileno=' +
+        Mobileno +
+        '&feedpostid=' +
+        feedpostid
+    );
+  }
+  GetFeedPostChanneldetail(
+    Mobileno: string,
+    ChannelPostId: string
+  ): Observable<any> {
+    return this.http.get(
+      this.apiUrl +
+        'api/Channel/GetChannelPostDetail?Mobile_No=' +
+        Mobileno +
+        '&ChannelPostId=' +
+        ChannelPostId
     );
   }
 
@@ -215,12 +255,12 @@ export class SharedService {
     const data = {};
     return this.http.post(
       this.apiUrl +
-      'FeedPostblock?FeedPostID=' +
-      id +
-      '&mobileno=' +
-      mobile_No +
-      '&block=' +
-      status,
+        'FeedPostblock?FeedPostID=' +
+        id +
+        '&mobileno=' +
+        mobile_No +
+        '&block=' +
+        status,
       data
     );
   }
@@ -233,18 +273,21 @@ export class SharedService {
     const data = {};
     return this.http.post(
       this.apiUrl +
-      'UpdateFeedPostlike?FeedPostID=' +
-      FeedPostID +
-      '&like=' +
-      status +
-      '&Mobileno=' +
-      mobile_No,
+        'UpdateFeedPostlike?FeedPostID=' +
+        FeedPostID +
+        '&like=' +
+        status +
+        '&Mobileno=' +
+        mobile_No,
       data
     );
   }
 
-  ChannelPostLikeDislike(data: any): Observable<any> {
-    return this.http.post(this.apiUrl + 'UpdateChannelMasterLike', data);
+  ChannelPostLikeDislike(data: ChannelLike): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'api/Channel/UpdateChannelMasterLike',
+      data
+    );
   }
   GetLikes(id: string): Observable<any> {
     return this.http.get(this.apiUrl + 'GetLikeCount?id=' + id);
@@ -253,10 +296,10 @@ export class SharedService {
   GetClubDetails(mobileNumber: string, id: string) {
     return this.http.get(
       this.apiUrl +
-      'api/Club/GetUserClublistDetail?mobileno=' +
-      mobileNumber +
-      '&clublistid=' +
-      id
+        'api/Club/GetUserClublistDetail?mobileno=' +
+        mobileNumber +
+        '&clublistid=' +
+        id
     );
   }
 
@@ -271,7 +314,77 @@ export class SharedService {
     return this.http.post(this.apiUrl + 'api/channel/AddChannelPost', data);
   }
 
-  ApproveRejectChannel(data: ChannelApproveReject): Observable<any>{
-    return this.http.post(this.apiUrl + 'api/channel/UpdateChannelMasterApproveReject', data)
+  ApproveRejectChannel(data: ChannelApproveReject): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'api/channel/UpdateChannelMasterApproveReject',
+      data
+    );
+  }
+
+  FilterData(
+    mobile_No: number,
+    Club: string,
+    Channel: string,
+    Expert: string,
+    Investor: string,
+    ExpertAndInvestor: string,
+    pageNumber: number,
+    pageSize: number
+  ): Observable<any> {
+    return this.http.get(
+      this.apiUrl +
+        'GetFeedPost?Mobile_No=' +
+        mobile_No +
+        '&Club=' +
+        Club +
+        '&Channel=' +
+        Channel +
+        '&Expert=' +
+        Expert +
+        '&Investor=' +
+        Investor +
+        '&ExpertAndInvestor=' +
+        ExpertAndInvestor +
+        '&pageNumber=' +
+        pageNumber +
+        '&pageSize=' +
+        pageSize
+    );
+  }
+
+  GetChannelDetails(
+    mobile_No: string,
+    ChannelMasterId: string
+  ): Observable<any> {
+    return this.http.get(
+      this.apiUrl +
+        'api/Channel/GetChannelMasterforEdit?Mobile_No=' +
+        mobile_No +
+        '&ChannelMasterId=' +
+        ChannelMasterId
+    );
+  }
+
+  ContactUs(data: ContactUs): Observable<ContactUs> {
+    return this.http.post(
+      this.apiUrl + 'api/ExpertInvestor/AddContactDetails',
+      data
+    );
+  }
+
+  IdeaTracker(data: IdeaTracker): Observable<IdeaTracker> {
+    return this.http.post(
+      this.apiUrl + 'api/Channel/UpdateChannelPostActivePast',
+      data
+    );
+  }
+
+  UpdateUserDetails(
+    data: UpdateProfileDetails
+  ): Observable<UpdateProfileDetails> {
+    return this.http.post(
+      this.apiUrl + 'api/ExpertInvestor/UpdateUserDetails',
+      data
+    );
   }
 }

@@ -1,0 +1,134 @@
+
+<section class="d-none d-md-none d-lg-block">
+
+  <div class="row">
+    <div class="card">
+      <div class="pagetitle">
+        <div class="d-flex justify-content-between align-items-baseline">
+          <div>
+            <h1 class="px-3 py-1">Club</h1>
+          </div>
+          <!-- <button type="button" class="btn btn-outline-secondary" (click)="open()"><i class="bi bi-sliders"
+              style="width: 12px; padding-right: 7px;"></i><span style="padding-left: 12px;">Filter</span></button> -->
+        </div>
+      </div>
+      <div class="m-2">
+        <div class="" >
+          <div class="" >
+            <div class="d-flex justify-content-center" *ngIf="isLoading == true" style="height: 50vh; align-items: center;">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div class="example">
+              <div class="card list-card  p-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
+               <div class="">
+                <div class="row">
+                  <div class="channel-name d-flex col-12">
+                    <div class="col-8" (click)="getDetails(items)">
+                      <span class="club-header"  style="cursor: pointer;"> {{items.name}}</span>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                      <span class="">
+                        <button type="button" class="btn follow-btn" (click)="followClub(items.id)" *ngIf="items.follow == 'Follow'">{{items.follow}}</button>
+                        <button type="button" class="btn follow-btn" (click)="unFollowClub(items.id)" *ngIf="items.follow == 'Followed'">{{items.follow}}</button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="">
+                 <p class="club-dis" (click)="getDetails(items)">{{items.description}}</p>
+                </div>
+               </div>
+                 <div class="container expect-section my-2 " (click)="getDetails(items)">
+                   <div class="grid-data d-flex">
+                     <div class="col-5  border-end ">
+                       <div class="d-flex "><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                           class="club-inf">Impression</span></div>
+                       <div class="club-icon px-2">{{items.likecount}}</div>
+                     </div>
+                     <div class="col-4 px-2 border-end">
+                       <div class="d-flex "><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                           class="club-inf">Followers</span></div>
+                       <div class="club-icon px-2">{{items.followersCount}}</div>
+                     </div>
+                     <div class="col-3  px-1">
+                       <div class="d-flex "><span class="club-icon"><i class="bi bi-pencil-square "></i></span><span
+                           class="club-inf">Post</span></div>
+                       <div class="club-icon px-3">{{items.postcount}}</div>
+                     </div>
+                   </div>
+                   </div>
+              </div>
+             </div>
+          </div>
+        </div><!-- End Bordered Tabs Justified -->
+      </div>
+    </div>
+  </div>
+</section>
+   <app-responsive-view></app-responsive-view>
+
+
+  <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+    <form>
+      <div class="modal-dialog" role="document" style="width: 40%; ">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="filterLabel">Filter</h5>
+            <button type="button" class="close " (click)="close()" style="border: 0;background: #fff;">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          <div class="container">
+            <div class="">
+              <div class="row border-bottom  ">
+                <div>
+                 
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Accepted">
+                    <label class="form-check-label filter-text" for="flexRadioDefault3">
+                      Expert
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Pending">
+                    <label class="form-check-label filter-text" for="flexRadioDefault3">
+                      Investor
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Delivered">
+                    <label class="form-check-label filter-text" for="flexRadioDefault4">
+                      Expert & Investor
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Cancelled">
+                    <label class="form-check-label filter-text" for="flexRadioDefault5">
+                      Club
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="Cancelled">
+                    <label class="form-check-label filter-text" for="flexRadioDefault5">
+                      Channel
+                    </label>
+                  </div>
+  
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row px-3 py-3 text-center">
+            <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary"
+                style="width: inherit; font-size: 12px; font-weight: 500; " (click)="close()">CLEAR FILTER</button></div>
+            <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger"
+                style="width: inherit; font-size: 12px; font-weight: 500;" (click)="close()">APPLY</button></div>
+          </div>
+  
+        </div>
+      </div>
+    </form>
+  </div>

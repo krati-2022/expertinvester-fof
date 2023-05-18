@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://103.117.66.70:5008/'
+  baseUrlForWebsite: 'http://103.117.66.70:5008/',
+  baseUrlForAdmmin: 'http://103.117.66.70:5010/',
   // apiUrl: 'https://api.expertinvester.com/'
 };
 

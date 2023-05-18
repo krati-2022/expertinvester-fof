@@ -1,0 +1,155 @@
+<section class="container my-5">
+  <form [formGroup]="AddInvestorForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+
+        <div class="card list-card">
+          <div class="card-body">
+            <h5 class="card-title">Investor-Form</h5>
+
+            <!-- General Form Elements -->
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row mb-3">
+                    <label for="inputText" class="col-lg-4 col-form-label form-line"><i
+                        class="bi bi-person px-2"></i>User Name</label>
+                    <div class="col-lg-8">
+                      <input type="text" class="form-control" formControlName="name"  [ngClass]="{ 'is-invalid': submitted && InvestorControl.name.errors }">
+                      <div *ngIf=" submitted && InvestorControl.name.errors" class="invalid-feedback">
+                        <div *ngIf="InvestorControl.name.errors.required">Name is required.</div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputEmail" class="col-lg-4 col-form-label form-line"><i
+                        class="bi bi-envelope px-2"></i>Email</label>
+                    <div class="col-lg-8">
+                      <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted && InvestorControl.email.errors }" maxlength="50">
+                      <div *ngIf=" submitted && InvestorControl.email.errors" class="invalid-feedback">
+                        <div *ngIf="InvestorControl.email.errors.required">Email is required.</div>
+                        <div *ngIf="InvestorControl.email.errors.email">Email is invalid.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i
+                        class="bi bi-database px-2"></i>Experience</label>
+                    <div class="col-lg-8">
+                      <!-- <input type="text" class="form-control" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experience.errors }"> -->
+                      <select class="form-select" aria-label="Default select example" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experience.errors }">
+                        <option [value]="item" *ngFor="let item of experience">{{item}}</option>
+                      </select>
+                      <div *ngIf=" submitted && InvestorControl.experience.errors" class="invalid-feedback">
+                        <div *ngIf="InvestorControl.experience.errors.required">Experience is required.</div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="inputPassword" class="col-lg-4 col-form-label form-line"><i
+                        class="bi bi-pencil px-2"></i>About Us</label>
+                    <div class="col-lg-8">
+                      <textarea class="form-control" formControlName="aboutus" style="height: 100px" [ngClass]="{ 'is-invalid': submitted && InvestorControl.aboutus.errors }"></textarea>
+
+                      <div *ngIf=" submitted && InvestorControl.aboutus.errors" class="invalid-feedback">
+                        <div *ngIf="InvestorControl.aboutus.errors.required">About Us is required.</div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+
+                    <div class="row mb-3">
+                      <label for="inputNumber" class="col-lg-4 col-form-label form-line"><i class="bi bi-book px-2"></i>Knowledge
+                        Level</label>
+                      <div class="col-lg-8">
+                        <!-- <input type="text" class="form-control" formControlName="knowledgelevel" [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }"> -->
+                        <select class="form-select" aria-label="Default select example" formControlName="knowledgelevel"
+                          [ngClass]="{ 'is-invalid': submitted && InvestorControl.knowledgelevel.errors }">
+                          <option [value]="item" *ngFor="let item of knowledgeLevel">{{item}}</option>
+                        </select>
+                        <div *ngIf=" submitted && InvestorControl.knowledgelevel.errors" class="invalid-feedback">
+                          <div *ngIf="InvestorControl.knowledgelevel.errors.required">Knowledge Level is required.</div>
+                        </div>
+                    
+                      </div>
+                    </div>
+
+
+                  <div class="row mb-3">
+                    <label class="col-lg-4 col-form-label form-line"><i class="bi bi-explicit px-2"></i>I am Expert in </label>
+                    <div class="col-lg-8">
+                      <select class="form-select" aria-label="Default select example" formControlName="experttype" (change)="getCountry(AddInvestorForm.value.experttype)" [ngClass]="{ 'is-invalid': submitted && InvestorControl.experttype.errors }" >
+                        <option [value]="item.countryName" *ngFor="let item of country">{{item.countryName}}</option>
+                      </select>
+                      <div *ngIf=" submitted && InvestorControl.experttype.errors" class="invalid-feedback">
+                        <div *ngIf="InvestorControl.experttype.errors.required">Expert type is required.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-lg-4 col-form-label form-line"><i class="bi bi-person-video3 px-2"></i>I Want idea
+                      on </label>
+                    <div class="col-lg-8 mb-2">
+                      <button type="button" class="btn btn-primary w-100" [disabled]="ideaOn.length == 0" (click)="openPopUp()">I Want idea on</button>
+                      <div *ngIf="submitted && ideaOnlist.length == 0" style="color: red;">Please select at least one</div>
+                      <div *ngIf="isData == 0" style="color: red;">No Data</div>
+                      <div class="" *ngFor="let item of ideaOnlist">
+                        <div class="row">
+                          <div class="col-3">
+                            <span class="badge bg-primary">{{item.ideaOn}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3 mt-3">
+                <div class="col-lg-6 mx-auto">
+                  <!-- <button class="btn btn-primary w-100 " type="submit">Submit</button> -->
+                  <button class="btn btn-primary w-100 " type="submit" [disabled]="isLoading">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+                     <span *ngIf="!isLoading">Submit</span>
+                  </button>
+                </div>
+              </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">I Want idea on</h5>
+            <button type="button" class="close" style="border: 0;background: #fff;" (click)="closePopUp()">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex" *ngFor="let item of ideaOn">
+              <input type="checkbox" formControlName="ideaOn" [id]="item.ideaOn" (change)="getIdeaOn(AddInvestorForm.value.ideaOn,item,item.ideaOn)">
+              &nbsp;<label for="scales" [for]="item.ideaOn">{{item.ideaOn}}</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" (click)="closePopUp()">Close</button> -->
+            <button type="button" class="btn btn-primary" (click)="closePopUp()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
