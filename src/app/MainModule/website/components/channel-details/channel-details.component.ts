@@ -22,6 +22,7 @@ export interface PostDetails {
   isChannelApprove: boolean;
   isChannelLiked: boolean;
   isUserChannel: string;
+  likeCount: number;
   likecount: number;
   post: number;
   reputation: number;
@@ -30,6 +31,7 @@ export interface PostDetails {
   sebi: string;
   subscription: string;
   isSubscribe: boolean;
+  isLiked: boolean;
   username: string;
   usertype: string;
   stockname: string;
@@ -38,6 +40,8 @@ export interface PostDetails {
   targetprice: string;
   externallink: string;
   createdate: string;
+  expected_Move: string;
+  channelId: string;
   benefits: any;
   idealfor: any;
 }
@@ -61,6 +65,8 @@ export class ChannelDetailsComponent implements OnInit {
   activeTab: any = 'Active-Post';
   isUserChannel: any;
   ideaTracker = ['Target', 'Stop Loss'];
+  isLoading: boolean = false;
+  isLike: boolean = false;
   channelSubscriber = new ChannelSubscriber();
   constructor(
     private _ActivatedRoute: ActivatedRoute,
@@ -78,21 +84,6 @@ export class ChannelDetailsComponent implements OnInit {
     this.isSubscribed = this._ActivatedRoute.snapshot.paramMap.get('param5');
     // console.log('this.username: ', this.username);
     this.getActivePost();
-    // if (this.isSubscribed == 'true') {
-    // }else if(this.isSubscribed == 'false'){
-    //   this.GetPastPost()
-    //   this.activeTab = 'Past-Post';
-    // }
-    // Pusher.logToConsole = true;
-    // const pusher = new Pusher('523e3cf86c481c43e5a5', {
-    //   cluster: 'ap2',
-    // });
-    // const channel = pusher.subscribe('channel');
-    // channel.bind('my-event', (data: any) => {
-    //   // alert(JSON.stringify(data));
-    //   this.messages.push(data);
-    //   console.log(' this.messages: ', this.messages);
-    // });
   }
 
   goBack() {
@@ -107,10 +98,13 @@ export class ChannelDetailsComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-
+    if (this.isLike == false) {
+      this.isLoading = true;
+    }
     this._service.GetActivePost(mobile_No, this.id).subscribe((res) => {
       this.notFound = res.message;
       this.activePostDetails = res.data;
+      this.isLoading = false;
 
       // this.isUserChannel = this.activePostDetails[0].isUserChannel;
       // console.log('this.channelDetails: ', this.channelDetails);
@@ -125,10 +119,13 @@ export class ChannelDetailsComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
+    this.isLoading = true;
 
     this._service.GetPastPost(mobile_No, this.id).subscribe((res) => {
       this.notFound = res.message;
       this.pastPostDetails = res.data;
+      this.isLoading = false;
+
       // console.log('this.channelDetails: ', this.channelDetails);
     });
   }
@@ -141,10 +138,13 @@ export class ChannelDetailsComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-    console.log('mobile_No: ', mobile_No);
+    // console.log('mobile_No: ', mobile_No);
+    this.isLoading = true;
 
     this._service.GetProfile(mobile_No, this.id).subscribe((res) => {
       this.profile = res.data;
+      this.isLoading = false;
+
       // console.log('this.channelDetails: ', this.channelDetails);
     });
   }
@@ -174,6 +174,20 @@ export class ChannelDetailsComponent implements OnInit {
     this.router.navigate([
       'home/list/' + this.id + '/' + this.mobile_No + '/' + this.username,
     ]);
+  }
+
+  like(channelId: string, status: boolean) {
+    let formData = {
+      channelId: channelId,
+      like: status,
+      mobileno: this.mobile_No,
+    };
+    this.isLike = true;
+    this._service.ChannelPostLikeDislike(formData).subscribe((res) => {
+      // console.log('res: ', res);
+      this.getActivePost();
+      // this.getLikes(id)
+    });
   }
 
   jumoToChannel() {

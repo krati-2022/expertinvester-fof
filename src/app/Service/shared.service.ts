@@ -183,6 +183,7 @@ export class SharedService {
   AddChannel(data: any): Observable<any> {
     return this.http.post(this.apiUrl + 'api/Channel/AddchannelMaster', data);
   }
+
   UpdateChannel(data: any): Observable<any> {
     return this.http.post(
       this.apiUrl + 'api/Channel/UpdatechannelMaster',
@@ -231,6 +232,18 @@ export class SharedService {
         Mobileno +
         '&feedpostid=' +
         feedpostid
+    );
+  }
+  GetFeedPostChanneldetail(
+    Mobileno: string,
+    ChannelPostId: string
+  ): Observable<any> {
+    return this.http.get(
+      this.apiUrl +
+        'api/Channel/GetChannelPostDetail?Mobile_No=' +
+        Mobileno +
+        '&ChannelPostId=' +
+        ChannelPostId
     );
   }
 

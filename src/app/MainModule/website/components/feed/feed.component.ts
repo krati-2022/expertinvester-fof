@@ -134,7 +134,7 @@ export class FeedComponent implements OnInit {
   searchKey: string = '';
   filterForm: FormGroup | any;
   scrollPosition = 0;
-  data = DATA
+  data = DATA;
   ideaTracker = ['Target', 'Stop Loss'];
   Club: string = '';
   Channel: string = '';
@@ -142,6 +142,8 @@ export class FeedComponent implements OnInit {
   Investor: string = '';
   ExpertAndInvestor: string = '';
   showSearch: boolean = false;
+  isLoading: boolean = false;
+  isLike: boolean = false;
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -169,17 +171,22 @@ export class FeedComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
+    if (this.isLike == false) {
+      this.isLoading = true;
+    }
     this._service
       .GetFeed(mobile_No, this.current, this.perPage)
       .subscribe((res) => {
         // console.log('res: ', res.items[0]);
         this.feedDetails = res.items;
+        this.isLoading = false;
         // console.log('this.feedDetails: ', this.feedDetails);
         // console.log(this.feedDetails);
 
         // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
       });
   }
+
   getChannel() {
     let mobile_No = '';
     var splitString = this.mobile_number.split('');
@@ -188,9 +195,10 @@ export class FeedComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-
+    this.isLoading = true;
     this._service.GetChannel(mobile_No).subscribe((res) => {
       this.channelDetails = res.data;
+      this.isLoading = false;
       // console.log('this.channelDetails: ', this.channelDetails);
     });
   }
@@ -203,11 +211,13 @@ export class FeedComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
+    this.isLoading = true;
     this._service.GetMasterData(mobile_No).subscribe((res) => {
       this.clubList = res.data;
       // console.log('this.clubList : ', this.clubList);
       let data = this.clubList.filter((i) => i.follow == 'Followed');
       this.count = data.length;
+      this.isLoading = false;
     });
   }
 
@@ -363,6 +373,8 @@ export class FeedComponent implements OnInit {
         '/' +
         item.name +
         '/' +
+        item.isUserChannel +
+        '/' +
         item.isSubscribed,
     ]);
   }
@@ -393,6 +405,7 @@ export class FeedComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
+    this.isLike = true;
     this._service
       .FeedPostLikeDislike(id, status, mobile_No)
       .subscribe((res) => {
@@ -417,7 +430,7 @@ export class FeedComponent implements OnInit {
     <any>$('#exampleModalCenter').modal('hide');
   }
   onFilter(event: any) {
-    event.checked = true
+    event.checked = true;
     switch (event.name) {
       case 'Club':
         this.Club = this.filterForm.value.name == true ? 'Club' : '';
@@ -479,13 +492,13 @@ export class FeedComponent implements OnInit {
       });
   }
 
-  ClearAll(){
+  ClearAll() {
     // console.log(this.data);
-    this.data.map((i:any) => {
-      i.checked = false
+    this.data.map((i: any) => {
+      i.checked = false;
     });
     // (<any>$('#filter')).modal('hide');
-    this.GetFeed()
+    this.GetFeed();
   }
 
   @HostListener('window:scroll', [])

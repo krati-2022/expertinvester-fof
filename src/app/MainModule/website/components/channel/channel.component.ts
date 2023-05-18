@@ -62,6 +62,9 @@ export class ChannelComponent implements OnInit {
   searchKey: string = '';
   filterForm: FormGroup | any;
   data = DATA;
+  isLoading: boolean = false;
+  isLike: boolean = false;
+
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -86,9 +89,12 @@ export class ChannelComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-
+    if(this.isLike == false){
+      this.isLoading = true;
+    }
     this._service.GetChannel(mobile_No).subscribe((res) => {
       this.channelDetails = res.data;
+      this.isLoading = false;
       // console.log('this.channelDetails: ', this.channelDetails);
     });
   }
@@ -113,46 +119,6 @@ export class ChannelComponent implements OnInit {
         '/' +
         item.isSubscribed,
     ]);
-  }
-
-  getMasterData() {
-    let mobile_No = '';
-    var splitString = this.mobileNumber.split('');
-    // console.log('this.mobileNumber: ', this.mobileNumber);
-    if (splitString[0] == '+') {
-      splitString[0] = '%2B';
-      var joinString = splitString.join('');
-      mobile_No = joinString;
-    }
-    this._service.GetMasterData(mobile_No).subscribe((res) => {
-      this.clubList = res.data;
-      // console.log('this.clubList: ', this.clubList);
-      // console.log('this.clubList : ', this.clubList);
-      let data = this.clubList.filter((i) => i.follow == 'Followed');
-      this.count = data.length;
-    });
-  }
-
-  followClub(clublistId: string) {
-    this.followClubDetails = new FollowClub({
-      clublistId: clublistId,
-      mobileno: this.mobileNumber,
-    });
-    this._service.FollowClub(this.followClubDetails).subscribe((res) => {
-      // console.log('res: ', res);
-      this.getMasterData();
-    });
-  }
-
-  unFollowClub(clublistId: string) {
-    this.followClubDetails = new FollowClub({
-      clublistId: clublistId,
-      mobileno: this.mobileNumber,
-    });
-    this._service.UnFollowClub(this.followClubDetails).subscribe((res) => {
-      // console.log('res: ', res);
-      this.getMasterData();
-    });
   }
 
   subscribe(item: any) {
@@ -263,7 +229,20 @@ export class ChannelComponent implements OnInit {
       });
   }
 
-  ClearAll(){
+  like(channelId: string, status: boolean) {
+    let formData = {
+      channelId: channelId,
+      like: status,
+      mobileno: this.mobileNumber,
+    };
+    this.isLike = true
+    this._service.ChannelPostLikeDislike(formData).subscribe((res) => {
+      // console.log('res: ', res);
+      this.getChannel();
+      // this.getLikes(id)
+    });
+  }
+  ClearAll() {
     this.data.map((i: any) => {
       i.checked = false;
     });

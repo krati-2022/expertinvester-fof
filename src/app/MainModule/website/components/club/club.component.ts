@@ -32,6 +32,7 @@ export class ClubComponent implements OnInit {
   public current = 0;
   public itemsToDisplay: any;
   public perPage = 10;
+  isLoading: boolean = false
   constructor(private _service: SharedService, private router: Router) {}
 
   ngOnInit(): void {
@@ -51,28 +52,14 @@ export class ClubComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
+    this.isLoading = true
     this._service.GetMasterData(mobile_No).subscribe((res) => {
       this.clubList = res.data;
       // console.log('this.clubList: ', this.clubList);
       // console.log('this.clubList : ', this.clubList);
       let data = this.clubList.filter((i) => i.follow == 'Followed');
       this.count = data.length;
-    });
-  }
-
-  getChannel() {
-    let mobile_No = '';
-    var splitString = this.mobileNumber.split('');
-    if (splitString[0] == '+') {
-      splitString[0] = '%2B';
-      var joinString = splitString.join('');
-      mobile_No = joinString;
-    }
-
-    this._service.GetChannel(mobile_No).subscribe((res) => {
-      console.log('res: ', res);
-      this.channelDetails = res.data;
-      // console.log('this.channelDetails: ', this.channelDetails);
+       this.isLoading = false;
     });
   }
 
@@ -96,10 +83,6 @@ export class ClubComponent implements OnInit {
       // console.log('res: ', res);
       this.getMasterData();
     });
-  }
-
-  AddChannel() {
-    this.router.navigate(['home/add-channel']);
   }
 
   getDetails(item: any) {
@@ -136,33 +119,9 @@ export class ClubComponent implements OnInit {
     ]);
   }
 
-  getFeedDetails(id: string, recordType: string) {
-    switch (recordType) {
-      case 'ClubRecord':
-        this.router.navigate(['home/details/' + id + '/' + this.mobileNumber]);
-        break;
-      case 'ChannelRecord':
-        this.router.navigate([
-          'home/listGroup/' + id + '/' + this.mobileNumber,
-        ]);
-        break;
-    }
-  }
 
-  blockUnblockPost(id: string, status: boolean) {
-    // console.log('status: ', status);
-    // console.log('id: ', id);
-    let mobile_No = '';
-    var splitString = this.mobileNumber.split('');
-    if (splitString[0] == '+') {
-      splitString[0] = '%2B';
-      var joinString = splitString.join('');
-      mobile_No = joinString;
-    }
-    this._service
-      .BlockUnblockFeedPost(id, mobile_No, status)
-      .subscribe((res) => {});
-  }
+
+
 
   open() {
     (<any>$('#filter')).modal('show');

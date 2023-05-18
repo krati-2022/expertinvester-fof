@@ -1,12 +1,15 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/Service/shared.service';
 import { Router } from '@angular/router';
-import {  GetFeedDetails } from '../feed/feed.component';
+import { GetFeedDetails } from '../feed/feed.component';
 import { FollowClub } from '../club/club.classes';
-import { ChannelApproveReject, ChannelSubscriber } from '../channel/channel.classes';
+import {
+  ChannelApproveReject,
+  ChannelSubscriber,
+} from '../channel/channel.classes';
 import { ChannelListDetails } from '../channel/channel.component';
 import Swal from 'sweetalert2';
-declare var $ : any
+declare var $: any;
 export interface ClubList {
   id: string;
   description: string;
@@ -15,7 +18,6 @@ export interface ClubList {
   likecount: number;
   name: string;
   postcount: number;
- 
 }
 @Component({
   selector: 'app-responsive-view',
@@ -37,6 +39,7 @@ export class ResponsiveViewComponent implements OnInit {
   channelSubscriber = new ChannelSubscriber();
   screenWidth: any;
   ideaTracker = ['Target', 'Stop Loss'];
+  isLoading: boolean = false;
   constructor(private _service: SharedService, private router: Router) {}
 
   ngOnInit(): void {
@@ -68,8 +71,10 @@ export class ResponsiveViewComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
+    this.isLoading = true;
     this._service.GetMasterData(mobile_No).subscribe((res) => {
       this.clubList = res.data;
+      this.isLoading = false;
       // console.log('this.clubList: ', this.clubList);
       // console.log('this.clubList : ', this.clubList);
       let data = this.clubList.filter((i) => i.follow == 'Followed');
@@ -85,10 +90,12 @@ export class ResponsiveViewComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
+    this.isLoading = true;
     this._service
       .GetFeed(mobile_No, this.current, this.perPage)
       .subscribe((res) => {
         this.feedDetails = res.items;
+        this.isLoading = false;
         // console.log('this.feedDetails: ', this.feedDetails);
         // console.log(this.feedDetails);
 
@@ -103,10 +110,11 @@ export class ResponsiveViewComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-
+    this.isLoading = true;
     this._service.GetChannel(mobile_No).subscribe((res) => {
       // console.log('res: ', res);
       this.channelDetails = res.data;
+      this.isLoading = false;
       // console.log('this.channelDetails: ', this.channelDetails);
     });
   }
@@ -205,18 +213,18 @@ export class ResponsiveViewComponent implements OnInit {
   }
 
   getChannelDetails(item: any) {
-     this.router.navigate([
-       'home/channel-details/' +
-         item.channelMasterId +
-         '/' +
-         item.mobile_No +
-         '/' +
-         item.name +
-         '/' +
-         item.isUserChannel +
-         '/' +
-         item.isSubscribed,
-     ]);
+    this.router.navigate([
+      'home/channel-details/' +
+        item.channelMasterId +
+        '/' +
+        item.mobile_No +
+        '/' +
+        item.name +
+        '/' +
+        item.isUserChannel +
+        '/' +
+        item.isSubscribed,
+    ]);
   }
 
   getTab(event: any) {
@@ -270,6 +278,20 @@ export class ResponsiveViewComponent implements OnInit {
         this.GetFeed();
         // this.getLikes(id)
       });
+  }
+
+  channelLike(channelId: string, status: boolean) {
+    let formData = {
+      channelId: channelId,
+      like: status,
+      mobileno: this.mobileNumber,
+    };
+
+    this._service.ChannelPostLikeDislike(formData).subscribe((res) => {
+      // console.log('res: ', res);
+      this.getChannel();
+      // this.getLikes(id)
+    });
   }
 
   subscribe(item: any) {
@@ -331,4 +353,3 @@ export class ResponsiveViewComponent implements OnInit {
     <any>$('#exampleModalCenter').modal('hide');
   }
 }
-

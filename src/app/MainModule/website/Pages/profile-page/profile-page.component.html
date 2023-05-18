@@ -7,14 +7,24 @@
       <div class="col-lg-4">
         <div class="card list-card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <!-- <img src="assets/img/user2.png" alt="Profile" class="rounded-circle"> -->
+            <div class="edit-icon">
+              <label for="file-input">
+                <i class="fas fa-edit"></i>
+              </label>
+              <input id="file-input" type="file" class="cstm-file" >
+            </div>
+            <div class="profile-img d-flex justify-content-center">
+              <img src="assets/img/user2.png" alt="" style="border-radius: 50px;">
+              
+            </div>
             <h6>{{model.name}}</h6>
             <h3>{{model.userType}}</h3>
             <div class="social-links mt-2">
-              <a  class="twitter"><i class="bi bi-twitter"></i></a>
-              <a  class="facebook"><i class="bi bi-facebook"></i></a>
-              <a  class="instagram"><i class="bi bi-instagram"></i></a>
-              <a  class="linkedin"><i class="bi bi-linkedin"></i></a>
+              <a  class="twitter" (click)="openTwitter()"><i class="bi bi-twitter"></i></a>
+              <a  class="facebook" (click)="openFacebook()"><i class="bi bi-facebook"></i></a>
+              <a  class="instagram" (click)="openInsta()"><i class="bi bi-instagram"></i></a>
+              <a  class="linkedin" (click)="openLinkedIn()"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
         </div>
@@ -118,7 +128,7 @@
                   <div class="row mb-3">
                     <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="phone" type="text" class="form-control" [ngModel]="model.mobileno" formControlName="mobileno" id="Phone" placeholder="(436) 486-3538 x29071">
+                      <input name="phone" type="text" class="form-control disabled" [ngModel]="model.mobileno" formControlName="mobileno" id="Phone" placeholder="(436) 486-3538 x29071">
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -233,3 +243,105 @@
   </section>
 
 </main>
+
+
+<div class="modal fade" id="twitterModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Twitter</h5>
+        <button type="button" class="close " (click)="closeTwitter()" style="border: 0;background: #fff;">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+          <div class="form-group">
+            <label for="twitter">Twitter Link</label>
+            <input type="text" class="form-control" id="twitter"  name="twitter">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeTwitter()">Close</button>
+        <button type="button" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="facebookModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Facebook</h5>
+        <button type="button" class="close " (click)="closeFacebook()" style="border: 0;background: #fff;">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+          <div class="form-group">
+            <label for="twitter">Facebook Link</label>
+            <input type="text" class="form-control" id="twitter"  name="twitter">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeFacebook()">Close</button>
+        <button type="button" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="instaModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Instagram</h5>
+        <button type="button" class="close " (click)="closeInsta()" style="border: 0;background: #fff;">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+          <div class="form-group">
+            <label for="twitter">Instagram Link</label>
+            <input type="text" class="form-control" id="twitter"  name="twitter">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeInsta()">Close</button>
+        <button type="button" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="linkedInModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update LinkedIn</h5>
+        <button type="button" class="close " (click)="closeLinkedIn()" style="border: 0;background: #fff;">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+          <div class="form-group">
+            <label for="twitter">LinkedIn Link</label>
+            <input type="text" class="form-control" id="twitter"  name="twitter">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeLinkedIn()">Close</button>
+        <button type="button" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

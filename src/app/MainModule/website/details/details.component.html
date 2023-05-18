@@ -1,9 +1,14 @@
 <!-- End Page Title -->
-<section class="p-4">
+<div class="d-flex justify-content-center" *ngIf="isLoading == true" style="height: 50vh; align-items: center;">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<section class="p-4" *ngIf="isLoading == false">
   <div class="row">
     <div class="card list-card  ">
       <div class="pagetitle">
-        <h1 class="pt-2"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i>Detail-Page</h1>
+        <h1 class="pt-2"><i class="bi bi-arrow-left px-2" (click)="goBack()"></i>Detail Page</h1>
       </div>
        
       <div class="" *ngFor="let items of feedPostDetail">
@@ -12,15 +17,18 @@
           <div class="card ">
             <div class="my-2 mx-2">
               <div class="row">
-                <div class="channel-detail py-1">
-                  Market Volatility
+                <div class="channel-detail py-1" style="text-transform: uppercase;">
+                  <h4>{{items.username}}</h4>
+                  {{items.clubName}}
                 </div>
+                <div class="date">{{items.createdate | date : 'fullDate'}} {{items.createdate | date : 'shortTime'}}</div>
                 <div class="row py-2">
                   <div class="col-lg-6 months">
                     <button type="button" class="btn position-btn"><i class="bi bi-clock px-2"></i>Medium Term (6-12
                       Months)</button>
                   </div>
                 </div>
+                
                 <div class="gallery-wrapper"
                   *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != '' && items.imageurl != null">
                   <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"
@@ -36,11 +44,11 @@
                 </div>
                 <div class="d-flex justify-content-between user_informatiom py-2">
                   <div>
-                    <span> <i class="bi bi-hand-thumbs-up-fill px-2">1</i></span>
+                    <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likeCount}}</i></span>
                     <span><i class="bi bi-share-fill"></i></span>
                   </div>
                   <div>
-                    <i class="bi bi-bookmark-fill"></i>
+                    <!-- <i class="bi bi-bookmark-fill"></i> -->
                   </div>
                 </div>
                 <!-- <div class="py-3 ">
@@ -58,7 +66,6 @@
             </div>
           </div>
         </div>
-        <!-- End Bordered Tabs Justified -->
       </div>
     </div>
 

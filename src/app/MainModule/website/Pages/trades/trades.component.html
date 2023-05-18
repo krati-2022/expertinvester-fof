@@ -49,14 +49,17 @@
                 <div class="row py-3">
                   <div class="form-group">
                     <label class="form-line" for="exampleFormControlSelect1">Interval</label>
-                    <select class="form-control" id="exampleFormControlSelect1" formControlName="interval"
+                    <!-- <select class="form-control" id="exampleFormControlSelect1" formControlName="interval"
                       [ngClass]="{ 'is-invalid': submitted && addPostControl.interval.errors }">
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
                       <option>4</option>
                       <option>5</option>
-                    </select>
+                    </select> -->
+                    <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="interval"
+                       placeholder="Enter Interval"
+                      [ngClass]="{ 'is-invalid': submitted && addPostControl.entryprice.errors }">
                     <div *ngIf=" submitted && addPostControl.interval.errors" class="invalid-feedback">
                       <div *ngIf="addPostControl.interval.errors.required">Interval is required.</div>
                     </div>
@@ -66,7 +69,7 @@
                   <div class="form-group">
                     <label class="form-line" for="">Entry Price</label>
                     <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="entryprice"
-                      id="" AddExpertInvestorForm placeholder="Entry Price"
+                       placeholder="Entry Price"
                       [ngClass]="{ 'is-invalid': submitted && addPostControl.entryprice.errors }">
                     <div *ngIf=" submitted && addPostControl.entryprice.errors" class="invalid-feedback">
                       <div *ngIf="addPostControl.entryprice.errors.required">Entry Price is required.</div>
@@ -78,7 +81,7 @@
                     <div class="form-group">
                       <label class="form-line" for="">Target Price</label>
                       <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="targetprice"
-                        id="" AddExpertInvestorForm placeholder="Target Price"
+                         placeholder="Target Price"
                         [ngClass]="{ 'is-invalid': submitted && addPostControl.targetprice.errors }">
                       <div *ngIf=" submitted && addPostControl.targetprice.errors" class="invalid-feedback">
                         <div *ngIf="addPostControl.targetprice.errors.required">Target Price is required.</div>
@@ -89,7 +92,7 @@
                     <div class="form-group">
                       <label class="form-line" for="exampleInputEmail2">Stop Loss</label>
                       <input type="text" class="form-control" (keypress)="keyPressNumbers($event)" formControlName="stoploss"
-                        id="exampleInputEmail2" AddExpertInvestorForm placeholder="Stop Loss"
+                        id="exampleInputEmail2"  placeholder="Stop Loss"
                         [ngClass]="{ 'is-invalid': submitted && addPostControl.stoploss.errors }">
                       <div *ngIf=" submitted && addPostControl.stoploss.errors" class="invalid-feedback">
                         <div *ngIf="addPostControl.stoploss.errors.required">Stop Loss is required.</div>

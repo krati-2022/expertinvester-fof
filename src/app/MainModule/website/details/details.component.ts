@@ -15,6 +15,7 @@ export class DetailsComponent implements OnInit {
   feedPostDetail: any;
   galleryOptions: NgxGalleryOptions[] | any;
   galleryImages: NgxGalleryImage[] | any;
+  isLoading: boolean = false
   constructor(
     private _ActivaedRoute: ActivatedRoute,
     private _service: SharedService,
@@ -53,15 +54,17 @@ export class DetailsComponent implements OnInit {
     ];
   }
 
-  goBack(){
-    this.location.back()
+  goBack() {
+    this.location.back();
   }
 
   GetFeedPost() {
+    this.isLoading = true
     this._service
       .GetFeedPostdetail(this.mobileNumber, this.id)
       .subscribe((res) => {
         this.feedPostDetail = res.data;
+        this.isLoading = false;
         let arr = [];
         arr.push(...this.feedPostDetail);
         // console.log('arr: ', arr);

@@ -14,6 +14,7 @@ export class ClubDetailsComponent implements OnInit {
   name: any;
   clubDetails: any;
   searchKey: string = '';
+  isLoading: boolean = false
   constructor(
     private _service: SharedService,
     private router: Router,
@@ -35,11 +36,13 @@ export class ClubDetailsComponent implements OnInit {
     this.location.back();
   }
   getClubDetails() {
+    this.isLoading = true
     this._service
       .GetClubDetails(this.mobile_number, this.clubListId)
       .subscribe((res: any) => {
         // console.log('res: ', res.data[0]);
         this.clubDetails = res.data;
+        this.isLoading = false;
       });
   }
   AddClub() {
@@ -51,6 +54,13 @@ export class ClubDetailsComponent implements OnInit {
         this.mobile_number +
         '/' +
         this.name,
+    ]);
+  }
+
+  getCulbDetails(item:any){
+  // console.log('item: ', item);
+    this.router.navigate([
+      'home/details/' + item.id + '/' + this.mobile_number,
     ]);
   }
 }

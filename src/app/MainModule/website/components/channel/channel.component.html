@@ -17,8 +17,12 @@
         </div>
        </div>
       <div class="m-2">
-
-        <div class="example" *ngIf="channelDetails.length != 0">
+        <div class="d-flex justify-content-center" *ngIf="isLoading == true" style="height: 50vh; align-items: center;">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="example" *ngIf="channelDetails.length != 0 && isLoading == false">
           <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey :  'name'">
             <div class="m-2" >
               <div class="container pad0"  style="cursor: pointer;">
@@ -162,7 +166,10 @@
 
               <div class="d-flex justify-content-between mt-2">
                 <div>
-                  <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
+                  <span (click)="like(items.channelMasterId, !items.isChannelLiked)">
+                    <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isChannelLiked == false">{{items.likecount}}</i>
+                    <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
+                  </span>
                 </div>
                 <div>
                   <span><i class="bi bi-share-fill px-2"></i></span>
@@ -188,8 +195,9 @@
 
         </div>
 
-        <div class="example d-flex justify-content-center" style="height: 65vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0" >
-          <span>Data Not Found</span>
+        <div class="example d-flex justify-content-center" style="height: 65vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0 && isLoading == false" >
+          <img src="assets/img/noDataFound.png" alt="" />
+          <sapn>No Data Found at the Moment, Comeback later!</sapn>
         </div>
       </div><!-- End Bordered Tabs Justified -->
     </div>

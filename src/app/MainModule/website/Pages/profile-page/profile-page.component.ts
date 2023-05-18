@@ -6,6 +6,7 @@ import { UpdateProfileDetails } from './profile-page.classe';
 import { Codes } from 'src/app/Utils/country-codes';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+declare var $ : any
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
@@ -18,7 +19,11 @@ export class ProfilePageComponent implements OnInit {
   updateUserDetailsForm: FormGroup | any;
   countryCodes = Codes;
   userDetails = new UpdateProfileDetails();
-  constructor(private location: Location, private _service: SharedService, private router: Router) {}
+  constructor(
+    private location: Location,
+    private _service: SharedService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // this.getUserDetails();
@@ -52,26 +57,51 @@ export class ProfilePageComponent implements OnInit {
       email: this.updateUserDetailsForm.value.email,
     });
     // console.log('this.userDetails: ', this.userDetails);
-    this._service.UpdateUserDetails(this.userDetails).subscribe((res:any) =>{
-    // console.log('res: ', res);
-       const Toast = Swal.mixin({
-         toast: true,
-         position: 'top-end',
-         showConfirmButton: false,
-         timer: 3000,
-         timerProgressBar: true,
-         didOpen: (toast) => {
-           toast.addEventListener('mouseenter', Swal.stopTimer);
-           toast.addEventListener('mouseleave', Swal.resumeTimer);
-         },
-       });
-       Toast.fire({
-         icon: 'success',
-         title: res.message
-       });
-       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>{
+    this._service.UpdateUserDetails(this.userDetails).subscribe((res: any) => {
+      // console.log('res: ', res);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: 'success',
+        title: res.message,
+      });
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['home/profile-page']);
-       })
-    })
+      });
+    });
+  }
+
+  openTwitter() {
+    <any>$('#twitterModel').modal('show');
+  }
+  openFacebook() {
+    <any>$('#facebookModel').modal('show');
+  }
+  openInsta() {
+    <any>$('#instaModel').modal('show');
+  }
+  openLinkedIn() {
+    <any>$('#linkedInModel').modal('show');
+  }
+  closeTwitter() {
+    <any>$('#twitterModel').modal('hide');
+  }
+  closeFacebook() {
+    <any>$('#facebookModel').modal('hide');
+  }
+  closeInsta() {
+    <any>$('#instaModel').modal('hide');
+  }
+  closeLinkedIn() {
+    <any>$('#linkedInModel').modal('hide');
   }
 }
