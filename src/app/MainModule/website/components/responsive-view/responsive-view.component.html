@@ -1,3 +1,24 @@
+<div *ngIf="activeTab == 'home-tab'">
+  <div class="btnmangemobile">
+    <div *ngIf="isLoading == false" 
+      (click)="open()"><i class="bi bi-funnel" style="width: 12px; padding-right: 7px;"></i><span
+        style="padding-left: 12px;"></span></div>
+    
+  </div>
+</div>
+<div *ngIf="activeTab == 'contact-tab'">
+  <div class="btnmangemobile">
+    <div *ngIf="isLoading == false">
+      <div  (click)="open()"><i class="bi bi-funnel"
+          style="width: 12px; padding-right: 7px;"></i><span style="padding-left: 12px;"></span></div>
+  </div>
+    <div *ngIf="isLoading == false" class="addbtnmanage">
+      <button type="button" class="btn btn-outline-secondary" (click)="AddChannel()"><i
+          class="bi bi-pencil-square"></i></button>
+    </div>
+  </div>
+</div>
+
 <section class="d-lg-none d-md-block d-sm-block">
   <div class="row">
     <div class="mx-auto">
@@ -20,7 +41,7 @@
               aria-selected="false">CHANNEL</button>
           </li>
         </ul>
-        <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+        <div class="tab-content pt-2" id="borderedTabJustifiedContent" style="height: 75vh; overflow: auto;">
           <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
             aria-labelledby="home-tab">
             <div class="example" >
@@ -34,7 +55,7 @@
 
                 <div class="card list-card my-3" *ngFor="let items of feedDetails | filter : searchKey : 'username'">
                   <div class="m-2">
-                    <div class="container" [ngClass]="items.clubBlock == true ? 'club-block' : ''">
+                    <div class="containe pad0mobile" [ngClass]="items.clubBlock == true ? 'club-block' : ''">
                       <div class=" row user_informatiom d-flex justify-content-between align-items-center"
                         style="cursor: pointer;">
                         <div class="d-flex col-8" (click)="getFeedDetails(items.id, items.recordType)">
@@ -68,7 +89,7 @@
                       </div>
                     </div>
                     <div *ngIf="items.clubBlock != true">
-                      <div class="container">
+                      <div class="container  pad0mobile">
                         <div class="row">
                           <div class="d-flex justify-content-between align-items-baseline py-2">
                             <h6 class="heading" (click)="getFeedDetails(items.id, items.recordType)" style="width: 800px;">{{items.clubName}}
@@ -133,7 +154,10 @@
                               <div class="expect-percent">{{items.expectedMove}}</div>
                             </div>
                             <div class="channel-detail">{{items.stockname}}</div>
-                            <div><button type="button" class="btn btn-danger danger-btn" (click)="openIdeaTracke()">Idea tracker</button></div>
+                            <div>
+                              <button *ngIf="items.istargetprice == false && items.isstoploss == false" type="button"
+                                class="btn btn-danger danger-btn" (click)="openIdeaTracke(items.id)">Idea tracker</button>
+                            </div>
                           </div>
                           <div>
                             <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
@@ -188,11 +212,11 @@
                               *ngIf="items.isUserLiked == false">{{items.likeCount}}</i>
                             <i class="bi bi-hand-thumbs-up-fill px-2"
                               *ngIf="items.isUserLiked == true">{{items.likeCount}}</i>
-                          </span>
+                            </span>
+                            <span><i class="bi bi-share-fill px-2"></i></span>
                         </div>
                         <div>
-                          <span><i class="bi bi-share-fill px-2"></i></span>
-                          <span><i class="bi bi-bookmark-fill px-2"></i></span>
+                          <!-- <span><i class="bi bi-bookmark-fill px-2"></i></span> -->
 
                         </div>
                       </div>
@@ -205,7 +229,7 @@
             <div class="example d-flex justify-content-center"
               style="height: 75vh; overflow: auto; align-items: center;" *ngIf="feedDetails.length == 0 && isLoading == false">
               <img src="assets/img/noDataFound.png" alt="" />
-              <sapn>No Feed Found at the Moment, Comeback later!</sapn>
+              <!-- <sapn>No Feed Found at the Moment, Comeback later!</sapn> -->
             </div>
           </div>
           <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -217,7 +241,7 @@
             <div class="example" *ngIf="isLoading == false">
               <div class="card list-card my-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
                 <div class="p-2">
-                  <div class="container">
+                  <div class="container pad0mobile">
                     <div class="row">
 
                       <div class="channel-name d-flex col-12">
@@ -233,7 +257,7 @@
                           </span>
                         </div>
                       </div>
-                      <div class="">
+                      <div class="pad0mobile">
                         <p class="club-dis" (click)="getDetails(items)" [innerHTML]="items.description"></p>
                       </div>
                     </div>
@@ -277,7 +301,7 @@
                   <div class="container">
                     <div class=" row user_informatiom d-flex justify-content-between align-items-center"
                       style="cursor: pointer;">
-                      <div class="d-flex col-8" (click)="getChannelDetails(items)">
+                      <div class="d-flex col-12" (click)="getChannelDetails(items)">
                         <div class="col-2">
                           <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                         </div>
@@ -374,7 +398,7 @@
                         <div class="club-icon px-3">{{items.post}}</div>
                       </div>
                     </div>
-                    <div class="container-fluid ">
+                    <div class="container-fluid pad0mobile">
                       <div class="row py-2">
                         <div class="col-6">
                           <div class=" risk-btn w-100 d-flex justify-content-between">
@@ -446,7 +470,7 @@
             <div class="example d-flex justify-content-center"
               style="height: 75vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0 && isLoading == false">
               <img src="assets/img/noDataFound.png" alt="" />
-              <sapn>No Data Found at the Moment, Comeback later!</sapn>
+              <!-- <sapn>No Data Found at the Moment, Comeback later!</sapn> -->
             </div>
           </div>
         </div>
@@ -455,6 +479,55 @@
     </div>
   </div>
 </section>
+
+
+<div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+  <form [formGroup]="filterForm">
+    <div class="modal-dialog popueresposive" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="filterLabel">Filter</h5>
+          <button type="button" class="close " (click)="close()" style="border: 0;background: #fff;">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="container">
+          <div class="">
+            <div class="row border-bottom  ">
+              <div *ngIf="activeTab=='home-tab'">
+
+                <div class="form-check" *ngFor="let item of data">
+                  <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)"
+                    [(ngModel)]="item.checked" [id]="item.name">
+                  <label class="form-check-label filter-text" [for]="item.name">
+                    {{item.name}}
+                  </label>
+                </div>
+              </div>
+              <div *ngIf="activeTab=='contact-tab'">
+                <div class="form-check" *ngFor="let item of channeldata">
+                  <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)"
+                    [(ngModel)]="item.checked" [id]="item.name">
+                  <label class="form-check-label filter-text" [for]="item.name">
+                    {{item.name}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row px-3 py-3 text-center">
+          <div class="col-md-6 col-6 mx-auto"> <button type="button" class="btn btn-outline-secondary setfillterbtn"
+              (click)="ClearAll()">CLEAR FILTER</button></div>
+          <div class="col-md-6 col-6 mx-auto"> <button type="button" class="btn btn-danger setapplyfiltter"
+              (click)="apply()">APPLY</button></div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
 
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -469,7 +542,7 @@
       </div>
       <div class="modal-body">
         <div class="form-check" *ngFor="let item of ideaTracker">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" [id]="item">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" (change)="onChange($event)" [id]="item">
           <label class="form-check-label" [for]="item">
             {{item}}
           </label>

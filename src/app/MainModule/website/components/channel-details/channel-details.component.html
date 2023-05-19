@@ -12,6 +12,13 @@
           </div>
         </div>
       </div>
+<div class="d-md-block d-sm-block d-lg-none">
+  <div *ngIf="activeTab == 'Active-Post'" [ngClass]="isUserChannel == 'true' ? 'd-block' : 'd-none'">
+    <button type="button" class="btn btn-outline-secondary" (click)="addPost()"><i
+        class="bi bi-pencil-square"></i></button>
+  </div>
+
+</div>
       <div class="m-2">
         <!-- Bordered Tabs Justified -->
         <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
@@ -161,7 +168,7 @@
             <div class="example d-flex justify-content-center" style="font-size: 20px;"
               *ngIf="activePostDetails.length == 0 && isLoading == false">
               <img src="assets/img/noDataFound.png" alt="" />
-              <sapn>No Data Found at the Moment, Comeback later!</sapn>
+              <!-- <sapn>No Data Found at the Moment, Comeback later!</sapn> -->
             </div>
           </div>
 
@@ -221,7 +228,8 @@
                           </div>
                           <div class="expect-percent">{{items.expected_Move | number : '1.2-2' }}%</div>
                         </div>
-                        <div><button type="button" class="btn btn-danger danger-btn">Idea tracker</button>
+                        <div>
+                          <!-- <button type="button" class="btn btn-danger danger-btn">Idea tracker</button> -->
                         </div>
                       </div>
                       <div>
@@ -287,7 +295,7 @@
             <div class="example d-flex justify-content-center" style="font-size: 20px;"
               *ngIf="pastPostDetails.length == 0 && isLoading == false">
               <img src="assets/img/noDataFound.png" alt="" />
-              <sapn>No Data Found at the Moment, Comeback later!</sapn>
+              <!-- <sapn>No Data Found at the Moment, Comeback later!</sapn> -->
             </div>
           </div>
           <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">

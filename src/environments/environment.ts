@@ -7,7 +7,7 @@ export const environment = {
   baseUrlForWebsite: 'http://103.117.66.70:5008/',
   // baseUrlForAdmmin: 'http://103.117.66.70:5010/',
   baseUrlForAdmmin: 'https://adminapi.expertinvester.com/',
-  // apiUrl: 'https://api.expertinvester.com/'
+  // baseUrlForWebsite: 'https://api.expertinvester.com/',
 };
 
 /*

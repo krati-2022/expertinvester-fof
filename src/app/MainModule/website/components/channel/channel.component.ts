@@ -160,15 +160,16 @@ export class ChannelComponent implements OnInit {
     this.router.navigate(['home/edit-channel/' + item.channelMasterId]);
   }
   open() {
-    (<any>$('#filter')).modal('show');
+    (<any>$('#filterPopUp')).modal('show');
   }
   close() {
-    (<any>$('#filter')).modal('hide');
+    (<any>$('#filterPopUp')).modal('hide');
   }
 
   onFilter(event: any) {
     // console.log('event: ', event);
     //   console.log(this.filterForm.value.name);
+    event.status = true
     switch (event.name) {
       case 'Free Access':
         this.FreeAccess =

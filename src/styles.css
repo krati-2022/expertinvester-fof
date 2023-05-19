@@ -351,9 +351,26 @@ li.dropdown-header h6 {
   /* Firefox */
 }
 
-@media screen and (max-width: 1024px) {}
+@media screen and (min-width: 320px) and (max-width: 991px){
+  .responsiveView{
+    height: 75vh;
+    overflow: auto;
+  }
+}
 
 @media screen and (min-width: 320px) and (max-width: 416px) {
+
+  .btnmangemobile{
+    position: fixed;
+    width: 40px;
+    height: 0;
+    right: 100px;
+    top: 11px;
+    z-index: 999;
+  font-size: 25px;
+    color: #f61c7a;
+  }
+   
   .logo img {
     max-height: 19px;
     margin-right: 6px;
@@ -538,6 +555,24 @@ li.dropdown-header h6 {
 }
 
 @media screen and (min-width: 415px) and (max-width: 501px) {
+
+.btnmangemobile {
+    position: fixed;
+    width: 40px;
+    height: 0;
+    right: 100px;
+    top: 11px;
+    z-index: 999;
+    font-size: 25px;
+      color: #f61c7a;
+  }
+
+     .addbtnmanage {
+       position: fixed;
+       right: 31px;
+       bottom: 81px;
+       z-index: 99;
+     }
   .logo img {
     max-height: 22px;
     margin-right: 6px;
@@ -719,6 +754,22 @@ li.dropdown-header h6 {
 
 
 @media screen and (min-width: 500px) and (max-width: 769px) {
+.btnmangemobile {
+    position: fixed;
+    width: 40px;
+    height: 0;
+    right: 100px;
+    top: 11px;
+    z-index: 999;
+    font-size: 25px;
+      color: #f61c7a;
+  }
+ .addbtnmanage {
+  position: fixed;
+    right: 16px;
+    bottom: 46px;
+    z-index: 99;
+ }
   .logo img {
     max-height: 24px;
     margin-right: 6px;
@@ -785,6 +836,27 @@ li.dropdown-header h6 {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+
+.btnmangemobile {
+    position: fixed;
+    width: 40px;
+    height: 0;
+    right: 221px;
+    top: 11px;
+    z-index: 999;
+    font-size: 25px;
+      color: #f61c7a;
+  }
+
+     .addbtnmanage {
+       position: fixed;
+       right: 31px;
+       bottom: 81px;
+       z-index: 99;
+     }
+
+ 
+    
   .club-icon {
     padding-right: 12px;
     padding-left: 12px;
@@ -827,7 +899,51 @@ li.dropdown-header h6 {
   display: none;
 }
 
+
+
+
 @media screen and (min-width: 320px) and (max-width: 767px) {
+
+    .addbtnmanage {
+        position: fixed;
+        right: 21px;
+        bottom: 49px;
+        z-index: 99;
+      }
+
+
+ .user-icon{
+      font-size: 40px!important;
+      color: #FDCDE7;
+    }
+
+        .user_name {
+          font-size: 16px!important;
+        margin-top: 11px!important;}
+
+    h6.heading{
+        font-size: 14px !important;
+      }
+
+
+  .setfillterbtn {
+      font-size: 12px;
+      font-weight: 500;
+      width: 113px;
+      height: 33px;
+      border-radius: 20px;
+    }
+
+        .setapplyfiltter {
+          font-size: 12px;
+          font-weight: 500;
+          width: 113px;
+          height: 33px;
+          border-radius: 20px;
+        }
+
+  .popueresposive{width: 75%;
+    margin: 60px auto;}
   .pagetitle {
     display: none;
   }
@@ -846,6 +962,27 @@ li.dropdown-header h6 {
     height: 250px;
   }
 
+    .fixadd {
+      position: relative !important;
+      font-size: 12px;
+      max-width: 100%;
+      padding: 0px 30px;
+  
+  
+    }
+
+
+        .col-md-6.mx-auto {
+          padding: 8px;
+        }
+
+    .footer{position: relative;}
+
+        h5.card-title.addstyletitel {
+          color: #fff;
+          padding: 17px;
+        }
+
 }
 
 @media screen and (min-width: 320px) and (max-width: 991px) {
@@ -853,11 +990,7 @@ li.dropdown-header h6 {
     height: auto !important;
   }
 
-  .fixadd {
-    position: relative !important;
-    font-size: 12px;
-
-  }
+  
 
   .search-bar {
     padding: 0 !important;
