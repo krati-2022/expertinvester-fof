@@ -64,7 +64,8 @@ export class ChannelComponent implements OnInit {
   data = DATA;
   isLoading: boolean = false;
   isLike: boolean = false;
-
+  isShare: boolean = false;
+  shareId: any;
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -89,7 +90,7 @@ export class ChannelComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-    if(this.isLike == false){
+    if (this.isLike == false) {
       this.isLoading = true;
     }
     this._service.GetChannel(mobile_No).subscribe((res) => {
@@ -169,7 +170,7 @@ export class ChannelComponent implements OnInit {
   onFilter(event: any) {
     // console.log('event: ', event);
     //   console.log(this.filterForm.value.name);
-    event.status = true
+    event.status = true;
     switch (event.name) {
       case 'Free Access':
         this.FreeAccess =
@@ -236,7 +237,7 @@ export class ChannelComponent implements OnInit {
       like: status,
       mobileno: this.mobileNumber,
     };
-    this.isLike = true
+    this.isLike = true;
     this._service.ChannelPostLikeDislike(formData).subscribe((res) => {
       // console.log('res: ', res);
       this.getChannel();
@@ -249,6 +250,11 @@ export class ChannelComponent implements OnInit {
     });
     // (<any>$('#filter')).modal('hide');
     this.getChannel();
+  }
+
+  share(id: any) {
+    this.shareId = id;
+    this.isShare = !this.isShare;
   }
   @HostListener('window:scroll', [])
   public onScrolled() {

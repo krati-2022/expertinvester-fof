@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="example" *ngIf="channelDetails.length != 0 && isLoading == false">
-          <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey :  'name'">
+          <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey :  'name'; let index = index">
             <div class="m-2" >
               <div class="container pad0"  style="cursor: pointer;">
                   <div class="container  pad0">
@@ -170,12 +170,17 @@
                     <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isChannelLiked == false">{{items.likecount}}</i>
                     <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
                   </span>
+                  <span (click)="share(index)"><i class="bi bi-share-fill px-2"></i></span>
                 </div>
                 <div>
-                  <span><i class="bi bi-share-fill px-2"></i></span>
-                  <i class="bi bi-bookmark-fill px-2"></i>
+                  <!-- <i class="bi bi-bookmark-fill px-2"></i> -->
                 </div>
               </div>
+                <div *ngIf="isShare == true && index == shareId" class="d-flex justify-content-center">
+                  <share-buttons style="background: rebeccapurple; border-radius: 20px;"
+                    [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']" [show]="5"
+                    [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
+                </div>
               <div class="py-3" >
                 <div class="percent" *ngIf="items.coAdChannel == true">
                   <span>Co-ad channels</span>

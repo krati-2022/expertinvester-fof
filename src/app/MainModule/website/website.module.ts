@@ -62,7 +62,8 @@ import { ScrollDirective } from 'src/app/Utils/scroll-directive';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
 import { NgChartsModule } from 'ng2-charts';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     NgxGalleryModule,
     NgChartsModule,
     AngularEditorModule,
+    ShareButtonsModule,
+    ShareIconsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [

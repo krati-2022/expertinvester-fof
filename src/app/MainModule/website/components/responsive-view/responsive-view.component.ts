@@ -58,6 +58,8 @@ export class ResponsiveViewComponent implements OnInit {
   filterForm: FormGroup | any;
   data: any;
   channeldata: any;
+  isShare: boolean = false;
+  shareId: any;
   constructor(
     private _service: SharedService,
     private router: Router,
@@ -528,5 +530,10 @@ export class ResponsiveViewComponent implements OnInit {
     } else if (this.activeTab == 'contact-tab') {
       this.getChannel();
     }
+  }
+
+  share(id: any) {
+    this.shareId = id;
+    this.isShare = !this.isShare;
   }
 }

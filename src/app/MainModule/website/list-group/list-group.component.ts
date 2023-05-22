@@ -14,6 +14,7 @@ export class ListGroupComponent implements OnInit {
   isLoading: boolean = false;
   feedPostChannelDetail: any;
   expectedMove: any;
+  isShare:boolean = false
   constructor(
     private router: Router,
     private location: Location,
@@ -66,5 +67,9 @@ export class ListGroupComponent implements OnInit {
       this.GetChannelPost();
       // this.getLikes(id)
     });
+  }
+
+  share() {
+    this.isShare = !this.isShare;
   }
 }

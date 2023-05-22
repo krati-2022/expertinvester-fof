@@ -67,6 +67,8 @@ export class ChannelDetailsComponent implements OnInit {
   ideaTracker = ['Target', 'Stop Loss'];
   isLoading: boolean = false;
   isLike: boolean = false;
+  isShare: boolean = false;
+  shareId: any;
   channelSubscriber = new ChannelSubscriber();
   constructor(
     private _ActivatedRoute: ActivatedRoute,
@@ -244,5 +246,9 @@ export class ChannelDetailsComponent implements OnInit {
       console.log('res: ', res);
       this.GetProfile();
     });
+  }
+  share(id: any) {
+    this.shareId = id;
+    this.isShare = !this.isShare;
   }
 }

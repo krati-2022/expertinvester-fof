@@ -54,6 +54,8 @@ export class TopBarComponent implements OnInit {
       this.data = res.data;
       this.model.name = this.data.name;
       this.model.userType = this.data.userType;
+      this.model.image = this.data.image;
+      // console.log('this.model.image: ', this.model.image);
       this._service.setData(this.data);
     });
   }

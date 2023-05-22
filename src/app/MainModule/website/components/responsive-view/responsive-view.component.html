@@ -213,12 +213,17 @@
                             <i class="bi bi-hand-thumbs-up-fill px-2"
                               *ngIf="items.isUserLiked == true">{{items.likeCount}}</i>
                             </span>
-                            <span><i class="bi bi-share-fill px-2"></i></span>
+                            <span (click)="share(items.id)"><i class="bi bi-share-fill px-2"></i></span>
                         </div>
                         <div>
                           <!-- <span><i class="bi bi-bookmark-fill px-2"></i></span> -->
 
                         </div>
+                      </div>
+                      <div *ngIf="isShare == true && items.id == shareId" class="d-flex justify-content-center">
+                        <share-buttons style="background: rebeccapurple; border-radius: 20px;"
+                          [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']" [show]="5"
+                          [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
                       </div>
                     </div>
                   </div>
@@ -239,7 +244,7 @@
               </div>
             </div>
             <div class="example" *ngIf="isLoading == false">
-              <div class="card list-card my-3" *ngFor="let items of clubList | filter : searchKey : 'name'">
+              <div class="card list-card my-3" *ngFor="let items of clubList | filter : searchKey : 'name'; ">
                 <div class="p-2">
                   <div class="container pad0mobile">
                     <div class="row">
@@ -296,7 +301,7 @@
               </div>
             </div>
             <div class="example" *ngIf="isLoading == false">
-              <div class="card list-card my-2" *ngFor="let items of channelDetails | filter : searchKey : 'name'">
+              <div class="card list-card my-2" *ngFor="let items of channelDetails | filter : searchKey : 'name'; let index = index">
                 <div class="m-2">
                   <div class="container">
                     <div class=" row user_informatiom d-flex justify-content-between align-items-center"
@@ -448,11 +453,16 @@
                         <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isChannelLiked == false">{{items.likecount}}</i>
                         <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
                       </span>
-                      <span><i class="bi bi-share-fill"></i></span>
+                      <span (click)="share(index)"><i class="bi bi-share-fill"></i></span>
                     </div>
-                    <div>
+                    <!-- <div>
                       <i class="bi bi-bookmark-fill"></i>
-                    </div>
+                    </div> -->
+                  </div>
+                  <div *ngIf="isShare == true && index == shareId" class="d-flex justify-content-center">
+                    <share-buttons style="background: rebeccapurple; border-radius: 20px;"
+                      [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']" [show]="5"
+                      [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
                   </div>
                   <div class="py-3">
                     <div class="percent" *ngIf="items.coAdChannel == true">Co-ad channels</div>

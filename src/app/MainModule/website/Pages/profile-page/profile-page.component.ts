@@ -6,7 +6,7 @@ import { UpdateProfileDetails } from './profile-page.classe';
 import { Codes } from 'src/app/Utils/country-codes';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-declare var $ : any
+declare var $: any;
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
@@ -17,8 +17,12 @@ export class ProfilePageComponent implements OnInit {
   model: any = {};
   data: any;
   updateUserDetailsForm: FormGroup | any;
+  updateImageForm: FormGroup | any;
+  updateSocialLinkForm: FormGroup | any;
   countryCodes = Codes;
   userDetails = new UpdateProfileDetails();
+  imageSrc?: string;
+  socialLinks: any;
   constructor(
     private location: Location,
     private _service: SharedService,
@@ -36,6 +40,8 @@ export class ProfilePageComponent implements OnInit {
       this.model.mobileno = this.data.mobileno;
       this.model.expertType = this.data.expertType;
       this.model.userType = this.data.userType;
+      this.model.image = this.data.image;
+      // console.log('this.model.image: ', this.model.image);
     });
     this.updateUserDetailsForm = new FormGroup({
       mobileno: new FormControl(''),
@@ -44,9 +50,23 @@ export class ProfilePageComponent implements OnInit {
       email: new FormControl(''),
       code: new FormControl(''),
     });
+    this.updateImageForm = new FormGroup({
+      Image: new FormControl(''),
+    });
+    this.updateSocialLinkForm = new FormGroup({
+      url: new FormControl(''),
+    });
+    this.getSocialLinks();
   }
   goBack() {
     this.location.back();
+  }
+
+  getSocialLinks() {
+    this._service.GetSocialLinks().subscribe((res: any) => {
+      // console.log('res: ', res);
+      this.socialLinks = res.data;
+    });
   }
 
   update() {
@@ -80,28 +100,86 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  openTwitter() {
-    <any>$('#twitterModel').modal('show');
+  openSocialLinks(data: any) {
+    <any>$('#socialLinkModel').modal('show');
+    // console.log('data: ', data);
+    this.model.linkName = data.name;
+    this.model.url = data.url;
+    this.model.id = data.id;
+    // console.log('this.model.url: ', this.model.url);
   }
-  openFacebook() {
-    <any>$('#facebookModel').modal('show');
+  closeSocialLinks() {
+    <any>$('#socialLinkModel').modal('hide');
   }
-  openInsta() {
-    <any>$('#instaModel').modal('show');
+
+  onSelectFile(event: any) {
+    // console.log('event: ', event);
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+
+        this.updateImageForm.patchValue({
+          image: reader.result,
+        });
+      };
+      let formData = new FormData();
+      formData.append('image', file);
+      formData.append('Mobile_Number', this.mobileNumber);
+      this._service.UpdateUserProfileImage(formData).subscribe((res) => {
+        // console.log(res);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+        Toast.fire({
+          icon: 'success',
+          title: 'profile picture updated',
+        });
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate(['home/profile-page']);
+          });
+      });
+    }
   }
-  openLinkedIn() {
-    <any>$('#linkedInModel').modal('show');
-  }
-  closeTwitter() {
-    <any>$('#twitterModel').modal('hide');
-  }
-  closeFacebook() {
-    <any>$('#facebookModel').modal('hide');
-  }
-  closeInsta() {
-    <any>$('#instaModel').modal('hide');
-  }
-  closeLinkedIn() {
-    <any>$('#linkedInModel').modal('hide');
+
+  UpdateLinks(id:any) {
+    let data = {
+      id: id,
+      name: this.model.linkName,
+      mobile_Number: this.mobileNumber,
+      url: this.updateSocialLinkForm.value.url,
+    };
+    this._service.UpDateSocilaLinks(data).subscribe((res:any) => {
+       const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 3000,
+         timerProgressBar: true,
+         didOpen: (toast) => {
+           toast.addEventListener('mouseenter', Swal.stopTimer);
+           toast.addEventListener('mouseleave', Swal.resumeTimer);
+         },
+       });
+       Toast.fire({
+         icon: 'success',
+         title: res.message,
+       });
+       <any>$('#socialLinkModel').modal('hide');
+    });
   }
 }

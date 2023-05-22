@@ -387,4 +387,33 @@ export class SharedService {
       data
     );
   }
+
+  UpdateUserProfileImage(formData: any): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'api/Login/UpdateUserProfile',
+      formData
+    );
+  }
+
+  GetSocialLinks() {
+    return this.http.get(this.apiUrl + 'api/Login/GetSocialMediaLink');
+  }
+
+  UpDateSocilaLinks(data: any) {
+    return this.http.post(
+      this.apiUrl + 'api/Login/UpdateSocialMediaLink',
+      data
+    );
+  }
+
+  GetComments(mobile_No: string, clublistid:string) {
+    return this.http.get(
+      this.apiUrl +
+        'api/Club/GetClubDetailComments?mobileno='+ mobile_No +'&clublistid=' + clublistid
+    );
+  }
+
+  AddComment(data:any): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Club/AddClubComments', data);
+  }
 }

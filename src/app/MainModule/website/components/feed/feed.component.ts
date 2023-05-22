@@ -146,6 +146,8 @@ export class FeedComponent implements OnInit {
   FreeAccess: string = '';
   PaidAccess: string = '';
   showSearch: boolean = false;
+  isShare: boolean = false;
+  shareId: any;
   isLoading: boolean = false;
   isLike: boolean = false;
   channelPostId: any;
@@ -194,6 +196,7 @@ export class FeedComponent implements OnInit {
   }
 
   getChannel() {
+
     let mobile_No = '';
     var splitString = this.mobile_number.split('');
     if (splitString[0] == '+') {
@@ -201,7 +204,11 @@ export class FeedComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-    this.isLoading = true;
+    if (this.isLike == true){
+      this.isLoading = false;
+    } else{
+      this.isLoading = true;
+    }
     this._service.GetChannel(mobile_No).subscribe((res) => {
       this.channelDetails = res.data;
       this.isLoading = false;
@@ -256,70 +263,72 @@ export class FeedComponent implements OnInit {
   }
 
   onScroll() {
-    var pageNumber = ++this.current;
-    // console.log('pageNumber: ', pageNumber);
-    // this.GetFeed()
-    let mobile_No = '';
-    var splitString = this.mobile_number.split('');
-    if (splitString[0] == '+') {
-      splitString[0] = '%2B';
-      var joinString = splitString.join('');
-      mobile_No = joinString;
-    }
-    // console.log(this.Channel);
-    if (
-      this.Club != '' ||
-      this.Channel != '' ||
-      this.Expert != '' ||
-      this.ExpertAndInvestor != '' ||
-      this.Investor != ''
-    ) {
-      this.http
-        .get(
-          this.apiUrl +
-            'api/Filter/GetFeedPostFilter?Mobile_No=' +
-            mobile_No +
-            '&Club=' +
-            this.Club +
-            '&Channel=' +
-            this.Channel +
-            '&Expert=' +
-            this.Expert +
-            '&Investor=' +
-            this.Investor +
-            '&ExpertAndInvestor=' +
-            this.ExpertAndInvestor +
-            '&pageNumber=' +
-            pageNumber +
-            '&pageSize=' +
-            this.perPage
-        )
-        .subscribe({
-          next: (response: any) => {
-            if (response.items.length != 0) {
-              this.feedDetails.push(...response.items);
+    if (this.activeTab == 'home-tab') {
+      var pageNumber = ++this.current;
+      // console.log('pageNumber: ', pageNumber);
+      // this.GetFeed()
+      let mobile_No = '';
+      var splitString = this.mobile_number.split('');
+      if (splitString[0] == '+') {
+        splitString[0] = '%2B';
+        var joinString = splitString.join('');
+        mobile_No = joinString;
+      }
+      // console.log(this.Channel);
+      if (
+        this.Club != '' ||
+        this.Channel != '' ||
+        this.Expert != '' ||
+        this.ExpertAndInvestor != '' ||
+        this.Investor != ''
+      ) {
+        this.http
+          .get(
+            this.apiUrl +
+              'api/Filter/GetFeedPostFilter?Mobile_No=' +
+              mobile_No +
+              '&Club=' +
+              this.Club +
+              '&Channel=' +
+              this.Channel +
+              '&Expert=' +
+              this.Expert +
+              '&Investor=' +
+              this.Investor +
+              '&ExpertAndInvestor=' +
+              this.ExpertAndInvestor +
+              '&pageNumber=' +
+              pageNumber +
+              '&pageSize=' +
+              this.perPage
+          )
+          .subscribe({
+            next: (response: any) => {
+              if (response.items.length != 0) {
+                this.feedDetails.push(...response.items);
+              } else {
+                this.current--;
+              }
+            },
+            error: (error) => {
+              if (error.status == '400') {
+              }
+            },
+          });
+      } else {
+        this._service
+          .GetFeed(mobile_No, pageNumber, this.perPage)
+          .subscribe((res) => {
+            // console.log('res: ', res.items);
+            if (res.items.length != 0) {
+              this.feedDetails.push(...res.items);
             } else {
               this.current--;
             }
-          },
-          error: (error) => {
-            if (error.status == '400') {
-            }
-          },
-        });
-    } else {
-      this._service
-        .GetFeed(mobile_No, pageNumber, this.perPage)
-        .subscribe((res) => {
-          // console.log('res: ', res.items);
-          if (res.items.length != 0) {
-            this.feedDetails.push(...res.items);
-          } else {
-            this.current--;
-          }
 
-          // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
-        });
+            // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+          });
+      }
     }
   }
 
@@ -600,11 +609,31 @@ export class FeedComponent implements OnInit {
       i.checked = false;
     });
     // (<any>$('#filter')).modal('hide');
-    if(this.activeTab == 'home-tab'){
+    if (this.activeTab == 'home-tab') {
       this.GetFeed();
-    }else if(this.activeTab == 'contact-tab'){
+    } else if (this.activeTab == 'contact-tab') {
       this.getChannel();
     }
+  }
+
+  channelLike(channelId: string, status: boolean) {
+    this.isLike = true
+    let formData = {
+      channelId: channelId,
+      like: status,
+      mobileno: this.mobile_number,
+    };
+
+    this._service.ChannelPostLikeDislike(formData).subscribe((res) => {
+      // console.log('res: ', res);
+      this.getChannel();
+      // this.getLikes(id)
+    });
+  }
+
+  share(id: any) {
+    this.shareId = id;
+    this.isShare = !this.isShare;
   }
 
   @HostListener('window:scroll', [])

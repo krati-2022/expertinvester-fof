@@ -14,7 +14,9 @@ export class ClubDetailsComponent implements OnInit {
   name: any;
   clubDetails: any;
   searchKey: string = '';
-  isLoading: boolean = false
+  isLoading: boolean = false;
+  isShare: boolean = false;
+  shareId: any;
   constructor(
     private _service: SharedService,
     private router: Router,
@@ -36,7 +38,7 @@ export class ClubDetailsComponent implements OnInit {
     this.location.back();
   }
   getClubDetails() {
-    this.isLoading = true
+    this.isLoading = true;
     this._service
       .GetClubDetails(this.mobile_number, this.clubListId)
       .subscribe((res: any) => {
@@ -57,10 +59,15 @@ export class ClubDetailsComponent implements OnInit {
     ]);
   }
 
-  getCulbDetails(item:any){
-  // console.log('item: ', item);
+  getCulbDetails(item: any) {
+    // console.log('item: ', item);
     this.router.navigate([
       'home/details/' + item.id + '/' + this.mobile_number,
     ]);
+  }
+
+  share(id: any) {
+    this.shareId = id;
+    this.isShare = !this.isShare;
   }
 }
