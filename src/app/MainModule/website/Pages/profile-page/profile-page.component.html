@@ -24,14 +24,18 @@
               <h6>{{model.name}}</h6>
               <h3>{{model.userType}}</h3>
               <div class="social-links mt-2" >
-               <a class="twitter" (click)="openSocialLinks(data)" *ngFor="let data of socialLinks">
+               <!-- <a class="twitter" href="data.url" target="_blank" *ngFor="let data of socialLinks">
                 <i *ngIf="data.name == 'Twitter'" class="bi bi-twitter"></i>
                 <i *ngIf="data.name == 'FaceBook'" class="bi bi-facebook"></i>
                 <i *ngIf="data.name == 'Instagram'" class="bi bi-instagram"></i>
                 <i *ngIf="data.name == 'LinkedIn'" class="bi bi-linkedin"></i>
-              </a>
-                <!-- <a class="facebook" (click)="openFacebook()"><i class="bi bi-facebook"></i></a>
-                <a class="instagram" (click)="openInsta()"><i class="bi bi-instagram"></i></a>
+              </a> -->
+              
+                <a class="twitter" *ngIf="model.twitter != null && model.twitter != ''" [href]="model.twitter.url" target="_blank"><i class="bi bi-twitter"></i></a>
+                <a class="instagram" *ngIf="model.Instagram!= null && model.Instagram != ''" [href]="model.Instagram.url" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a class="facebook" *ngIf="model.facebook != null && model.facebook != ''" [href]="model.facebook.url" target="_blank"><i class="bi bi-facebook"></i></a>
+                <a class="linkedin" *ngIf="model.linkededIn!= null && model.linkededIn != ''" [href]="model.linkededIn.url" target="_blank"><i class="bi bi-linkedin"></i></a>
+                <!-- <a class="instagram" (click)="openInsta()"><i class="bi bi-instagram"></i></a>
                 <a class="linkedin" (click)="openLinkedIn()"><i class="bi bi-linkedin"></i></a> -->
               </div>
             </div>
@@ -150,30 +154,42 @@
                         formControlName="email" id="Email" placeholder="k.anderson@example.com">
                     </div>
                   </div>
-                  <!-- <div class="row mb-3">
+                  <div class="row mb-3">
                     <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="twitter" type="text" class="form-control" id="Twitter" placeholder="https://twitter.com/#">
+                    <div class="col-md-6 col-lg-8">
+                      <input name="twitter" type="text" class="form-control" [disabled]="twitter" id="Twitter" placeholder="Add Your Twitter">
+                    </div>
+                    <div class="col-md-2 col-lg-1">
+                      <i class="bi bi-pencil-square" id="Twitter" (click)="EnableDisable($event)"></i>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="facebook" type="text" class="form-control" id="Facebook" placeholder="https://facebook.com/#">
+                    <div class="col-md-6 col-lg-8">
+                      <input name="facebook" type="text" class="form-control" [disabled]="facebook" id="Facebook" placeholder="Add Your FaceBook">
                     </div>
+                      <div class="col-md-2 col-lg-1">
+                        <i class="bi bi-pencil-square" id="Facebook" (click)="EnableDisable($event)"></i>
+                      </div>
                   </div>
                   <div class="row mb-3">
                     <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="instagram" type="text" class="form-control" id="Instagram" placeholder="https://instagram.com/#">
+                    <div class="col-md-6 col-lg-8">
+                      <input name="instagram" type="text" class="form-control" [disabled]="insta" id="Instagram" placeholder="Add Your Instagram">
                     </div>
+                      <div class="col-md-2 col-lg-1">
+                        <i class="bi bi-pencil-square" id="Instagram" (click)="EnableDisable($event)"></i>
+                      </div>
                   </div>
                   <div class="row mb-3">
                     <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="linkedin" type="text" class="form-control" id="Linkedin" placeholder="https://linkedin.com/#">
+                    <div class="col-md-6 col-lg-8">
+                      <input name="linkedin" type="text" class="form-control" [disabled]="linkededIn" id="Linkedin" placeholder="Add Your Linkedin">
                     </div>
-                  </div> -->
+                      <div class="col-md-2 col-lg-1">
+                        <i class="bi bi-pencil-square" id="Linkedin" (click)="EnableDisable($event)"></i>
+                      </div>
+                  </div>
                   <div class="row mb-3">
                     <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                     <div class="col-md-8 col-lg-9">

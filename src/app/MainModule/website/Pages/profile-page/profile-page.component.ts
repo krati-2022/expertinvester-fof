@@ -23,6 +23,10 @@ export class ProfilePageComponent implements OnInit {
   userDetails = new UpdateProfileDetails();
   imageSrc?: string;
   socialLinks: any;
+  twitter: boolean = true;
+  facebook: boolean = true;
+  insta: boolean = true;
+  linkededIn: boolean = true;
   constructor(
     private location: Location,
     private _service: SharedService,
@@ -66,6 +70,29 @@ export class ProfilePageComponent implements OnInit {
     this._service.GetSocialLinks().subscribe((res: any) => {
       // console.log('res: ', res);
       this.socialLinks = res.data;
+      this.socialLinks.map((item:any) => {
+        switch (item.name) {
+          case 'Twitter':
+            this.model.twitter = item;
+            break;
+          case 'FaceBook':
+            this.model.facebook = item;
+            break;
+          case 'LinkedIn':
+            this.model.linkededIn = item;
+            break;
+          case 'Instagram':
+            this.model.Instagram = item;
+            break;
+        }
+              
+            })
+      //       console.log('this.model.facebook: ', this.model.facebook);
+      //     console.log('this.model.linkededIn: ', this.model.linkededIn);
+      //   console.log('this.model.Instagram: ', this.model.Instagram);
+      // console.log('this.model.twitter: ', this.model.twitter);
+      // console.log('this.socialLinks: ', this.socialLinks[0]);
+      // this.model.twitter = this.socialLinks[0].url
     });
   }
 
@@ -156,30 +183,49 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
-  UpdateLinks(id:any) {
+  UpdateLinks(id: any) {
     let data = {
       id: id,
       name: this.model.linkName,
       mobile_Number: this.mobileNumber,
       url: this.updateSocialLinkForm.value.url,
     };
-    this._service.UpDateSocilaLinks(data).subscribe((res:any) => {
-       const Toast = Swal.mixin({
-         toast: true,
-         position: 'top-end',
-         showConfirmButton: false,
-         timer: 3000,
-         timerProgressBar: true,
-         didOpen: (toast) => {
-           toast.addEventListener('mouseenter', Swal.stopTimer);
-           toast.addEventListener('mouseleave', Swal.resumeTimer);
-         },
-       });
-       Toast.fire({
-         icon: 'success',
-         title: res.message,
-       });
-       <any>$('#socialLinkModel').modal('hide');
+    this._service.UpDateSocilaLinks(data).subscribe((res: any) => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: 'success',
+        title: res.message,
+      });
+      <any>$('#socialLinkModel').modal('hide');
     });
+  }
+
+  EnableDisable(event:any) {
+  // console.log('event: ', event.target.id);
+  switch (event.target.id) {
+    case 'Twitter':
+      
+      this.twitter = !this.twitter;
+      break;
+    case 'Facebook':
+      this.facebook = !this.facebook;
+      break;
+    case 'Instagram':
+      this.insta = !this.insta;
+      break;
+    case 'Linkedin':
+      this.linkededIn = !this.linkededIn
+      break
+  }
   }
 }

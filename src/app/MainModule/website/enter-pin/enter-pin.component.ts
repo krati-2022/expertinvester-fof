@@ -11,6 +11,7 @@ import { Login } from './enter-pin.classes';
 export class EnterPinComponent implements OnInit {
   pin: any = localStorage.getItem('pin');
   isRegistered = localStorage.getItem('isRegistered');
+  ReEnterPin = localStorage.getItem('setuppin');
   password!: string;
   showOtpComponent = true;
   loginDetails = new Login();
@@ -64,6 +65,7 @@ export class EnterPinComponent implements OnInit {
         });
         this._service.LoginIn(loginDetailas).subscribe((res) => {
           // console.log('res: ', res);
+          localStorage.removeItem('setuppin');
           if (res.data[0]?.userDetail) {
             this.router.navigate(['home']);
           } else {

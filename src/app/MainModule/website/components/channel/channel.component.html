@@ -4,63 +4,71 @@
     <div class="card">
       <div class="pagetitle">
         <div class="d-flex justify-content-between align-items-baseline">
-         <div>
-           <h1 class="px-3">Channel</h1>
-         </div>
-         
-         <div *ngIf="isLoading == false">
-          <button type="button" class="btn btn-outline-secondary " (click)="open()"><i class="bi bi-sliders"
-              style="width: 12px; padding-right: 7px;"></i><span style="padding-left: 12px;">Filter</span></button>
-              &nbsp;
-          <button type="button" class="btn btn-outline-secondary" (click)="AddChannel()"><i class="bi bi-pencil-square"></i></button>
+          <div>
+            <h1 class="px-3">Channel</h1>
+          </div>
+
+          <div *ngIf="isLoading == false">
+            <button type="button" class="btn btn-outline-secondary " (click)="open()"><i class="bi bi-sliders"
+                style="width: 12px; padding-right: 7px;"></i><span style="padding-left: 12px;">Filter</span></button>
+            &nbsp;
+            <button type="button" class="btn btn-outline-secondary" (click)="AddChannel()"><i
+                class="bi bi-pencil-square"></i></button>
+          </div>
         </div>
-        </div>
-       </div>
+      </div>
       <div class="m-2">
         <div class="d-flex justify-content-center" *ngIf="isLoading == true" style="height: 50vh; align-items: center;">
           <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
-        <div class="example" *ngIf="channelDetails.length != 0 && isLoading == false">
-          <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey :  'name'; let index = index">
-            <div class="m-2" >
-              <div class="container pad0"  style="cursor: pointer;">
-                  <div class="container  pad0">
-                    <div class=" row user_informatiom d-flex justify-content-between align-items-center" style="cursor: pointer;">
-                      <div class="d-flex col-12" (click)="getChannelDetails(items)">
-                        <div class="col-2">
-                          <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                        </div>
-                        <div class="col-6 mx-3 py-2">
-                          <div class="user_name">{{items.name}}</div>
-                          <div class="detail">{{items.sebi}}</div>
-                          <!-- <div class="percent">Accuracy 57.7% Profitability -13.5%</div> -->
-                        </div>
+        <div class="example" *ngIf="channelDetails.length != 0 && isLoading == false" infiniteScroll
+          [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+          <div class="card list-card "
+            *ngFor="let items of channelDetails | filter : searchKey :  'name'; let index = index">
+            <div class="m-2">
+              <div class="container pad0" style="cursor: pointer;">
+                <div class="container  pad0">
+                  <div class=" row user_informatiom d-flex justify-content-between align-items-center"
+                    style="cursor: pointer;">
+                    <div class="d-flex col-12" (click)="getChannelDetails(items)">
+                      <div class="col-2">
+                        <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                       </div>
-
-
+                      <div class="col-6 mx-3 py-2">
+                        <div class="user_name">{{items.name}}</div>
+                        <div class="detail">{{items.sebi}}</div>
+                        <!-- <div class="percent">Accuracy 57.7% Profitability -13.5%</div> -->
+                      </div>
                     </div>
+
+
                   </div>
+                </div>
               </div>
               <div class="container  pad0">
                 <div class="row">
                   <div class="d-flex justify-content-between align-items-baseline py-2">
                     <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
-                    <button class="btn follow-btn" *ngIf="items.isSubscribed == true"><i class="bi bi-lock-fill "></i>&nbsp;Subscribed</button>
-                   <div class="dropdown" *ngIf="items.isSubscribed == false">
-                          <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-three-dots-vertical"></i>
-                          </a>
+                    <button class="btn follow-btn" *ngIf="items.isSubscribed == true"><i
+                        class="bi bi-lock-fill "></i>&nbsp;Subscribed</button>
+                    <div class="dropdown" *ngIf="items.isSubscribed == false">
+                      <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                      </a>
 
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                            <li *ngIf="items.isUserChannel == false" (click)="subscribe(items)" style="cursor: pointer;"><a class="dropdown-item"><i class="bi bi-unlock-fill" [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
-                            <li  style="cursor: pointer;" *ngIf="items.isUserChannel == true" (click)="Edit(items)"><a class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
+                        <li *ngIf="items.isUserChannel == false" (click)="subscribe(items)" style="cursor: pointer;"><a
+                            class="dropdown-item"><i class="bi bi-unlock-fill"
+                              [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
+                        <li style="cursor: pointer;" *ngIf="items.isUserChannel == true" (click)="Edit(items)"><a
+                            class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
 
-                          </ul>
-                        </div>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -85,12 +93,12 @@
                       </div>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                      <button type="button" class="btn position-btn"><i
-                          class="bi bi-graph-up-arrow px-2"></i>Success
+                      <button type="button" class="btn position-btn"><i class="bi bi-graph-up-arrow px-2"></i>Success
                         rate: 20%</button>
                     </div>
                   </div>
-                  <div class="date">{{items.createdDate | date: 'fullDate'}} {{items.createdDate | date: 'shortTime'}}</div>
+                  <div class="date">{{items.createdDate | date: 'fullDate'}} {{items.createdDate | date: 'shortTime'}}
+                  </div>
                 </div>
               </div>
               <div class="container  pad0" (click)="getChannelDetails(items)">
@@ -168,7 +176,8 @@
                 <div>
                   <span (click)="like(items.channelMasterId, !items.isChannelLiked)">
                     <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isChannelLiked == false">{{items.likecount}}</i>
-                    <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
+                    <i class="bi bi-hand-thumbs-up-fill px-2"
+                      *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
                   </span>
                   <span (click)="share(index)"><i class="bi bi-share-fill px-2"></i></span>
                 </div>
@@ -176,12 +185,12 @@
                   <!-- <i class="bi bi-bookmark-fill px-2"></i> -->
                 </div>
               </div>
-                <div *ngIf="isShare == true && index == shareId" class="d-flex justify-content-center">
-                  <share-buttons style="background: rebeccapurple; border-radius: 20px;"
-                    [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']" [show]="5"
-                    [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
-                </div>
-              <div class="py-3" >
+              <div *ngIf="isShare == true && index == shareId" class="d-flex justify-content-center">
+                <share-buttons style="background: rebeccapurple; border-radius: 20px;"
+                  [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']" [show]="5"
+                  [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
+              </div>
+              <div class="py-3">
                 <div class="percent" *ngIf="items.coAdChannel == true">
                   <span>Co-ad channels</span>
                   <div *ngFor="let experts of items.coAdExperts">
@@ -189,10 +198,12 @@
                   </div>
                 </div>
 
-                <div class="d-flex justify-content-end" *ngIf="items.isChannelApprove == true && items.channelApproved == false">
-                  <span class="px-4"><button type="button"
-                      class="btn btn-primary danger-btn" (click)="approveRejectChannel(items.channelMasterId, items.expertId, true, false)">Approve</button></span>
-                  <span><button type="button" class="btn btn-success danger-btn" (click)="approveRejectChannel(items.channelMasterId, items.expertId, false, true)">Reject</button></span>
+                <div class="d-flex justify-content-end"
+                  *ngIf="items.isChannelApprove == true && items.channelApproved == false">
+                  <span class="px-4"><button type="button" class="btn btn-primary danger-btn"
+                      (click)="approveRejectChannel(items.channelMasterId, items.expertId, true, false)">Approve</button></span>
+                  <span><button type="button" class="btn btn-success danger-btn"
+                      (click)="approveRejectChannel(items.channelMasterId, items.expertId, false, true)">Reject</button></span>
                 </div>
               </div>
             </div>
@@ -200,7 +211,8 @@
 
         </div>
 
-        <div class="example d-flex justify-content-center" style="height: 65vh; overflow: auto; align-items: center;" *ngIf="channelDetails.length == 0 && isLoading == false" >
+        <div class="example d-flex justify-content-center" style="height: 65vh; overflow: auto; align-items: center;"
+          *ngIf="channelDetails.length == 0 && isLoading == false">
           <img src="assets/img/noDataFound.png" alt="" />
           <!-- <sapn>No Data Found at the Moment, Comeback later!</sapn> -->
         </div>
@@ -208,7 +220,6 @@
     </div>
   </div>
 </section>
-
 
 <app-responsive-view></app-responsive-view>
 
@@ -228,8 +239,9 @@
               <div>
 
                 <div class="form-check" *ngFor="let item of data">
-                  <input class="form-check-input" type="checkbox" formControlName="name" [(ngModel)]="item.checked"  (change)="onFilter(item)">
-                  <label class="form-check-label filter-text" >
+                  <input class="form-check-input" type="checkbox" formControlName="name" [(ngModel)]="item.checked"
+                    (change)="onFilter(item)">
+                  <label class="form-check-label filter-text">
                     {{item.name}}
                   </label>
                 </div>
@@ -239,8 +251,10 @@
         </div>
 
         <div class="row px-3 py-3 text-center">
-          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary setfillterbtn" (click)="ClearAll()">CLEAR FILTER</button></div>
-          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger setapplyfiltter" (click)="apply()">APPLY</button></div>
+          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary setfillterbtn"
+              (click)="ClearAll()">CLEAR FILTER</button></div>
+          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger setapplyfiltter"
+              (click)="apply()">APPLY</button></div>
         </div>
 
       </div>

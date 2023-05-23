@@ -168,9 +168,9 @@ export class SharedService {
     );
   }
 
-  GetChannel(mobile_No: string): Observable<any> {
+  GetChannel(mobile_No: string, pageNumber:number, pageSize:number): Observable<any> {
     return this.http.get(
-      this.apiUrl + 'api/Channel/GetChannelMasterList?Mobile_No=' + mobile_No
+      this.apiUrl + 'api/Channel/GetChannelMasterList?Mobile_No=' + mobile_No +'&pageNumber=' +pageNumber+'&pageSize='+ pageSize
     );
   }
 

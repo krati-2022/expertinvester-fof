@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContactUs } from './contact-us.classes';
 import { SharedService } from 'src/app/Service/shared.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contact-us',
@@ -11,6 +12,7 @@ import { SharedService } from 'src/app/Service/shared.service';
 export class ContactUsComponent implements OnInit {
   contactUsForm: FormGroup | any
   submitted: boolean = false
+  isLoading: boolean = false
   constructor(private _service: SharedService) {}
 
   ngOnInit(): void {
@@ -23,6 +25,7 @@ export class ContactUsComponent implements OnInit {
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       mobileNumber: new FormControl('', Validators.required),
+      messageType: new FormControl('', Validators.required),
     });
   }
 
@@ -39,10 +42,30 @@ export class ContactUsComponent implements OnInit {
       firstName: this.contactUsForm.get('firstName').value,
       lastName: this.contactUsForm.get('lastName').value,
       mobileNumber: this.contactUsForm.get('mobileNumber').value,
+      messageType: this.contactUsForm.get('messageType').value,
     };
+    // console.log('formData: ', formData);
+    // return
+    this.isLoading = true
     this._service.ContactUs(formData).subscribe(res =>{
-    console.log('res: ', res);
-      
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: 'success',
+        title: 'Successfully sent',
+      });
+      this.isLoading = false;
+      this.contactUsForm.reset()
+      this.submitted = false
     })
   }
 }

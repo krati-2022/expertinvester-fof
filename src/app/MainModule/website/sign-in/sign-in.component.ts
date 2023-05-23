@@ -75,9 +75,9 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.countryCodes);
     // console.log('this.isExistUser: ', this.isExistUser);
-    // if(this.isExistUser != null){
-    //   this.router.navigate(['enter-pin'])
-    // }
+    if(this.isExistUser != null){
+      this.router.navigate(['enter-pin'])
+    }
   }
   onOtpChange(otp: string) {
     this.otp = otp;

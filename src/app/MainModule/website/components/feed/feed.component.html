@@ -82,7 +82,7 @@
                             <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                           </div>
                           <div class="col-6 mx-3 py-2">
-                            <div class="user_name">{{items.username}} {{feedDetails.length}}</div>
+                            <div class="user_name">{{items.username}}</div>
                             <!-- <div class="detail">{{items.sebi}}</div>
                             <div class="percent">Accuracy 57.7% Profitability -13.5%</div> -->
                           </div>
@@ -127,8 +127,8 @@
                                       class="bi bi-slash-circle"></i>Block</a>
 
                                 </li>
-                                <li *ngIf="items.isSelfPost != true"><a class="dropdown-item"><i
-                                      class="bi bi-unlock-fill"></i>Free Access</a></li>
+                                <!-- <li *ngIf="items.isSelfPost != true"><a class="dropdown-item"><i
+                                      class="bi bi-unlock-fill"></i>Free Access</a></li> -->
 
                               </ul>
                             </div>
@@ -327,7 +327,7 @@
                 <span class="visually-hidden">Loading...</span>
               </div>
             </div>
-            <div class="example" *ngIf="isLoading == false">
+            <div class="example" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollChannelList()" *ngIf="isLoading == false">
               <div class="card list-card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'username'; let index = index">
                 <div class="card-body">
                   <!-- <div class="container">

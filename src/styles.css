@@ -353,10 +353,10 @@ li.dropdown-header h6 {
 }
 
 @media screen and (min-width: 320px) and (max-width: 991px){
-  .responsiveView{
+  /* .responsiveView{
     height: 75vh;
     overflow: auto;
-  }
+  } */
 }
 
 @media screen and (min-width: 320px) and (max-width: 416px) {

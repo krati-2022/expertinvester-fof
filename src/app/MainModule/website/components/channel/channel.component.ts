@@ -56,6 +56,7 @@ export class ChannelComponent implements OnInit {
   Investor: string = '';
   ExpertAndInvestor: string = '';
   count: any;
+  screenWidth: any;
   public current = 0;
   public itemsToDisplay: any;
   public perPage = 10;
@@ -93,11 +94,41 @@ export class ChannelComponent implements OnInit {
     if (this.isLike == false) {
       this.isLoading = true;
     }
-    this._service.GetChannel(mobile_No).subscribe((res) => {
-      this.channelDetails = res.data;
-      this.isLoading = false;
-      // console.log('this.channelDetails: ', this.channelDetails);
-    });
+    this._service
+      .GetChannel(mobile_No, this.current, this.perPage)
+      .subscribe((res) => {
+        // console.log('res: ', res);
+        this.channelDetails = res.items;
+        this.isLoading = false;
+        // console.log('this.channelDetails: ', this.channelDetails);
+      });
+  }
+
+  onScroll() {
+    this.screenWidth = window.innerWidth;
+    // console.log('this.screenWidth: ', this.screenWidth);
+    if (this.screenWidth >= 992) {
+      var pageNumber = ++this.current;
+      let mobile_No = '';
+      var splitString = this.mobileNumber.split('');
+      if (splitString[0] == '+') {
+        splitString[0] = '%2B';
+        var joinString = splitString.join('');
+        mobile_No = joinString;
+      }
+  
+      this._service
+        .GetChannel(mobile_No, pageNumber, this.perPage)
+        .subscribe((res) => {
+          // console.log('res: ', res);
+          if (res.items.length != 0) {
+            this.channelDetails.push(...res.items);
+          } else {
+            this.current--;
+          }
+          // console.log('this.channelDetails: ', this.channelDetails);
+        });
+    }
   }
 
   AddChannel() {
@@ -201,7 +232,7 @@ export class ChannelComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-    (<any>$('#filter')).modal('hide');
+    (<any>$('#filterPopUp')).modal('hide');
     this.http
       .get(
         this.apiUrl +
@@ -217,7 +248,10 @@ export class ChannelComponent implements OnInit {
           this.Investor +
           '&ExpertAndInvestor=' +
           this.ExpertAndInvestor +
-          'pageNumber=0&pageSize=100'
+          '&pageNumber=' +
+          this.current +
+          '&pageSize=' +
+          this.perPage
       )
       .subscribe({
         next: (response: any) => {
@@ -248,7 +282,7 @@ export class ChannelComponent implements OnInit {
     this.data.map((i: any) => {
       i.checked = false;
     });
-    // (<any>$('#filter')).modal('hide');
+    (<any>$('#filterPopUp')).modal('hide');
     this.getChannel();
   }
 
@@ -256,6 +290,17 @@ export class ChannelComponent implements OnInit {
     this.shareId = id;
     this.isShare = !this.isShare;
   }
+
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event: any) {
+  //   this.getWindowSize();
+  // }
+
+  // getWindowSize() {
+  //   this.screenWidth = window.innerWidth;
+  //   console.log('this.screenWidth: ', this.screenWidth);
+  // }
+
   @HostListener('window:scroll', [])
   public onScrolled() {
     if (window.pageYOffset >= 100) {

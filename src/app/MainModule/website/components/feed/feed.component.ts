@@ -209,8 +209,8 @@ export class FeedComponent implements OnInit {
     } else{
       this.isLoading = true;
     }
-    this._service.GetChannel(mobile_No).subscribe((res) => {
-      this.channelDetails = res.data;
+    this._service.GetChannel(mobile_No,this.current, this.perPage).subscribe((res) => {
+      this.channelDetails = res.items;
       this.isLoading = false;
       // console.log('this.channelDetails: ', this.channelDetails);
     });
@@ -327,6 +327,75 @@ export class FeedComponent implements OnInit {
             }
 
             // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+          });
+      }
+    }
+  }
+
+  onScrollChannelList(){
+     if(this.activeTab=='contact-tab'){
+      // console.log('pageNumber: ', pageNumber);
+      // this.GetFeed()
+      var pageNumber = ++this.current
+      let mobile_No = '';
+      var splitString = this.mobile_number.split('');
+      if (splitString[0] == '+') {
+        splitString[0] = '%2B';
+        var joinString = splitString.join('');
+        mobile_No = joinString;
+      }
+      // console.log(this.Channel);
+      if (
+        this.FreeAccess != '' ||
+        this.PaidAccess != '' ||
+        this.Expert != '' ||
+        this.ExpertAndInvestor != '' ||
+        this.Investor != ''
+      ) {
+         this.http
+           .get(
+             this.apiUrl +
+               'api/Filter/GetChannelMasterFilterList?Mobile_No=' +
+               mobile_No +
+               '&FreeAccess=' +
+               this.FreeAccess +
+               '&PaidAccess=' +
+               this.PaidAccess +
+               '&Expert=' +
+               this.Expert +
+               '&Investor=' +
+               this.Investor +
+               '&ExpertAndInvestor=' +
+               this.ExpertAndInvestor +
+               '&pageNumber=' +
+               this.current +
+               '&pageSize=' +
+               this.perPage
+           )
+           .subscribe({
+             next: (response: any) => {
+               if (response.items.length != 0) {
+                 this.channelDetails.push(...response.items);
+               } else {
+                 this.current--;
+               }
+             },
+             error: (error) => {
+               if (error.status == '400') {
+               }
+             },
+           });
+      }else{
+        this._service
+          .GetChannel(mobile_No, pageNumber, this.perPage)
+          .subscribe((res) => {
+            // console.log('res: ', res);
+            if (res.items.length != 0) {
+              this.channelDetails.push(...res.items);
+            } else {
+              this.current--;
+            }
+            // console.log('this.channelDetails: ', this.channelDetails);
           });
       }
     }
@@ -588,7 +657,10 @@ export class FeedComponent implements OnInit {
             this.Investor +
             '&ExpertAndInvestor=' +
             this.ExpertAndInvestor +
-            'pageNumber=0&pageSize=100'
+            '&pageNumber=' +
+            this.current +
+            '&pageSize=' +
+            this.perPage
         )
         .subscribe({
           next: (response: any) => {
