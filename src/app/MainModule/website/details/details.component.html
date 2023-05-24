@@ -45,23 +45,43 @@
                 <div class="d-flex justify-content-between user_informatiom py-2">
                   <div>
                     <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likeCount}}</i></span>
-                    <span><i class="bi bi-share-fill"></i></span>
+                    <span (click)="share(items.id)"><i class="bi bi-share-fill"></i></span>
                   </div>
                   <div>
-                    <!-- <i class="bi bi-bookmark-fill"></i> -->
+                    <span (click)="getComments()"><i class="bi bi-chat"></i></span>
                   </div>
                 </div>
-                <!-- <div class="py-3 ">
-                  <div class="row py-2">
-                    <h6 class="dis-line">Disclaimer </h6>
-                    <p class="dis">Ideas are shared on best effort basis with required due diligence and
-                      research integrity. These ideas can go wrong and incur losses considering market volatility. You
-                      are fully responsible for both profits
-                      and losses incurred from these ideas if you choose to follow and execute them. We recommend you to
-                      do your own research and take
-                      informed decicions</p>
+                <div *ngIf="isShare == true && items.id == shareId" class="d-flex justify-content-center">
+                  <share-buttons style="background: rebeccapurple; border-radius: 20px;"
+                    [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']" [show]="5"
+                    [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
+                </div>
+                <div class="py-3 ">
+                  <div class="row py-2" *ngIf="isShowComment">
+                    <h6 class="dis-line">Comment</h6>
+                    <div *ngFor="let comments of data">
+                      <p class="dis">{{comments.message}}</p>
+                    </div>
+                    <form [formGroup]="addCommnetFrom" (ngSubmit)="Comment()">
+                      <div class="col-12">
+                        <div class="row d-flex justify-content-center align-items-center">
+                          <div class="col-10">
+                            <input class="form-control" formControlName="message" type="text" placeholder="Add your comment" 
+                             [ngClass]="{'is-invalid' : submitted && addCommentControl.message.errors}" />
+                            <div *ngIf=" submitted && addCommentControl.message.errors" class="invalid-feedback">
+                              <div *ngIf="addCommentControl.message.errors.required">Message is required.</div>
+                            </div>
+                          </div>
+                          <div class="col-2">
+                            <i type="sumbit"  class="bi bi-arrow-right" style="font-size: 25px;"></i>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </form>
                   </div>
-                </div> -->
+                </div>
               </div>
             </div>
           </div>

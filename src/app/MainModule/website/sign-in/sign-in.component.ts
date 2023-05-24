@@ -75,9 +75,9 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.countryCodes);
     // console.log('this.isExistUser: ', this.isExistUser);
-    // if(this.isExistUser != null){
-    //   this.router.navigate(['enter-pin'])
-    // }
+    if(this.isExistUser != null){
+      this.router.navigate(['enter-pin'])
+    }
   }
   onOtpChange(otp: string) {
     this.otp = otp;
@@ -148,6 +148,25 @@ export class SignInComponent implements OnInit {
           this.submitted = false;
 
           (<any>$('#exampleModal')).modal('show');
+        }
+      }, (error)=>{
+        if(error.status == '400'){
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+              },
+            });
+            Toast.fire({
+              icon: 'error',
+              title: 'Something went wrong',
+            });
+          this.isLoading= false
         }
       });
     // this._service.UserIsExist(this.mobile).subscribe(res =>{

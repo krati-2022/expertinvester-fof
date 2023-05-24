@@ -56,10 +56,10 @@ export class AddClubComponent implements OnInit {
       clubDescription: this.AddClubForm.value.clubDescription,
       country: this.AddClubForm.value.country,
     });
-    console.log('this.ClubDetails: ', this.ClubDetails);
+    // console.log('this.ClubDetails: ', this.ClubDetails);
     this.isLoading = true
     this._service.AddClub(this.ClubDetails).subscribe(res => {
-    console.log('res: ', res);
+    // console.log('res: ', res);
        const Toast = Swal.mixin({
          toast: true,
          position: 'top-end',
@@ -72,11 +72,30 @@ export class AddClubComponent implements OnInit {
          },
        });
        Toast.fire({
-         icon: 'error',
+         icon: 'success',
          title: 'Club Added Successfully',
        });
        this.isLoading = false
-       this.router.navigate(['club-list'])
+       this.router.navigate(['admin/home/add-club']);
+    }, (error) =>{
+      if(error.status == '400'){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+          Toast.fire({
+            icon: 'error',
+            title: 'Something Went Wrong',
+          });
+        this.isLoading = false
+      }
     })
   }
 }

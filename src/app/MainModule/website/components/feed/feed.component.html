@@ -1,9 +1,8 @@
-
 <section class="p-2" [style.marginTop.px]="scrollPosition">
   <div class="row">
     <div class="mx-auto">
       <div class="card">
-        <div class="pagetitle" >
+        <div class="pagetitle">
           <div class="d-flex justify-content-between align-items-baseline">
             <div>
               <h1 class="px-3 py-1 d-lg-block d-md-none d-sm-none ">Feed</h1>
@@ -11,10 +10,32 @@
             <!-- <div>
               <h1 class="px-3 py-1 d-lg-block d-md-none d-sm-none " *ngIf="showSearch">Search</h1>
             </div> -->
-            <button type="button" class="btn btn-outline-secondary d-lg-block d-md-none d-sm-none" (click)="open()"><i class="bi bi-sliders"
+            <button *ngIf="isLoading == false" type="button"
+              class="btn btn-outline-secondary d-lg-block d-md-none d-sm-none" (click)="open()"><i class="bi bi-sliders"
                 style="width: 12px; padding-right: 7px;"></i><span style="padding-left: 12px;">Filter</span></button>
           </div>
         </div>
+        <div *ngIf="activeTab == 'home-tab'">
+          <div class="btnmangemobile">
+            <div *ngIf="isLoading == false" class=" d-lg-none d-md-block d-sm-block" (click)="open()"><i
+                class="bi bi-funnel" style="width: 12px; padding-right: 7px;"></i><span
+                style="padding-left: 12px;"></span></div>
+          </div>
+        </div>
+        <div *ngIf="activeTab == 'contact-tab'">
+          <div class="btnmangemobile">
+            <div *ngIf="isLoading == false">
+              <div (click)="open()"><i class="bi bi-funnel" style="width: 12px; padding-right: 7px;"></i><span
+                  style="padding-left: 12px;"></span></div>
+              &nbsp;
+            </div>
+          </div>
+          <div *ngIf="isLoading == false" class="addbtnmanage">
+            <button type="button" class="btn btn-outline-secondary" (click)="AddChannel()"><i
+                class="bi bi-pencil-square"></i></button>
+          </div>
+        </div>
+
         <div class="d-lg-none d-md-block d-sm-block">
           <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
             <li class="nav-item flex-fill" role="presentation">
@@ -37,16 +58,18 @@
 
         </div>
         <!-- Bordered Tabs Justified -->
-        <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+        <div class="tab-content pt-2 responsiveView" id="borderedTabJustifiedContent">
           <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
             aria-labelledby="home-tab">
             <div class="example">
-              <div class="d-flex justify-content-center" *ngIf="isLoading == true" style="height: 50vh; align-items: center;">
+              <div class="d-flex justify-content-center" *ngIf="isLoading == true"
+                style="height: 50vh; align-items: center;">
                 <div class="spinner-border" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
               </div>
-              <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" *ngIf="isLoading == false">
+              <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()"
+                *ngIf="isLoading == false">
 
                 <div class="card list-card" *ngFor="let items of feedDetails | filter : searchKey : 'username'">
                   <div class="m-2">
@@ -88,7 +111,8 @@
                       <div class="container">
                         <div class="row">
                           <div class="d-flex justify-content-between align-items-baseline py-2">
-                            <h6 class="heading" (click)="getDetails(items.id, items.recordType)" style="width: 800px;">{{items.clubName}}
+                            <h6 class="heading" (click)="getDetails(items.id, items.recordType)" style="width: 800px;">
+                              {{items.clubName}}
                             </h6>
                             <div class="dropdown" *ngIf="items.clubBlock == false">
 
@@ -103,8 +127,8 @@
                                       class="bi bi-slash-circle"></i>Block</a>
 
                                 </li>
-                                <li *ngIf="items.isSelfPost != true"><a class="dropdown-item"><i
-                                      class="bi bi-unlock-fill"></i>Free Access</a></li>
+                                <!-- <li *ngIf="items.isSelfPost != true"><a class="dropdown-item"><i
+                                      class="bi bi-unlock-fill"></i>Free Access</a></li> -->
 
                               </ul>
                             </div>
@@ -135,7 +159,7 @@
                             {{items.stockname}}
                           </div>
                           <div class="date">{{items.createdDate | date : 'fullDate'}} {{items.createdDate | date :
-                          'shortTime'}}</div>
+                            'shortTime'}}</div>
                         </div>
                       </div>
                       <div class="container">
@@ -148,7 +172,12 @@
                               <div class="expect-percent">{{items.expected_Move | number : '1.2-2'}} %</div>
                             </div>
                             <div class="channel-detail">{{items.stockname}}</div>
-                            <div><button type="button" class="btn btn-danger danger-btn" (click)="openIdeaTracke()">Idea tracker</button></div>
+                            <div>
+
+                              <button *ngIf="items.istargetprice == false && items.isstoploss == false" type="button"
+                                class="btn btn-danger danger-btn" (click)="openIdeaTracke(items.id)">Idea
+                                tracker</button>
+                            </div>
                           </div>
                           <div>
                             <span class="line ">IRB</span> <span class="equity-btn px-2">Equity</span>
@@ -189,12 +218,14 @@
                       <div class="container">
                         <div class="row"
                           *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
-                          <img (click)="getDetails(items.id, items.recordType)" [src]="items.imageurl"  alt="" class="manageimg">
+                          <img (click)="getDetails(items.id, items.recordType)" [src]="items.imageurl" alt=""
+                            class="manageimg">
                         </div>
                       </div>
                       <div class="container">
                         <div class="row py-2" style="cursor: pointer;">
-                          <h6 class="dis-line"  (click)="getDetails(items.id, items.recordType)" [innerHTML]="items.description"></h6>
+                          <h6 class="dis-line" (click)="getDetails(items.id, items.recordType)"
+                            [innerHTML]="items.description"></h6>
                           <p class="dis" style="opacity: 0.6;">{{items.externallink}}</p>
                         </div>
                       </div>
@@ -206,15 +237,19 @@
                             <i class="bi bi-hand-thumbs-up-fill px-2"
                               *ngIf="items.isUserLiked == true">{{items.likeCount}}</i>
                           </span>
-                          <span><i class="bi bi-share-fill px-2"></i></span>
+                          <span (click)="share(items.id)"><i class="bi bi-share-fill px-2"></i></span>
                         </div>
                         <div>
                           <!-- <span><i class="bi bi-bookmark-fill px-2"></i></span> -->
                           <!-- <button class="btn follow-btn" style="background: blue;" (click)="getDetails(items.id, items.recordType)">
-                          <span *ngIf="items.recordType == 'ChannelRecord'">Channel Details</span>
-                          <span *ngIf="items.recordType == 'ClubRecord'">Club Details</span>
-                        </button> -->
+                            <span *ngIf="items.recordType == 'ChannelRecord'">Channel Details</span>
+                            <span *ngIf="items.recordType == 'ClubRecord'">Club Details</span>
+                          </button> -->
                         </div>
+                      </div>
+                      <div *ngIf="isShare == true && items.id == shareId" class="d-flex justify-content-center">
+                        <share-buttons style="background: rebeccapurple; border-radius: 20px;" [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']" [show]="5"
+                          [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
                       </div>
                     </div>
                   </div>
@@ -223,13 +258,15 @@
 
             </div>
             <div class="example d-flex justify-content-center"
-              style="height: 75vh; overflow: auto; align-items: center;" *ngIf="feedDetails.length == 0 && isLoading == false">
+              style="height: 75vh; overflow: auto; align-items: center;"
+              *ngIf="feedDetails.length == 0 && isLoading == false">
               <img src="assets/img/noDataFound.png" alt="" />
-              <sapn>No Feed Found at the Moment, Comeback later!</sapn>
+              <!-- <sapn>No Feed Found at the Moment, Comeback later!</sapn> -->
             </div>
           </div>
           <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="d-flex justify-content-center" *ngIf="isLoading == true" style="height: 50vh; align-items: center;">
+            <div class="d-flex justify-content-center" *ngIf="isLoading == true"
+              style="height: 50vh; align-items: center;">
               <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
@@ -240,7 +277,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="channel-name d-flex col-12">
-                      <div class="col-8" (click)="getClubDetails(items.id, items.name)">
+                      <div class="col-8" (click)="getClubDetails(items)">
                         <span class="club-header" style="cursor: pointer;"> {{items.name}}</span>
                       </div>
                       <div class="col-4 d-flex justify-content-end">
@@ -255,10 +292,10 @@
 
                   </div>
                   <div class="">
-                    <p class="club-dis" (click)="getClubDetails(items.id, items.name)" [innerHTML]="items.description"></p>
+                    <p class="club-dis" (click)="getClubDetails(items)" [innerHTML]="items.description"></p>
                   </div>
                 </div>
-                <div class="container expect-section my-2 " (click)="getClubDetails(items.id, items.name)">
+                <div class="container expect-section my-2 " (click)="getClubDetails(items)">
                   <div class="grid-data d-flex  ">
 
                     <div class="col-5  border-end ">
@@ -284,13 +321,14 @@
             </div>
           </div>
           <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
-            <div class="d-flex justify-content-center" *ngIf="isLoading == true" style="height: 50vh; align-items: center;">
+            <div class="d-flex justify-content-center" *ngIf="isLoading == true"
+              style="height: 50vh; align-items: center;">
               <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
             </div>
-            <div class="example" *ngIf="isLoading == false">
-              <div class="card list-card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'username'">
+            <div class="example" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollChannelList()" *ngIf="isLoading == false">
+              <div class="card list-card my-3" *ngFor="let items of channelDetails | filter : searchKey : 'username'; let index = index">
                 <div class="card-body">
                   <!-- <div class="container">
                     <div class=" row user_informatiom" (click)="getChannelDetails(items)">
@@ -308,7 +346,8 @@
                     <div class="row">
                       <div class="d-flex justify-content-between align-items-baseline py-2">
                         <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
-                        <span *ngIf="items.isUserChannel == false" class=" subscript"><i class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
+                        <span *ngIf="items.isUserChannel == false" class=" subscript"><i
+                            class="bi bi-lock-fill lock-icon"></i>{{items.subscription}}</span>
                       </div>
                     </div>
                   </div>
@@ -334,7 +373,8 @@
                             rate: 20%</button>
                         </div>
                       </div>
-                      <div class="date">{{items.createdDate | date: 'fullDate'}} {{items.createdDate | date: 'shortTime'}}</div>
+                      <div class="date">{{items.createdDate | date: 'fullDate'}} {{items.createdDate | date:
+                        'shortTime'}}</div>
                     </div>
                   </div>
                   <div class="container" (click)="getChannelDetails(items)">
@@ -415,15 +455,30 @@
                   </div> -->
                   <div class="d-flex justify-content-between">
                     <div>
-                      <span> <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likecount}}</i></span>
-                      <span><i class="bi bi-share-fill"></i></span>
+                      <span (click)="channelLike(items.channelMasterId, !items.isChannelLiked)">
+                        <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isChannelLiked == false">{{items.likecount}}</i>
+                        <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
+                      </span>
+                      <span (click)="share(index)"><i class="bi bi-share-fill"></i></span>
                     </div>
                     <!-- <div>
                       <i class="bi bi-bookmark-fill"></i>
                     </div> -->
                   </div>
+                  <div *ngIf="isShare == true && index == shareId" class="d-flex justify-content-center">
+                    <share-buttons style="background: rebeccapurple; border-radius: 20px;"
+                      [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']" [show]="5"
+                      [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
+                  </div>
                   <div class="py-3">
-                    <div class="percent" *ngIf="items.coAdChannel == true">Co-ad channels</div>
+                    <div class="percent" *ngIf="items.coAdChannel == true">
+                      <span>Co-ad channels</span>
+                      <div *ngFor="let experts of items.coAdExperts" class="d-flex align-items-center">
+                        <span style="color: black;">{{experts.expert_Name}}</span>&nbsp;
+                        <span class="badge badge-success" *ngIf="experts.isapproved == true">Approved</span>
+                        <span class="badge badge-warning" *ngIf="experts.isapproved == false">Pending</span>
+                      </div>
+                    </div>
                     <div class="d-flex justify-content-end" *ngIf="items.coAdChannel == true">
                       <span class="px-4"><button type="button"
                           class="btn btn-primary danger-btn">Approve</button></span>
@@ -446,7 +501,7 @@
 
 <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
   <form [formGroup]="filterForm">
-    <div class="modal-dialog" role="document" style="width: 40%; ">
+    <div class="modal-dialog popueresposive" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="filterLabel">Filter</h5>
@@ -457,12 +512,21 @@
         <div class="container">
           <div class="">
             <div class="row border-bottom  ">
-              <div>
+              <div *ngIf="activeTab=='home-tab'">
 
                 <div class="form-check" *ngFor="let item of data">
-                  <input class="form-check-input" type="checkbox" formControlName="name"
-                    (change)="onFilter(item)" [(ngModel)]="item.checked">
-                  <label class="form-check-label filter-text" for="flexRadioDefault3">
+                  <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)"
+                    [(ngModel)]="item.checked" [id]="item.name">
+                  <label class="form-check-label filter-text" [for]="item.name">
+                    {{item.name}}
+                  </label>
+                </div>
+              </div>
+              <div *ngIf="activeTab=='contact-tab'">
+                <div class="form-check" *ngFor="let item of channeldata">
+                  <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)"
+                    [(ngModel)]="item.checked" [id]="item.name">
+                  <label class="form-check-label filter-text" [for]="item.name">
                     {{item.name}}
                   </label>
                 </div>
@@ -472,10 +536,10 @@
         </div>
 
         <div class="row px-3 py-3 text-center">
-          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary setfillterbtn"
-          (click)="ClearAll()">CLEAR FILTER</button></div>
-          <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger setapplyfiltter"
-          (click)="apply()">APPLY</button></div>
+          <div class="col-md-6 col-6 mx-auto"> <button type="button" class="btn btn-outline-secondary setfillterbtn"
+              (click)="ClearAll()">CLEAR FILTER</button></div>
+          <div class="col-md-6 col-6 mx-auto"> <button type="button" class="btn btn-danger setapplyfiltter"
+              (click)="apply()">APPLY</button></div>
         </div>
 
       </div>
@@ -496,7 +560,7 @@
       </div>
       <div class="modal-body">
         <div class="form-check" *ngFor="let item of ideaTracker">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" [id]="item">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" (change)="onChange($event)" [id]="item">
           <label class="form-check-label" [for]="item">
             {{item}}
           </label>
@@ -510,4 +574,3 @@
     </div>
   </div>
 </div>
-

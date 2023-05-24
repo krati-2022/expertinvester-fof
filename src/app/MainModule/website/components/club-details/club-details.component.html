@@ -22,8 +22,8 @@
             </div>
             <div class="example" *ngIf="isLoading == false">
               <div class="card list-card " *ngFor="let items of clubDetails | filter : searchKey : 'username'">
-                <div class="m-2" (click)="getCulbDetails(items)">
-                  <div class=" row user_informatiom d-flex justify-content-between" style="cursor: pointer;">
+                <div class="m-2" >
+                  <div class=" row user_informatiom d-flex justify-content-between" style="cursor: pointer;" (click)="getCulbDetails(items)">
                     <div class="d-flex col-8">
                       <div class="col-2">
                         <span class="user-icon"><i class="bi bi-person-circle"></i></span>
@@ -38,18 +38,18 @@
                   </div>
                   <div>
   
-                    <div class="row">
+                    <div class="row" (click)="getCulbDetails(items)">
                       <div class="channel-name d-flex justify-content-between align-items-center py-2">
                         <span> <i class="bi bi-lightbulb"></i>{{items.clubName}}</span> 
                       </div>
                       
                       <div class="date">{{items.createdDate | date : 'fullDate'}}{{items.createdDate | date : 'shortTime'}}</div>
                     </div>
-                    <div class="row"
+                    <div class="row" (click)="getCulbDetails(items)"
                       *ngIf="items.imageurl != 'http://103.117.66.70:5002/FitOnFace/' && items.imageurl != 'https://api.expertinvester.com/FitOnFaceImages/' && items.imageurl != '' && items.imageurl != null">
                       <img [src]="items.imageurl"  alt="" class="manageimg">
                     </div>
-                    <div class="row py-2">
+                    <div class="row py-2" (click)="getCulbDetails(items)">
                       <h6 class="dis-line" [innerHTML]="items.description"></h6>
                       <!-- <p class="dis">{{items.description}}</p> -->
                     </div>
@@ -60,13 +60,18 @@
                                             *ngIf="items.isUserLiked == false">{{items.likeCount}}</i> -->
                           <i class="bi bi-hand-thumbs-up-fill px-2">{{items.likeCount}}</i>
                         </span>
+                        <span (click)="share(items.id)"><i class="bi bi-share-fill px-2"></i></span>
                       </div>
-                      <div>
-                        <span><i class="bi bi-share-fill px-2"></i></span>
+                      <!-- <div>
                         <span><i class="bi bi-bookmark-fill px-2"></i></span>
   
-                      </div>
+                      </div> -->
                     </div>
+                      <div *ngIf="isShare == true && items.id == shareId" class="d-flex justify-content-center">
+                        <share-buttons style="background: rebeccapurple; border-radius: 20px;"
+                          [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']" [show]="5"
+                          [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
+                      </div>
                   </div>
                 </div>
               </div>

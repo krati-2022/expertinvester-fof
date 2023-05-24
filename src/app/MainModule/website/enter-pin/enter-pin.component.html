@@ -72,7 +72,9 @@
               <span class="login-line">Enter Your PIN</span>
             </div> -->
             <div>
-              <span class="login-line">Enter Your Pin Number</span>
+              <span class="login-line">
+               <sapn *ngIf="ReEnterPin != null">Re-</sapn>Enter Your Pin Number
+              </span>
             </div>
           </div>
           <div class="input-container d-flex flex-row justify-content-center " style="    margin-top: 15px;">

@@ -6,9 +6,14 @@ import { FollowClub } from '../club/club.classes';
 import {
   ChannelApproveReject,
   ChannelSubscriber,
+
 } from '../channel/channel.classes';
 import { ChannelListDetails } from '../channel/channel.component';
 import Swal from 'sweetalert2';
+import { FormControl, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ChannelDATA, DATA } from '../feed/feed.classes';
 declare var $: any;
 export interface ClubList {
   id: string;
@@ -26,6 +31,7 @@ export interface ClubList {
 })
 export class ResponsiveViewComponent implements OnInit {
   mobileNumber = localStorage.getItem('mobile_number') || '{}';
+  apiUrl = environment.baseUrlForWebsite;
   clubList: ClubList[] = [];
   followClubDetails = new FollowClub();
   feedDetails: GetFeedDetails[] = [];
@@ -40,12 +46,36 @@ export class ResponsiveViewComponent implements OnInit {
   screenWidth: any;
   ideaTracker = ['Target', 'Stop Loss'];
   isLoading: boolean = false;
-  constructor(private _service: SharedService, private router: Router) {}
+  channelPostId: any;
+  activeTab: string = 'home-tab';
+  Club: string = '';
+  Channel: string = '';
+  Expert: string = '';
+  Investor: string = '';
+  ExpertAndInvestor: string = '';
+  FreeAccess: string = '';
+  PaidAccess: string = '';
+  filterForm: FormGroup | any;
+  data: any;
+  channeldata: any;
+  isShare: boolean = false;
+  shareId: any;
+  constructor(
+    private _service: SharedService,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
+    this.data = DATA;
+    this.channeldata = ChannelDATA;
     this.getWindowSize();
     this._service.search.subscribe((val: any) => {
       this.searchKey = val;
+    });
+
+    this.filterForm = new FormGroup({
+      name: new FormControl(false),
     });
   }
 
@@ -111,12 +141,14 @@ export class ResponsiveViewComponent implements OnInit {
       mobile_No = joinString;
     }
     this.isLoading = true;
-    this._service.GetChannel(mobile_No).subscribe((res) => {
-      // console.log('res: ', res);
-      this.channelDetails = res.data;
-      this.isLoading = false;
-      // console.log('this.channelDetails: ', this.channelDetails);
-    });
+    this._service
+      .GetChannel(mobile_No, this.current, this.perPage)
+      .subscribe((res) => {
+        // console.log('res: ', res);
+        this.channelDetails = res.items;
+        this.isLoading = false;
+        // console.log('this.channelDetails: ', this.channelDetails);
+      });
   }
 
   followClub(clublistId: string) {
@@ -142,23 +174,99 @@ export class ResponsiveViewComponent implements OnInit {
   }
 
   onScroll() {
-    var pageNumber = ++this.current;
+    // console.log('this.activeTab: ', this.activeTab);
+    this.screenWidth = window.innerWidth;
+    if(this.screenWidth <= 992){
+      if (this.activeTab == 'home-tab') {
+        var pageNumber = ++this.current;
+        let mobile_No = '';
+        var splitString = this.mobileNumber.split('');
+        if (splitString[0] == '+') {
+          splitString[0] = '%2B';
+          var joinString = splitString.join('');
+          mobile_No = joinString;
+        }
+        this._service
+          .GetFeed(mobile_No, pageNumber, this.perPage)
+          .subscribe((res) => {
+            this.feedDetails.push(...res.items);
+  
+            // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+          });
+      }
+
+    }
     // console.log('pageNumber: ', pageNumber);
     // this.GetFeed()
-    let mobile_No = '';
-    var splitString = this.mobileNumber.split('');
-    if (splitString[0] == '+') {
-      splitString[0] = '%2B';
-      var joinString = splitString.join('');
-      mobile_No = joinString;
-    }
-    this._service
-      .GetFeed(mobile_No, pageNumber, this.perPage)
-      .subscribe((res) => {
-        this.feedDetails.push(...res.items);
+  }
 
-        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
-      });
+  onScrollChannelList() {
+    if (this.activeTab == 'contact-tab') {
+      // console.log('pageNumber: ', pageNumber);
+      // this.GetFeed()
+      var pageNumber = ++this.current;
+      let mobile_No = '';
+      var splitString = this.mobileNumber.split('');
+      if (splitString[0] == '+') {
+        splitString[0] = '%2B';
+        var joinString = splitString.join('');
+        mobile_No = joinString;
+      }
+      // console.log(this.Channel);
+      if (
+        this.FreeAccess != '' ||
+        this.PaidAccess != '' ||
+        this.Expert != '' ||
+        this.ExpertAndInvestor != '' ||
+        this.Investor != ''
+      ) {
+        this.http
+          .get(
+            this.apiUrl +
+              'api/Filter/GetChannelMasterFilterList?Mobile_No=' +
+              mobile_No +
+              '&FreeAccess=' +
+              this.FreeAccess +
+              '&PaidAccess=' +
+              this.PaidAccess +
+              '&Expert=' +
+              this.Expert +
+              '&Investor=' +
+              this.Investor +
+              '&ExpertAndInvestor=' +
+              this.ExpertAndInvestor +
+              '&pageNumber=' +
+              this.current +
+              '&pageSize=' +
+              this.perPage
+          )
+          .subscribe({
+            next: (response: any) => {
+              if (response.items.length != 0) {
+                this.channelDetails.push(...response.items);
+              } else {
+                this.current--;
+              }
+            },
+            error: (error) => {
+              if (error.status == '400') {
+              }
+            },
+          });
+      } else {
+        this._service
+          .GetChannel(mobile_No, pageNumber, this.perPage)
+          .subscribe((res) => {
+            // console.log('res: ', res);
+            if (res.items.length != 0) {
+              this.channelDetails.push(...res.items);
+            } else {
+              this.current--;
+            }
+            // console.log('this.channelDetails: ', this.channelDetails);
+          });
+      }
+    }
   }
 
   AddChannel() {
@@ -228,15 +336,18 @@ export class ResponsiveViewComponent implements OnInit {
   }
 
   getTab(event: any) {
-    console.log('event: ', event.target.id);
+    // console.log('event: ', event.target.id);
     switch (event.target.id) {
       case 'home-tab':
+        this.activeTab = 'home-tab';
         this.GetFeed();
         break;
       case 'profile-tab':
+        this.activeTab = 'profile-tab';
         this.getMasterData();
         break;
       case 'contact-tab':
+        this.activeTab = 'contact-tab';
         this.getChannel();
         break;
 
@@ -331,25 +442,176 @@ export class ResponsiveViewComponent implements OnInit {
   }
 
   Edit(item: any) {
-    // console.log('item: ', item);
-    // this.router.navigate([
-    //   'home/trades/' +
-    //     'FINOLEXIND' +
-    //     '/' +
-    //     item.channelMasterId +
-    //     '/' +
-    //     this.mobileNumber +
-    //     '/' +
-    //     item.username,
-    // ]);
     this.router.navigate(['home/edit-channel/' + item.channelMasterId]);
   }
 
-  openIdeaTracke() {
+  open() {
+    (<any>$('#filter')).modal('show');
+  }
+  close() {
+    (<any>$('#filter')).modal('hide');
+  }
+
+  openIdeaTracke(id: any) {
+    this.channelPostId = id;
     <any>$('#exampleModalCenter').modal('show');
+  }
+
+  onChange(event: any) {
+    let istargetprice;
+    let isstoploss;
+    switch (event.target.id) {
+      case 'Target':
+        istargetprice = true;
+        isstoploss = false;
+        break;
+      case 'Stop Loss':
+        istargetprice = false;
+        isstoploss = true;
+        break;
+    }
+    let formData = {
+      channelPostId: this.channelPostId,
+      mobile_No: this.mobileNumber,
+      istargetprice: istargetprice,
+      isstoploss: isstoploss,
+    };
+    this._service.IdeaTracker(formData).subscribe((res) => {
+      // console.log('res: ', res);
+      this.GetFeed();
+      <any>$('#exampleModalCenter').modal('hide');
+    });
   }
 
   closeIdeaTracke() {
     <any>$('#exampleModalCenter').modal('hide');
+  }
+
+  onFilter(event: any) {
+    event.checked = true;
+
+    switch (event.name) {
+      case 'Club':
+        this.Club = this.filterForm.value.name == true ? 'Club' : '';
+        break;
+      case 'Channel':
+        this.Channel = this.filterForm.value.name == true ? 'Channel' : '';
+        break;
+      case 'Expert':
+        this.Expert = this.filterForm.value.name == true ? 'Expert' : '';
+        break;
+      case 'Investor':
+        this.Investor = this.filterForm.value.name == true ? 'Investor' : '';
+        break;
+      case 'Expert&Invester':
+        this.ExpertAndInvestor =
+          this.filterForm.value.name == true ? 'ExpertAndInvestor' : '';
+        break;
+      case 'Free Access':
+        this.FreeAccess =
+          this.filterForm.value.name == true ? 'FreeAccess' : '';
+        break;
+      case 'Paid Access':
+        this.PaidAccess =
+          this.filterForm.value.name == true ? 'PaidAccess' : '';
+        break;
+    }
+  }
+
+  apply() {
+    if (this.activeTab == 'home-tab') {
+      let mobile_No = '';
+      var splitString = this.mobileNumber.split('');
+      if (splitString[0] == '+') {
+        splitString[0] = '%2B';
+        var joinString = splitString.join('');
+        mobile_No = joinString;
+      }
+      (<any>$('#filter')).modal('hide');
+      this.http
+        .get(
+          this.apiUrl +
+            'api/Filter/GetFeedPostFilter?Mobile_No=' +
+            mobile_No +
+            '&Club=' +
+            this.Club +
+            '&Channel=' +
+            this.Channel +
+            '&Expert=' +
+            this.Expert +
+            '&Investor=' +
+            this.Investor +
+            '&ExpertAndInvestor=' +
+            this.ExpertAndInvestor +
+            '&pageNumber=' +
+            this.current +
+            '&pageSize=' +
+            this.perPage
+        )
+        .subscribe({
+          next: (response: any) => {
+            // debugger;
+            this.feedDetails = response.items;
+          },
+          error: (error) => {
+            if (error.status == '400') {
+            }
+          },
+        });
+    } else if (this.activeTab == 'contact-tab') {
+      let mobile_No = '';
+      var splitString = this.mobileNumber.split('');
+      if (splitString[0] == '+') {
+        splitString[0] = '%2B';
+        var joinString = splitString.join('');
+        mobile_No = joinString;
+      }
+      (<any>$('#filter')).modal('hide');
+      this.http
+        .get(
+          this.apiUrl +
+            'api/Filter/GetChannelMasterFilterList?Mobile_No=' +
+            mobile_No +
+            '&FreeAccess=' +
+            this.FreeAccess +
+            '&PaidAccess=' +
+            this.PaidAccess +
+            '&Expert=' +
+            this.Expert +
+            '&Investor=' +
+            this.Investor +
+            '&ExpertAndInvestor=' +
+            this.ExpertAndInvestor +
+            'pageNumber=0&pageSize=100'
+        )
+        .subscribe({
+          next: (response: any) => {
+            // debugger;
+            this.channelDetails = response.items;
+          },
+          error: (error) => {
+            if (error.status == '400') {
+            }
+          },
+        });
+    }
+  }
+
+  ClearAll() {
+    // console.log(this.data);
+    this.data.map((i: any) => {
+      i.checked = false;
+    });
+    (<any>$('#filter')).modal('hide');
+    if (this.activeTab == 'home-tab') {
+      this.GetFeed();
+    } else if (this.activeTab == 'contact-tab') {
+      this.getChannel();
+    }
+  }
+
+  share(id: any) {
+    this.shareId = id;
+    this.isShare = !this.isShare;
   }
 }

@@ -2,6 +2,10 @@
   padding: 12px;
 }
 
+.p-2 {
+  padding: 16px !important;
+}
+
 .search-form input {
   border: 0;
   font-size: 14px;
@@ -200,7 +204,6 @@ background: #FDCDE7;
 
 .dis-line{
 font-size: 16px;
-font-weight: 600;
 color: #000;
 }
 
@@ -445,9 +448,9 @@ li.benefit-line {
   color: #496333;
 }
 span.club-inf {
-  font-size: 9px;
-  font-weight: 600;
-  color: #979797;
+  font-size: 11px;
+    font-weight: 600;
+    margin-left: 4px;
 }
 .user-icon {
 font-size: 30px;
@@ -499,9 +502,12 @@ color: #012970;
 }
 .channel-name {
 font-size: 7px;
+padding: 0px;
 font-weight: 600;
 color: #F61C7A;
 }
+
+.pad0mobile{padding: 0px;}
 .fol {
 font-size: 12px;
 }
@@ -539,7 +545,6 @@ font-size: 10px;
 }
 .dis-line {
 font-size: 12px;
-font-weight: 600;
 color: #000;
 }
 .position-btn {
@@ -607,7 +612,7 @@ font-size: 10px;
 padding: 4px;
 }
 .expect-section {
-padding: 2px;
+padding: 15px;
 border: 2px solid #F61C7A;
 border-radius: 8px;
 }
@@ -1177,4 +1182,7 @@ margin: 0;
 
 .club {
   pointer-events: all;
+}
+::-webkit-scrollbar {
+  display: none;
 }

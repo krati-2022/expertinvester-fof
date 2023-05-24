@@ -1,33 +1,46 @@
-<main  class="main mx-auto">
+<main class="main mx-auto">
   <div class="pagetitle" style="width: 30%;">
     <h1 class="px-3 "><i class="bi bi-arrow-left px-2" (click)="goBack()"></i>Profile</h1>
   </div><!-- End Page Title -->
   <section class="container profile ">
     <div class="row">
       <div class="col-lg-4">
-        <div class="card list-card">
-          <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-            <!-- <img src="assets/img/user2.png" alt="Profile" class="rounded-circle"> -->
-            <div class="edit-icon">
-              <label for="file-input">
-                <i class="fas fa-edit"></i>
-              </label>
-              <input id="file-input" type="file" class="cstm-file" >
-            </div>
-            <div class="profile-img d-flex justify-content-center">
-              <img src="assets/img/user2.png" alt="" style="border-radius: 50px;">
+        <form [formGroup]="updateImageForm">
+          <div class="card list-card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+              <!-- <img src="assets/img/user2.png" alt="Profile" class="rounded-circle"> -->
+              <div class="edit-icon">
+                <label for="file-input">
+                  <i class="fas fa-edit"></i>
+                </label>
+                <input id="file-input" type="file" (change)="onSelectFile($event)" class="cstm-file">
+              </div>
+              <div class="profile-img d-flex justify-content-center">
+                <img *ngIf="!imageSrc && (model.image == null || model.image =='')" src="assets/img/user2.png" alt="" style="border-radius: 50px;">
+                <img *ngIf="!imageSrc" [src]="model.image" alt="" style="border-radius: 50px;">
+                <img [src]="imageSrc" *ngIf="imageSrc" style="border-radius: 50px;">
+
+              </div>
+              <h6>{{model.name}}</h6>
+              <h3>{{model.userType}}</h3>
+              <div class="social-links mt-2" >
+               <!-- <a class="twitter" href="data.url" target="_blank" *ngFor="let data of socialLinks">
+                <i *ngIf="data.name == 'Twitter'" class="bi bi-twitter"></i>
+                <i *ngIf="data.name == 'FaceBook'" class="bi bi-facebook"></i>
+                <i *ngIf="data.name == 'Instagram'" class="bi bi-instagram"></i>
+                <i *ngIf="data.name == 'LinkedIn'" class="bi bi-linkedin"></i>
+              </a> -->
               
-            </div>
-            <h6>{{model.name}}</h6>
-            <h3>{{model.userType}}</h3>
-            <div class="social-links mt-2">
-              <a  class="twitter" (click)="openTwitter()"><i class="bi bi-twitter"></i></a>
-              <a  class="facebook" (click)="openFacebook()"><i class="bi bi-facebook"></i></a>
-              <a  class="instagram" (click)="openInsta()"><i class="bi bi-instagram"></i></a>
-              <a  class="linkedin" (click)="openLinkedIn()"><i class="bi bi-linkedin"></i></a>
+                <a class="twitter" *ngIf="model.twitterUrl != null && model.twitterUrl != ''" [href]="model.twitterUrl" target="_blank"><i class="bi bi-twitter"></i></a>
+                <a class="instagram" *ngIf="model.instagramUrl != null && model.instagramUrl != ''" [href]="model.instagramUrl" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a class="facebook" *ngIf="model.faceBookUrl != null && model.faceBookUrl != ''" [href]="model.faceBookUrl" target="_blank"><i class="bi bi-facebook"></i></a>
+                <a class="linkedin" *ngIf="model.linkedinUrl != null && model.linkedinUrl != ''" [href]="model.linkedinUrl" target="_blank"><i class="bi bi-linkedin"></i></a>
+                <!-- <a class="instagram" (click)="openInsta()"><i class="bi bi-instagram"></i></a>
+                <a class="linkedin" (click)="openLinkedIn()"><i class="bi bi-linkedin"></i></a> -->
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div class="col-lg-8">
         <div class="card list-card">
@@ -35,7 +48,8 @@
             <!-- Bordered Tabs -->
             <ul class="nav nav-tabs nav-tabs-bordered">
               <li class="nav-item">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                <button class="nav-link active" data-bs-toggle="tab"
+                  data-bs-target="#profile-overview">Overview</button>
               </li>
               <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
@@ -97,10 +111,11 @@
                   <div class="row mb-3">
                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="fullName" type="text" formControlName="name" [ngModel]="model.name" class="form-control" id="fullName" placeholder="Kevin Anderson">
+                      <input name="fullName" type="text" formControlName="name" [ngModel]="model.name"
+                        class="form-control" id="fullName" placeholder="Kevin Anderson">
                     </div>
                   </div>
-                 
+
                   <!-- <div class="row mb-3">
                     <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
                     <div class="col-md-8 col-lg-9">
@@ -128,43 +143,58 @@
                   <div class="row mb-3">
                     <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="phone" type="text" class="form-control disabled" [ngModel]="model.mobileno" formControlName="mobileno" id="Phone" placeholder="(436) 486-3538 x29071">
+                      <input name="phone" type="text" class="form-control disabled" [ngModel]="model.mobileno"
+                        formControlName="mobileno" id="Phone" placeholder="(436) 486-3538 x29071">
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="email" type="email" class="form-control" [ngModel]="model.email" formControlName="email" id="Email" placeholder="k.anderson@example.com">
+                      <input name="email" type="email" class="form-control" [ngModel]="model.email"
+                        formControlName="email" id="Email" placeholder="k.anderson@example.com">
                     </div>
                   </div>
-                  <!-- <div class="row mb-3">
+                  <div class="row mb-3">
                     <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="twitter" type="text" class="form-control" id="Twitter" placeholder="https://twitter.com/#">
+                      <input name="twitter" type="text" class="form-control" [ngModel]="model.twitterUrl" formControlName="twitterUrl" id="Twitter" placeholder="Add Your Twitter">
                     </div>
+                    <!-- <div class="col-md-2 col-lg-1">
+                      <i class="bi bi-pencil-square" id="Twitter" (click)="EnableDisable($event)"></i>
+                    </div> -->
                   </div>
                   <div class="row mb-3">
                     <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="facebook" type="text" class="form-control" id="Facebook" placeholder="https://facebook.com/#">
+                      <input name="facebook" type="text" class="form-control" [ngModel]="model.faceBookUrl" formControlName="faceBookUrl" id="Facebook" placeholder="Add Your FaceBook">
                     </div>
+                      <!-- <div class="col-md-2 col-lg-1">
+                        <i class="bi bi-pencil-square" id="Facebook" (click)="EnableDisable($event)"></i>
+                      </div> -->
                   </div>
                   <div class="row mb-3">
                     <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="instagram" type="text" class="form-control" id="Instagram" placeholder="https://instagram.com/#">
+                      <input name="instagram" type="text" class="form-control" [ngModel]="model.instagramUrl" formControlName="instagramUrl" id="Instagram" placeholder="Add Your Instagram">
                     </div>
+                      <!-- <div class="col-md-2 col-lg-1">
+                        <i class="bi bi-pencil-square" id="Instagram" (click)="EnableDisable($event)"></i>
+                      </div> -->
                   </div>
                   <div class="row mb-3">
                     <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="linkedin" type="text" class="form-control" id="Linkedin" placeholder="https://linkedin.com/#">
+                      <input name="linkedin" type="text" class="form-control" [ngModel]="model.linkedinUrl" formControlName="linkedinUrl" id="Linkedin" placeholder="Add Your Linkedin">
                     </div>
-                  </div> -->
+                      <!-- <div class="col-md-2 col-lg-1">
+                        <i class="bi bi-pencil-square" id="Linkedin" (click)="EnableDisable($event)"></i>
+                      </div> -->
+                  </div>
                   <div class="row mb-3">
                     <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                     <div class="col-md-8 col-lg-9">
-                      <textarea name="about" class="form-control" [ngModel]="model.aboutUs" formControlName="aboutus" id="about" ></textarea>
+                      <textarea name="about" class="form-control" [ngModel]="model.aboutUs" formControlName="aboutus"
+                        id="about"></textarea>
                     </div>
                   </div>
                   <div class="text-center">
@@ -245,102 +275,27 @@
 </main>
 
 
-<div class="modal fade" id="twitterModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="socialLinkModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update Twitter</h5>
-        <button type="button" class="close " (click)="closeTwitter()" style="border: 0;background: #fff;">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update {{model.linkName}}</h5>
+        <button type="button" class="close " (click)="closeSocialLinks()" style="border: 0;background: #fff;">
           <i class="bi bi-x-lg"></i>
         </button>
       </div>
       <div class="modal-body">
-        <form >
+        <form [formGroup]="updateSocialLinkForm">
           <div class="form-group">
-            <label for="twitter">Twitter Link</label>
-            <input type="text" class="form-control" id="twitter"  name="twitter">
+            <label for="twitter">{{model.linkName}} Link</label>
+            <input type="text" formControlName="url" [ngModel]="model.url" class="form-control">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeTwitter()">Close</button>
-        <button type="button" class="btn btn-primary">Update</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="facebookModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update Facebook</h5>
-        <button type="button" class="close " (click)="closeFacebook()" style="border: 0;background: #fff;">
-          <i class="bi bi-x-lg"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form >
-          <div class="form-group">
-            <label for="twitter">Facebook Link</label>
-            <input type="text" class="form-control" id="twitter"  name="twitter">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeFacebook()">Close</button>
-        <button type="button" class="btn btn-primary">Update</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="instaModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update Instagram</h5>
-        <button type="button" class="close " (click)="closeInsta()" style="border: 0;background: #fff;">
-          <i class="bi bi-x-lg"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form >
-          <div class="form-group">
-            <label for="twitter">Instagram Link</label>
-            <input type="text" class="form-control" id="twitter"  name="twitter">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeInsta()">Close</button>
-        <button type="button" class="btn btn-primary">Update</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="linkedInModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update LinkedIn</h5>
-        <button type="button" class="close " (click)="closeLinkedIn()" style="border: 0;background: #fff;">
-          <i class="bi bi-x-lg"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form >
-          <div class="form-group">
-            <label for="twitter">LinkedIn Link</label>
-            <input type="text" class="form-control" id="twitter"  name="twitter">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeLinkedIn()">Close</button>
-        <button type="button" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="closeSocialLinks()">Close</button>
+        <button type="submit" (click)="UpdateLinks(model.id)" class="btn btn-primary">Update</button>
       </div>
     </div>
   </div>

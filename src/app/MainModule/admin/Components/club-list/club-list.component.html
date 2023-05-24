@@ -2,183 +2,75 @@
     <div class="row">
         <div class="col-lg-12 ">
             <div class="row">
-            <div class="d-flex justify-content-between align-items-baseline">
-                <div>
-                    <h1 class="px-3 py-1">Club List</h1>
+                <div class="d-flex justify-content-between align-items-baseline">
+                    <div>
+                        <h1 class="px-3 py-1">Club List</h1>
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary"><i class="bi bi-pencil-square"
+                            (click)="addClub()"></i></button>
                 </div>
-                <button type="button" class="btn btn-outline-secondary" ><i class="bi bi-pencil-square" (click)="addClub()"></i></button>
             </div>
+            <div class="d-flex justify-content-center" *ngIf="isLoading == true" style="height: 50vh; align-items: center;">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
-            <table class="rwd-table list-card w-100">
+            <table class="rwd-table list-card w-100" *ngIf="isLoading == false">
                 <tbody>
                     <tr>
                         <th>Club Name</th>
-                        <th>Impresssion</th>
-                        <th>Followers</th>
-                        <th>Post</th>
+                        <th>Country</th>
+                        <th>Active</th>
+                        <th>Discription</th>
                         <th>Operation</th>
                     </tr>
-                    <tr>
-                      
+
+                    <tr *ngFor="let data of clubList">
                         <td data-th="Club Name">
                             <div class="table-text">
-                                Chartbusters
+                                {{data.name}}
                             </div>
                         </td>
-                        <td data-th="Impresssion">
+                        <td data-th="Country">
                             <div class="table-text">
-                                49
+                                {{data.country}}
                             </div>
                         </td>
 
-                        <td data-th="Followers">
-                            <div class="table-text">
-                                2
+                        <td data-th="Active">
+                            <div class="table-text d-flex">
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <div class="col-6 d-flex justify-content-start">
+                                        <span class="badge badge-success" *ngIf="data.isActive == true">Active</span>
+                                        <span class="badge badge-danger" *ngIf="data.isActive == false">DeActive</span>
+                                    </div>&nbsp;
+                                    <div class="col-6">
+                                        <label class="switch">
+                                            <input type="checkbox" [checked]="data.isActive == true"
+                                                (change)="onChange(data.id, data.isActive)">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+    
+
+                                </div>
                             </div>
                         </td>
-                        <td data-th="Post">
+                        <td data-th="Discription">
                             <div class="table-text">
-                                8
+                                {{data.description}}
                             </div>
                         </td>
-                     
+
                         <td data-th="Operation">
                             <div class="d-flex">
-                                <span><i class="bi bi-pencil px-2"></i></span>
-                                <span><i class="bi bi-trash"></i></span>
+                                <span (click)="Edit(data.id)"><i class="bi bi-pencil-square px-2"></i></span>
+                                <!-- <span><i class="bi bi-trash"></i></span> -->
                             </div>
                         </td>
 
                     </tr>
-                    <tr>
-                      
-                        <td data-th="Member Name">
-                            <div class="table-text">
-                                Test 2
-                            </div>
-                        </td>
-                        <td data-th="User Type">
-                            <div class="table-text">
-                                3
-                            </div>
-                        </td>
 
-                        <td data-th="Mobile">
-                            <div class="table-text">
-                                2
-                            </div>
-                        </td>
-                        <td data-th="Email">
-                            <div class="table-text">
-                                3
-                            </div>
-                        </td>
-                     
-                        <td data-th="Operation">
-                            <div class="d-flex">
-                                <span><i class="bi bi-pencil px-2"></i></span>
-                                <span><i class="bi bi-trash"></i></span>
-                            </div>
-                        </td>
-
-                    </tr>
-                    <tr>
-                      
-                        <td data-th="Member Name">
-                            <div class="table-text">
-                            Shri
-                            </div>
-                        </td>
-                        <td data-th="User Type">
-                            <div class="table-text">
-                               0
-                            </div>
-                        </td>
-
-                        <td data-th="Mobile">
-                            <div class="table-text">
-                                1
-                            </div>
-                        </td>
-                        <td data-th="Email">
-                            <div class="table-text">
-                                0
-                            </div>
-                        </td>
-                     
-                        <td data-th="Operation">
-                            <div class="d-flex">
-                                <span><i class="bi bi-pencil px-2"></i></span>
-                                <span><i class="bi bi-trash"></i></span>
-                            </div>
-                        </td>
-
-                    </tr>
-                    <tr>
-                      
-                        <td data-th="Member Name">
-                            <div class="table-text">
-                                Monetize
-                            </div>
-                        </td>
-                        <td data-th="User Type">
-                            <div class="table-text">
-                                9
-                            </div>
-                        </td>
-
-                        <td data-th="Mobile">
-                            <div class="table-text">
-                                1
-                            </div>
-                        </td>
-                        <td data-th="Email">
-                            <div class="table-text">
-                                6
-                            </div>
-                        </td>
-                     
-                        <td data-th="Operation">
-                            <div class="d-flex">
-                                <span><i class="bi bi-pencil px-2"></i></span>
-                                <span><i class="bi bi-trash"></i></span>
-                            </div>
-                        </td>
-
-                    </tr>
-                    <tr>
-                      
-                        <td data-th="Member Name">
-                            <div class="table-text">
-                            Club 2
-                            </div>
-                        </td>
-                        <td data-th="User Type">
-                            <div class="table-text">
-                                59
-                            </div>
-                        </td>
-
-                        <td data-th="Mobile">
-                            <div class="table-text">
-                                3
-                            </div>
-                        </td>
-                        <td data-th="Email">
-                            <div class="table-text">
-                                4
-                            </div>
-                        </td>
-                     
-                        <td data-th="Operation">
-                            <div class="d-flex">
-                                <span><i class="bi bi-pencil px-2"></i></span>
-                                <span><i class="bi bi-trash"></i></span>
-                            </div>
-                        </td>
-
-                    </tr>
-                   
                 </tbody>
             </table>
         </div>

@@ -976,3 +976,6 @@ span.profile-option {
   background: black;
   opacity:0.2;
 }
+::-webkit-scrollbar {
+  display: none;
+}

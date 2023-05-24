@@ -65,6 +65,7 @@ list-style: none;
 .user-name {
 color: black;
 font-weight: 600;
+
 }
 
 .verification-icon {
@@ -96,6 +97,7 @@ color: #0081C9;
 .user_name {
   font-size: 20px;
   font-weight: 600;
+  margin-top: 28px;
   color: #496333;
 }
 
@@ -400,7 +402,6 @@ span.subscript {
 }
 .dis-line {
   font-size: 12px;
-  font-weight: 600;
   color: #000;
 }
 .position-btn {
@@ -492,7 +493,7 @@ button.btn.follow-btn {
 }
   .dis-line {
     font-size: 12px;
-    font-weight: 600;
+
     color: #000;
 }
   .percent {
@@ -730,4 +731,7 @@ pointer-events: none;
 }
 .club{
 pointer-events: all;
+}
+::-webkit-scrollbar {
+  display: none;
 }

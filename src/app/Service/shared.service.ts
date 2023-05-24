@@ -168,9 +168,9 @@ export class SharedService {
     );
   }
 
-  GetChannel(mobile_No: string): Observable<any> {
+  GetChannel(mobile_No: string, pageNumber:number, pageSize:number): Observable<any> {
     return this.http.get(
-      this.apiUrl + 'api/Channel/GetChannelMasterList?Mobile_No=' + mobile_No
+      this.apiUrl + 'api/Channel/GetChannelMasterList?Mobile_No=' + mobile_No +'&pageNumber=' +pageNumber+'&pageSize='+ pageSize
     );
   }
 
@@ -386,5 +386,34 @@ export class SharedService {
       this.apiUrl + 'api/ExpertInvestor/UpdateUserDetails',
       data
     );
+  }
+
+  UpdateUserProfileImage(formData: any): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'api/Login/UpdateUserProfile',
+      formData
+    );
+  }
+
+  GetSocialLinks() {
+    return this.http.get(this.apiUrl + 'api/Login/GetSocialMediaLink');
+  }
+
+  UpDateSocilaLinks(data: any) {
+    return this.http.post(
+      this.apiUrl + 'api/Login/UpdateSocialMediaLink',
+      data
+    );
+  }
+
+  GetComments(mobile_No: string, clublistid:string) {
+    return this.http.get(
+      this.apiUrl +
+        'api/Club/GetClubDetailComments?mobileno='+ mobile_No +'&clublistid=' + clublistid
+    );
+  }
+
+  AddComment(data:any): Observable<any>{
+    return this.http.post(this.apiUrl + 'api/Club/AddClubComments', data);
   }
 }

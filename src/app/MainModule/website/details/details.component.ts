@@ -1,8 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { SharedService } from 'src/app/Service/shared.service';
+import Swal from 'sweetalert2';
 declare var $ :any
 @Component({
   selector: 'app-details',
@@ -15,7 +17,15 @@ export class DetailsComponent implements OnInit {
   feedPostDetail: any;
   galleryOptions: NgxGalleryOptions[] | any;
   galleryImages: NgxGalleryImage[] | any;
-  isLoading: boolean = false
+  isLoading: boolean = false;
+  isShare: boolean = false;
+  shareId: any;
+  isShowComment: boolean = false;
+  data: any;
+  isCommented : boolean = false
+  userId: any;
+  addCommnetFrom: FormGroup | any
+  submitted:boolean = false
   constructor(
     private _ActivaedRoute: ActivatedRoute,
     private _service: SharedService,
@@ -26,7 +36,15 @@ export class DetailsComponent implements OnInit {
     this.id = this._ActivaedRoute.snapshot.paramMap.get('param1');
     // console.log('this.id: ', this.id);
     this.mobileNumber = this._ActivaedRoute.snapshot.paramMap.get('param2');
+    this._service.getData().subscribe(data => {
+    // console.log('data: ', data);
+      this.userId = data.id;
+    })
     // console.log('this.mobileNumber: ', this.mobileNumber);
+    this.addCommnetFrom = new FormGroup({
+      message: new FormControl('', Validators.required),
+      
+    });
     this.GetFeedPost();
 
     this.galleryOptions = [
@@ -54,12 +72,13 @@ export class DetailsComponent implements OnInit {
     ];
   }
 
+  get addCommentControl() { return this.addCommnetFrom.controls }
   goBack() {
     this.location.back();
   }
 
   GetFeedPost() {
-    this.isLoading = true
+    this.isLoading = true;
     this._service
       .GetFeedPostdetail(this.mobileNumber, this.id)
       .subscribe((res) => {
@@ -80,7 +99,72 @@ export class DetailsComponent implements OnInit {
       });
   }
 
+  GetComments() {
+    let mobile_No = '';
+    var splitString = this.mobileNumber.split('');
+    if (splitString[0] == '+') {
+      splitString[0] = '%2B';
+      var joinString = splitString.join('');
+      mobile_No = joinString;
+    }
+    this._service.GetComments(mobile_No, this.id).subscribe((res: any) => {
+      this.data = res.data[0].comments;
+      this.isCommented = this.data.length
+      
+      // console.log('this.data: ', this.data);
+    });
+  }
+
   imagePreview() {
     // (<any>$('#exampleModal1').modal('show'))
+  }
+
+  getComments() {
+    
+    this.isShowComment = !this.isShowComment;
+    if (this.isShowComment === true) {
+      this.GetComments();
+    }
+ 
+  }
+
+  share(id: any) {
+    this.shareId = id;
+    this.isShare = !this.isShare;
+  }
+
+  Comment(){
+    this.submitted = true
+    if(this.addCommnetFrom.invalid){
+      return
+    }
+    let data = {
+      feedPostId: this.id,
+      message: this.addCommnetFrom.value.message,
+      userId: this.userId,
+    };
+    // console.log('data: ', data);
+    this.isLoading = true
+    this._service.AddComment(data).subscribe(res => {
+       const Toast = Swal.mixin({
+         toast: true,
+         position: 'top',
+         showConfirmButton: false,
+         timer: 3000,
+         timerProgressBar: true,
+         didOpen: (toast) => {
+           toast.addEventListener('mouseenter', Swal.stopTimer);
+           toast.addEventListener('mouseleave', Swal.resumeTimer);
+         },
+       });
+       Toast.fire({
+         icon: 'success',
+         title: 'Comment Added Successfully',
+       });
+       this.addCommnetFrom.reset()
+       this.submitted = false
+       this.isLoading = false
+       this.GetComments()
+    })
   }
 }
