@@ -416,4 +416,11 @@ export class SharedService {
   AddComment(data:any): Observable<any>{
     return this.http.post(this.apiUrl + 'api/Club/AddClubComments', data);
   }
+
+  TopTrendingChannels(mobile_No:string, pageNumber: number, pageSize: number){
+    return this.http.get(
+      this.apiUrl +
+        'api/Channel/GetTrandingChannelMasterList?Mobile_No=' + mobile_No +'&pageNumber=' + pageNumber + '&pageSize='+pageSize
+    );
+  } 
 }
