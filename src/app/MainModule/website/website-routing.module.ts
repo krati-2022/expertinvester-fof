@@ -34,7 +34,6 @@ import { ChannelDetailsComponent } from './components/channel-details/channel-de
 import { PinRecoveryComponent } from './pin-recovery/pin-recovery.component';
 import { ClubDetailsComponent } from './components/club-details/club-details.component';
 import { EditChannelComponent } from './components/edit-channel/edit-channel.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },

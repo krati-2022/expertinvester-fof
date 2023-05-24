@@ -57,20 +57,23 @@
                     [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
                 </div>
                 <div class="py-3 ">
-                  <div class="row py-2" *ngIf="isShowComment == true">
+                  <div class="row py-2" *ngIf="isShowComment">
                     <h6 class="dis-line">Comment</h6>
                     <div *ngFor="let comments of data">
                       <p class="dis">{{comments.message}}</p>
                     </div>
-                    <form [formGroup]="addCommnetFrom" >
+                    <form [formGroup]="addCommnetFrom" (ngSubmit)="Comment()">
                       <div class="col-12">
                         <div class="row d-flex justify-content-center align-items-center">
                           <div class="col-10">
-                            <input class="form-control" formControlName="message" type="text" placeholder="Add your comment"/>
-
+                            <input class="form-control" formControlName="message" type="text" placeholder="Add your comment" 
+                             [ngClass]="{'is-invalid' : submitted && addCommentControl.message.errors}" />
+                            <div *ngIf=" submitted && addCommentControl.message.errors" class="invalid-feedback">
+                              <div *ngIf="addCommentControl.message.errors.required">Message is required.</div>
+                            </div>
                           </div>
                           <div class="col-2">
-                            <i (click)="Comment()" class="bi bi-arrow-right" style="font-size: 25px;"></i>
+                            <i type="sumbit"  class="bi bi-arrow-right" style="font-size: 25px;"></i>
                           </div>
                         </div>
 

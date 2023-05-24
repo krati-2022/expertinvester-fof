@@ -478,7 +478,14 @@
                       [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
                   </div>
                   <div class="py-3">
-                    <div class="percent" *ngIf="items.coAdChannel == true">Co-ad channels</div>
+                    <div class="percent" *ngIf="items.coAdChannel == true">
+                      <span>Co-ad channels</span>
+                      <div *ngFor="let experts of items.coAdExperts" class="d-flex align-items-center">
+                        <span style="color: black;">{{experts.expert_Name}}</span>&nbsp;
+                        <span class="badge badge-success" *ngIf="experts.isapproved == true">Approved</span>
+                        <span class="badge badge-warning" *ngIf="experts.isapproved == false">Pending</span>
+                      </div>
+                    </div>
                     <div class="d-flex justify-content-end"
                       *ngIf="items.isChannelApprove == true && items.channelApproved == false">
                       <span class="px-4"><button type="button" class="btn btn-primary danger-btn"

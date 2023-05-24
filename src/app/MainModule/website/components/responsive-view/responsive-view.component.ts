@@ -174,23 +174,27 @@ export class ResponsiveViewComponent implements OnInit {
   }
 
   onScroll() {
-    console.log('this.activeTab: ', this.activeTab);
-    if (this.activeTab == 'home-tab') {
-      var pageNumber = ++this.current;
-      let mobile_No = '';
-      var splitString = this.mobileNumber.split('');
-      if (splitString[0] == '+') {
-        splitString[0] = '%2B';
-        var joinString = splitString.join('');
-        mobile_No = joinString;
+    // console.log('this.activeTab: ', this.activeTab);
+    this.screenWidth = window.innerWidth;
+    if(this.screenWidth <= 992){
+      if (this.activeTab == 'home-tab') {
+        var pageNumber = ++this.current;
+        let mobile_No = '';
+        var splitString = this.mobileNumber.split('');
+        if (splitString[0] == '+') {
+          splitString[0] = '%2B';
+          var joinString = splitString.join('');
+          mobile_No = joinString;
+        }
+        this._service
+          .GetFeed(mobile_No, pageNumber, this.perPage)
+          .subscribe((res) => {
+            this.feedDetails.push(...res.items);
+  
+            // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+          });
       }
-      this._service
-        .GetFeed(mobile_No, pageNumber, this.perPage)
-        .subscribe((res) => {
-          this.feedDetails.push(...res.items);
 
-          // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
-        });
     }
     // console.log('pageNumber: ', pageNumber);
     // this.GetFeed()

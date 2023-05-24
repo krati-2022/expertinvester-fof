@@ -50,7 +50,10 @@
               <div class="container  pad0">
                 <div class="row">
                   <div class="d-flex justify-content-between align-items-baseline py-2">
-                    <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
+                    <!-- <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6> -->
+                    <div class="channel-name">
+                      <i class="bi bi-lightbulb"></i>{{items.name}}
+                    </div>
                     <button class="btn follow-btn" *ngIf="items.isSubscribed == true"><i
                         class="bi bi-lock-fill "></i>&nbsp;Subscribed</button>
                     <div class="dropdown" *ngIf="items.isSubscribed == false">
@@ -74,9 +77,9 @@
               </div>
               <div class="container  pad0" (click)="getChannelDetails(items)">
                 <div class="row">
-                  <div class="channel-name">
-                    <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                  </div>
+                  <!-- <div class="channel-name">
+                    <i class="bi bi-lightbulb"></i>{{items.name}}
+                  </div> -->
                   <div class="channel-detail d-flex py-2">
                     <div class="col-6 d-flex text-center">
                       <div class="px-3">
@@ -152,8 +155,8 @@
                   </div>
                 </div>
                 <div class="py-2">
-                  <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
-                    investing</p>
+                  <!-- <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
+                    investing</p> -->
                 </div>
               </div>
               <div class="container pad0" (click)="getChannelDetails(items)">
@@ -193,8 +196,10 @@
               <div class="py-3">
                 <div class="percent" *ngIf="items.coAdChannel == true">
                   <span>Co-ad channels</span>
-                  <div *ngFor="let experts of items.coAdExperts">
-                    <span style="color: black;">{{experts.expert_Name}}</span>
+                  <div *ngFor="let experts of items.coAdExperts" class="d-flex align-items-center">
+                    <span style="color: black;">{{experts.expert_Name}}</span>&nbsp;
+                    <span class="badge badge-success" *ngIf="experts.isapproved == true">Approved</span>
+                    <span class="badge badge-warning" *ngIf="experts.isapproved == false">Pending</span>
                   </div>
                 </div>
 

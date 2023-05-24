@@ -22,9 +22,10 @@ export class DetailsComponent implements OnInit {
   shareId: any;
   isShowComment: boolean = false;
   data: any;
-  isCommented : any
+  isCommented : boolean = false
   userId: any;
   addCommnetFrom: FormGroup | any
+  submitted:boolean = false
   constructor(
     private _ActivaedRoute: ActivatedRoute,
     private _service: SharedService,
@@ -71,6 +72,7 @@ export class DetailsComponent implements OnInit {
     ];
   }
 
+  get addCommentControl() { return this.addCommnetFrom.controls }
   goBack() {
     this.location.back();
   }
@@ -118,8 +120,12 @@ export class DetailsComponent implements OnInit {
   }
 
   getComments() {
-    this.isShowComment = true;
-    this.GetComments();
+    
+    this.isShowComment = !this.isShowComment;
+    if (this.isShowComment === true) {
+      this.GetComments();
+    }
+ 
   }
 
   share(id: any) {
@@ -128,12 +134,17 @@ export class DetailsComponent implements OnInit {
   }
 
   Comment(){
+    this.submitted = true
+    if(this.addCommnetFrom.invalid){
+      return
+    }
     let data = {
       feedPostId: this.id,
       message: this.addCommnetFrom.value.message,
       userId: this.userId,
     };
     // console.log('data: ', data);
+    this.isLoading = true
     this._service.AddComment(data).subscribe(res => {
        const Toast = Swal.mixin({
          toast: true,
@@ -150,6 +161,9 @@ export class DetailsComponent implements OnInit {
          icon: 'success',
          title: 'Comment Added Successfully',
        });
+       this.addCommnetFrom.reset()
+       this.submitted = false
+       this.isLoading = false
        this.GetComments()
     })
   }

@@ -20,7 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExpertComponent } from './expert/expert.component';
 import { InvestorComponent } from './investor/investor.component';
 import { ExpertAndInvestorComponent } from './expert-and-investor/expert-and-investor.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { ClubComponent } from './components/club/club.component';
 import { ChannelComponent } from './components/channel/channel.component';
@@ -76,7 +75,6 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
     ExpertComponent,
     InvestorComponent,
     ExpertAndInvestorComponent,
-    DashboardComponent,
     FeedComponent,
     ClubComponent,
     ChannelComponent,

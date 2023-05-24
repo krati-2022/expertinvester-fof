@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from 'src/app/Service/shared.service';
 import { UpdateProfileDetails } from './profile-page.classe';
 import { Codes } from 'src/app/Utils/country-codes';
@@ -27,6 +27,7 @@ export class ProfilePageComponent implements OnInit {
   facebook: boolean = true;
   insta: boolean = true;
   linkededIn: boolean = true;
+  socialmedialinkData: any = [];
   constructor(
     private location: Location,
     private _service: SharedService,
@@ -45,6 +46,10 @@ export class ProfilePageComponent implements OnInit {
       this.model.expertType = this.data.expertType;
       this.model.userType = this.data.userType;
       this.model.image = this.data.image;
+      this.model.twitterUrl = this.data.twitterUrl;
+      this.model.linkedinUrl = this.data.linkedinUrl;
+      this.model.instagramUrl = this.data.instagramUrl;
+      this.model.faceBookUrl = this.data.faceBookUrl;
       // console.log('this.model.image: ', this.model.image);
     });
     this.updateUserDetailsForm = new FormGroup({
@@ -53,6 +58,10 @@ export class ProfilePageComponent implements OnInit {
       aboutus: new FormControl(''),
       email: new FormControl(''),
       code: new FormControl(''),
+      instagramUrl: new FormControl(''),
+      faceBookUrl: new FormControl(''),
+      twitterUrl: new FormControl(''),
+      linkedinUrl: new FormControl(''),
     });
     this.updateImageForm = new FormGroup({
       Image: new FormControl(''),
@@ -70,7 +79,7 @@ export class ProfilePageComponent implements OnInit {
     this._service.GetSocialLinks().subscribe((res: any) => {
       // console.log('res: ', res);
       this.socialLinks = res.data;
-      this.socialLinks.map((item:any) => {
+      this.socialLinks.map((item: any) => {
         switch (item.name) {
           case 'Twitter':
             this.model.twitter = item;
@@ -85,8 +94,7 @@ export class ProfilePageComponent implements OnInit {
             this.model.Instagram = item;
             break;
         }
-              
-            })
+      });
       //       console.log('this.model.facebook: ', this.model.facebook);
       //     console.log('this.model.linkededIn: ', this.model.linkededIn);
       //   console.log('this.model.Instagram: ', this.model.Instagram);
@@ -96,16 +104,26 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
+  OnChangeField(event:any){
+  console.log('event: ', event.target.id);
+  this.socialmedialinkData.push({ id: '', name: event.target.id, url:event.target.value });
+  // console.log('this.socialmedialinkData: ', this.socialmedialinkData);
+  }
   update() {
     this.userDetails = new UpdateProfileDetails({
       mobileno: this.updateUserDetailsForm.value.mobileno,
       name: this.updateUserDetailsForm.value.name,
       aboutus: this.updateUserDetailsForm.value.aboutus,
       email: this.updateUserDetailsForm.value.email,
+      instagramUrl: this.updateUserDetailsForm.value.instagramUrl,
+      faceBookUrl: this.updateUserDetailsForm.value.faceBookUrl,
+      twitterUrl: this.updateUserDetailsForm.value.twitterUrl,
+      linkedinUrl: this.updateUserDetailsForm.value.linkedinUrl,
     });
     // console.log('this.userDetails: ', this.userDetails);
+    // return
     this._service.UpdateUserDetails(this.userDetails).subscribe((res: any) => {
-      // console.log('res: ', res);
+      console.log('res: ', res);
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -210,22 +228,41 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  EnableDisable(event:any) {
-  // console.log('event: ', event.target.id);
-  switch (event.target.id) {
-    case 'Twitter':
-      
-      this.twitter = !this.twitter;
-      break;
-    case 'Facebook':
-      this.facebook = !this.facebook;
-      break;
-    case 'Instagram':
-      this.insta = !this.insta;
-      break;
-    case 'Linkedin':
-      this.linkededIn = !this.linkededIn
-      break
-  }
+  EnableDisable(event: any) {
+    // console.log('event: ', event.target.id);
+    switch (event.target.id) {
+      case 'Twitter':
+        this.twitter = !this.twitter;
+        if (this.twitter == false) {
+          this.model.twitterObj = { id: '', name: 'Twitter', url: '' };
+        } else if (this.twitter == true) {
+          this.model.Obj = { id: '', name: '', url: '' };
+        }
+        break;
+      case 'Facebook':
+        this.facebook = !this.facebook;
+        if (this.facebook == false) {
+          this.model.facebookObj = { id: '', name: 'Facebook', url: '' };
+        } else if (this.facebook == true) {
+          this.model.Obj = { id: '', name: '', url: '' };
+        }
+        break;
+      case 'Instagram':
+        this.insta = !this.insta;
+        if (this.insta == false) {
+          this.model.instaObj = { id: '', name: 'Instagram', url: '' };
+        } else if (this.insta == true) {
+          this.model.Obj = { id: '', name: '', url: '' };
+        }
+        break;
+      case 'Linkedin':
+        this.linkededIn = !this.linkededIn;
+        if (this.linkededIn == false) {
+          this.model.linkededInObj = { id: '', name: 'Linkedin', url: '' };
+        } else if (this.linkededIn == true) {
+          this.model.Obj = { id: '', name: '', url: '' };
+        }
+        break;
+    }
   }
 }

@@ -3,7 +3,11 @@ export class UpdateProfileDetails {
   name?: string;
   aboutus?: string;
   email?: string;
-  public constructor(init?: Partial<UpdateProfileDetails>){
-    Object.assign(this, init)
+  instagramUrl?: string;
+  faceBookUrl?: string;
+  twitterUrl?: string;
+  linkedinUrl?: string
+  public constructor(init?: Partial<UpdateProfileDetails>) {
+    Object.assign(this, init);
   }
 }

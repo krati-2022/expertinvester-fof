@@ -1024,3 +1024,12 @@ li.dropdown-header h6 {
   border-radius: 10px;
   background: lightgray
 }
+.badge-success {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.badge-warning {
+  color: #212529;
+  background-color: #ffc107;
+}
