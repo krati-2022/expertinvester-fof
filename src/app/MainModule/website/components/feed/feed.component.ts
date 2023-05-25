@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ChannelDATA, DATA } from './feed.classes';
 import Swal from 'sweetalert2';
+import { ChannelApproveReject, ChannelSubscriber } from '../channel/channel.classes';
 
 declare var $: any;
 export interface GetFeedDetails {
@@ -148,10 +149,14 @@ export class FeedComponent implements OnInit {
   showSearch: boolean = false;
   isShare: boolean = false;
   shareId: any;
+  isTarget?: string = '';
   isLoading: boolean = false;
   isLike: boolean = false;
   channelPostId: any;
   activeTab = 'home-tab';
+  approveRejectDetail = new ChannelApproveReject();
+  channelSubscriber = new ChannelSubscriber();
+
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -196,7 +201,6 @@ export class FeedComponent implements OnInit {
   }
 
   getChannel() {
-
     let mobile_No = '';
     var splitString = this.mobile_number.split('');
     if (splitString[0] == '+') {
@@ -204,16 +208,18 @@ export class FeedComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-    if (this.isLike == true){
+    if (this.isLike == true) {
       this.isLoading = false;
-    } else{
+    } else {
       this.isLoading = true;
     }
-    this._service.GetChannel(mobile_No,this.current, this.perPage).subscribe((res) => {
-      this.channelDetails = res.items;
-      this.isLoading = false;
-      // console.log('this.channelDetails: ', this.channelDetails);
-    });
+    this._service
+      .GetChannel(mobile_No, this.current, this.perPage)
+      .subscribe((res) => {
+        this.channelDetails = res.items;
+        this.isLoading = false;
+        // console.log('this.channelDetails: ', this.channelDetails);
+      });
   }
 
   getMasterData() {
@@ -332,11 +338,11 @@ export class FeedComponent implements OnInit {
     }
   }
 
-  onScrollChannelList(){
-     if(this.activeTab=='contact-tab'){
+  onScrollChannelList() {
+    if (this.activeTab == 'contact-tab') {
       // console.log('pageNumber: ', pageNumber);
       // this.GetFeed()
-      var pageNumber = ++this.current
+      var pageNumber = ++this.current;
       let mobile_No = '';
       var splitString = this.mobile_number.split('');
       if (splitString[0] == '+') {
@@ -352,40 +358,40 @@ export class FeedComponent implements OnInit {
         this.ExpertAndInvestor != '' ||
         this.Investor != ''
       ) {
-         this.http
-           .get(
-             this.apiUrl +
-               'api/Filter/GetChannelMasterFilterList?Mobile_No=' +
-               mobile_No +
-               '&FreeAccess=' +
-               this.FreeAccess +
-               '&PaidAccess=' +
-               this.PaidAccess +
-               '&Expert=' +
-               this.Expert +
-               '&Investor=' +
-               this.Investor +
-               '&ExpertAndInvestor=' +
-               this.ExpertAndInvestor +
-               '&pageNumber=' +
-               this.current +
-               '&pageSize=' +
-               this.perPage
-           )
-           .subscribe({
-             next: (response: any) => {
-               if (response.items.length != 0) {
-                 this.channelDetails.push(...response.items);
-               } else {
-                 this.current--;
-               }
-             },
-             error: (error) => {
-               if (error.status == '400') {
-               }
-             },
-           });
-      }else{
+        this.http
+          .get(
+            this.apiUrl +
+              'api/Filter/GetChannelMasterFilterList?Mobile_No=' +
+              mobile_No +
+              '&FreeAccess=' +
+              this.FreeAccess +
+              '&PaidAccess=' +
+              this.PaidAccess +
+              '&Expert=' +
+              this.Expert +
+              '&Investor=' +
+              this.Investor +
+              '&ExpertAndInvestor=' +
+              this.ExpertAndInvestor +
+              '&pageNumber=' +
+              this.current +
+              '&pageSize=' +
+              this.perPage
+          )
+          .subscribe({
+            next: (response: any) => {
+              if (response.items.length != 0) {
+                this.channelDetails.push(...response.items);
+              } else {
+                this.current--;
+              }
+            },
+            error: (error) => {
+              if (error.status == '400') {
+              }
+            },
+          });
+      } else {
         this._service
           .GetChannel(mobile_No, pageNumber, this.perPage)
           .subscribe((res) => {
@@ -411,6 +417,7 @@ export class FeedComponent implements OnInit {
       case 'home-tab':
         this.activeTab = 'home-tab';
         this.GetFeed();
+        this.isTarget = '';
         break;
       case 'profile-tab':
         this.activeTab = 'profile-tab';
@@ -419,6 +426,7 @@ export class FeedComponent implements OnInit {
       case 'contact-tab':
         this.activeTab = 'contact-tab';
         this.getChannel();
+        this.isTarget = '';
         break;
 
       default:
@@ -488,6 +496,7 @@ export class FeedComponent implements OnInit {
   blockUnblockPost(id: string, status: boolean) {
     // console.log('status: ', status);
     // console.log('id: ', id);
+    this.isLike = true
     let mobile_No = '';
     var splitString = this.mobile_number.split('');
     if (splitString[0] == '+') {
@@ -566,12 +575,12 @@ export class FeedComponent implements OnInit {
     event.checked = true;
 
     switch (event.name) {
-      case 'Club':
-        this.Club = this.filterForm.value.name == true ? 'Club' : '';
-        break;
-      case 'Channel':
-        this.Channel = this.filterForm.value.name == true ? 'Channel' : '';
-        break;
+      // case 'Club':
+      //   this.Club = this.filterForm.value.name == true ? 'Club' : '';
+      //   break;
+      // case 'Channel':
+      //   this.Channel = this.filterForm.value.name == true ? 'Channel' : '';
+      //   break;
       case 'Expert':
         this.Expert = this.filterForm.value.name == true ? 'Expert' : '';
         break;
@@ -582,19 +591,46 @@ export class FeedComponent implements OnInit {
         this.ExpertAndInvestor =
           this.filterForm.value.name == true ? 'ExpertAndInvestor' : '';
         break;
-      case 'Free Access':
-        this.FreeAccess =
-          this.filterForm.value.name == true ? 'FreeAccess' : '';
-        break;
-      case 'Paid Access':
-        this.PaidAccess =
-          this.filterForm.value.name == true ? 'PaidAccess' : '';
-        break;
+      // case 'Free Access':
+      //   this.FreeAccess =
+      //     this.filterForm.value.name == true ? 'FreeAccess' : '';
+      //   break;
+      // case 'Paid Access':
+      //   this.PaidAccess =
+      //     this.filterForm.value.name == true ? 'PaidAccess' : '';
+      //   break;
     }
   }
 
+  radioButtonClick(event: any) {
+    // console.log('event: ', event.target.id);
+
+    this.isTarget = event.target.id;
+    switch (event.target.id) {
+      case 'Club':
+        this.Club = 'Club';
+        this.Channel = '';
+        break;
+      case 'Channel':
+        this.Channel = 'Channel';
+        this.Club = '';
+        break;
+      case 'Paid Access':
+        this.PaidAccess = 'PaidAccess';
+        this.FreeAccess = '';
+        break;
+      case 'Free Access':
+        this.FreeAccess = 'FreeAccess';
+        this.PaidAccess = '';
+        break;
+    }
+  }
   apply() {
     if (this.activeTab == 'home-tab') {
+      // console.log(this.Club);
+      // console.log(this.Channel);
+      // return
+
       let mobile_No = '';
       var splitString = this.mobile_number.split('');
       if (splitString[0] == '+') {
@@ -689,7 +725,7 @@ export class FeedComponent implements OnInit {
   }
 
   channelLike(channelId: string, status: boolean) {
-    this.isLike = true
+    this.isLike = true;
     let formData = {
       channelId: channelId,
       like: status,
@@ -706,6 +742,46 @@ export class FeedComponent implements OnInit {
   share(id: any) {
     this.shareId = id;
     this.isShare = !this.isShare;
+  }
+
+  approveRejectChannel(
+    channelMasterId: string,
+    expertId: string,
+    approve: boolean,
+    reject: boolean
+  ) {
+    this.isLike=true
+    this.approveRejectDetail = new ChannelApproveReject({
+      channelMasterId: channelMasterId,
+      expertId: expertId,
+      approve: approve,
+      reject: reject,
+    });
+    this._service
+      .ApproveRejectChannel(this.approveRejectDetail)
+      .subscribe((res) => {
+        // console.log('res: ', res);
+        this.getChannel();
+      });
+  }
+
+  subscribe(item: any) {
+    // console.log('item: ', item);
+    this.channelSubscriber = new ChannelSubscriber({
+      channelId: item.id,
+      subscriber: !item.isSubscribed,
+      mobile_No: this.mobile_number,
+    });
+    // console.log('this.channelSubscriber: ', this.channelSubscriber);
+    // return
+    this._service.ChannelSubscribe(this.channelSubscriber).subscribe((res) => {
+      // console.log('res: ', res);
+      this.getChannel();
+    });
+  }
+
+  Edit(item: any) {
+    this.router.navigate(['home/edit-channel/' + item.channelMasterId]);
   }
 
   @HostListener('window:scroll', [])

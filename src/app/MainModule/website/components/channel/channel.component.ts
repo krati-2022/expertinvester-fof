@@ -67,6 +67,7 @@ export class ChannelComponent implements OnInit {
   isLike: boolean = false;
   isShare: boolean = false;
   shareId: any;
+  isTarget: string = '';
   constructor(
     private router: Router,
     private _service: SharedService,
@@ -116,7 +117,7 @@ export class ChannelComponent implements OnInit {
         var joinString = splitString.join('');
         mobile_No = joinString;
       }
-  
+
       this._service
         .GetChannel(mobile_No, pageNumber, this.perPage)
         .subscribe((res) => {
@@ -203,14 +204,14 @@ export class ChannelComponent implements OnInit {
     //   console.log(this.filterForm.value.name);
     event.status = true;
     switch (event.name) {
-      case 'Free Access':
-        this.FreeAccess =
-          this.filterForm.value.name == true ? 'FreeAccess' : '';
-        break;
-      case 'Paid Access':
-        this.PaidAccess =
-          this.filterForm.value.name == true ? 'PaidAccess' : '';
-        break;
+      // case 'Free Access':
+      //   this.FreeAccess =
+      //     this.filterForm.value.name == true ? 'FreeAccess' : '';
+      //   break;
+      // case 'Paid Access':
+      //   this.PaidAccess =
+      //     this.filterForm.value.name == true ? 'PaidAccess' : '';
+      //   break;
       case 'Expert':
         this.Expert = this.filterForm.value.name == true ? 'Expert' : '';
         break;
@@ -220,6 +221,22 @@ export class ChannelComponent implements OnInit {
       case 'Expert&Invester':
         this.ExpertAndInvestor =
           this.filterForm.value.name == true ? 'ExpertAndInvestor' : '';
+        break;
+    }
+  }
+
+  radioButtonClick(event: any) {
+    // console.log('event: ', event.target.id);
+
+    this.isTarget = event.target.id;
+    switch (event.target.id) {
+      case 'Paid Access':
+        this.PaidAccess = 'PaidAccess';
+        this.FreeAccess = '';
+        break;
+      case 'Free Access':
+        this.FreeAccess = 'FreeAccess';
+        this.PaidAccess = '';
         break;
     }
   }

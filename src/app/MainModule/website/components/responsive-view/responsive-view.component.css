@@ -739,6 +739,7 @@ color: black;
 border-radius: 5px;
 background: #FDCDE7;
 font-size: 10px;
+height: 40px;
 }
 .price {
 font-size: 10px;
@@ -1185,4 +1186,13 @@ margin: 0;
 }
 ::-webkit-scrollbar {
   display: none;
+}
+
+.responsive-tab {
+  background: aliceblue;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  top: 60px;
+  left: 0;
 }

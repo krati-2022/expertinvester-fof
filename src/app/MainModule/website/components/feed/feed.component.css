@@ -546,6 +546,7 @@ button.btn.follow-btn {
   border-radius: 5px;
   background: #FDCDE7;
   font-size: 10px;
+  height: 40px;
 }
 .price {
   font-size: 10px;
@@ -734,4 +735,13 @@ pointer-events: all;
 }
 ::-webkit-scrollbar {
   display: none;
+}
+
+.responsive-tab{
+  background: aliceblue;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  top: 60px;
+  left: 0;
 }

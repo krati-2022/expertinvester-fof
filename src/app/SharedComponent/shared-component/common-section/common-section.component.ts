@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ChannelSubscriber } from 'src/app/MainModule/website/components/channel/channel.classes';
 import { SharedService } from 'src/app/Service/shared.service';
 
 @Component({
@@ -12,11 +13,14 @@ export class CommonSectionComponent implements OnInit {
   searchFilterForm: FormGroup | any;
   showSearch: boolean = false;
   isLoading: boolean = false;
+  isReload: boolean = false;
   current: number = 0;
-  perPage: number = 100;
+  perPage: number = 10;
   mobileNumber = localStorage.getItem('mobile_number') || '';
   topTrendingChannel: any = [];
-  selector: string = '.main-pannel-scrl';
+  channelSubscriber = new ChannelSubscriber();
+
+  // selector: string = '.main-pannel-scrl';
   constructor(private _service: SharedService) {}
 
   ngOnInit(): void {
@@ -36,11 +40,13 @@ export class CommonSectionComponent implements OnInit {
       mobile_No = joinString;
     }
     // console.log('splitString: ', mobile_No);
-    this.isLoading = true;
+    if(this.isReload == false){
+      this.isLoading = true;
+    }
     this._service
       .TopTrendingChannels(mobile_No, this.current, this.perPage)
       .subscribe((res: any) => {
-        console.log('res: ', res);
+        // console.log('res: ', res);
         this.topTrendingChannel = res.items;
         this.isLoading = false;
         // console.log('this.topTrendingChannel: ', this.topTrendingChannel);
@@ -49,7 +55,33 @@ export class CommonSectionComponent implements OnInit {
 
   onScroll() {
     var pageNumber = ++this.current;
-    console.log('pageNumber: ', pageNumber);
+    this._service
+      .TopTrendingChannels(this.mobileNumber, pageNumber, this.perPage)
+      .subscribe((res: any) => {
+        if (res.items.length != 0) {
+          this.topTrendingChannel.push(...res.items);
+        } else {
+          this.current--;
+        }
+
+        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+      });
+  }
+
+  subscribe(item: any) {
+    // console.log('item: ', item);
+    this.isReload = true
+    this.channelSubscriber = new ChannelSubscriber({
+      channelId: item.channelMasterId,
+      subscriber: !item.isSubscribed,
+      mobile_No: this.mobileNumber,
+    });
+    // console.log('this.channelSubscriber: ', this.channelSubscriber);
+    // return
+    this._service.ChannelSubscribe(this.channelSubscriber).subscribe((res) => {
+      // console.log('res: ', res);
+      this.GetTopTrendingChannels();
+    });
   }
 
   @HostListener('window:scroll', [])

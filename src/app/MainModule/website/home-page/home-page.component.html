@@ -8,11 +8,11 @@
   <main id="main" class="main" [ngClass]="toggleSideBar == false ? 'cstm' : 'main'">
    <div class="" [ngClass]="{'my-cls' : toggleSideBar == false && screenWidth < 1200}">
       <div class="row" >
-         <div class="col-lg-8 mt-2" [ngClass]="hide == true ? 'col-lg-12' : 'col-lg-8'">
+         <div class="col-lg-8 mx-auto mt-2" [ngClass]="hide == true ? 'col-lg-12' : 'col-lg-8'">
             <router-outlet ></router-outlet>
          </div>
 
-         <div class="col-lg-4 mt-2 common-section" *ngIf="!hide">
+         <div class="col-lg-4 mx-auto mt-2 common-section" *ngIf="!hide">
             <app-common-section ></app-common-section>
          </div>
 

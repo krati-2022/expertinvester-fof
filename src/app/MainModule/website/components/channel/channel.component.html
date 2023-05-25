@@ -52,10 +52,10 @@
                   <div class="d-flex justify-content-between align-items-baseline py-2">
                     <!-- <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6> -->
                     <div class="channel-name">
-                      <i class="bi bi-lightbulb"></i>{{items.name}}
+                      <i class="bi bi-lightbulb"></i>{{items.name}} 
                     </div>
                     <button class="btn follow-btn" *ngIf="items.isSubscribed == true"><i
-                        class="bi bi-lock-fill "></i>&nbsp;Subscribed</button>
+                        class="bi bi-unlock-fill "></i>&nbsp;Subscribed</button>
                     <div class="dropdown" *ngIf="items.isSubscribed == false">
                       <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,8 +65,8 @@
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
                         <li *ngIf="items.isUserChannel == false" (click)="subscribe(items)" style="cursor: pointer;"><a
-                            class="dropdown-item"><i class="bi bi-unlock-fill"
-                              [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
+                            class="dropdown-item"><i class="bi bi-lock-fill"
+                              [ngClass]="{'bi bi-lock-fill' : items.isSubscribed == false}"></i>Subscribe</a>
                         <li style="cursor: pointer;" *ngIf="items.isUserChannel == true" (click)="Edit(items)"><a
                             class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
 
@@ -242,13 +242,24 @@
           <div class="">
             <div class="row border-bottom  ">
               <div>
-
-                <div class="form-check" *ngFor="let item of data">
-                  <input class="form-check-input" type="checkbox" formControlName="name" [(ngModel)]="item.checked"
-                    (change)="onFilter(item)">
-                  <label class="form-check-label filter-text">
-                    {{item.name}}
-                  </label>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" (click)="radioButtonClick($event)"
+                    name="inlineRadioOptions" id="Paid Access" value="option1">
+                  <label class="form-check-label" for="Paid Access">Paid Access</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" (click)="radioButtonClick($event)"
+                    name="inlineRadioOptions" id="Free Access" value="option2">
+                  <label class="form-check-label" for="Free Access">Free Access</label>
+                </div>
+                <div *ngIf="isTarget != ''">
+                  <div class="form-check" *ngFor="let item of data">
+                    <input class="form-check-input" type="checkbox" formControlName="name" [(ngModel)]="item.checked"
+                      (change)="onFilter(item)">
+                    <label class="form-check-label filter-text">
+                      {{item.name}}
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>

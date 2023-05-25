@@ -827,7 +827,7 @@ li.dropdown-header h6 {
   }
 
   .card-title {
-    padding: 20px 0 15px 0;
+    /* padding: 20px 0 15px 0; */
     font-size: 14px;
     font-weight: 500;
     color: #012970;
@@ -837,6 +837,14 @@ li.dropdown-header h6 {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .fixadd {
+        position: relative !important;
+        font-size: 12px;
+        max-width: 100%;
+        padding: 0px 11px;
+    
+    
+      }
 
 .btnmangemobile {
     position: fixed;
@@ -880,7 +888,7 @@ li.dropdown-header h6 {
   }
 
   .card-title {
-    padding: 20px 0 15px 0;
+    /* padding: 20px 0 15px 0; */
     font-size: 18px;
     font-weight: 500;
     color: #012970;

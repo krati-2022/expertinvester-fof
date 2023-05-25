@@ -28,14 +28,14 @@ export const DATA = [
   { name: 'Expert', checked: false },
   { name: 'Investor', checked: false },
   { name: 'ExpertAndInvester', checked: false },
-  { name: 'Free Access', checked: false },
-  { name: 'Paid Access', checked: false },
+  // { name: 'Free Access', checked: false },
+  // { name: 'Paid Access', checked: false },
 ];
 
-  export const FeedDATA = [
-    { name: 'Expert', checked: false },
-    { name: 'Investor', checked: false },
-    { name: 'ExpertAndInvester', checked: false },
-    { name: 'Club', checked: false },
-    { name: 'Channel', checked: false },
-  ];
+  // export const FeedDATA = [
+  //   { name: 'Expert', checked: false },
+  //   { name: 'Investor', checked: false },
+  //   { name: 'ExpertAndInvester', checked: false },
+  //   // { name: 'Club', checked: false },
+  //   // { name: 'Channel', checked: false },
+  // ];

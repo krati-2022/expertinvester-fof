@@ -60,6 +60,8 @@ export class ResponsiveViewComponent implements OnInit {
   channeldata: any;
   isShare: boolean = false;
   shareId: any;
+  isTarget: string = '';
+  isReload : boolean = false
   constructor(
     private _service: SharedService,
     private router: Router,
@@ -101,7 +103,9 @@ export class ResponsiveViewComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-    this.isLoading = true;
+    if (this.isReload == false){
+     this.isLoading = true;
+    } 
     this._service.GetMasterData(mobile_No).subscribe((res) => {
       this.clubList = res.data;
       this.isLoading = false;
@@ -120,7 +124,9 @@ export class ResponsiveViewComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-    this.isLoading = true;
+     if (this.isReload == false) {
+       this.isLoading = true;
+     } 
     this._service
       .GetFeed(mobile_No, this.current, this.perPage)
       .subscribe((res) => {
@@ -140,7 +146,9 @@ export class ResponsiveViewComponent implements OnInit {
       var joinString = splitString.join('');
       mobile_No = joinString;
     }
-    this.isLoading = true;
+     if (this.isReload == false) {
+       this.isLoading = true;
+     } 
     this._service
       .GetChannel(mobile_No, this.current, this.perPage)
       .subscribe((res) => {
@@ -176,7 +184,7 @@ export class ResponsiveViewComponent implements OnInit {
   onScroll() {
     // console.log('this.activeTab: ', this.activeTab);
     this.screenWidth = window.innerWidth;
-    if(this.screenWidth <= 992){
+    if (this.screenWidth <= 992) {
       if (this.activeTab == 'home-tab') {
         var pageNumber = ++this.current;
         let mobile_No = '';
@@ -189,12 +197,15 @@ export class ResponsiveViewComponent implements OnInit {
         this._service
           .GetFeed(mobile_No, pageNumber, this.perPage)
           .subscribe((res) => {
-            this.feedDetails.push(...res.items);
-  
+             if (res.items.length != 0) {
+               this.feedDetails.push(...res.items);
+             } else {
+               this.current--;
+             }
+
             // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
           });
       }
-
     }
     // console.log('pageNumber: ', pageNumber);
     // this.GetFeed()
@@ -341,6 +352,7 @@ export class ResponsiveViewComponent implements OnInit {
       case 'home-tab':
         this.activeTab = 'home-tab';
         this.GetFeed();
+        this.isTarget = '';
         break;
       case 'profile-tab':
         this.activeTab = 'profile-tab';
@@ -349,6 +361,7 @@ export class ResponsiveViewComponent implements OnInit {
       case 'contact-tab':
         this.activeTab = 'contact-tab';
         this.getChannel();
+        this.isTarget = '';
         break;
 
       default:
@@ -392,11 +405,13 @@ export class ResponsiveViewComponent implements OnInit {
   }
 
   channelLike(channelId: string, status: boolean) {
+    this.isReload = true;
     let formData = {
       channelId: channelId,
       like: status,
       mobileno: this.mobileNumber,
     };
+
 
     this._service.ChannelPostLikeDislike(formData).subscribe((res) => {
       // console.log('res: ', res);
@@ -407,6 +422,7 @@ export class ResponsiveViewComponent implements OnInit {
 
   subscribe(item: any) {
     // console.log('item: ', item);
+    this.isReload = true
     this.channelSubscriber = new ChannelSubscriber({
       channelId: item.channelMasterId,
       subscriber: !item.isSubscribed,
@@ -426,6 +442,7 @@ export class ResponsiveViewComponent implements OnInit {
     approve: boolean,
     reject: boolean
   ) {
+    this.isReload = true;
     this.approveRejectDetail = new ChannelApproveReject({
       channelMasterId: channelMasterId,
       expertId: expertId,
@@ -491,12 +508,12 @@ export class ResponsiveViewComponent implements OnInit {
     event.checked = true;
 
     switch (event.name) {
-      case 'Club':
-        this.Club = this.filterForm.value.name == true ? 'Club' : '';
-        break;
-      case 'Channel':
-        this.Channel = this.filterForm.value.name == true ? 'Channel' : '';
-        break;
+      // case 'Club':
+      //   this.Club = this.filterForm.value.name == true ? 'Club' : '';
+      //   break;
+      // case 'Channel':
+      //   this.Channel = this.filterForm.value.name == true ? 'Channel' : '';
+      //   break;
       case 'Expert':
         this.Expert = this.filterForm.value.name == true ? 'Expert' : '';
         break;
@@ -507,13 +524,37 @@ export class ResponsiveViewComponent implements OnInit {
         this.ExpertAndInvestor =
           this.filterForm.value.name == true ? 'ExpertAndInvestor' : '';
         break;
-      case 'Free Access':
-        this.FreeAccess =
-          this.filterForm.value.name == true ? 'FreeAccess' : '';
+      // case 'Free Access':
+      //   this.FreeAccess =
+      //     this.filterForm.value.name == true ? 'FreeAccess' : '';
+      //   break;
+      // case 'Paid Access':
+      //   this.PaidAccess =
+      //     this.filterForm.value.name == true ? 'PaidAccess' : '';
+      //   break;
+    }
+  }
+
+  radioButtonClick(event: any) {
+    // console.log('event: ', event.target.id);
+
+    this.isTarget = event.target.id;
+    switch (event.target.id) {
+      case 'Club':
+        this.Club = 'Club';
+        this.Channel = '';
+        break;
+      case 'Channel':
+        this.Channel = 'Channel';
+        this.Club = '';
         break;
       case 'Paid Access':
-        this.PaidAccess =
-          this.filterForm.value.name == true ? 'PaidAccess' : '';
+        this.PaidAccess = 'PaidAccess';
+        this.FreeAccess = '';
+        break;
+      case 'Free Access':
+        this.FreeAccess = 'FreeAccess';
+        this.PaidAccess = '';
         break;
     }
   }

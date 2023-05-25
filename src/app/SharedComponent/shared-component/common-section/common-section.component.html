@@ -8,9 +8,10 @@
         </div>
       </div>
       <div class="m-3"  style="height: 55vh; overflow: auto;" *ngIf="topTrendingChannel.length != 0 && isLoading == false"
-        >
+        infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+              (scrolled)="onScroll()">
         <div class="" *ngFor="let data of topTrendingChannel" >
-          <div class="d-flex align-items-baseline justify-content-between">
+          <div class="d-flex align-items-baseline justify-content-between" >
             <div class="trending-name"> Trending in {{data.experttype}}</div>
             <div class="follow-dropdown">
               <li class="nav-item dropdown pe-3">
@@ -18,13 +19,14 @@
                   <i class="bi bi-three-dots"></i>
                 </a><!-- End Profile Iamge Icon -->
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header">
-                    <h6><i class="bi bi-bell px-2"></i>Subscribe Now</h6>
-                    <span><i class="bi bi-emoji-frown px-2"></i>This trend is harmful or spammy</span>
+                  <li class="dropdown-header" style="cursor: pointer;">
+                    <h6 *ngIf="data.isSubscribed == false" (click)="subscribe(data)"><i class="bi bi-bell px-2"></i>Subscribe Now</h6>
+                    <h6 *ngIf="data.isSubscribed == true"><i class="bi bi-bell px-2"></i>Subscribed</h6>
+                    <!-- <span><i class="bi bi-emoji-frown px-2"></i>This trend is harmful or spammy</span> -->
                   </li>
-                  <li>
+                  <!-- <li>
                     <hr class="dropdown-divider">
-                  </li>
+                  </li> -->
                 </ul><!-- End Profile Dropdown Items -->
               </li>
             </div>
@@ -36,8 +38,13 @@
        
      
       </div>
-      <div class="m-3" style="height: 55vh; overflow: auto;" *ngIf="topTrendingChannel.length < 0">
-        <img src="assets/img/noDataFound.png" alt="" />
+      <div class="m-3" style="height: 55vh; overflow: auto;" *ngIf="topTrendingChannel.length == 0">
+        <div>
+          <img class="nodata" src="assets/img/noDataFound.png" alt="" />
+        </div>
+        <div class="msg">
+          <sapn>No Data Found at the Moment, Comeback later!</sapn>
+        </div>
       </div>
       <!-- <div class="border-bottom">
     <p class="condition-line">By signing up, you agree to the <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>, including Cookie Use.</p>

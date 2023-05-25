@@ -18,12 +18,12 @@
   </div>
 </div>
 
-<section class="d-lg-none d-md-block d-sm-block">
+<section class="d-lg-none d-md-block d-sm-block ">
   <div class="row">
     <div class="mx-auto">
       <div class="card">
         <!-- Bordered Tabs Justified -->
-        <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+        <ul class="nav nav-tabs nav-tabs-bordered d-flex responsive-tab" id="borderedTabJustified" role="tablist">
           <li class="nav-item flex-fill" role="presentation">
             <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" (click)="getTab($event)"
               data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home"
@@ -40,7 +40,7 @@
               aria-selected="false">CHANNEL</button>
           </li>
         </ul>
-        <div class="tab-content pt-2" id="borderedTabJustifiedContent" >
+        <div class="tab-content pt-2" id="borderedTabJustifiedContent">
           <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel"
             aria-labelledby="home-tab">
             <div class="example">
@@ -50,9 +50,8 @@
                   <span class="visually-hidden">Loading...</span>
                 </div>
               </div>
-              <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-                 [scrollWindow]="true" [fromRoot]="true" (scrolled)="onScroll()"
-                *ngIf="isLoading == false">
+              <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="true"
+                [fromRoot]="true" (scrolled)="onScroll()" *ngIf="isLoading == false">
 
                 <div class="card list-card my-3" *ngFor="let items of feedDetails | filter : searchKey : 'username'">
                   <div class="m-2">
@@ -309,58 +308,61 @@
                 <span class="visually-hidden">Loading...</span>
               </div>
             </div>
-            <div class="example"  infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-                 [scrollWindow]="true" [fromRoot]="true" (scrolled)="onScrollChannelList()" *ngIf="isLoading == false">
-              <div class="card list-card my-2"
-                *ngFor="let items of channelDetails | filter : searchKey : 'name'; let index = index">
+            <div class="example" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+              [scrollWindow]="true" [fromRoot]="true" (scrolled)="onScrollChannelList()" *ngIf="isLoading == false">
+              <div class="card list-card " *ngFor="let items of channelDetails | filter : searchKey :  'name'; let index = index">
                 <div class="m-2">
-                  <div class="container">
-                    <div class=" row user_informatiom d-flex justify-content-between align-items-center"
-                      style="cursor: pointer;">
-                      <div class="d-flex col-12" (click)="getChannelDetails(items)">
-                        <div class="col-2">
-                          <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                  <div class="container pad0" style="cursor: pointer;">
+                    <div class="container  pad0">
+                      <div class=" row user_informatiom d-flex justify-content-between align-items-center" style="cursor: pointer;">
+                        <div class="d-flex col-12" (click)="getChannelDetails(items)">
+                          <div class="col-2">
+                            <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                          </div>
+                          <div class="col-6 mx-3 py-2">
+                            <div class="user_name">{{items.name}}</div>
+                            <div class="detail">{{items.sebi}}</div>
+                            <!-- <div class="percent">Accuracy 57.7% Profitability -13.5%</div> -->
+                          </div>
                         </div>
-                        <div class="col-6 mx-3 py-2">
-                          <div class="user_name">{{items.name}}</div>
-                          <!-- <div class="detail">{{items.sebi}}</div> -->
-                          <!-- <div class="percent">Accuracy 57.7% Profitability -13.5%</div> -->
-                        </div>
+              
+              
                       </div>
-
-
                     </div>
                   </div>
-                  <div class="container">
+                  <div class="container  pad0">
                     <div class="row">
                       <div class="d-flex justify-content-between align-items-baseline py-2">
-                        <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6>
+                        <!-- <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6> -->
+                        <div class="channel-name">
+                          <i class="bi bi-lightbulb"></i>{{items.name}}
+                        </div>
                         <button class="btn follow-btn" *ngIf="items.isSubscribed == true"><i
-                            class="bi bi-lock-fill "></i>&nbsp;Subscribed</button>
+                            class="bi bi-unlock-fill "></i>&nbsp;Subscribed</button>
                         <div class="dropdown" *ngIf="items.isSubscribed == false">
                           <a class="nav-link nav-profile d-flex align-items-center pe-0 " id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
                           </a>
-
+              
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-                            <li *ngIf="items.isSubscribed == false" (click)="subscribe(items)" style="cursor: pointer;">
-                              <a class="dropdown-item"><i class="bi bi-unlock-fill"
-                                  [ngClass]="{'bi bi-lock-fill' : items.subscription == 'Paid Access'}"></i>{{items.subscription}}</a>
-                            <li style="cursor: pointer;" (click)="Edit(items)"><a class="dropdown-item"><i
-                                  class="bi bi-pencil-square"></i>Edit</a></li>
-
+              
+                            <li *ngIf="items.isUserChannel == false" (click)="subscribe(items)" style="cursor: pointer;"><a
+                                class="dropdown-item"><i class="bi bi-lock-fill"
+                                  [ngClass]="{'bi bi-lock-fill' : items.isSubscribed == false}"></i>Subscribe</a>
+                            <li style="cursor: pointer;" *ngIf="items.isUserChannel == true" (click)="Edit(items)"><a
+                                class="dropdown-item"><i class="bi bi-pencil-square"></i>Edit</a></li>
+              
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="container" (click)="getChannelDetails(items)">
+                  <div class="container  pad0" (click)="getChannelDetails(items)">
                     <div class="row">
-                      <div class="channel-name">
-                        <i class="bi bi-lightbulb"></i>EQUITY COMPREHENSIVE
-                      </div>
+                      <!-- <div class="channel-name">
+                                  <i class="bi bi-lightbulb"></i>{{items.name}}
+                                </div> -->
                       <div class="channel-detail d-flex py-2">
                         <div class="col-6 d-flex text-center">
                           <div class="px-3">
@@ -377,44 +379,43 @@
                           </div>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
-                          <button type="button" class="btn position-btn"><i
-                              class="bi bi-graph-up-arrow px-2"></i>Success
+                          <button type="button" class="btn position-btn"><i class="bi bi-graph-up-arrow px-2"></i>Success
                             rate: 20%</button>
                         </div>
                       </div>
-                      <div class="date">{{items.createdDate | date : 'fullDate'}} {{items.createdDate | date :
-                        'shortTime'}}</div>
+                      <div class="date">{{items.createdDate | date: 'fullDate'}} {{items.createdDate | date: 'shortTime'}}
+                      </div>
                     </div>
                   </div>
-                  <div class="container" (click)="getChannelDetails(items)">
+                  <div class="container  pad0" (click)="getChannelDetails(items)">
                     <div class="row">
                       <p class="club-dis" [innerHTML]="items.description"></p>
                     </div>
                   </div>
-                  <div class="container expect-section my-2" (click)="getChannelDetails(items)">
+                  <div class="container  expect-section my-2" (click)="getChannelDetails(items)">
                     <div class="grid-data d-flex expect-sections ">
                       <div class="col-3 border-end ">
-                        <div class="d-flex club-icons d-flex align-items-center"><span class="club-icon "><i
-                              class="bi bi-chat-square-text"></i></span><span class="club-inf">Reputation</span></div>
+                        <div class="d-flex club-icons"><span class="club-icon "><i class="bi bi-chat-square-text"></i></span><span
+                            class="club-inf">Reputation</span></div>
                         <div class="club-icon px-2">{{items.reputation}}</div>
                       </div>
                       <div class="col-3  border-end ">
-                        <div class="d-flex club-icons d-flex align-items-center"><span class="club-icon "><i
-                              class="bi bi-eye"></i></span><span class="club-inf">Impression</span></div>
+                        <div class="d-flex club-icons"><span class="club-icon "><i class="bi bi-eye"></i></span><span
+                            class="club-inf">Impression</span></div>
                         <div class="club-icon px-2">15</div>
                       </div>
                       <div class="col-3  border-end">
-                        <div class="d-flex club-icons d-flex align-items-center"><span class="club-icon "><i
-                              class="bi bi-chat-left"></i></span><span class="club-inf">Followers</span></div>
+                        <div class="d-flex club-icons"><span class="club-icon"><i class="bi bi-chat-left"></i></span><span
+                            class="club-inf">Followers</span></div>
                         <div class="club-icon px-2">{{items.followersCount}}</div>
                       </div>
                       <div class="col-3  ">
-                        <div class="d-flex club-icons d-flex align-items-center"><span class="club-icon "><i
-                              class="bi bi-pencil-square "></i></span><span class="club-inf">Post</span></div>
+                        <div class="d-flex club-icons"><span class="club-icon"><i class="bi bi-pencil-square "></i></span><span
+                            class="club-inf">Post</span></div>
                         <div class="club-icon px-3">{{items.post}}</div>
                       </div>
                     </div>
-                    <div class="container-fluid pad0mobile">
+                    <div class="container-fluid  pad0 ">
                       <div class="row py-2">
                         <div class="col-6">
                           <div class=" risk-btn w-100 d-flex justify-content-between">
@@ -437,16 +438,15 @@
                       </div>
                     </div>
                     <div class="py-2">
-                      <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence
-                        before
-                        investing</p>
+                      <!-- <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
+                                  investing</p> -->
                     </div>
                   </div>
-                  <!-- <div class="container">
+                  <div class="container pad0" (click)="getChannelDetails(items)">
                     <div class="row">
                       <div class="col-4 risk">
-                        <button type="button" class="btn position-btn"><svg width="12" height="12" viewBox="0 0 12 12"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button type="button" class="btn position-btn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <circle cx="6" cy="6" r="6" fill="#ED1C24" />
                           </svg>
                           High Risk</button>
@@ -456,21 +456,19 @@
                           (1-3 Months)</button>
                       </div>
                     </div>
-                  </div> -->
-
-                  <div class="d-flex justify-content-between">
+                  </div>
+              
+                  <div class="d-flex justify-content-between mt-2">
                     <div>
-                      <span (click)="channelLike(items.channelMasterId, !items.isChannelLiked)">
-                        <i class="bi bi-hand-thumbs-up px-2"
-                          *ngIf="items.isChannelLiked == false">{{items.likecount}}</i>
-                        <i class="bi bi-hand-thumbs-up-fill px-2"
-                          *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
+                      <span (click)="like(items.channelMasterId, !items.isChannelLiked)">
+                        <i class="bi bi-hand-thumbs-up px-2" *ngIf="items.isChannelLiked == false">{{items.likecount}}</i>
+                        <i class="bi bi-hand-thumbs-up-fill px-2" *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
                       </span>
-                      <span (click)="share(index)"><i class="bi bi-share-fill"></i></span>
+                      <span (click)="share(index)"><i class="bi bi-share-fill px-2"></i></span>
                     </div>
-                    <!-- <div>
-                      <i class="bi bi-bookmark-fill"></i>
-                    </div> -->
+                    <div>
+                      <!-- <i class="bi bi-bookmark-fill px-2"></i> -->
+                    </div>
                   </div>
                   <div *ngIf="isShare == true && index == shareId" class="d-flex justify-content-center">
                     <share-buttons style="background: rebeccapurple; border-radius: 20px;"
@@ -486,8 +484,8 @@
                         <span class="badge badge-warning" *ngIf="experts.isapproved == false">Pending</span>
                       </div>
                     </div>
-                    <div class="d-flex justify-content-end"
-                      *ngIf="items.isChannelApprove == true && items.channelApproved == false">
+              
+                    <div class="d-flex justify-content-end" *ngIf="items.isChannelApprove == true && items.channelApproved == false">
                       <span class="px-4"><button type="button" class="btn btn-primary danger-btn"
                           (click)="approveRejectChannel(items.channelMasterId, items.expertId, true, false)">Approve</button></span>
                       <span><button type="button" class="btn btn-success danger-btn"
@@ -526,22 +524,48 @@
           <div class="">
             <div class="row border-bottom  ">
               <div *ngIf="activeTab=='home-tab'">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" (click)="radioButtonClick($event)"
+                    name="inlineRadioOptions" id="Club" value="option1">
+                  <label class="form-check-label" for="Club">Club</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" (click)="radioButtonClick($event)"
+                    name="inlineRadioOptions" id="Channel" value="option2">
+                  <label class="form-check-label" for="Channel">Channel</label>
+                </div>
+                <div *ngIf="isTarget != ''">
 
-                <div class="form-check" *ngFor="let item of data">
-                  <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)"
-                    [(ngModel)]="item.checked" [id]="item.name">
-                  <label class="form-check-label filter-text" [for]="item.name">
-                    {{item.name}}
-                  </label>
+                  <div class="form-check" *ngFor="let item of data">
+                    <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)"
+                      [(ngModel)]="item.checked" [id]="item.name">
+                    <label class="form-check-label filter-text" [for]="item.name">
+                      {{item.name}}
+                    </label>
+                  </div>
+
                 </div>
               </div>
               <div *ngIf="activeTab=='contact-tab'">
-                <div class="form-check" *ngFor="let item of channeldata">
-                  <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)"
-                    [(ngModel)]="item.checked" [id]="item.name">
-                  <label class="form-check-label filter-text" [for]="item.name">
-                    {{item.name}}
-                  </label>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" (click)="radioButtonClick($event)"
+                    name="inlineRadioOptions" id="Paid Access" value="option1">
+                  <label class="form-check-label" for="Paid Access">Paid Access</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" (click)="radioButtonClick($event)"
+                    name="inlineRadioOptions" id="Free Access" value="option2">
+                  <label class="form-check-label" for="Free Access">Free Access</label>
+                </div>
+                <div *ngIf="isTarget != ''">
+                  <div class="form-check" *ngFor="let item of channeldata">
+                    <input class="form-check-input" type="checkbox" formControlName="name" (change)="onFilter(item)"
+                      [(ngModel)]="item.checked" [id]="item.name">
+                    <label class="form-check-label filter-text" [for]="item.name">
+                      {{item.name}}
+                    </label>
+                  </div>
+
                 </div>
               </div>
             </div>
