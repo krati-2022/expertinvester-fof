@@ -17,6 +17,7 @@ import { SettingsComponent } from './Components/settings/settings.component';
 import { AddClubComponent } from './Components/add-club/add-club.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditClubComponent } from './Components/edit-club/edit-club.component';
+import { AdminProfileComponent } from './Components/admin-profile/admin-profile.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { EditClubComponent } from './Components/edit-club/edit-club.component';
     SettingsComponent,
     AddClubComponent,
     EditClubComponent,
+    AdminProfileComponent,
 
   ],
   imports: [

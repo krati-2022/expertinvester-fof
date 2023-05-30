@@ -10,6 +10,7 @@ import { SettingsComponent } from './Components/settings/settings.component';
 import { AuthGuard } from './Authentication/auth.guard';
 import { AddClubComponent } from './Components/add-club/add-club.component';
 import { EditClubComponent } from './Components/edit-club/edit-club.component';
+import { AdminProfileComponent } from './Components/admin-profile/admin-profile.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'user-list', component: UserListComponent },
       { path: 'payment-list', component: PaymentListComponent },
       { path: 'setting', component: SettingsComponent },
+      { path: 'profile', component: AdminProfileComponent },
     ],
   },
   { path: '', component: AdminLoginComponent },

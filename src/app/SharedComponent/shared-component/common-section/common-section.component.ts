@@ -58,6 +58,7 @@ export class CommonSectionComponent implements OnInit {
     this._service
       .TopTrendingChannels(this.mobileNumber, pageNumber, this.perPage)
       .subscribe((res: any) => {
+      // console.log('res: ', res);
         if (res.items.length != 0) {
           this.topTrendingChannel.push(...res.items);
         } else {

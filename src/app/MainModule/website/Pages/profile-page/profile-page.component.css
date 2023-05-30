@@ -36,9 +36,9 @@
     font-size: 14px;
   }
 
-  .profile .profile-card img {
+  /* .profile .profile-card img {
     max-width: 47px;
-  }
+  } */
 
   button.btn.follow-btn {
     font-size: 11px;
@@ -256,9 +256,9 @@
     font-size: 16px;
   }
 
-  .profile .profile-card img {
+  /* .profile .profile-card img {
     max-width: 47px;
-  }
+  } */
 
   button.btn.follow-btn {
     font-size: 11px;
@@ -473,9 +473,9 @@
     font-size: 16px;
   }
 
-  .profile .profile-card img {
+  /* .profile .profile-card img {
     max-width: 70px;
-  }
+  } */
 
   button.btn.follow-btn {
     font-size: 13px;
@@ -575,13 +575,20 @@
 }
 
 .edit-icon {
-  position: absolute;
-  left: 14rem;
-  top: 12px;
+  position: relative;
+  left: -25px;
   font-size: 20px;
   color: #2c2a2a;
 }
 
 .cstm-file {
   display: contents;
+}
+
+.rounded-circle {
+  height: 116px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 88px;
+  padding: 5px 9px;
 }

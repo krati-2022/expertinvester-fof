@@ -535,7 +535,11 @@ h6 {
 
 .header-nav .nav-profile img {
   border: 2px solid #F61C7A;
-  max-height: 36px;
+  height: 52px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50px;
+
 }
 
 .header-nav .nav-profile span {

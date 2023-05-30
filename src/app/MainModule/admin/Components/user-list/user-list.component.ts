@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
       this.isLoading = true;
     }
     this._service.GetUserList().subscribe((res) => {
-      console.log('res: ', res);
+      // console.log('res: ', res);
       this.userList = res.data;
       this.isLoading = false;
     });
