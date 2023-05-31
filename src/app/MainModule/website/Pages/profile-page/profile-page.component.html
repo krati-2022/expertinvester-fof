@@ -15,7 +15,7 @@
                 <img *ngIf="!imageSrc && (model.image == null || model.image =='')" src="assets/img/user2.png" alt=""
                   class="rounded-circle">
                 <img *ngIf="!imageSrc" [src]="model.image" alt=""  class="rounded-circle">
-                <img [src]="imageSrc" *ngIf="imageSrc"  class="rounded-circle">
+                <img *ngIf="imageSrc" [src]="imageSrc" class="rounded-circle">
               </div>
               <div class="edit-icon">
                 <label for="file-input">
@@ -277,7 +277,7 @@
 
 </main>
 
-
+<!-- 
 <div class="modal fade" id="socialLinkModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -302,4 +302,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

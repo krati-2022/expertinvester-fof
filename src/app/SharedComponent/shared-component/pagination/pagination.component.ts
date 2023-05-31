@@ -38,9 +38,7 @@ export class PaginationComponent implements OnChanges {
   public onNext(): void {
     this.next.emit(this.current);
   }
-  public onScroll(): void {
-    this.next.emit(this.current);
-  }
+
 
   public onPrevious(): void {
     this.previous.next(this.current);

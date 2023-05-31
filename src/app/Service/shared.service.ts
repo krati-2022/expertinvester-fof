@@ -173,6 +173,14 @@ export class SharedService {
       this.apiUrl + 'api/Channel/GetChannelMasterList?Mobile_No=' + mobile_No +'&pageNumber=' +pageNumber+'&pageSize='+ pageSize
     );
   }
+  GetMyChannel(mobile_No: string): Observable<any> {
+    return this.http.get(
+      this.apiUrl +
+        'api/Channel/GetChannelSubscriber?Mobile_No=' +
+        mobile_No
+      
+    );
+  }
 
   GetExpertList(mobile_No: string): Observable<any> {
     return this.http.get(

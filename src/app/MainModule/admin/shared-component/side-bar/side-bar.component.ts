@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedService } from 'src/app/Service/shared.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -11,12 +11,14 @@ export class SideBarComponent implements OnInit {
   sideBarCollaps: boolean = false
   hide: boolean = true;
   screenWidth: any;
-  constructor(private coreService: SharedService, private router: Router) {}
+  constructor(private coreService: AdminService, private router: Router) {}
 
   ngOnInit(): void {
     this.getWindowSize();
     this.coreService.toggleSidebar.subscribe(() => {
       this.hide = !this.hide;
+      
+      
     });
   }
 

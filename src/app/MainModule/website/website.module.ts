@@ -46,7 +46,6 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { EnterPinComponent } from './enter-pin/enter-pin.component';
 import { SetuUpPinComponent } from './setu-up-pin/setu-up-pin.component';
 import { CommonSectionComponent } from 'src/app/SharedComponent/shared-component/common-section/common-section.component';
-import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pagination/pagination.component';
 import { ChannelDetailsComponent } from './components/channel-details/channel-details.component';
 import { InfiniteScrollComponent } from 'src/app/SharedComponent/shared-component/infinite-scroll/infinite-scroll.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -63,6 +62,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { MyChannelComponent } from './components/my-channel/my-channel.component';
+import { TrendingChannelComponent } from './components/trending-channel/trending-channel.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,6 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
     EnterPinComponent,
     SetuUpPinComponent,
     CommonSectionComponent,
-    PaginationComponent,
     ChannelDetailsComponent,
     InfiniteScrollComponent,
     FilterPipe,
@@ -110,6 +110,8 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
     ChatBoxComponent,
     ScrollDirective,
     EditChannelComponent,
+    MyChannelComponent,
+    TrendingChannelComponent,
   ],
   imports: [
     CommonModule,

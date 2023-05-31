@@ -21,7 +21,7 @@ export class ProfilePageComponent implements OnInit {
   updateSocialLinkForm: FormGroup | any;
   countryCodes = Codes;
   userDetails = new UpdateProfileDetails();
-  imageSrc?: string;
+  imageSrc: string = '';
   socialLinks: any;
   twitter: boolean = true;
   facebook: boolean = true;
@@ -123,7 +123,7 @@ export class ProfilePageComponent implements OnInit {
     // console.log('this.userDetails: ', this.userDetails);
     // return
     this._service.UpdateUserDetails(this.userDetails).subscribe((res: any) => {
-      console.log('res: ', res);
+      // console.log('res: ', res);
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -201,68 +201,68 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
-  UpdateLinks(id: any) {
-    let data = {
-      id: id,
-      name: this.model.linkName,
-      mobile_Number: this.mobileNumber,
-      url: this.updateSocialLinkForm.value.url,
-    };
-    this._service.UpDateSocilaLinks(data).subscribe((res: any) => {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-        },
-      });
-      Toast.fire({
-        icon: 'success',
-        title: res.message,
-      });
-      <any>$('#socialLinkModel').modal('hide');
-    });
-  }
+  // UpdateLinks(id: any) {
+  //   let data = {
+  //     id: id,
+  //     name: this.model.linkName,
+  //     mobile_Number: this.mobileNumber,
+  //     url: this.updateSocialLinkForm.value.url,
+  //   };
+  //   this._service.UpDateSocilaLinks(data).subscribe((res: any) => {
+  //     const Toast = Swal.mixin({
+  //       toast: true,
+  //       position: 'top-end',
+  //       showConfirmButton: false,
+  //       timer: 3000,
+  //       timerProgressBar: true,
+  //       didOpen: (toast) => {
+  //         toast.addEventListener('mouseenter', Swal.stopTimer);
+  //         toast.addEventListener('mouseleave', Swal.resumeTimer);
+  //       },
+  //     });
+  //     Toast.fire({
+  //       icon: 'success',
+  //       title: res.message,
+  //     });
+  //     <any>$('#socialLinkModel').modal('hide');
+  //   });
+  // }
 
-  EnableDisable(event: any) {
-    // console.log('event: ', event.target.id);
-    switch (event.target.id) {
-      case 'Twitter':
-        this.twitter = !this.twitter;
-        if (this.twitter == false) {
-          this.model.twitterObj = { id: '', name: 'Twitter', url: '' };
-        } else if (this.twitter == true) {
-          this.model.Obj = { id: '', name: '', url: '' };
-        }
-        break;
-      case 'Facebook':
-        this.facebook = !this.facebook;
-        if (this.facebook == false) {
-          this.model.facebookObj = { id: '', name: 'Facebook', url: '' };
-        } else if (this.facebook == true) {
-          this.model.Obj = { id: '', name: '', url: '' };
-        }
-        break;
-      case 'Instagram':
-        this.insta = !this.insta;
-        if (this.insta == false) {
-          this.model.instaObj = { id: '', name: 'Instagram', url: '' };
-        } else if (this.insta == true) {
-          this.model.Obj = { id: '', name: '', url: '' };
-        }
-        break;
-      case 'Linkedin':
-        this.linkededIn = !this.linkededIn;
-        if (this.linkededIn == false) {
-          this.model.linkededInObj = { id: '', name: 'Linkedin', url: '' };
-        } else if (this.linkededIn == true) {
-          this.model.Obj = { id: '', name: '', url: '' };
-        }
-        break;
-    }
-  }
+  // EnableDisable(event: any) {
+  //   // console.log('event: ', event.target.id);
+  //   switch (event.target.id) {
+  //     case 'Twitter':
+  //       this.twitter = !this.twitter;
+  //       if (this.twitter == false) {
+  //         this.model.twitterObj = { id: '', name: 'Twitter', url: '' };
+  //       } else if (this.twitter == true) {
+  //         this.model.Obj = { id: '', name: '', url: '' };
+  //       }
+  //       break;
+  //     case 'Facebook':
+  //       this.facebook = !this.facebook;
+  //       if (this.facebook == false) {
+  //         this.model.facebookObj = { id: '', name: 'Facebook', url: '' };
+  //       } else if (this.facebook == true) {
+  //         this.model.Obj = { id: '', name: '', url: '' };
+  //       }
+  //       break;
+  //     case 'Instagram':
+  //       this.insta = !this.insta;
+  //       if (this.insta == false) {
+  //         this.model.instaObj = { id: '', name: 'Instagram', url: '' };
+  //       } else if (this.insta == true) {
+  //         this.model.Obj = { id: '', name: '', url: '' };
+  //       }
+  //       break;
+  //     case 'Linkedin':
+  //       this.linkededIn = !this.linkededIn;
+  //       if (this.linkededIn == false) {
+  //         this.model.linkededInObj = { id: '', name: 'Linkedin', url: '' };
+  //       } else if (this.linkededIn == true) {
+  //         this.model.Obj = { id: '', name: '', url: '' };
+  //       }
+  //       break;
+  //   }
+  // }
 }

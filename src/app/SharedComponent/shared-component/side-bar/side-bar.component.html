@@ -16,7 +16,20 @@
       <li class="nav-item">
         <a class="nav-link collapsed"  routerLink="channel">
           <i class="bi bi-diagram-3"></i>
-          <span>Channel</span>
+          <span>All Channel</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" routerLink="my-channel">
+          <i class="bi bi-diagram-3"></i>
+          <span>My Channel</span>
+        </a>
+      </li>
+     
+      <li class="nav-item" *ngIf="screenWidth < 992">
+        <a class="nav-link collapsed"  routerLink="trending-channel">
+          <i class="bi bi-diagram-3"></i>
+          <span>Trending Channel</span>
         </a>
       </li>
 

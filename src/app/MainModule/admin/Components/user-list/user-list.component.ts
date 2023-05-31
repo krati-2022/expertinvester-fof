@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import Swal from 'sweetalert2';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-user-list',
@@ -8,29 +10,63 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  userList: any;
+  userList = new Array<any>();
   isLoading: boolean = false;
   isReload: boolean = false;
+  isShowContent: boolean = false;
+  contentId: any;
+  isTableHasData: boolean = false;
+  pageSizeOptions: number[] = [10];
+  displayedColumns: string[] = [
+    'NAME',
+    'User Type',
+    'Mobile',
+    'Email',
+    'Country',
+    'Experience',
+    'Bank',
+    'Account Number',
+    'IFSC Code',
+    'About Us',
+    'Status',
+    'Options',
+  ];
+  public dataSource = new MatTableDataSource<any>();
+  @ViewChild('paginator') paginator: MatPaginator | any;
+
   constructor(private _service: AdminService) {}
 
   ngOnInit(): void {
     this.GetUsersList();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   GetUsersList() {
-    if(this.isReload == true){
+    if (this.isReload == true) {
       this.isLoading = false;
-    }else{
+    } else {
       this.isLoading = true;
     }
     this._service.GetUserList().subscribe((res) => {
       // console.log('res: ', res);
-      this.userList = res.data;
+      this.userList = res.data as Array<any>;
+      this.dataSource.data = this.userList;
+      this.isTableHasData = this.userList.length != 0;
       this.isLoading = false;
     });
   }
 
+
   onChange(userId: string, status: boolean) {
+  
+    if(status === null){
+      status = false;
+    }
+    // console.log(status);
+    // return
     this.isReload = true;
     switch (status) {
       case false:
@@ -75,5 +111,10 @@ export class UserListComponent implements OnInit {
         });
         break;
     }
+  }
+
+  showContent(id: any) {
+    this.contentId = id;
+    this.isShowContent = !this.isShowContent;
   }
 }

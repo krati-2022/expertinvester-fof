@@ -12,7 +12,7 @@
             <router-outlet ></router-outlet>
          </div>
 
-         <div class="col-lg-4 mx-auto mt-2 common-section" *ngIf="!hide">
+         <div class="col-lg-4 mx-auto mt-2 common-section" [ngClass]="screenWidth < 992 ? 'd-none' : ''" *ngIf="!hide">
             <app-common-section ></app-common-section>
          </div>
 

@@ -18,6 +18,10 @@ import { AddClubComponent } from './Components/add-club/add-club.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditClubComponent } from './Components/edit-club/edit-club.component';
 import { AdminProfileComponent } from './Components/admin-profile/admin-profile.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { PaginationComponent } from 'src/app/SharedComponent/shared-component/pagination/pagination.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -35,7 +39,7 @@ import { AdminProfileComponent } from './Components/admin-profile/admin-profile.
     AddClubComponent,
     EditClubComponent,
     AdminProfileComponent,
-
+    PaginationComponent,
   ],
   imports: [
     CommonModule,
@@ -43,9 +47,12 @@ import { AdminProfileComponent } from './Components/admin-profile/admin-profile.
     FormsModule,
     ReactiveFormsModule,
     NgChartsModule,
-    AngularEditorModule
+    AngularEditorModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   schemas: [],
-  providers:[]
+  providers: [],
 })
 export class AdminModule {}

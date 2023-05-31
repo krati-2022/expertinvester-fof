@@ -14,12 +14,13 @@ export class CommonSectionComponent implements OnInit {
   showSearch: boolean = false;
   isLoading: boolean = false;
   isReload: boolean = false;
+  notFound: boolean = false;
   current: number = 0;
   perPage: number = 10;
   mobileNumber = localStorage.getItem('mobile_number') || '';
   topTrendingChannel: any = [];
   channelSubscriber = new ChannelSubscriber();
-
+  screenWidth: any;
   // selector: string = '.main-pannel-scrl';
   constructor(private _service: SharedService) {}
 
@@ -40,38 +41,47 @@ export class CommonSectionComponent implements OnInit {
       mobile_No = joinString;
     }
     // console.log('splitString: ', mobile_No);
-    if(this.isReload == false){
+    if (this.isReload == false) {
       this.isLoading = true;
     }
     this._service
       .TopTrendingChannels(mobile_No, this.current, this.perPage)
-      .subscribe((res: any) => {
-        // console.log('res: ', res);
-        this.topTrendingChannel = res.items;
-        this.isLoading = false;
-        // console.log('this.topTrendingChannel: ', this.topTrendingChannel);
-      });
+      .subscribe(
+        (res: any) => {
+          // console.log('res: ', res);
+          this.topTrendingChannel = res.items;
+          this.isLoading = false;
+          // console.log('this.topTrendingChannel: ', this.topTrendingChannel);
+        },
+        (error) => {
+          if (error.status == '404') {
+            this.notFound = true;
+          }
+        }
+      );
   }
 
   onScroll() {
-    var pageNumber = ++this.current;
-    this._service
-      .TopTrendingChannels(this.mobileNumber, pageNumber, this.perPage)
-      .subscribe((res: any) => {
-      // console.log('res: ', res);
-        if (res.items.length != 0) {
-          this.topTrendingChannel.push(...res.items);
-        } else {
-          this.current--;
-        }
+    if (this.screenWidth > 992) {
+      var pageNumber = ++this.current;
+      this._service
+        .TopTrendingChannels(this.mobileNumber, pageNumber, this.perPage)
+        .subscribe((res: any) => {
+          // console.log('res: ', res);
+          if (res.items.length != 0) {
+            this.topTrendingChannel.push(...res.items);
+          } else {
+            this.current--;
+          }
 
-        // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
-      });
+          // this.total = Math.ceil(res.totalRecords / this.perPage) - 1
+        });
+    }
   }
 
   subscribe(item: any) {
     // console.log('item: ', item);
-    this.isReload = true
+    this.isReload = true;
     this.channelSubscriber = new ChannelSubscriber({
       channelId: item.channelMasterId,
       subscriber: !item.isSubscribed,

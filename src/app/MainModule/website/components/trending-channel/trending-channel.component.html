@@ -1,0 +1,295 @@
+<!-- End Page Title -->
+<section class="">
+    <div class="row">
+        <div class="card">
+            <div class="pagetitle">
+                <div class="d-flex justify-content-between align-items-baseline">
+                    <div>
+                        <h1 class="px-3">Trending Channel's</h1>
+                    </div>
+
+                    <div *ngIf="isLoading == false">
+                        <button type="button" class="btn btn-outline-secondary " (click)="open()"><i
+                                class="bi bi-sliders" style="width: 12px; padding-right: 7px;"></i><span
+                                style="padding-left: 12px;">Filter</span></button>
+                        &nbsp;
+                        <button type="button" class="btn btn-outline-secondary" (click)="AddChannel()"><i
+                                class="bi bi-pencil-square"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="m-2">
+                <div class="d-flex justify-content-center" *ngIf="isLoading == true"
+                    style="height: 50vh; align-items: center;">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div class="example" *ngIf="channelDetails.length != 0 && isLoading == false" infiniteScroll
+                    [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+                    <div class="card list-card "
+                        *ngFor="let items of channelDetails | filter : searchKey :  'name'; let index = index">
+                        <div class="m-2">
+                            <div class="container pad0" style="cursor: pointer;">
+                                <div class="container  pad0">
+                                    <div class=" row user_informatiom d-flex justify-content-between align-items-center"
+                                        style="cursor: pointer;">
+                                        <div class="d-flex col-12" (click)="getChannelDetails(items)">
+                                            <div class="col-2">
+                                                <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                                            </div>
+                                            <div class="col-6 mx-3 py-2">
+                                                <div class="user_name">{{items.name}} {{index}}</div>
+                                                <div class="detail">{{items.sebi}}</div>
+                                                <!-- <div class="percent">Accuracy 57.7% Profitability -13.5%</div> -->
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container  pad0">
+                                <div class="row">
+                                    <div class="d-flex justify-content-between align-items-baseline py-2">
+                                        <!-- <h6 class="heading" (click)="getChannelDetails(items)" style="width: 50%;">{{items.name}}</h6> -->
+                                        <div class="channel-name">
+                                            <i class="bi bi-lightbulb"></i>{{items.name}}
+                                        </div>
+                                        <button class="btn follow-btn" *ngIf="items.isSubscribed == true"><i
+                                                class="bi bi-unlock-fill "></i>&nbsp;Subscribed</button>
+                                        <div class="dropdown" *ngIf="items.isSubscribed == false">
+                                            <a class="nav-link nav-profile d-flex align-items-center pe-0 "
+                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                                <li *ngIf="items.isUserChannel == false" (click)="subscribe(items)"
+                                                    style="cursor: pointer;"><a class="dropdown-item"><i
+                                                            class="bi bi-lock-fill"
+                                                            [ngClass]="{'bi bi-lock-fill' : items.isSubscribed == false}"></i>Subscribe</a>
+                                                <li style="cursor: pointer;" *ngIf="items.isUserChannel == true"
+                                                    (click)="Edit(items)"><a class="dropdown-item"><i
+                                                            class="bi bi-pencil-square"></i>Edit</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container  pad0" (click)="getChannelDetails(items)">
+                                <div class="row">
+                                    <!-- <div class="channel-name">
+                    <i class="bi bi-lightbulb"></i>{{items.name}}
+                  </div> -->
+                                    <div class="channel-detail d-flex py-2">
+                                        <div class="col-6 d-flex text-center">
+                                            <div class="px-3">
+                                                <div>{{items.post}}</div>
+                                                <div class="channel-name">Post</div>
+                                            </div>
+                                            <div class="px-3">
+                                                <div>{{items.followersCount}}</div>
+                                                <div class="channel-name">Subscriber</div>
+                                            </div>
+                                            <div>
+                                                <div>{{items.active_post_count}}</div>
+                                                <div class="channel-name">Active Post</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 d-flex justify-content-end">
+                                            <button type="button" class="btn position-btn"><i
+                                                    class="bi bi-graph-up-arrow px-2"></i>Success
+                                                rate: 20%</button>
+                                        </div>
+                                    </div>
+                                    <div class="date">{{items.createdDate | date: 'fullDate'}} {{items.createdDate |
+                                        date: 'shortTime'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container  pad0" (click)="getChannelDetails(items)">
+                                <div class="row">
+                                    <p class="club-dis" [innerHTML]="items.description"></p>
+                                </div>
+                            </div>
+                            <div class="container  expect-section my-2" (click)="getChannelDetails(items)">
+                                <div class="grid-data d-flex expect-sections ">
+                                    <div class="col-3 border-end ">
+                                        <div class="d-flex club-icons"><span class="club-icon "><i
+                                                    class="bi bi-chat-square-text"></i></span><span
+                                                class="club-inf">Reputation</span></div>
+                                        <div class="club-icon px-2">{{items.reputation}}</div>
+                                    </div>
+                                    <div class="col-3  border-end ">
+                                        <div class="d-flex club-icons"><span class="club-icon "><i
+                                                    class="bi bi-eye"></i></span><span
+                                                class="club-inf">Impression</span></div>
+                                        <div class="club-icon px-2">15</div>
+                                    </div>
+                                    <div class="col-3  border-end">
+                                        <div class="d-flex club-icons"><span class="club-icon"><i
+                                                    class="bi bi-chat-left"></i></span><span
+                                                class="club-inf">Followers</span></div>
+                                        <div class="club-icon px-2">{{items.followersCount}}</div>
+                                    </div>
+                                    <div class="col-3  ">
+                                        <div class="d-flex club-icons"><span class="club-icon"><i
+                                                    class="bi bi-pencil-square "></i></span><span
+                                                class="club-inf">Post</span></div>
+                                        <div class="club-icon px-3">{{items.post}}</div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid  pad0 ">
+                                    <div class="row py-2">
+                                        <div class="col-6">
+                                            <div class=" risk-btn w-100 d-flex justify-content-between">
+                                                One Month accuracy<span class="">0%</span></div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                                                gain<span class="">0%</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class=" risk-btn w-100 d-flex justify-content-between"> One year
+                                                accuracy<span class="">0%</span></div>
+                                        </div>
+                                        <div class="col-6 ">
+                                            <div class=" risk-btn w-100 d-flex justify-content-between"> One Month
+                                                gain<span class="">0%</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-2">
+                                    <!-- <p class="price">Disclaimer: Not a sebi registered advisor. Please do your own due diligence before
+                    investing</p> -->
+                                </div>
+                            </div>
+                            <div class="container pad0" (click)="getChannelDetails(items)">
+                                <div class="row">
+                                    <div class="col-4 risk">
+                                        <button type="button" class="btn position-btn"><svg width="12" height="12"
+                                                viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="6" cy="6" r="6" fill="#ED1C24" />
+                                            </svg>
+                                            High Risk</button>
+                                    </div>
+                                    <div class="col-8 months">
+                                        <button type="button" class="btn position-btn"><i
+                                                class="bi bi-clock px-"></i>Positional Trading
+                                            (1-3 Months)</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-2">
+                                <div>
+                                    <span (click)="like(items.channelMasterId, !items.isChannelLiked)">
+                                        <i class="bi bi-hand-thumbs-up px-2"
+                                            *ngIf="items.isChannelLiked == false">{{items.likecount}}</i>
+                                        <i class="bi bi-hand-thumbs-up-fill px-2"
+                                            *ngIf="items.isChannelLiked == true">{{items.likecount}}</i>
+                                    </span>
+                                    <span (click)="share(index)"><i class="bi bi-share-fill px-2"></i></span>
+                                </div>
+                                <div>
+                                    <!-- <i class="bi bi-bookmark-fill px-2"></i> -->
+                                </div>
+                            </div>
+                            <div *ngIf="isShare == true && index == shareId" class="d-flex justify-content-center">
+                                <share-buttons style="background: rebeccapurple; border-radius: 20px;"
+                                    [include]="['facebook','twitter','linkedin','pinterest','telegram','whatsapp','email']"
+                                    [show]="5" [url]="items.externallink" [autoSetMeta]="false"></share-buttons>
+                            </div>
+                            <div class="py-3">
+                                <div class="percent" *ngIf="items.coAdChannel == true">
+                                    <span>Co-ad channels</span>
+                                    <div *ngFor="let experts of items.coAdExperts" class="d-flex align-items-center">
+                                        <span style="color: black;">{{experts.expert_Name}}</span>&nbsp;
+                                        <span class="badge badge-success"
+                                            *ngIf="experts.isapproved == true">Approved</span>
+                                        <span class="badge badge-warning"
+                                            *ngIf="experts.isapproved == false">Pending</span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end"
+                                    *ngIf="items.isChannelApprove == true && items.channelApproved == false">
+                                    <span class="px-4"><button type="button" class="btn btn-primary danger-btn"
+                                            (click)="approveRejectChannel(items.channelMasterId, items.expertId, true, false)">Approve</button></span>
+                                    <span><button type="button" class="btn btn-success danger-btn"
+                                            (click)="approveRejectChannel(items.channelMasterId, items.expertId, false, true)">Reject</button></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="example d-flex justify-content-center"
+                    style="height: 65vh; overflow: auto; align-items: center;"
+                    *ngIf="channelDetails.length == 0 && isLoading == false">
+                    <img src="assets/img/noDataFound.png" alt="" />
+                    <!-- <sapn>No Data Found at the Moment, Comeback later!</sapn> -->
+                </div>
+            </div><!-- End Bordered Tabs Justified -->
+        </div>
+    </div>
+</section>
+
+<!-- <app-responsive-view></app-responsive-view> -->
+
+<div class="modal fade" id="filterPopUp" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+    <form [formGroup]="filterForm">
+        <div class="modal-dialog" role="document" style="width: 40%; ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterLabel">Filter</h5>
+                    <button type="button" class="close " (click)="close()" style="border: 0;background: #fff;">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="container">
+                    <div class="">
+                        <div class="row border-bottom  ">
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" (click)="radioButtonClick($event)"
+                                        name="inlineRadioOptions" id="Paid Access" value="option1">
+                                    <label class="form-check-label" for="Paid Access">Paid Access</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" (click)="radioButtonClick($event)"
+                                        name="inlineRadioOptions" id="Free Access" value="option2">
+                                    <label class="form-check-label" for="Free Access">Free Access</label>
+                                </div>
+                                <div *ngIf="isTarget != ''">
+                                    <div class="form-check" *ngFor="let item of data">
+                                        <input class="form-check-input" type="checkbox" formControlName="name"
+                                            [(ngModel)]="item.checked" (change)="onFilter(item)">
+                                        <label class="form-check-label filter-text">
+                                            {{item.name}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row px-3 py-3 text-center">
+                    <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-outline-secondary setfillterbtn"
+                            (click)="ClearAll()">CLEAR FILTER</button></div>
+                    <div class="col-md-6 mx-auto"> <button type="button" class="btn btn-danger setapplyfiltter"
+                            (click)="apply()">APPLY</button></div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

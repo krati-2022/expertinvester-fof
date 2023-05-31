@@ -1,12 +1,12 @@
-
 .search-bar {
   padding: 12px;
   width: 52%;
-  
+
 }
 
 
-.modal-header{    background: #4154f1;
+.modal-header {
+  background: #4154f1;
 }
 
 .modal-title {
@@ -18,24 +18,30 @@ div.row.border-bottom {
   padding: 15px;
 }
 
-.form-check{    margin-bottom: 16px}
+.form-check {
+  margin-bottom: 16px
+}
 
 
-.setfillterbtn{    font-size: 14px;
+.setfillterbtn {
+  font-size: 14px;
   font-weight: 500;
   width: 137px;
   height: 40px;
-  border-radius: 20px;}
+  border-radius: 20px;
+}
 
 
-  .setapplyfiltter{    font-size: 14px;
-    font-weight: 500;
-    width: 137px;
-    height: 40px;
-    border-radius: 20px;}
+.setapplyfiltter {
+  font-size: 14px;
+  font-weight: 500;
+  width: 137px;
+  height: 40px;
+  border-radius: 20px;
+}
 
 
-.btn-outline-secondary{
+.btn-outline-secondary {
   background: #6038dd;
   color: #fff;
   border: 0;
@@ -43,10 +49,12 @@ div.row.border-bottom {
 }
 
 
-.addstyletitel{padding: 18px;
+.addstyletitel {
+  padding: 18px;
   background: #f61c7a;
   border-radius: 10px 10px 0px 0px;
-  color: #FFF;}
+  color: #FFF;
+}
 
 .main .row {
   margin: 0px;
@@ -117,9 +125,9 @@ div.row.border-bottom {
 
 .trending-name {
   font-size: 14px;
-    font-weight: bold;
-    color: #4B6635;
-    text-transform: capitalize;
+  font-weight: bold;
+  color: #4B6635;
+  text-transform: capitalize;
 }
 
 span.title-name {
@@ -192,7 +200,7 @@ i.lock-icon {
 }
 
 h6.heading {
-  font-size: 18p!important;
+  font-size: 18p !important;
   font-weight: 600;
   color: #496333;
 }
@@ -204,7 +212,7 @@ h6.heading {
 
 .expect-section {
   padding: 9px 5px;
-  border: 1px solid #F61C7A!important;
+  border: 1px solid #F61C7A !important;
   border-radius: 8px;
 }
 
@@ -323,15 +331,15 @@ button.btn.follow-btn {
 span.club-inf {
   font-size: 14px;
   font-weight: 600;
-  color: #000000!important;
+  color: #000000 !important;
 }
 
 .club-dis {
-  font-size: 16px!important;
+  font-size: 16px !important;
   font-family: 'Inter Tight', sans-serif;
   line-height: 28px;
   color: #000;
-  font-weight: normal!important;
+  font-weight: normal !important;
 }
 
 
@@ -352,7 +360,7 @@ li.dropdown-header h6 {
   /* Firefox */
 }
 
-@media screen and (min-width: 320px) and (max-width: 991px){
+@media screen and (min-width: 320px) and (max-width: 991px) {
   /* .responsiveView{
     height: 75vh;
     overflow: auto;
@@ -361,17 +369,17 @@ li.dropdown-header h6 {
 
 @media screen and (min-width: 320px) and (max-width: 416px) {
 
-  .btnmangemobile{
+  .btnmangemobile {
     position: fixed;
     width: 40px;
     height: 0;
     right: 100px;
     top: 11px;
     z-index: 999;
-  font-size: 25px;
+    font-size: 25px;
     color: #f61c7a;
   }
-   
+
   .logo img {
     max-height: 19px;
     margin-right: 6px;
@@ -557,7 +565,7 @@ li.dropdown-header h6 {
 
 @media screen and (min-width: 415px) and (max-width: 501px) {
 
-.btnmangemobile {
+  .btnmangemobile {
     position: fixed;
     width: 40px;
     height: 0;
@@ -565,15 +573,16 @@ li.dropdown-header h6 {
     top: 11px;
     z-index: 999;
     font-size: 25px;
-      color: #f61c7a;
+    color: #f61c7a;
   }
 
-     .addbtnmanage {
-       position: fixed;
-       right: 31px;
-       bottom: 81px;
-       z-index: 99;
-     }
+  .addbtnmanage {
+    position: fixed;
+    right: 31px;
+    bottom: 81px;
+    z-index: 99;
+  }
+
   .logo img {
     max-height: 22px;
     margin-right: 6px;
@@ -755,7 +764,7 @@ li.dropdown-header h6 {
 
 
 @media screen and (min-width: 500px) and (max-width: 769px) {
-.btnmangemobile {
+  .btnmangemobile {
     position: fixed;
     width: 40px;
     height: 0;
@@ -763,14 +772,16 @@ li.dropdown-header h6 {
     top: 11px;
     z-index: 999;
     font-size: 25px;
-      color: #f61c7a;
+    color: #f61c7a;
   }
- .addbtnmanage {
-  position: fixed;
+
+  .addbtnmanage {
+    position: fixed;
     right: 16px;
     bottom: 46px;
     z-index: 99;
- }
+  }
+
   .logo img {
     max-height: 24px;
     margin-right: 6px;
@@ -837,16 +848,16 @@ li.dropdown-header h6 {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-    .fixadd {
-        position: relative !important;
-        font-size: 12px;
-        max-width: 100%;
-        padding: 0px 11px;
-    
-    
-      }
+  .fixadd {
+    position: relative !important;
+    font-size: 12px;
+    max-width: 100%;
+    padding: 0px 11px;
 
-.btnmangemobile {
+
+  }
+
+  .btnmangemobile {
     position: fixed;
     width: 40px;
     height: 0;
@@ -854,18 +865,18 @@ li.dropdown-header h6 {
     top: 11px;
     z-index: 999;
     font-size: 25px;
-      color: #f61c7a;
+    color: #f61c7a;
   }
 
-     .addbtnmanage {
-       position: fixed;
-       right: 31px;
-       bottom: 81px;
-       z-index: 99;
-     }
+  .addbtnmanage {
+    position: fixed;
+    right: 31px;
+    bottom: 81px;
+    z-index: 99;
+  }
 
- 
-    
+
+
   .club-icon {
     padding-right: 12px;
     padding-left: 12px;
@@ -913,46 +924,50 @@ li.dropdown-header h6 {
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
 
-    .addbtnmanage {
-        position: fixed;
-        right: 21px;
-        bottom: 49px;
-        z-index: 99;
-      }
+  .addbtnmanage {
+    position: fixed;
+    right: 21px;
+    bottom: 49px;
+    z-index: 99;
+  }
 
 
- .user-icon{
-      font-size: 40px!important;
-      color: #FDCDE7;
-    }
+  .user-icon {
+    font-size: 40px !important;
+    color: #FDCDE7;
+  }
 
-        .user_name {
-          font-size: 16px!important;
-        margin-top: 11px!important;}
+  .user_name {
+    font-size: 16px !important;
+    margin-top: 11px !important;
+  }
 
-    h6.heading{
-        font-size: 14px !important;
-      }
+  h6.heading {
+    font-size: 14px !important;
+  }
 
 
   .setfillterbtn {
-      font-size: 12px;
-      font-weight: 500;
-      width: 113px;
-      height: 33px;
-      border-radius: 20px;
-    }
+    font-size: 12px;
+    font-weight: 500;
+    width: 113px;
+    height: 33px;
+    border-radius: 20px;
+  }
 
-        .setapplyfiltter {
-          font-size: 12px;
-          font-weight: 500;
-          width: 113px;
-          height: 33px;
-          border-radius: 20px;
-        }
+  .setapplyfiltter {
+    font-size: 12px;
+    font-weight: 500;
+    width: 113px;
+    height: 33px;
+    border-radius: 20px;
+  }
 
-  .popueresposive{width: 75%;
-    margin: 60px auto;}
+  .popueresposive {
+    width: 75%;
+    margin: 60px auto;
+  }
+
   .pagetitle {
     display: none;
   }
@@ -971,26 +986,28 @@ li.dropdown-header h6 {
     height: 250px;
   }
 
-    .fixadd {
-      position: relative !important;
-      font-size: 12px;
-      max-width: 100%;
-      padding: 0px 30px;
-  
-  
-    }
+  .fixadd {
+    position: relative !important;
+    font-size: 12px;
+    max-width: 100%;
+    padding: 0px 30px;
 
 
-        .col-md-6.mx-auto {
-          padding: 8px;
-        }
+  }
 
-    .footer{position: relative;}
 
-        h5.card-title.addstyletitel {
-          color: #fff;
-          padding: 17px;
-        }
+  .col-md-6.mx-auto {
+    padding: 8px;
+  }
+
+  .footer {
+    position: relative;
+  }
+
+  h5.card-title.addstyletitel {
+    color: #fff;
+    padding: 17px;
+  }
 
 }
 
@@ -999,14 +1016,15 @@ li.dropdown-header h6 {
     height: auto !important;
   }
 
-  
+
 
   .search-bar {
     padding: 0 !important;
   }
-    .pagetitle{
-      display: none;
-    }
+
+  .pagetitle {
+    display: none;
+  }
 
 }
 
@@ -1032,6 +1050,7 @@ li.dropdown-header h6 {
   border-radius: 10px;
   background: lightgray
 }
+
 .badge-success {
   color: #fff;
   background-color: #28a745;
@@ -1040,4 +1059,15 @@ li.dropdown-header h6 {
 .badge-warning {
   color: #212529;
   background-color: #ffc107;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 12px !important;
+  /* border-bottom-width: 1px;
+  border-bottom-style: solid; */
+}
+.cdk-overlay-container {
+  display: none;
 }
