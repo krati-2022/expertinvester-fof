@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChild, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminLogin } from './admin-login.classes';
 import { AdminService } from '../admin.service';
@@ -24,10 +24,12 @@ export class AdminLoginComponent implements OnInit {
   submitted: boolean = false;
   adminLoginDetails = new AdminLogin();
   loginResponse: LoginResponse[] = [];
+  isHideShowPassword: boolean = false;
+  inputType: string = 'password';
   constructor(private _service: AdminService, private router: Router) {}
 
   ngOnInit(): void {
-    localStorage.clear()
+    localStorage.clear();
     this.loginForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -53,9 +55,8 @@ export class AdminLoginComponent implements OnInit {
     });
     // console.log('this.adminLoginDetails: ', this.adminLoginDetails);
     this.isLoading = true;
-    this._service
-      .ProceedToLogin(this.adminLoginDetails)
-      .subscribe((res: any) => {
+    this._service.ProceedToLogin(this.adminLoginDetails).subscribe(
+      (res: any) => {
         // console.log('res: ', res);
 
         // localStorage.setItem('authToken', res.data.token);
@@ -65,48 +66,57 @@ export class AdminLoginComponent implements OnInit {
             localStorage.setItem('authToken', res.data.token);
             localStorage.setItem('email', res.data.email);
             this.isLoading = false;
-            this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>{
-              this.router.navigate(['admin/home'])
-            })
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate(['admin/home']);
+              });
             break;
           case 'Failed':
-             const Toast = Swal.mixin({
-               toast: true,
-               position: 'top-end',
-               showConfirmButton: false,
-               timer: 3000,
-               timerProgressBar: true,
-               didOpen: (toast) => {
-                 toast.addEventListener('mouseenter', Swal.stopTimer);
-                 toast.addEventListener('mouseleave', Swal.resumeTimer);
-               },
-             });
-             Toast.fire({
-               icon: 'error',
-               title: res.message,
-             });
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+              },
+            });
+            Toast.fire({
+              icon: 'error',
+              title: res.message,
+            });
             this.isLoading = false;
             break;
         }
-      }, (error) =>{
-        if(error.status == '400'){
-           const Toast = Swal.mixin({
-             toast: true,
-             position: 'top-end',
-             showConfirmButton: false,
-             timer: 3000,
-             timerProgressBar: true,
-             didOpen: (toast) => {
-               toast.addEventListener('mouseenter', Swal.stopTimer);
-               toast.addEventListener('mouseleave', Swal.resumeTimer);
-             },
-           });
-           Toast.fire({
-             icon: 'error',
-             title: error.error,
-           });
+      },
+      (error) => {
+        if (error.status == '400') {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+          Toast.fire({
+            icon: 'error',
+            title: error.error,
+          });
           this.isLoading = false;
         }
-      });
+      }
+    );
+  }
+
+  hideShowPassword() {
+    this.isHideShowPassword = !this.isHideShowPassword;
+    this.inputType = this.isHideShowPassword ? 'text' : 'password';
   }
 }

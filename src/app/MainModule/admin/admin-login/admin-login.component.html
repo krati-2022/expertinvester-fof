@@ -45,10 +45,17 @@
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Password</label>
-                                            <input type="password" class="form-control" formControlName="password"
+                                            <input [type]="inputType" class="form-control"  formControlName="password"
                                                 [ngClass]="{'is-invalid ' :
                                                 submitted &&
                                                 loginControl.password.errors }" />
+                                                <div class="eye-btn">
+                                                    <button class="btn btn-transparent" style="border: none;" (click)="hideShowPassword()" type="button">
+                                                        <i class="bi bi-eye" aria-hidden="true" *ngIf="isHideShowPassword == true"></i>
+                                                        <i class="bi bi-eye-slash" aria-hidden="true" *ngIf="isHideShowPassword == false"></i>
+                                                    </button>
+
+                                                </div>
                                             <div *ngIf=" submitted && loginControl.password.errors"
                                                 class="invalid-feedback">
                                                 <div *ngIf="loginControl.password.errors.required">Password is required.
